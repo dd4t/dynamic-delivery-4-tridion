@@ -1,0 +1,27 @@
+#summary How to develop templates using DD4T, Visual Studio and Tridion.
+
+= Introduction =
+
+To develop templates using DD4T, you need to perform some steps manually. This is done for two reasons:
+
+  * We are not allowed to include Tridion DLLs and other artefacts in our open source repository
+  * Addresses, user names, folders etc are unique to each Tridion implementation.
+
+
+
+= Details =
+
+  * Check out the DD4T trunk from SVN (https://dynamic-delivery-4-tridion.googlecode.com/svn/trunk)
+  * Copy the following Tridion DLLs to the folder DD4T\dependencies\Tridion 2011 DLLs:
+{{{
+Tridion.Common.dll
+Tridion.ContentManager.Common.dll
+Tridion.ContentManager.dll
+Tridion.ContentManager.Publishing.dll
+Tridion.ContentManager.TemplateTypes.dll
+Tridion.ContentManager.Templating.dll
+Tridion.ContentManager.Templating.SiteEdit.dll
+Tridion.Logging.dll
+}}}
+  * Copy the file TcmUploadAssembly.exe to the folder DD4T\dependencies\Tridion Tools
+  * Create a config.xml using the TcmUploadAssembly.exe and place it in the same Tridion Tools folder (see Tridion documentation)
