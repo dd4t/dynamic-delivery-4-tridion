@@ -1,4 +1,4 @@
-#summary This page describes how to install the quickstart package to see dynamic delivery in action.
+#summary This page describes how to install the quickstart package to see dynamic delivery in action. The article assumes you are installing the java version.
 
 = Introduction =
 
