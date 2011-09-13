@@ -1,9 +1,9 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.googlecode.tridion-dynamic-delivery</groupId>
+  <groupId>com.googlecode.dynamic-delivery-4-tridion</groupId>
   <artifactId>dynamicdelivery</artifactId>
   <packaging>jar</packaging>
-  <name>Tridion Dynamic Delivery Java Framework</name>
+  <name>Dynamic Delivery 4 Tridion Java Framework</name>
   <version>1.0</version>
   <description>The maven main core project description</description>
   <url>https://code.google.com/p/dynamic-delivery-4-tridion</url>
