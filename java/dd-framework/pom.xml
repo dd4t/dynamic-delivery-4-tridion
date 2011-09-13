@@ -6,7 +6,7 @@
   <name>Tridion Dynamic Delivery Java Framework</name>
   <version>1.0</version>
   <description>The maven main core project description</description>
-  <url>https://code.google.com/p/tridion-dynamic-delivery</url>
+  <url>https://code.google.com/p/dynamic-delivery-4-tridion</url>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -15,8 +15,8 @@
     </license>
   </licenses>
   <scm>
-    <url>https://tridion-dynamic-delivery.googlecode.com/svn/</url>
-    <connection>https://tridion-dynamic-delivery.googlecode.com/svn/</connection>
+    <url>http://dynamic-delivery-4-tridion.googlecode.com/svn</url>
+    <connection>http://dynamic-delivery-4-tridion.googlecode.com/svn</connection>
   </scm>
   <dependencies>
   
