@@ -27,11 +27,11 @@ Using Tortoise (or some other SVN client), do a checkout of the trunk at googlec
 
 == 2. Prepare your Tridion 2011 CME ==
 
-On your CME installation TCM / Publisher, place the DLL files in the quickstart folder into the global assembly cache
+On your CME installation TCM / Publisher, place the DLL files in the build folder into the global assembly cache
 
 == 3. Import the content porter package ==
 
-Run the content porter package from the quickstart folder into your CME.
+Run the content porter package from the build folder into your CME.
 
 == 4. Prepare your Tridion 2011 CDE ==
 
@@ -39,18 +39,18 @@ Configure your deployer (in the storage_conf) to deploy pages into the DB. Gener
 
 == 5. Add Tridion jars, dlls, configuration & licences ==
 In the SVN checkout there are no Tridion DLL's, jars, configuration files or licences. Please fill the following locations:<br>
-\Tridion Resources\db-driver-lib -- place your DB driver jarfile here<br>
-\Tridion Resources\third-party-lib -- place the third-party-lib jars (from the Tridion installation files) here<br>
-\Tridion Resources\Tridion 2011 DLLs -- (for templating) -- place the Tridion DLL's used for templating here<br>
-\Tridion Resources\Tridion jarfiles -- place the Tridion CDE jarfiles (from the Tridion installation files) here<br>
-\Tridion Resources\Tridion tools -- (for templating) place your tcmuploadassembly.exe here<br>
+\dependencies\db-driver-lib -- place your DB driver jarfile here<br>
+\dependencies\third-party-lib -- place the third-party-lib jars (from the Tridion installation files) here<br>
+\dependencies\Tridion 2011 DLLs -- (for templating) -- place the Tridion DLL's used for templating here<br>
+\dependencies\Tridion jarfiles -- place the Tridion CDE jarfiles (from the Tridion installation files) here<br>
+\dependencies\Tridion tools -- (for templating) place your tcmuploadassembly.exe here<br>
 \java\dd-example\WebContent\WEB-INF\classes -- place your CDE license and CDE configuration files (cd_link, logback and cd_storage) here.<br> Configure your storage conf like you've configured your deployer.<br>
 
 == 6. Add projects to eclipse ==
 In your eclipse, add the \java\dd-framework and \java\dd-example folders as eclipse projects. You will see that both projects have lots of build errors due to lacking jarfiles. 
 
 == 7. Run antscript ==
-In the dd-example project, there is an antscript called "ant-scripts.xml". Open it, and run the "load-dd-framework" task. This task will build the dd-framework project (using every jarfile inside of the \Tridion resources folder!) and copy every single jar into the WEB-INF\LIB folder of the dd-example project. After running the task, refresh both projects - afterwards they should both be free of build errors.
+In the dd-example project, there is an antscript called "ant-scripts.xml". Open it, and run the "load-dd-framework" task. This task will build the dd-framework project (using every jarfile inside of the \dependencies folder!) and copy every single jar into the WEB-INF\LIB folder of the dd-example project. After running the task, refresh both projects - afterwards they should both be free of build errors.
 
 == 8. Configure dynamic delivery ==
 Inside of the \java\dd-example\webcontent\web-inf directory, open the urlmapping.xml file. Here, provide the content-porter imported publication id to the "dd" controller. This binds your example website to the imported publication.
