@@ -19,6 +19,13 @@
     <connection>http://dynamic-delivery-4-tridion.googlecode.com/svn</connection>
   </scm>
   <dependencies>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.9</version>
+      <scope>test</scope>
+    </dependency>
   
     <dependency>
       <groupId>org.hibernate</groupId>
