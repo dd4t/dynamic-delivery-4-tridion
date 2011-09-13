@@ -6,7 +6,8 @@ using Tridion.ContentManager.CommunicationManagement;
 using Tridion.ContentManager.ContentManagement;
 using Tridion.ContentManager.Publishing.Rendering;
 using Tridion.ContentManager.Templating;
-using DD4T.Templates.Utils;
+using DD4T.Templates.Base.Utils;
+using DD4T.Templates.Base.Xml;
 
 namespace DD4T.Templates 
 {

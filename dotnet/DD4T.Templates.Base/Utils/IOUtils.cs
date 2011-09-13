@@ -5,7 +5,7 @@ using System.Text;
 using System.Reflection;
 using System.IO;
 
-namespace DD4T.Templates.Utils
+namespace DD4T.Templates.Base.Utils
 {
    public class IOUtils
    {

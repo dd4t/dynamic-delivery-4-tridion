@@ -7,7 +7,7 @@ using Tridion.ContentManager.ContentManagement.Fields;
 using DD4T.ContentModel.Exceptions;
 using DD4T.ContentModel;
 
-namespace DD4T.Templates.Builder
+namespace DD4T.Templates.Base.Builder
 {
    public class FieldBuilder
    {

@@ -4,7 +4,8 @@ using System.Text;
 using Dynamic = DD4T.ContentModel;
 using TCM = Tridion.ContentManager.ContentManagement;
 
-namespace DD4T.Templates.Builder {
+namespace DD4T.Templates.Base.Builder
+{
 	public class SchemaBuilder {
         public static Dynamic.Schema BuildSchema(TCM.Schema tcmSchema, BuildManager manager)
         {

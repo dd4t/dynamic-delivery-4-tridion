@@ -4,10 +4,11 @@ using System.Drawing;
 using Tridion.ContentManager.Templating;
 using TCM = Tridion.ContentManager.ContentManagement;
 using DD4T.ContentModel;
-using DD4T.Templates.Utils;
+using DD4T.Templates.Base.Utils;
 using Dynamic = DD4T.ContentModel;
 
-namespace DD4T.Templates.Builder {
+namespace DD4T.Templates.Base.Builder
+{
    // TODO: add Publication element inside component (+ page, etc)
    // TODO: add OrganizationalItem element inside component (+ page, etc)
    public class ComponentBuilder

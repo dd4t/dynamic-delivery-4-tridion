@@ -9,6 +9,7 @@ using Dynamic = DD4T.ContentModel;
 using System.Xml.Serialization;
 using System.Text;
 using System.Xml;
+using DD4T.Templates.Base;
 
 namespace DD4T.Templates {
 

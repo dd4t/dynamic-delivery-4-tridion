@@ -7,7 +7,8 @@ using Tridion.ContentManager.Templating;
 using DD4T.ContentModel.Exceptions;
 
 
-namespace DD4T.Templates.Builder {
+namespace DD4T.Templates.Base.Builder
+{
 	public class PageBuilder {
         public static Dynamic.Page BuildPage(TCM.Page tcmPage, Engine engine, BuildManager manager)
         {

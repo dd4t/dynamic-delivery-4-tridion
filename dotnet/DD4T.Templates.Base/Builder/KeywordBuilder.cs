@@ -5,7 +5,7 @@ using System.Text;
 using Dynamic = DD4T.ContentModel;
 using Tridion.ContentManager.ContentManagement;
 
-namespace DD4T.Templates.Builder
+namespace DD4T.Templates.Base.Builder
 {
    public class KeywordBuilder
    {

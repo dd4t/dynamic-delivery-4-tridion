@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using Tridion.ContentManager.Templating.Assembly;
 using Tridion.ContentManager.CommunicationManagement;
-using Dynamic = DD4T.ContentModel;
 using TCM = Tridion.ContentManager.ContentManagement;
+using Dynamic = DD4T.ContentModel;
+using DD4T.Templates.Base;
+using DD4T.Templates.Base.Builder;
 
 namespace DD4T.Templates
 {
@@ -36,7 +38,7 @@ namespace DD4T.Templates
             {
                TCM.Fields.ItemFields tcmFields = new TCM.Fields.ItemFields(tcmSG.Metadata, tcmSG.MetadataSchema);
                // change
-               Builder.FieldsBuilder.AddFields(page.Metadata, tcmFields, 1, false, mergeAction, Manager);
+               FieldsBuilder.AddFields(page.Metadata, tcmFields, 1, false, mergeAction, Manager);
             }
             tcmSG = (StructureGroup)tcmSG.OrganizationalItem;
          }

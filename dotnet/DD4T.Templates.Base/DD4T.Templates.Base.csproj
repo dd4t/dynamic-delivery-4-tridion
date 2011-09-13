@@ -89,11 +89,13 @@
     <Compile Include="Builder\SchemaBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StopChainException.cs" />
+    <Compile Include="Utils\LowerCaseConverter.cs" />
     <Compile Include="Utils\GeneralUtils.cs" />
     <Compile Include="Utils\IOUtils.cs" />
+    <Compile Include="Utils\BinaryPublisher.cs" />
     <Compile Include="Utils\TridionUtils.cs" />
-    <Compile Include="XML\ConvertXmlToJava.cs" />
-    <Compile Include="XML\TridionXml.cs" />
+    <Compile Include="Utils\XmlToJavaConverter.cs" />
+    <Compile Include="Xml\TridionXml.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dynamicdelivery.snk" />
