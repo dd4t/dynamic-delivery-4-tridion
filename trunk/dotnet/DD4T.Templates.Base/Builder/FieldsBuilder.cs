@@ -4,7 +4,7 @@ using DD4T.ContentModel.Exceptions;
 using Dynamic = DD4T.ContentModel;
 using TCM = Tridion.ContentManager.ContentManagement;
 
-namespace DD4T.Templates.Builder
+namespace DD4T.Templates.Base.Builder
 {
    public class FieldsBuilder
    {

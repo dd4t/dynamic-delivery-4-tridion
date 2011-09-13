@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
-namespace Tridion.Extensions.DynamicDelivery.Templates
+namespace DD4T.Templates.Base.Xml
 {
    public class TridionXml : XmlDocument
    {

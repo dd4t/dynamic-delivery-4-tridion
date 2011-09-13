@@ -6,9 +6,10 @@ using TComm = Tridion.ContentManager.CommunicationManagement;
 using TCM = Tridion.ContentManager.ContentManagement;
 using Tridion.ContentManager.ContentManagement.Fields;
 using Tridion.ContentManager.ContentManagement;
-using DD4T.Templates.Utils;
+using DD4T.Templates.Base.Utils;
 
-namespace DD4T.Templates.Builder {
+namespace DD4T.Templates.Base.Builder
+{
 	public class CategoriesBuilder {
         public static List<Dynamic.Category> BuildCategories(TComm.Page page, BuildManager manager)
         {

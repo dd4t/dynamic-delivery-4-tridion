@@ -6,9 +6,9 @@ using TCM = Tridion.ContentManager.CommunicationManagement;
 using Tridion.ContentManager.Templating;
 using System.Xml.Serialization;
 using System.IO;
-using DD4T.Templates.Utils;
+using DD4T.Templates.Base.Utils;
 
-namespace DD4T.Templates.Builder
+namespace DD4T.Templates.Base.Builder
 {
    public class ComponentPresentationBuilder
    {

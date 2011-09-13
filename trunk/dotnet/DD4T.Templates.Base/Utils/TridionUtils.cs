@@ -8,7 +8,7 @@ using Tridion.ContentManager;
 using Tridion.ContentManager.ContentManagement;
 using System.Text.RegularExpressions;
 
-namespace DD4T.Templates.Utils
+namespace DD4T.Templates.Base.Utils
 {
    public class TridionUtils
    {

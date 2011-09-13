@@ -6,7 +6,7 @@ using System.Reflection;
 using System.IO;
 using Tridion.ContentManager.Templating;
 
-namespace DD4T.Templates.Utils
+namespace DD4T.Templates.Base.Utils
 {
    public class GeneralUtils
    {

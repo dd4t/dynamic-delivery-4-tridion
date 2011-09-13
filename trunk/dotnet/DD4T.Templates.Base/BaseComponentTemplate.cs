@@ -6,11 +6,11 @@ using System.Xml;
 using System.Xml.Serialization;
 using Tridion.ContentManager.ContentManagement;
 using Tridion.ContentManager.Templating;
-using DD4T.Templates.Builder;
-using DD4T.Templates.Utils;
+using DD4T.Templates.Base.Builder;
+using DD4T.Templates.Base.Utils;
 using Dynamic = DD4T.ContentModel;
 
-namespace DD4T.Templates
+namespace DD4T.Templates.Base
 {
     public abstract class BaseComponentTemplate : BaseTemplate
     {

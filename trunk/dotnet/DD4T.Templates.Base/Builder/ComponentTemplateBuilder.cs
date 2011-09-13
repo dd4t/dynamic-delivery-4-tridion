@@ -5,7 +5,8 @@ using Dynamic = DD4T.ContentModel;
 using TComm = Tridion.ContentManager.CommunicationManagement;
 using TCM = Tridion.ContentManager.ContentManagement;
 
-namespace DD4T.Templates.Builder {
+namespace DD4T.Templates.Base.Builder
+{
 	public class ComponentTemplateBuilder {
 		public static Dynamic.ComponentTemplate BuildComponentTemplate(TComm.ComponentTemplate tcmComponentTemplate, BuildManager manager) {
 			Dynamic.ComponentTemplate ct = new Dynamic.ComponentTemplate();

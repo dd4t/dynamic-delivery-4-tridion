@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using Tridion.ContentManager.Templating.Assembly;
 using Tridion.ContentManager.Templating;
-using DD4T.Templates.Builder;
+using DD4T.Templates.Base.Builder;
 using System.Xml;
 
-namespace DD4T.Templates
+namespace DD4T.Templates.Base
 {
     public abstract class BaseTemplate : ITemplate
     {

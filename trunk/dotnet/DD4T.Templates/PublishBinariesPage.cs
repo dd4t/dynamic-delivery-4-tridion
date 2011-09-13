@@ -2,6 +2,7 @@
 using Tridion.ContentManager.Templating;
 using Tridion.ContentManager.Templating.Assembly;
 using Dynamic = DD4T.ContentModel;
+using DD4T.Templates.Base;
 
 namespace DD4T.Templates
 {

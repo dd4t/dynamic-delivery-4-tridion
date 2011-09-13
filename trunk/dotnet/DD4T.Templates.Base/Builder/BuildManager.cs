@@ -7,7 +7,7 @@ using Dynamic = DD4T.ContentModel;
 using TComm = Tridion.ContentManager.CommunicationManagement;
 using Tridion.ContentManager.Templating;
 
-namespace DD4T.Templates.Builder
+namespace DD4T.Templates.Base.Builder
 {
     /// <summary>
     /// Class serves as reference point to all builders, allowing subclasses of the BuildManager to override

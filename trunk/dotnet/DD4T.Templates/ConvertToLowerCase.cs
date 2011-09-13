@@ -1,4 +1,13 @@
-﻿using Tridion.ContentManager;
+﻿using System;
+using System.IO;
+using System.Xml;
+using System.Xml.Xsl;
+using System.Xml.XPath;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+using Tridion.ContentManager;
 using Tridion.ContentManager.ContentManagement;
 using Tridion.ContentManager.CommunicationManagement;
 using Tridion.ContentManager.ContentManagement.Fields;
@@ -6,17 +15,9 @@ using Tridion.ContentManager.Publishing.Rendering;
 using Tridion.ContentManager.Templating;
 using Tridion.ContentManager.Templating.Assembly;
 using Tridion.Logging;
-using System;
-using System.IO;
-using System.Xml;
-using System.Xml.Xsl;
-using System.Xml.XPath;
-using System.Text;
-using System.Text.RegularExpressions;
 using Dynamic = DD4T.ContentModel;
-using System.Collections.Generic;
-using System.Xml.Serialization;
-using DD4T.Templates.Utils;
+using DD4T.Templates.Base.Utils;
+using DD4T.Templates.Base;
 
 namespace DD4T.Templates {
 
@@ -48,25 +49,10 @@ namespace DD4T.Templates {
 				return;
 			}
 
-			StringReader srXml = new StringReader(inputValue);
-			XmlReader readerXml = new XmlTextReader(srXml);
-			
-			// Load the style sheet.
-         XslCompiledTransform xslTransformer = new XslCompiledTransform();
-
-         //load the Xsl from the assembly
-         Stream xslStream = IOUtils.LoadResourceAsStream("DD4T.Templates.Resources.ConvertFirstCharToLowerCase.xslt");
-         xslTransformer.Load(XmlReader.Create(xslStream));
-
-			// Execute the transform and output the results to a file.
-			StringWriter sw = new StringWriter();
-			XmlWriter writer = new XmlTextWriter(sw);
-         xslTransformer.Transform(readerXml, writer);
-			writer.Close();
-			sw.Close();
+            string convertedValue = LowerCaseConverter.Convert(inputValue);
 
 			package.Remove(outputItem);
-			outputItem.SetAsString(sw.ToString());
+			outputItem.SetAsString(convertedValue);
 			package.PushItem("Output", outputItem);
 		}
 
