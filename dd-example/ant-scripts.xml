@@ -5,7 +5,7 @@
 	
 	<!-- Setting location properties -->
 
-	<property name="dd-framework.lib.dir" location="..\..\Tridion Resources\" />
+	<property name="dd-framework.lib.dir" location="..\..\dependencies\" />
 	<property name="dd-framework.src.dir" location="..\dd-framework\src\main\java" />
 	<property name="dd-example.src.dir" location="src" />
 	<property name="temp.dir" location="temp" />
