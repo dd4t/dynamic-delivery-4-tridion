@@ -25,7 +25,7 @@ namespace DD4T.Templates.Base.Utils
           XslCompiledTransform xslTransformer = new XslCompiledTransform();
 
           //load the Xsl from the assembly
-          Stream xslStream = IOUtils.LoadResourceAsStream("DD4T.Templates.Resources.ConvertToJava.xslt");
+          Stream xslStream = IOUtils.LoadResourceAsStream("DD4T.Templates.Base.Resources.ConvertToJava.xslt");
           xslTransformer.Load(XmlReader.Create(xslStream));
 
           //create the output stream 

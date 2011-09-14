@@ -9,7 +9,7 @@ using Tridion.ContentManager.Templating;
 using DD4T.Templates.Base.Utils;
 using DD4T.Templates.Base.Xml;
 
-namespace DD4T.Templates 
+namespace DD4T.Templates.Base.Utils 
 {
 	public class BinaryPublisher
     {

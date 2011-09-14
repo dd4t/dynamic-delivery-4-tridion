@@ -19,7 +19,7 @@ using Dynamic = DD4T.ContentModel;
 using DD4T.Templates.Base.Utils;
 using DD4T.Templates.Base;
 
-namespace DD4T.Templates 
+namespace DD4T.Templates.Base.Utils
 {
 
     public static class LowerCaseConverter
@@ -35,7 +35,7 @@ namespace DD4T.Templates
             XslCompiledTransform xslTransformer = new XslCompiledTransform();
 
             //load the Xsl from the assembly
-            Stream xslStream = IOUtils.LoadResourceAsStream("DD4T.Templates.Resources.ConvertFirstCharToLowerCase.xslt");
+            Stream xslStream = IOUtils.LoadResourceAsStream("DD4T.Templates.Base.Resources.ConvertFirstCharToLowerCase.xslt");
             xslTransformer.Load(XmlReader.Create(xslStream));
 
             // Execute the transform and output the results to a file.
