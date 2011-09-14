@@ -38,6 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
@@ -93,20 +94,22 @@
     <Compile Include="Utils\GeneralUtils.cs" />
     <Compile Include="Utils\IOUtils.cs" />
     <Compile Include="Utils\BinaryPublisher.cs" />
+    <Compile Include="Utils\TridionConfigurationManager.cs" />
     <Compile Include="Utils\TridionUtils.cs" />
     <Compile Include="Utils\XmlToJavaConverter.cs" />
     <Compile Include="Xml\TridionXml.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="dynamicdelivery.snk" />
     <None Include="Resources\CWA Parameters Auto.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\ConvertFirstCharToLowerCase.xslt" />
-    <Content Include="Resources\ConvertFullNameToLowerCase.xslt" />
-    <Content Include="Resources\ConvertToJava.xslt" />
+    <EmbeddedResource Include="Resources\ConvertFirstCharToLowerCase.xslt" />
+    <EmbeddedResource Include="Resources\ConvertFullNameToLowerCase.xslt" />
+    <EmbeddedResource Include="Resources\ConvertToJava.xslt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DD4T.ContentModel.Contracts\DD4T.ContentModel.Contracts.csproj">

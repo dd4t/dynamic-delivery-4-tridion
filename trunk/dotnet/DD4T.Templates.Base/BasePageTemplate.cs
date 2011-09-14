@@ -9,6 +9,7 @@ using Tridion.ContentManager.Templating;
 using DD4T.Templates.Base.Builder;
 using DD4T.Templates.Base.Utils;
 using Dynamic = DD4T.ContentModel;
+using System.Configuration;
 
 namespace DD4T.Templates.Base
 {
