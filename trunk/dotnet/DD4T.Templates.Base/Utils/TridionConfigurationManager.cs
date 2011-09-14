@@ -148,6 +148,9 @@ namespace DD4T.Templates.Base.Utils
         private Guid guid;
         private string fieldNameConfigurationComponents = null;
         private Configuration config = null;
+        private bool checkedPublicationMetadata = false;
+        private bool checkedConfigurationComponents = false;
+
 
         private bool TryGetValueFromField(ItemField field, out string value)
         {
@@ -242,69 +245,90 @@ namespace DD4T.Templates.Base.Utils
         {
             get
             {
-                
+
+                // 1. Check if the key is already in our base NameValueCollection (which means it was retrieved earlier)
                 string val = base[key];
                 if (!string.IsNullOrEmpty(val))
                 {
                     return val;
                 }
 
+                // 2. Check if the key can be found in the DD4T.config file
                 if (Configuration != null)
                 {
-                    string valueFromConfig = Configuration.AppSettings.Settings[key].Value;
-                    if (!string.IsNullOrEmpty(valueFromConfig))
+                    KeyValueConfigurationElement elmt = Configuration.AppSettings.Settings[key];
+                    if (elmt != null)
                     {
-                        // note: we found the setting in the App.config, return that!
-                        return valueFromConfig;
-                    }
-                }
-
-
-                if (configurationComponents == null)
-                {
-                    if (publication.Metadata == null || publication.MetadataSchema == null)
-                    {
-                        // publication has no metadata, we cannot find where the configuration components are
-                        configurationComponents = new List<Component>(); // subsequent calls will return "" directly!
-                        return string.Empty;
-                    }
-
-
-                    ItemFields metadataFields = new ItemFields(publication.Metadata, publication.MetadataSchema);
-
-                    if (metadataFields.Contains(key))
-                    {
-                        string v = null;
-                        if (TryGetValueFromField(metadataFields[key], out v))
+                        string valueFromConfig = elmt.Value;
+                        if (!string.IsNullOrEmpty(valueFromConfig))
                         {
-                            return v;
+                            // note: we found the setting in the App.config, return that!
+                            base[key] = valueFromConfig;
+                            return valueFromConfig;
                         }
                     }
-
-
-                    if (!metadataFields.Contains(this.FieldNameConfigurationComponents))
-                    {
-                        // publication metadata has reference to configuration components, we cannot find where the configuration components are
-                        configurationComponents = new List<Component>(); // subsequent calls will return "" directly!
-                        return string.Empty;
-                    }
-                    configurationComponents = ((ComponentLinkField)metadataFields[FieldNameConfigurationComponents]).Values;
                 }
 
-                foreach (Component c in configurationComponents)
+                // before we continue, we want to check if the publication has metadata at all, otherwise the rest of the logic is not necessary anymore
+                if (publication.Metadata == null || publication.MetadataSchema == null)
                 {
-                    
-                    ItemFields fields = new ItemFields(c.Content, c.Schema);
-                    foreach (ItemField field in fields)
+                    return string.Empty;
+                }
+
+                // 3. Check if the key is present in the publication metadata
+                ItemFields metadataFields = null;
+                if (!checkedPublicationMetadata)
+                {
+
+                    metadataFields = new ItemFields(publication.Metadata, publication.MetadataSchema);
+                    bool foundIt = false;
+                    foreach (ItemField field in metadataFields)
                     {
                         NameValueCollection fieldNVC = null;
                         if (TryGetValuesFromField(field, out fieldNVC))
                         {
                             base.Add(fieldNVC);
+                            if (field.Name.Equals(key))
+                            {
+                                foundIt = true;
+                            }
                         }
                     }
+                    checkedPublicationMetadata = true;
+                    if (foundIt)
+                    {
+                        return base[key];
+                    }
                 }
-                return base[key];
+
+                // 4. Check if there are configuration components linked from the publication's metadata, and try to locate the key in them
+                if (!checkedConfigurationComponents)
+                {
+                    checkedConfigurationComponents = true;
+                    if (!metadataFields.Contains(this.FieldNameConfigurationComponents))
+                    {
+                        // publication metadata has reference to configuration components, we cannot find where the configuration components are
+                        return string.Empty;
+                    }
+
+                    configurationComponents = ((ComponentLinkField)metadataFields[FieldNameConfigurationComponents]).Values;
+
+                    foreach (Component c in configurationComponents)
+                    {
+                        ItemFields fields = new ItemFields(c.Content, c.Schema);
+                        foreach (ItemField field in fields)
+                        {
+                            NameValueCollection fieldNVC = null;
+                            if (TryGetValuesFromField(field, out fieldNVC))
+                            {
+                                base.Add(fieldNVC);
+                            }
+                        }
+                    }
+                    checkedConfigurationComponents = true;
+                    return base[key];
+                }
+                return string.Empty;
             }
 
         }
