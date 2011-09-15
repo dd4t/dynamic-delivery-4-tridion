@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BinariesModel.Store" Alias="Self" Provider="System.Data.SQLite" ProviderManifestToken="ISO8601" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="BinariesModelStoreContainer">
+    <EntitySet Name="Binaries" EntityType="BinariesModel.Store.Binaries" store:Type="Tables" />
+  </EntityContainer>
+  <EntityType Name="Binaries">
+    <Key>
+      <PropertyRef Name="ComponentUri" />
+    </Key>
+    <Property Name="ComponentUri" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Path" Type="nvarchar" Nullable="false" MaxLength="5120" />
+    <Property Name="Content" Type="blob" Nullable="false" />
+    <Property Name="LastPublishedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,14 @@
+C:\RaboWebMVC\RaboWeb\Tridion.Extensions.DynamicDelivery.Factories.WebService\obj\Debug\ResolveAssemblyReference.cache
+C:\RaboWebMVC\RaboWeb\Tridion.Extensions.DynamicDelivery.Factories.WebService\bin\Debug\Tridion.Extensions.DynamicDelivery.Factories.WebService.dll.config
+C:\RaboWebMVC\RaboWeb\Tridion.Extensions.DynamicDelivery.Factories.WebService\bin\Debug\Tridion.Extensions.DynamicDelivery.Factories.WebService.dll
+C:\RaboWebMVC\RaboWeb\Tridion.Extensions.DynamicDelivery.Factories.WebService\bin\Debug\Tridion.Extensions.DynamicDelivery.Factories.WebService.pdb
+C:\RaboWebMVC\RaboWeb\Tridion.Extensions.DynamicDelivery.Factories.WebService\bin\Debug\Tridion.Extensions.DynamicDelivery.ContentModel.Contracts.dll
+C:\RaboWebMVC\RaboWeb\Tridion.Extensions.DynamicDelivery.Factories.WebService\bin\Debug\Tridion.Extensions.DynamicDelivery.ContentModel.dll
+C:\RaboWebMVC\RaboWeb\Tridion.Extensions.DynamicDelivery.Factories.WebService\bin\Debug\Tridion.Extensions.DynamicDelivery.Factories.Base.dll
+C:\RaboWebMVC\RaboWeb\Tridion.Extensions.DynamicDelivery.Factories.WebService\bin\Debug\Tridion.Extensions.DynamicDelivery.ContentModel.Contracts.pdb
+C:\RaboWebMVC\RaboWeb\Tridion.Extensions.DynamicDelivery.Factories.WebService\bin\Debug\Tridion.Extensions.DynamicDelivery.ContentModel.pdb
+C:\RaboWebMVC\RaboWeb\Tridion.Extensions.DynamicDelivery.Factories.WebService\bin\Debug\Tridion.Extensions.DynamicDelivery.Factories.Base.pdb
+C:\RaboWebMVC\RaboWeb\Tridion.Extensions.DynamicDelivery.Factories.WebService\obj\Debug\Tridion.Extensions.DynamicDelivery.Factories.WebService.dll
+C:\RaboWebMVC\RaboWeb\Tridion.Extensions.DynamicDelivery.Factories.WebService\obj\Debug\Tridion.Extensions.DynamicDelivery.Factories.WebService.pdb
+C:\RaboWebMVC\RaboWeb\Tridion.Extensions.DynamicDelivery.Factories.WebService\bin\Debug\Tridion.Extensions.DynamicDelivery.Factories.WebService.dll.CodeAnalysisLog.xml
+C:\RaboWebMVC\RaboWeb\Tridion.Extensions.DynamicDelivery.Factories.WebService\bin\Debug\Tridion.Extensions.DynamicDelivery.Factories.WebService.dll.lastcodeanalysissucceeded
