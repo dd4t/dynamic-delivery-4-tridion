@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e88f48a3-1a95-4ae1-8e7d-0406f232d067" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://10.233.18.132:19/TridionBrokerService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="TridionBrokerService.xsd" MetadataType="Schema" ID="edfee216-7c6b-4d02-9bef-bf37cdb2d5f5" SourceId="1" SourceUrl="http://webservice:19/TridionBrokerService.svc?xsd=xsd0" />
+    <MetadataFile FileName="TridionBrokerService.disco" MetadataType="Disco" ID="c53c5940-8a04-493b-94ca-419400a57340" SourceId="1" SourceUrl="http://webservice:19/TridionBrokerService.svc?disco" />
+    <MetadataFile FileName="TridionBrokerService1.xsd" MetadataType="Schema" ID="b5b811f2-80ff-42e1-93e5-a2c85daf7c0f" SourceId="1" SourceUrl="http://webservice:19/TridionBrokerService.svc?xsd=xsd1" />
+    <MetadataFile FileName="TridionBrokerService2.xsd" MetadataType="Schema" ID="0db8e25d-6291-4691-b5ab-00b72bd2a8fc" SourceId="1" SourceUrl="http://webservice:19/TridionBrokerService.svc?xsd=xsd2" />
+    <MetadataFile FileName="TridionBrokerService.wsdl" MetadataType="Wsdl" ID="98a6d678-b10b-4cea-8262-dffc547c4693" SourceId="1" SourceUrl="http://webservice:19/TridionBrokerService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

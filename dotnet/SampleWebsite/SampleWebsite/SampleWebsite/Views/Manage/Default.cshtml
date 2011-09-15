@@ -1,0 +1,32 @@
+﻿@model Tridion.Extensions.DynamicDelivery.ContentModel.IPage
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@Model.Title</title>
+</head>
+<body>
+    <div>
+    <p>
+    Number of component presentations: @Model.ComponentPresentations.Count
+    </p>
+    <ul>
+        @{
+            foreach (var cp in Model.ComponentPresentations) {
+                <li>
+                    Componenttitle: @cp.Component.Title <br />
+                    Component template: @cp.ComponentTemplate.Title <br />
+
+                </li>
+            }
+            
+        }
+        </ul>
+    </div>
+</body>
+</html>
