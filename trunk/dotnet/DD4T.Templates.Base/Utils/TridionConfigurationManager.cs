@@ -224,6 +224,7 @@ namespace DD4T.Templates.Base.Utils
                     this.fieldNameConfigurationComponents  = elmt == null ? DefaultConfigurationComponentsFieldName : elmt.Value;
                     return fieldNameConfigurationComponents;
                 }
+                return DefaultConfigurationComponentsFieldName;
             }
         }
         #endregion
