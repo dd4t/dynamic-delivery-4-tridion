@@ -220,15 +220,10 @@ namespace DD4T.Templates.Base.Utils
                 }
                 if (Configuration != null)
                 {
-                    string fieldName = Configuration.AppSettings.Settings["ConfigurationComponentsFieldName"].Value;
-                    if (!string.IsNullOrEmpty(fieldName))
-                    {
-                        this.fieldNameConfigurationComponents = fieldName;
-                        return fieldName;
-                    }
+                    KeyValueConfigurationElement elmt= Configuration.AppSettings.Settings["ConfigurationComponentsFieldName"];
+                    this.fieldNameConfigurationComponents  = elmt == null ? DefaultConfigurationComponentsFieldName : elmt.Value;
+                    return fieldNameConfigurationComponents;
                 }
-                this.fieldNameConfigurationComponents = DefaultConfigurationComponentsFieldName;
-                return DefaultConfigurationComponentsFieldName;
             }
         }
         #endregion
