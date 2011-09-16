@@ -13,7 +13,7 @@ namespace DD4T.ContentModel.Factories
         string GetPageContent(string tcmUri);
         bool HasPageChanged(string url);
         DateTime GetLastPublishedDateByUrl(string url);
-		DateTime GetLastPublishedDateByUri(string url);
+		DateTime GetLastPublishedDateByUri(string uri);
         string[] GetAllPublishedPageUrls(string[] includeExtensions, string[] pathStarts);
         IPage GetIPageObject(string pageStringContent);
     }

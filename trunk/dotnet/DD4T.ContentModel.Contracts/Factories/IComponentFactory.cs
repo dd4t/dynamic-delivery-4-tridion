@@ -9,8 +9,8 @@ namespace DD4T.ContentModel.Factories
     {
         bool TryGetComponent(string componentUri, out IComponent component);
         IComponent GetComponent(string componentUri);
-        List<IComponent> GetComponents(string[] componentUris);
-		IList<string> FindComponents(ExtendedQueryParameters queryParameters);
+        IList<IComponent> GetComponents(string[] componentUris);
+		IList<IComponent> FindComponents(ExtendedQueryParameters queryParameters);
         IComponent GetIComponentObject(string componentStringContent);
     }
 }
