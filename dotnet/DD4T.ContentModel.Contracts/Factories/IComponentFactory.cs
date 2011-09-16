@@ -9,13 +9,8 @@ namespace DD4T.ContentModel.Factories
     {
         bool TryGetComponent(string componentUri, out IComponent component);
         IComponent GetComponent(string componentUri);
-        IList<IComponent> FindComponents(string schemaUri);
-        IList<IComponent> FindComponents(string[] schemaUris);
-        IList<IComponent> FindComponents(string[] schemaUris, DateTime sinceLastPublished);
+        List<IComponent> GetComponents(string[] componentUris);
 		IList<string> FindComponents(ExtendedQueryParameters queryParameters);
-        IDictionary<string, IComponentMeta> FindComponentMetas(string[] schemaUri);
-        IDictionary<string, IComponentMeta> FindComponentMetas(string[] schemaUri, DateTime sinceLastPublished);
-        IComponent GetLastPublishedComponent(string schemaUri);
-        DateTime LastPublished(string[] schemaUris);
+        IComponent GetIComponentObject(string componentStringContent);
     }
 }
