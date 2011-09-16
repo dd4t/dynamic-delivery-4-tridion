@@ -8,9 +8,9 @@ namespace DD4T.ContentModel
     public interface IBinary : IComponent
     {
         DateTime LastPublishedDate { get; }
-        byte[] BinaryData { get; }
+        byte[] BinaryData { get; set; }
         string VariantId { get; }
         //IMultimedia Multimedia { get; set; }
-        string Url { get; }
+        string Url { get; set;  }
     }
 }
