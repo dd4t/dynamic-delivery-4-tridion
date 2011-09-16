@@ -28,23 +28,14 @@ namespace DD4T.Templates.Base.Utils
     public class TridionConfigurationManager
     {
         #region static
-        public static string ConfigFilePath
-        {
-            get
-            {
-                Uri p = new Uri(System.Reflection.Assembly.GetEntryAssembly().CodeBase);
-                string tridionBaseDir = Path.GetDirectoryName(p.LocalPath);
-                return Path.Combine(tridionBaseDir, @"..\config\DD4T.config");
-            }
-        }
 
         private static Dictionary<TcmUri, TridionConfigurationManager> instances = new Dictionary<TcmUri, TridionConfigurationManager>();
 
-        public static TridionConfigurationManager GetInstance(Publication publication)
+        public static TridionConfigurationManager GetInstance(Engine engine, Publication publication)
         {
             if (!instances.ContainsKey(publication.Id))
             {
-                instances.Add(publication.Id, new TridionConfigurationManager(publication));
+                instances.Add(publication.Id, new TridionConfigurationManager(engine, publication));
             }
             return instances[publication.Id];
         }
@@ -53,22 +44,24 @@ namespace DD4T.Templates.Base.Utils
             Publication publication = GetPublication(engine, package);
             if (!instances.ContainsKey(publication.Id))
             {
-                instances.Add(publication.Id, new TridionConfigurationManager(publication));
+                instances.Add(publication.Id, new TridionConfigurationManager(engine, publication));
             }
             return instances[publication.Id];
         }
         #endregion
 
         #region constructors
-        private TridionConfigurationManager(Publication publication)
+        private TridionConfigurationManager(Engine engine, Publication publication)
         {
-            nvc = new TridionNameValueCollection(publication);
+            string tridionConfigPath = engine.GetConfiguration().CurrentConfiguration.FilePath;
+            string tridionBaseDir = Path.GetDirectoryName(tridionConfigPath);
+            nvc = new TridionNameValueCollection(publication, Path.Combine(tridionBaseDir, @"DD4T.config"));
         }
         #endregion
 
         #region private
         private TridionNameValueCollection nvc = null;
-
+        private Engine engine;
         private static Publication GetPublication(Engine engine, Package package)
         {
             RepositoryLocalObject pubItem = null;
@@ -122,7 +115,6 @@ namespace DD4T.Templates.Base.Utils
                 return nvc;
             }
         }
-
         #endregion
     }
 
@@ -133,11 +125,12 @@ namespace DD4T.Templates.Base.Utils
         #endregion
 
         #region constructors
-        public TridionNameValueCollection(Publication publication)
+        public TridionNameValueCollection(Publication publication, string configPath)
         {
             this.publication = publication;
             this.configurationComponents = null;
             this.guid = Guid.NewGuid();
+            this.ConfigurationPath = configPath;
         }
 
         #endregion
@@ -208,7 +201,7 @@ namespace DD4T.Templates.Base.Utils
                 if (config == null)
                 {
                     ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
-                    configFileMap.ExeConfigFilename = TridionConfigurationManager.ConfigFilePath;
+                    configFileMap.ExeConfigFilename = ConfigurationPath;
 
                     // Get the mapped configuration file              
                     config = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
@@ -241,6 +234,12 @@ namespace DD4T.Templates.Base.Utils
         #endregion
 
         #region public
+        public string ConfigurationPath
+        {
+            get;
+            set;
+        }
+
         public new string this[string key]
         {
             get
