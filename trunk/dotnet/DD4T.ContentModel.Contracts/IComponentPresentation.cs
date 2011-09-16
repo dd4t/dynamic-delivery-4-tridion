@@ -7,5 +7,6 @@
         IPage Page { get; set; }
         bool IsDynamic { get; set; }
         string RenderedContent { get; }
+        int OrderOnPage { get; set; }
     }
 }
