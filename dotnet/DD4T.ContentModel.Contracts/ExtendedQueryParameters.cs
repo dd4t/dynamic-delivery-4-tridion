@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DD4T.ContentModel.Factories
 {
-    public class ExtendedQueryParameters
+    public class ExtendedQueryParameters 
     {
         public enum QueryLogic
         {
