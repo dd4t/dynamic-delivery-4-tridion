@@ -95,12 +95,13 @@ namespace DD4T.Templates.Base
             {
                 Item outputItem = package.GetByName("Output");
                 package.Remove(outputItem);
-                outputItem.SetAsString(outputValue);
-                package.PushItem("Output", outputItem);
+                package.PushItem(Package.OutputName, package.CreateStringItem(ContentType.Xml, outputValue));
+                //outputItem.SetAsString(outputValue);
+                //package.PushItem("Output", outputItem);
             }
             else
             {
-                package.PushItem(Package.OutputName, package.CreateStringItem(ContentType.Text, outputValue));
+                package.PushItem(Package.OutputName, package.CreateStringItem(ContentType.Xml, outputValue));
             }
 
             GeneralUtils.TimedLog("finished Transform");

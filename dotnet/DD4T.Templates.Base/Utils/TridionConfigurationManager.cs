@@ -11,6 +11,7 @@ using Tridion.ContentManager.ContentManagement.Fields;
 using Tridion.ContentManager;
 using Tridion.ContentManager.Templating;
 using System.IO;
+using System.Collections;
 
 namespace DD4T.Templates.Base.Utils
 {
@@ -118,7 +119,7 @@ namespace DD4T.Templates.Base.Utils
         #endregion
     }
 
-    public class TridionNameValueCollection : NameValueCollection
+    public class TridionNameValueCollection : Hashtable
     {
         #region static
         public static string DefaultConfigurationComponentsFieldName = "ConfigurationComponents";
@@ -155,44 +156,44 @@ namespace DD4T.Templates.Base.Utils
             }
             return false;
         }
-        private bool TryGetValuesFromField(ItemField field, out NameValueCollection nvc)
-        {
-            nvc = new NameValueCollection();
-            if (field is TextField)
-            {
-                foreach (string v in ((TextField)field).Values)
-                {
-                    nvc.Add(field.Name, v);
-                }
-                return true;
-            }
-            if (field is NumberField)
-            {
-                foreach (int i in ((NumberField)field).Values)
-                {
-                    nvc.Add(field.Name, Convert.ToString(i));
-                }
-                return true;
-            }
-            if (field is DateField)
-            {
-                foreach (DateTime dt in ((DateField)field).Values)
-                {
-                    nvc.Add(field.Name, dt.ToString());
-                }
-                return true;
-            }
-            if (field is ComponentLinkField)
-            {
-                foreach (Component c in ((ComponentLinkField)field).Values)
-                {
-                    nvc.Add(field.Name, c.Id.ToString());
-                }
-                return true;
-            }
+        //private bool TryGetValuesFromField(ItemField field, out NameValueCollection nvc)
+        //{
+        //    nvc = new NameValueCollection();
+        //    if (field is TextField)
+        //    {
+        //        foreach (string v in ((TextField)field).Values)
+        //        {
+        //            nvc.Add(field.Name, v);
+        //        }
+        //        return true;
+        //    }
+        //    if (field is NumberField)
+        //    {
+        //        foreach (int i in ((NumberField)field).Values)
+        //        {
+        //            nvc.Add(field.Name, Convert.ToString(i));
+        //        }
+        //        return true;
+        //    }
+        //    if (field is DateField)
+        //    {
+        //        foreach (DateTime dt in ((DateField)field).Values)
+        //        {
+        //            nvc.Add(field.Name, dt.ToString());
+        //        }
+        //        return true;
+        //    }
+        //    if (field is ComponentLinkField)
+        //    {
+        //        foreach (Component c in ((ComponentLinkField)field).Values)
+        //        {
+        //            nvc.Add(field.Name, c.Id.ToString());
+        //        }
+        //        return true;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
         private Configuration Configuration
         {
@@ -236,13 +237,13 @@ namespace DD4T.Templates.Base.Utils
             set;
         }
 
-        public new string this[string key]
+        public string this[string key]
         {
             get
             {
 
-                // 1. Check if the key is already in our base NameValueCollection (which means it was retrieved earlier)
-                string val = base[key];
+                // 1. Check if the key is already in our base Hashtable (which means it was retrieved earlier)
+                string val = base[key] as string;
                 if (!string.IsNullOrEmpty(val))
                 {
                     return val;
@@ -251,10 +252,13 @@ namespace DD4T.Templates.Base.Utils
                 // 2. Check if the key can be found in the DD4T.config file
                 if (Configuration != null)
                 {
+                          
                     KeyValueConfigurationElement elmt = Configuration.AppSettings.Settings[key];
+
                     if (elmt != null)
                     {
                         string valueFromConfig = elmt.Value;
+
                         if (!string.IsNullOrEmpty(valueFromConfig))
                         {
                             // note: we found the setting in the App.config, return that!
@@ -279,20 +283,23 @@ namespace DD4T.Templates.Base.Utils
                     bool foundIt = false;
                     foreach (ItemField field in metadataFields)
                     {
-                        NameValueCollection fieldNVC = null;
-                        if (TryGetValuesFromField(field, out fieldNVC))
+                        if (!base.ContainsKey(field.Name))
                         {
-                            base.Add(fieldNVC);
-                            if (field.Name.Equals(key))
+                            string v = null;
+                            if (TryGetValueFromField(field, out v))
                             {
-                                foundIt = true;
+                                base[field.Name] = v;
+                                if (field.Name.Equals(key))
+                                {
+                                    foundIt = true;
+                                }
                             }
                         }
                     }
                     checkedPublicationMetadata = true;
                     if (foundIt)
                     {
-                        return base[key];
+                        return base[key] as string;
                     }
                 }
 
@@ -313,15 +320,18 @@ namespace DD4T.Templates.Base.Utils
                         ItemFields fields = new ItemFields(c.Content, c.Schema);
                         foreach (ItemField field in fields)
                         {
-                            NameValueCollection fieldNVC = null;
-                            if (TryGetValuesFromField(field, out fieldNVC))
+                            if (!base.ContainsKey(field.Name))
                             {
-                                base.Add(fieldNVC);
+                                string v = null;
+                                if (TryGetValueFromField(field, out v))
+                                {
+                                    base[field.Name] = v;
+                                }
                             }
                         }
                     }
                     checkedConfigurationComponents = true;
-                    return base[key];
+                    return base[key] as string;
                 }
                 return string.Empty;
             }
