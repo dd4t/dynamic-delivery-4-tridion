@@ -119,6 +119,9 @@ using DD4T.ContentModel.Factories;
         public string RenderedContent { get; set; }
         public bool IsDynamic { get; set; }
 
+        [XmlIgnore]
+        public int OrderOnPage { get; set; }
+
 
     }
 
@@ -471,6 +474,9 @@ using DD4T.ContentModel.Factories;
         {
             this.Factory = factory;
         }
+        public Binary()
+        {
+        }
 
         public DateTime LastPublishedDate { get; set; }
 
@@ -483,6 +489,10 @@ using DD4T.ContentModel.Factories;
                     this.binaryData = this.Factory.FindBinaryContent(Url);
                 }
                 return this.binaryData;
+            }
+            set
+            {
+                this.binaryData = value;
             }
         }
 
