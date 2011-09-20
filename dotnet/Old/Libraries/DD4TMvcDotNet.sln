@@ -1,0 +1,120 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B08255AC-8A9E-4884-860E-98BA7852DA0E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tridion Dependencies", "Tridion Dependencies", "{DBE6DE36-ED63-4E08-A67B-9F7037EC72AE}"
+	ProjectSection(SolutionItems) = preProject
+		Tridion Dependencies\MSVCP71.DLL = Tridion Dependencies\MSVCP71.DLL
+		Tridion Dependencies\MSVCR71.DLL = Tridion Dependencies\MSVCR71.DLL
+		Tridion Dependencies\netrtsn.dll = Tridion Dependencies\netrtsn.dll
+		Tridion Dependencies\Tridion.Common.dll = Tridion Dependencies\Tridion.Common.dll
+		Tridion Dependencies\Tridion.ContentDelivery.Configuration.dll = Tridion Dependencies\Tridion.ContentDelivery.Configuration.dll
+		Tridion Dependencies\Tridion.ContentDelivery.dll = Tridion Dependencies\Tridion.ContentDelivery.dll
+		Tridion Dependencies\Tridion.ContentManager.dll = Tridion Dependencies\Tridion.ContentManager.dll
+		Tridion Dependencies\Tridion.ContentManager.Publishing.dll = Tridion Dependencies\Tridion.ContentManager.Publishing.dll
+		Tridion Dependencies\Tridion.ContentManager.Templating.dll = Tridion Dependencies\Tridion.ContentManager.Templating.dll
+		Tridion Dependencies\xmogrt.dll = Tridion Dependencies\xmogrt.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Extensions.DynamicDelivery.ContentModel", "DD4T.Extensions.DynamicDelivery.ContentModel\DD4T.Extensions.DynamicDelivery.ContentModel.csproj", "{FDA7B072-C0B1-46E6-A3DB-B68CA1BCDBBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Extensions.DynamicDelivery.ContentModel.Contracts", "DD4T.Extensions.DynamicDelivery.ContentModel.Contracts\DD4T.Extensions.DynamicDelivery.ContentModel.Contracts.csproj", "{6F624D68-173F-4D5E-A70F-073663009100}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Extensions.DynamicDelivery.Factories", "DD4T.Extensions.DynamicDelivery.Factories\DD4T.Extensions.DynamicDelivery.Factories.csproj", "{1006F041-AF57-4D53-A98F-C0DB73362251}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Extensions.DynamicDelivery.Factories.Base", "DD4T.Extensions.DynamicDelivery.Factories.Base\DD4T.Extensions.DynamicDelivery.Factories.Base.csproj", "{9E96EFE0-7478-4551-A47A-1F04B9F01DF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Extensions.DynamicDelivery.Factories.WebService", "DD4T.Extensions.DynamicDelivery.Factories.WebService\DD4T.Extensions.DynamicDelivery.Factories.WebService.csproj", "{F3D9A389-D6C7-4E38-A403-F10943541DCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Extensions.DynamicDelivery.Mvc", "DD4T.Extensions.DynamicDelivery.Mvc\DD4T.Extensions.DynamicDelivery.Mvc.csproj", "{3AC37BE3-9832-4317-A5E2-2C24C61DECBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Extensions.DynamicDelivery.Templates", "DD4T.Extensions.DynamicDelivery.Templates\DD4T.Extensions.DynamicDelivery.Templates.csproj", "{A6C14491-3C90-4BA4-BAA4-AFC7911FD874}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		DebugTridion2011|Any CPU = DebugTridion2011|Any CPU
+		DeveloperDebug|Any CPU = DeveloperDebug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		TridionDebug|Any CPU = TridionDebug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDA7B072-C0B1-46E6-A3DB-B68CA1BCDBBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDA7B072-C0B1-46E6-A3DB-B68CA1BCDBBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDA7B072-C0B1-46E6-A3DB-B68CA1BCDBBD}.DebugTridion2011|Any CPU.ActiveCfg = DebugTridion2011|Any CPU
+		{FDA7B072-C0B1-46E6-A3DB-B68CA1BCDBBD}.DebugTridion2011|Any CPU.Build.0 = DebugTridion2011|Any CPU
+		{FDA7B072-C0B1-46E6-A3DB-B68CA1BCDBBD}.DeveloperDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDA7B072-C0B1-46E6-A3DB-B68CA1BCDBBD}.DeveloperDebug|Any CPU.Build.0 = Debug|Any CPU
+		{FDA7B072-C0B1-46E6-A3DB-B68CA1BCDBBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDA7B072-C0B1-46E6-A3DB-B68CA1BCDBBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDA7B072-C0B1-46E6-A3DB-B68CA1BCDBBD}.TridionDebug|Any CPU.ActiveCfg = TridionDebug|Any CPU
+		{FDA7B072-C0B1-46E6-A3DB-B68CA1BCDBBD}.TridionDebug|Any CPU.Build.0 = TridionDebug|Any CPU
+		{6F624D68-173F-4D5E-A70F-073663009100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F624D68-173F-4D5E-A70F-073663009100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F624D68-173F-4D5E-A70F-073663009100}.DebugTridion2011|Any CPU.ActiveCfg = DebugTridion2011|Any CPU
+		{6F624D68-173F-4D5E-A70F-073663009100}.DebugTridion2011|Any CPU.Build.0 = DebugTridion2011|Any CPU
+		{6F624D68-173F-4D5E-A70F-073663009100}.DeveloperDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F624D68-173F-4D5E-A70F-073663009100}.DeveloperDebug|Any CPU.Build.0 = Debug|Any CPU
+		{6F624D68-173F-4D5E-A70F-073663009100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F624D68-173F-4D5E-A70F-073663009100}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F624D68-173F-4D5E-A70F-073663009100}.TridionDebug|Any CPU.ActiveCfg = TridionDebug|Any CPU
+		{6F624D68-173F-4D5E-A70F-073663009100}.TridionDebug|Any CPU.Build.0 = TridionDebug|Any CPU
+		{1006F041-AF57-4D53-A98F-C0DB73362251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1006F041-AF57-4D53-A98F-C0DB73362251}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1006F041-AF57-4D53-A98F-C0DB73362251}.DebugTridion2011|Any CPU.ActiveCfg = DebugTridion2011|Any CPU
+		{1006F041-AF57-4D53-A98F-C0DB73362251}.DebugTridion2011|Any CPU.Build.0 = DebugTridion2011|Any CPU
+		{1006F041-AF57-4D53-A98F-C0DB73362251}.DeveloperDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1006F041-AF57-4D53-A98F-C0DB73362251}.DeveloperDebug|Any CPU.Build.0 = Debug|Any CPU
+		{1006F041-AF57-4D53-A98F-C0DB73362251}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1006F041-AF57-4D53-A98F-C0DB73362251}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1006F041-AF57-4D53-A98F-C0DB73362251}.TridionDebug|Any CPU.ActiveCfg = TridionDebug|Any CPU
+		{1006F041-AF57-4D53-A98F-C0DB73362251}.TridionDebug|Any CPU.Build.0 = TridionDebug|Any CPU
+		{9E96EFE0-7478-4551-A47A-1F04B9F01DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E96EFE0-7478-4551-A47A-1F04B9F01DF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E96EFE0-7478-4551-A47A-1F04B9F01DF7}.DebugTridion2011|Any CPU.ActiveCfg = DebugTridion2011|Any CPU
+		{9E96EFE0-7478-4551-A47A-1F04B9F01DF7}.DebugTridion2011|Any CPU.Build.0 = DebugTridion2011|Any CPU
+		{9E96EFE0-7478-4551-A47A-1F04B9F01DF7}.DeveloperDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E96EFE0-7478-4551-A47A-1F04B9F01DF7}.DeveloperDebug|Any CPU.Build.0 = Debug|Any CPU
+		{9E96EFE0-7478-4551-A47A-1F04B9F01DF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E96EFE0-7478-4551-A47A-1F04B9F01DF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E96EFE0-7478-4551-A47A-1F04B9F01DF7}.TridionDebug|Any CPU.ActiveCfg = TridionDebug|Any CPU
+		{9E96EFE0-7478-4551-A47A-1F04B9F01DF7}.TridionDebug|Any CPU.Build.0 = TridionDebug|Any CPU
+		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.DebugTridion2011|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.DebugTridion2011|Any CPU.Build.0 = Debug|Any CPU
+		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.DeveloperDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.DeveloperDebug|Any CPU.Build.0 = Debug|Any CPU
+		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.TridionDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.TridionDebug|Any CPU.Build.0 = Debug|Any CPU
+		{3AC37BE3-9832-4317-A5E2-2C24C61DECBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AC37BE3-9832-4317-A5E2-2C24C61DECBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AC37BE3-9832-4317-A5E2-2C24C61DECBD}.DebugTridion2011|Any CPU.ActiveCfg = DebugTridion2011|Any CPU
+		{3AC37BE3-9832-4317-A5E2-2C24C61DECBD}.DebugTridion2011|Any CPU.Build.0 = DebugTridion2011|Any CPU
+		{3AC37BE3-9832-4317-A5E2-2C24C61DECBD}.DeveloperDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AC37BE3-9832-4317-A5E2-2C24C61DECBD}.DeveloperDebug|Any CPU.Build.0 = Debug|Any CPU
+		{3AC37BE3-9832-4317-A5E2-2C24C61DECBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AC37BE3-9832-4317-A5E2-2C24C61DECBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AC37BE3-9832-4317-A5E2-2C24C61DECBD}.TridionDebug|Any CPU.ActiveCfg = TridionDebug|Any CPU
+		{3AC37BE3-9832-4317-A5E2-2C24C61DECBD}.TridionDebug|Any CPU.Build.0 = TridionDebug|Any CPU
+		{A6C14491-3C90-4BA4-BAA4-AFC7911FD874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6C14491-3C90-4BA4-BAA4-AFC7911FD874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6C14491-3C90-4BA4-BAA4-AFC7911FD874}.DebugTridion2011|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6C14491-3C90-4BA4-BAA4-AFC7911FD874}.DebugTridion2011|Any CPU.Build.0 = Debug|Any CPU
+		{A6C14491-3C90-4BA4-BAA4-AFC7911FD874}.DeveloperDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6C14491-3C90-4BA4-BAA4-AFC7911FD874}.DeveloperDebug|Any CPU.Build.0 = Debug|Any CPU
+		{A6C14491-3C90-4BA4-BAA4-AFC7911FD874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6C14491-3C90-4BA4-BAA4-AFC7911FD874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6C14491-3C90-4BA4-BAA4-AFC7911FD874}.TridionDebug|Any CPU.ActiveCfg = TridionDebug|Any CPU
+		{A6C14491-3C90-4BA4-BAA4-AFC7911FD874}.TridionDebug|Any CPU.Build.0 = TridionDebug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DBE6DE36-ED63-4E08-A67B-9F7037EC72AE} = {B08255AC-8A9E-4884-860E-98BA7852DA0E}
+	EndGlobalSection
+EndGlobal
