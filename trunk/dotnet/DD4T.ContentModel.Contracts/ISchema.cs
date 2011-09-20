@@ -3,5 +3,6 @@
     public interface ISchema : IRepositoryLocal
     {
         IOrganizationalItem Folder { get; }
+        string RootElementName { get; }
     }
 }

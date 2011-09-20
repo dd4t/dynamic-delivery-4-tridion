@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IFieldSet.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Exceptions\BinaryNotFoundException.cs" />
     <Compile Include="Exceptions\ComponentNotFoundException.cs" />

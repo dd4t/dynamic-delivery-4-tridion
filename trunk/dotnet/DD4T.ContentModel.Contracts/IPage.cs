@@ -7,7 +7,7 @@
         IList<ICategory> Categories { get; }
         IList<IComponentPresentation> ComponentPresentations { get; }
         string Filename { get; }
-        IDictionary<string, IField> Metadata { get; }
+        IFieldSet MetadataFields { get; }
         IPageTemplate PageTemplate { get; }
         ISchema Schema { get; }
         IOrganizationalItem StructureGroup { get; }

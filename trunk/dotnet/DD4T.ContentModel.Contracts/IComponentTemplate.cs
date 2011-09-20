@@ -5,7 +5,7 @@
     public interface IComponentTemplate : IRepositoryLocal
     {
         IOrganizationalItem Folder { get; }
-        IDictionary<string, IField> MetadataFields { get; }
+        IFieldSet MetadataFields { get; }
         string OutputFormat { get; }
     }
 }
