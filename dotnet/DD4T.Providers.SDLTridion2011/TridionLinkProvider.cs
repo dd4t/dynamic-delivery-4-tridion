@@ -12,22 +12,26 @@ namespace DD4T.Providers.SDLTridion2011
     using System.Web.Caching;
     using System.Web;
     using DD4T.ContentModel.Contracts.Providers;
+    using System.Diagnostics;
 
     [Export(typeof(ILinkFactory))]
     public class TridionLinkProvider : BaseProvider, ILinkProvider, IDisposable
     {
 
-        private ComponentLink componentLink;
+        private ComponentLink componentLink = null;
         //private const string uriPrefix = "tcm:";
         private static TcmUri emptyTcmUri = new TcmUri("tcm:0-0-0");
 
-        public TridionLinkProvider()
+        public ComponentLink ComponentLink
         {
-            if (componentLink == null)
+            get
             {
-                componentLink = new ComponentLink(PublicationId);
+                if (componentLink == null) 
+                    componentLink = new ComponentLink(PublicationId);
+                return componentLink;
             }
         }
+
 
         public string ResolveLink(string componentUri)
         {
