@@ -1,0 +1,18 @@
+﻿@using DD4T.Mvc.Html;
+@using Sample.Web.Mvc.HtmlHelpers;
+@model DD4T.ContentModel.IComponent
+@{
+        Layout = "";
+}
+
+<h2>@Model.Fields["heading"].Value</h2>
+
+<h3>@Model.Fields["summary"].Value</h3>
+
+@Model.Fields["location"].Value<br />
+@Model.Fields["date"].Value<br />
+<hr />
+
+@Model.Fields["body"].ResolveRichText()
+
+<hr />
