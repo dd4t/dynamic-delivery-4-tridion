@@ -8,6 +8,6 @@
     {
         string FileExtension { get; }
         IOrganizationalItem Folder { get; }
-        IDictionary<string, IField> MetadataFields { get; }
+        IFieldSet MetadataFields { get; }
     }
 }

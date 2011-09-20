@@ -10,7 +10,8 @@
         string CategoryId { get; }
         string CategoryName { get; }
         IList<DateTime> DateTimeValues { get; }
-        IList<IDictionary<string, IField>> EmbeddedValues { get; }
+        IList<IFieldSet> EmbeddedValues { get; }
+        ISchema EmbeddedSchema { get; }
         FieldType FieldType { get; }
         IList<IComponent> LinkedComponentValues { get; }
         string Name { get; }

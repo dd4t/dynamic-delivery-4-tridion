@@ -6,9 +6,11 @@
     {
         IList<ICategory> Categories { get; }
         ComponentType ComponentType { get; }
-        IDictionary<string,IField> Fields { get; }
+        IFieldSet Fields { get; }
+        //IDictionary<string,IField> Fields { get; }
         IOrganizationalItem Folder { get; }
-        IDictionary<string,IField> MetadataFields { get; }
+        IFieldSet MetadataFields { get; }
+        //IDictionary<string, IField> MetadataFields { get; }
         IMultimedia Multimedia { get; }
         ISchema Schema { get; }
         //string ResolvedUrl { get; set; }

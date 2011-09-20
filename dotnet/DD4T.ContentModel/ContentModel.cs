@@ -7,8 +7,9 @@ namespace DD4T.ContentModel
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
     using System.Xml.Serialization;
-using DD4T.ContentModel.Factories;
+    using DD4T.ContentModel.Factories;
     using System.Runtime.Serialization;
+    using System.Xml;
     #endregion Usings
 
     public class ComponentMeta : IComponentMeta
@@ -20,7 +21,7 @@ using DD4T.ContentModel.Factories;
 
         DateTime IComponentMeta.ModificationDate
         {
-            get { return ModificationDate; }        
+            get { return ModificationDate; }
         }
 
         DateTime IComponentMeta.CreationDate
@@ -51,11 +52,14 @@ using DD4T.ContentModel.Factories;
         {
             get { return Schema; }
         }
-        public SerializableDictionary<string, Field> Metadata { get; set; }
+        public FieldSet MetadataFields { get; set; }
         [XmlIgnore]
-        IDictionary<string, IField> IPage.Metadata
+        IFieldSet IPage.MetadataFields
         {
-            get { return (Metadata != null ? (Metadata as Dictionary<string, Field>).Values.ToDictionary<IField, string>(f => f.Name) : null); }
+            get
+            {
+                return MetadataFields != null ? MetadataFields as IFieldSet : null;
+            }
         }
         public List<ComponentPresentation> ComponentPresentations { get; set; }
         [XmlIgnore]
@@ -85,10 +89,10 @@ using DD4T.ContentModel.Factories;
         [XmlAttribute]
         public string TaxonomyId { get; set; }
         [XmlAttribute]
-        public string Path { get; set; }   
+        public string Path { get; set; }
         private List<IKeyword> parentKeywords = new List<IKeyword>();
         [XmlIgnore]
-        public IList<IKeyword> ParentKeywords { get { return parentKeywords; } }    
+        public IList<IKeyword> ParentKeywords { get { return parentKeywords; } }
 
     }
 
@@ -128,11 +132,14 @@ using DD4T.ContentModel.Factories;
     public class PageTemplate : RepositoryLocalItem, IPageTemplate
     {
         public string FileExtension { get; set; }
-        public SerializableDictionary<string, Field> MetadataFields { get; set; }
+        public FieldSet MetadataFields { get; set; }
         [XmlIgnore]
-        IDictionary<string, IField> IPageTemplate.MetadataFields
+        IFieldSet IPageTemplate.MetadataFields
         {
-            get { return (MetadataFields != null ? (MetadataFields as Dictionary<string, Field>).Values.ToDictionary<IField, string>(f => f.Name) : null); }
+            get
+            {
+                return MetadataFields != null ? MetadataFields as IFieldSet : null;
+            }
         }
         public OrganizationalItem Folder { get; set; }
         [XmlIgnore]
@@ -145,11 +152,14 @@ using DD4T.ContentModel.Factories;
     public class ComponentTemplate : RepositoryLocalItem, IComponentTemplate
     {
         public string OutputFormat { get; set; }
-        public SerializableDictionary<string, Field> MetadataFields { get; set; }
+        public FieldSet MetadataFields { get; set; }
         [XmlIgnore]
-        IDictionary<string, IField> IComponentTemplate.MetadataFields
+        IFieldSet IComponentTemplate.MetadataFields
         {
-            get { return (MetadataFields != null ? (MetadataFields as Dictionary<string, Field>).Values.ToDictionary<IField, string>(f => f.Name) : null); }
+            get
+            {
+                return MetadataFields != null ? MetadataFields as IFieldSet : null;
+            }
         }
         public OrganizationalItem Folder { get; set; }
         [XmlIgnore]
@@ -170,17 +180,17 @@ using DD4T.ContentModel.Factories;
             get { return Schema; }
         }
 
-        public SerializableDictionary<string, Field> Fields { get; set; }
+        public FieldSet Fields { get; set; }
         [XmlIgnore]
-        IDictionary<string, IField> IComponent.Fields
+        IFieldSet IComponent.Fields
         {
-            get { return (Fields != null ? (Fields as Dictionary<string, Field>).Values.ToDictionary<IField, string>(f => f.Name) : null); }
+            get { return Fields != null ? (Fields as IFieldSet) : null; }
         }
-        public SerializableDictionary<string, Field> MetadataFields { get; set; }
+        public FieldSet MetadataFields { get; set; }
         [XmlIgnore]
-        IDictionary<string, IField> IComponent.MetadataFields
+        IFieldSet IComponent.MetadataFields
         {
-            get { return (MetadataFields != null ? (MetadataFields as Dictionary<string, Field>).Values.ToDictionary<IField, string>(f => f.Name) : null); }
+            get { return MetadataFields != null ? (MetadataFields as IFieldSet) : null; }
         }
         public ComponentType ComponentType { get; set; }
         public Multimedia Multimedia { get; set; }
@@ -220,8 +230,8 @@ using DD4T.ContentModel.Factories;
         public Component()
         {
             this.Schema = new Schema();
-            this.Fields = new SerializableDictionary<string, Field>();
-            this.MetadataFields = new SerializableDictionary<string, Field>();
+            this.Fields = new FieldSet();
+            this.MetadataFields = new FieldSet();
         }
         #endregion constructors
     }
@@ -233,18 +243,25 @@ using DD4T.ContentModel.Factories;
         {
             get { return Folder as IOrganizationalItem; }
         }
+
+        public string RootElementName
+        {
+            get;
+            set; 
+        }
     }
     public enum MergeAction { Replace, Merge, Skip }
 
     [Serializable]
-    public class Fields : SerializableDictionary<string, Field>
+    public class FieldSet : SerializableDictionary<string, IField, Field>, IFieldSet, IXmlSerializable
     {
-        public Fields()
+        public FieldSet()
             : base()
         {
         }
 
-        protected Fields(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected FieldSet(SerializationInfo info, StreamingContext context) : base(info, context) { }
+
     }
 
     public class Field : IField
@@ -257,11 +274,12 @@ using DD4T.ContentModel.Factories;
         }
         public string Value
         {
-            get{
+            get
+            {
                 if (this.Values == null || this.Values.Count == 0)
                     return string.Empty;
                 return this.Values[0];
-            }                
+            }
         }
         public List<string> Values
         {
@@ -303,16 +321,35 @@ using DD4T.ContentModel.Factories;
         {
             get { return LinkedComponentValues.ToList<IComponent>(); }
         }
-        public List<Fields> EmbeddedValues
+        public List<FieldSet> EmbeddedValues
         {
             get;
             set;
         }
         [XmlIgnore]
-        IList<IDictionary<string, IField>> IField.EmbeddedValues
+        IList<IFieldSet> IField.EmbeddedValues
         {
-            get { return (EmbeddedValues.Select<SerializableDictionary<string, Field>,IDictionary<string, IField>>(e => e.Values.ToDictionary<IField, string>(f => f.Name)).ToList<IDictionary<string, IField>>()); }
+            get
+            {
+                return EmbeddedValues.Select<FieldSet, IFieldSet>(e => e as IFieldSet).ToList<IFieldSet>();
+            }
         }
+
+
+        public Schema EmbeddedSchema
+        {
+            get;
+            set;
+        }
+        [XmlIgnore]
+        ISchema IField.EmbeddedSchema 
+        {
+            get
+            {
+                return EmbeddedSchema as ISchema;
+            }
+        }
+
 
         [XmlAttribute]
         public FieldType FieldType
@@ -334,6 +371,8 @@ using DD4T.ContentModel.Factories;
             get;
             set;
         }
+
+
         #endregion Properties
         #region Constructors
         public Field()
@@ -480,12 +519,12 @@ using DD4T.ContentModel.Factories;
 
         public DateTime LastPublishedDate { get; set; }
 
-        public byte[] BinaryData 
+        public byte[] BinaryData
         {
             get
             {
                 if (this.binaryData == null)
-                {                    
+                {
                     this.binaryData = this.Factory.FindBinaryContent(Url);
                 }
                 return this.binaryData;
