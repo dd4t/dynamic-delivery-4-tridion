@@ -1,5 +1,0 @@
-C:\AppData\workspace\TridionMVCDotNet\Libraries\DD4T.Extensions.DynamicDelivery.ContentModel.Contracts\bin\Debug\Tridion.Extensions.DynamicDelivery.ContentModel.Contracts.dll
-C:\AppData\workspace\TridionMVCDotNet\Libraries\DD4T.Extensions.DynamicDelivery.ContentModel.Contracts\bin\Debug\Tridion.Extensions.DynamicDelivery.ContentModel.Contracts.pdb
-C:\AppData\workspace\TridionMVCDotNet\Libraries\DD4T.Extensions.DynamicDelivery.ContentModel.Contracts\obj\Debug\ResolveAssemblyReference.cache
-C:\AppData\workspace\TridionMVCDotNet\Libraries\DD4T.Extensions.DynamicDelivery.ContentModel.Contracts\obj\Debug\Tridion.Extensions.DynamicDelivery.ContentModel.Contracts.dll
-C:\AppData\workspace\TridionMVCDotNet\Libraries\DD4T.Extensions.DynamicDelivery.ContentModel.Contracts\obj\Debug\Tridion.Extensions.DynamicDelivery.ContentModel.Contracts.pdb
