@@ -26,7 +26,6 @@ namespace DD4T.Templates.Base.Builder
 			c.Id = tcmComponent.Id.ToString();
          GeneralUtils.TimedLog("component title = " + c.Title);
 
-         // change by QS (not in github yet)
          c.Version = tcmComponent.Version;
          GeneralUtils.TimedLog("start building schema");
          c.Schema = manager.BuildSchema(tcmComponent.Schema);
@@ -65,27 +64,29 @@ namespace DD4T.Templates.Base.Builder
          {
             c.Multimedia = null;
          }
-         c.Fields = new Dynamic.SerializableDictionary<string,Field>();
-			c.MetadataFields = new Dynamic.SerializableDictionary<string, Field>();
-			if (linkLevels > 0) {
-            if (tcmComponent.Content != null)
-            {
-               GeneralUtils.TimedLog("start retrieving tcm fields");
-               TCM.Fields.ItemFields tcmFields = new TCM.Fields.ItemFields(tcmComponent.Content, tcmComponent.Schema);
-               GeneralUtils.TimedLog("finished retrieving tcm fields");
-               GeneralUtils.TimedLog("start building fields");
-               c.Fields = manager.BuildFields(tcmFields, linkLevels, resolveWidthAndHeight);
-               GeneralUtils.TimedLog("finished building fields");
-            }
-				if (tcmComponent.Metadata != null) {
-               GeneralUtils.TimedLog("start retrieving tcm metadata fields");
-               TCM.Fields.ItemFields tcmMetadataFields = new TCM.Fields.ItemFields(tcmComponent.Metadata, tcmComponent.MetadataSchema);
-               GeneralUtils.TimedLog("finished retrieving tcm metadata fields");
-               GeneralUtils.TimedLog("start building metadata fields");
-               c.MetadataFields = manager.BuildFields(tcmMetadataFields, linkLevels, resolveWidthAndHeight);
-               GeneralUtils.TimedLog("finished building metadata fields");
-            }
-			}
+         c.Fields = new Dynamic.FieldSet();
+         c.MetadataFields = new Dynamic.FieldSet();
+         if (linkLevels > 0)
+         {
+             if (tcmComponent.Content != null)
+             {
+                 GeneralUtils.TimedLog("start retrieving tcm fields");
+                 TCM.Fields.ItemFields tcmFields = new TCM.Fields.ItemFields(tcmComponent.Content, tcmComponent.Schema);
+                 GeneralUtils.TimedLog("finished retrieving tcm fields");
+                 GeneralUtils.TimedLog("start building fields");
+                 c.Fields = manager.BuildFields(tcmFields, linkLevels, resolveWidthAndHeight);
+                 GeneralUtils.TimedLog("finished building fields");
+             }
+             if (tcmComponent.Metadata != null)
+             {
+                 GeneralUtils.TimedLog("start retrieving tcm metadata fields");
+                 TCM.Fields.ItemFields tcmMetadataFields = new TCM.Fields.ItemFields(tcmComponent.Metadata, tcmComponent.MetadataSchema);
+                 GeneralUtils.TimedLog("finished retrieving tcm metadata fields");
+                 GeneralUtils.TimedLog("start building metadata fields");
+                 c.MetadataFields = manager.BuildFields(tcmMetadataFields, linkLevels, resolveWidthAndHeight);
+                 GeneralUtils.TimedLog("finished building metadata fields");
+             }
+         }
 
 
 

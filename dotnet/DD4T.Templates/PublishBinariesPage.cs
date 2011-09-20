@@ -4,6 +4,7 @@ using Tridion.ContentManager.Templating.Assembly;
 using Dynamic = DD4T.ContentModel;
 using DD4T.Templates.Base;
 using DD4T.Templates.Base.Utils;
+using DD4T.ContentModel;
 
 namespace DD4T.Templates
 {
@@ -22,11 +23,10 @@ namespace DD4T.Templates
 
 
             // call helper function to publish all relevant multimedia components
-            // that could be:
-            // - the current page
-            // - any component on the current page
-            // - any component linked to a component on the current page
-            // - any component linked to that (the number of levels is configurable in a parameter)
+            // Note: this template only published mm components that are found in the metadata of the page
+            // MM components that are used as component presentation, or that are linked from a component that is 
+            // used as a component presentation, will be published from the component template
+            // (e.g. by adding 'Publish binaries for components' to that CT)
 
             PublishAllBinaries(page);
         }
@@ -36,7 +36,10 @@ namespace DD4T.Templates
         private void PublishAllBinaries(Dynamic.Page page)
         {
 
-            foreach (Dynamic.Field field in page.Metadata.Values)
+            GeneralUtils.TimedLog("page: " + page);
+            GeneralUtils.TimedLog("page metadata fields property: " + (page.MetadataFields == null ? "null" : page.MetadataFields.ToString()));
+            GeneralUtils.TimedLog("page metadata fields count: " + page.MetadataFields.Count);
+            foreach (Dynamic.Field field in page.MetadataFields.Values)
             {
                 if (field.FieldType == Dynamic.FieldType.ComponentLink || field.FieldType == Dynamic.FieldType.MultiMediaLink)
                 {
@@ -55,27 +58,6 @@ namespace DD4T.Templates
                 }
             }
 
-            // do not publish binaries in the components, because they should be handled
-            // by the component templates!
-
-            //foreach (Dynamic.ComponentPresentation cp in page.ComponentPresentations)
-            //{
-            //   Dynamic.Component component = cp.Component;
-            //   if (component.ComponentType.Equals(Dynamic.ComponentType.Multimedia))
-            //   {
-            //      component.Multimedia.Url = binaryPublisher.PublishMultimediaComponent(component.Id);
-            //   }
-            //   foreach (Dynamic.Field field in component.Fields.Values)
-            //   {
-            //      if (field.FieldType == Dynamic.FieldType.ComponentLink || field.FieldType == Dynamic.FieldType.MultiMediaLink)
-            //      {
-            //         foreach (Dynamic.Component linkedComponent in field.LinkedComponentValues)
-            //         {
-            //            PublishAllBinaries(linkedComponent);
-            //         }
-            //      }
-            //   }
-            //}
         }
 
         private void PublishAllBinaries(Dynamic.Component component)
@@ -88,9 +70,9 @@ namespace DD4T.Templates
             {
                 if (field.FieldType == Dynamic.FieldType.ComponentLink || field.FieldType == Dynamic.FieldType.MultiMediaLink)
                 {
-                    foreach (var linkedComponent in field.LinkedComponentValues)
+                    foreach (IComponent linkedComponent in field.LinkedComponentValues)
                     {
-                        PublishAllBinaries(linkedComponent);
+                        PublishAllBinaries(linkedComponent as Component);
                     }
                 }
                 if (field.FieldType == Dynamic.FieldType.Xhtml)

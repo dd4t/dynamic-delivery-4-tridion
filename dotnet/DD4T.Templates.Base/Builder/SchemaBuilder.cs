@@ -17,6 +17,7 @@ namespace DD4T.Templates.Base.Builder
 			s.Id = tcmSchema.Id.ToString();
             s.Folder = manager.BuildOrganizationalItem((TCM.Folder)tcmSchema.OrganizationalItem);
             s.Publication = manager.BuildPublication(tcmSchema.ContextRepository);
+            s.RootElementName = tcmSchema.RootElementName;
 
 			return s;
 		}

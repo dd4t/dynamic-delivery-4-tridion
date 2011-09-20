@@ -65,7 +65,7 @@ namespace DD4T.Templates.Base.Builder
             return FieldBuilder.BuildField(tcmItemField, linkLevels, resolveWidthAndHeight, this);
         }
 
-        public virtual Dynamic.Fields BuildFields(TCM.Fields.ItemFields tcmItemFields, int linkLevels, bool resolveWidthAndHeight)
+        public virtual Dynamic.FieldSet BuildFields(TCM.Fields.ItemFields tcmItemFields, int linkLevels, bool resolveWidthAndHeight)
         {
             return FieldsBuilder.BuildFields(tcmItemFields, linkLevels, resolveWidthAndHeight, this);
         }

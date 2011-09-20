@@ -149,7 +149,8 @@ namespace DD4T.Templates.Base.Builder
             if (sField.Values.Count == 0)
                throw new FieldHasNoValueException();
             // we will wrap each linked component in a ContentModel component
-            f.EmbeddedValues = new List<Dynamic.Fields>();
+            f.EmbeddedValues = new List<Dynamic.FieldSet>();
+            f.EmbeddedSchema = manager.BuildSchema(((EmbeddedSchemaFieldDefinition)sField.Definition).EmbeddedSchema);
             foreach (TCM.Fields.ItemFields embeddedFields in sField.Values)
             {
                 f.EmbeddedValues.Add(manager.BuildFields(embeddedFields, linkLevels, resolveWidthAndHeight));

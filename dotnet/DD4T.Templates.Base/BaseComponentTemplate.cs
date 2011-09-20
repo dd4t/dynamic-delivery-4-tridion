@@ -18,7 +18,7 @@ namespace DD4T.Templates.Base
         public bool DefaultResolveWidthAndHeight = false;
         DateTime startTime = DateTime.Now;
 
-        public BaseComponentTemplate() : base(TemplatingLogger.GetLogger(typeof(BaseComponentTemplate))) {}
+        public BaseComponentTemplate() : base(TemplatingLogger.GetLogger(typeof(BaseComponentTemplate))) { }
         public BaseComponentTemplate(TemplatingLogger log) : base(log) { }
 
         /// <summary>
@@ -94,8 +94,6 @@ namespace DD4T.Templates.Base
                 Item outputItem = package.GetByName("Output");
                 package.Remove(outputItem);
                 package.PushItem(Package.OutputName, package.CreateStringItem(ContentType.Xml, outputValue));
-                //outputItem.SetAsString(outputValue);
-                //package.PushItem("Output", outputItem);
             }
             else
             {

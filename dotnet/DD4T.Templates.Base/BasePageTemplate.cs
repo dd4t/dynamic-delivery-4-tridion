@@ -96,8 +96,6 @@ namespace DD4T.Templates.Base
                 Item outputItem = package.GetByName("Output");
                 package.Remove(outputItem);
                 package.PushItem(Package.OutputName, package.CreateStringItem(ContentType.Xml, outputValue));
-                //outputItem.SetAsString(outputValue);
-                //package.PushItem("Output", outputItem);
             }
             else
             {
@@ -139,7 +137,8 @@ namespace DD4T.Templates.Base
             }
             Log.Debug("found page with title " + tcmPage.Title + " and id " + tcmPage.Id);
             Log.Debug("constructing dynamic page, links are followed to level " + linkLevels + ", width and height are " + (resolveWidthAndHeight ? "" : "not ") + "resolved");
-            return manager.BuildPage(tcmPage, Engine, linkLevels, resolveWidthAndHeight);
+            Dynamic.Page page = manager.BuildPage(tcmPage, Engine, linkLevels, resolveWidthAndHeight);
+            return page;
         }
 
         protected Page GetTcmPage()
