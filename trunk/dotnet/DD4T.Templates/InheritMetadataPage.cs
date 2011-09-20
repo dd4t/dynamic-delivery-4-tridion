@@ -38,7 +38,7 @@ namespace DD4T.Templates
             {
                TCM.Fields.ItemFields tcmFields = new TCM.Fields.ItemFields(tcmSG.Metadata, tcmSG.MetadataSchema);
                // change
-               FieldsBuilder.AddFields(page.Metadata, tcmFields, 1, false, mergeAction, Manager);
+               FieldsBuilder.AddFields(page.MetadataFields, tcmFields, 1, false, mergeAction, Manager);
             }
             tcmSG = (StructureGroup)tcmSG.OrganizationalItem;
          }

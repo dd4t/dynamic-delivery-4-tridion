@@ -15,9 +15,9 @@ namespace DD4T.Templates.Base.Builder
 			ct.OutputFormat = tcmComponentTemplate.OutputFormat;
          if (tcmComponentTemplate.Metadata != null && tcmComponentTemplate.MetadataSchema != null)
          {
-            ct.MetadataFields = new Dynamic.SerializableDictionary<string, Dynamic.Field>();
+             ct.MetadataFields = new Dynamic.FieldSet();
             TCM.Fields.ItemFields tcmMetadataFields = new TCM.Fields.ItemFields(tcmComponentTemplate.Metadata, tcmComponentTemplate.MetadataSchema);
-            ct.MetadataFields = manager.BuildFields(tcmMetadataFields, 0, false); // never follow links to comopnents from component templates, never resolve binary widht/height
+            ct.MetadataFields = manager.BuildFields(tcmMetadataFields, 0, false); // never follow links to components from component templates, never resolve binary widht/height
          }
          else
          {

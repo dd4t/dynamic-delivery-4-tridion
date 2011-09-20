@@ -24,13 +24,13 @@ namespace DD4T.Templates.Base.Builder
 			                         PageTemplate = manager.BuildPageTemplate(tcmPage.PageTemplate),
 			                         Schema = manager.BuildSchema(tcmPage.MetadataSchema),
 			                         Version = tcmPage.Version,
-			                         Metadata = new Dynamic.SerializableDictionary<string, Dynamic.Field>()
+			                         MetadataFields = new Dynamic.FieldSet()
 			                     };
           if (linkLevels > 0) {
 				try {
 					if (tcmPage.Metadata != null) {
 						var tcmMetadataFields = new Tridion.ContentManager.ContentManagement.Fields.ItemFields(tcmPage.Metadata, tcmPage.MetadataSchema);
-                        p.Metadata = manager.BuildFields(tcmMetadataFields, linkLevels, resolveWidthAndHeight);
+                        p.MetadataFields = manager.BuildFields(tcmMetadataFields, linkLevels, resolveWidthAndHeight);
 					}
 				} catch (ItemDoesNotExistException) {
 					// fail silently if there is no metadata schema

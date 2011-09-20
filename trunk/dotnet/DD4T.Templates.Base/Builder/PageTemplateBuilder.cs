@@ -17,9 +17,9 @@ namespace DD4T.Templates.Base.Builder
 
          if (tcmPageTemplate.Metadata != null && tcmPageTemplate.MetadataSchema != null)
          {
-            pt.MetadataFields = new Dynamic.SerializableDictionary<string, Dynamic.Field>();
+             pt.MetadataFields = new Dynamic.FieldSet();
             TCM.Fields.ItemFields tcmMetadataFields = new TCM.Fields.ItemFields(tcmPageTemplate.Metadata, tcmPageTemplate.MetadataSchema);
-            pt.MetadataFields = manager.BuildFields(tcmMetadataFields, 0, false); // never follow links to comopnents from page templates, never resolve binary widht/height
+            pt.MetadataFields = manager.BuildFields(tcmMetadataFields, 0, false); // never follow links to components from page templates, never resolve binary widht/height
          }
          else
          {
