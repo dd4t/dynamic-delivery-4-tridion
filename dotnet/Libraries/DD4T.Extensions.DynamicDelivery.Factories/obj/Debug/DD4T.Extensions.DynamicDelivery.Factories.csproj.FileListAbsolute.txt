@@ -1,1 +1,0 @@
-C:\AppData\workspace\TridionMVCDotNet\Libraries\DD4T.Extensions.DynamicDelivery.Factories\obj\Debug\ResolveAssemblyReference.cache
