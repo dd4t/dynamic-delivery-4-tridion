@@ -11,7 +11,6 @@ using DD4T.ContentModel.Factories;
 
 namespace DD4T.ContentModel
 {
-
     public class ComponentMeta : IComponentMeta
     {
         public string ID { get; set; }
