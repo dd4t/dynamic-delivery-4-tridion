@@ -1,16 +1,16 @@
 ﻿using System.Linq;
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Xml.Serialization;
+using System.Runtime.Serialization;
+using System.Xml;
+using System.Diagnostics;
+using DD4T.ContentModel.Factories;
+
 
 namespace DD4T.ContentModel
 {
-    #region Usings
-    using System;
-    using System.Collections.Generic;
-    using System.Text.RegularExpressions;
-    using System.Xml.Serialization;
-    using DD4T.ContentModel.Factories;
-    using System.Runtime.Serialization;
-    using System.Xml;
-    #endregion Usings
 
     public class ComponentMeta : IComponentMeta
     {
@@ -418,6 +418,7 @@ namespace DD4T.ContentModel
         public int ItemTypeId { get; set; }
         public int Version { get; set; }
 
+        [DebuggerStepThrough]
         public TcmUri(string Uri)
         {
             Regex re = new Regex(@"tcm:(\d+)-(\d+)-?(\d*)-?v?(\d*)");
