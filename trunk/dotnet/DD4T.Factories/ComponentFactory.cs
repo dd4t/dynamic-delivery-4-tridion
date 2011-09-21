@@ -108,7 +108,7 @@ namespace DD4T.Factories
         public IList<IComponent> FindComponents(ExtendedQueryParameters queryParameters)
         {
             var results = ComponentProvider.FindComponents(queryParameters)
-                .Select(c => GetIComponentObject(c))
+                .Select(c => GetComponent(c))
                 .ToList();
             return results;
         }

@@ -54,7 +54,7 @@ namespace DD4T.Providers.SDLTridion2011
 
             if (!componentUriToLinkTo.Equals(emptyTcmUri))
             {
-                Link link = componentLink.GetLink(pageUri.ToString(), componentUriToLinkTo.ToString(), componentTemplateUri.ToString(), String.Empty, String.Empty, false, false);
+                Link link = ComponentLink.GetLink(pageUri.ToString(), componentUriToLinkTo.ToString(), componentTemplateUri.ToString(), String.Empty, String.Empty, false, false);
                 if (!link.IsResolved)
                 {
                     return null;
