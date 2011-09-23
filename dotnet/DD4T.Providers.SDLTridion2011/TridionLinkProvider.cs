@@ -14,7 +14,7 @@ namespace DD4T.Providers.SDLTridion2011
     using DD4T.ContentModel.Contracts.Providers;
     using System.Diagnostics;
 
-    [Export(typeof(ILinkFactory))]
+    [Export(typeof(ILinkProvider))]
     public class TridionLinkProvider : BaseProvider, ILinkProvider, IDisposable
     {
 
@@ -39,7 +39,7 @@ namespace DD4T.Providers.SDLTridion2011
 
             if (!uri.Equals(emptyTcmUri))
             {
-                Link link = componentLink.GetLink(uri.ToString());
+                Link link = ComponentLink.GetLink(uri.ToString());
                 return link.IsResolved ? link.Url : null;
             }
     
