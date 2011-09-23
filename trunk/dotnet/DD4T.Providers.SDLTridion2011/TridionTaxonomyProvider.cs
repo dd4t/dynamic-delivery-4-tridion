@@ -5,9 +5,11 @@ using System.Text;
 using Dynamic = DD4T.ContentModel;
 using Tridion.ContentDelivery.Taxonomies;
 using DD4T.ContentModel.Contracts.Providers;
+using System.ComponentModel.Composition;
 
 namespace DD4T.Providers.SDLTridion2011
 {
+    [Export(typeof(ITaxonomyProvider))]
     public class TridionTaxonomyProvider : BaseProvider, ITaxonomyProvider, IDisposable
     {
         private TaxonomyFactory _taxonomyFactory;

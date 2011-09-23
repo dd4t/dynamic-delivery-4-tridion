@@ -80,7 +80,7 @@ namespace DD4T.Mvc.Controllers
             }
             catch (PageNotFoundException)
             {
-                throw new HttpException(404, "De pagina wordt niet gevonden.");
+                throw new HttpException(404, "Page cannot be found");
             }
         }
 

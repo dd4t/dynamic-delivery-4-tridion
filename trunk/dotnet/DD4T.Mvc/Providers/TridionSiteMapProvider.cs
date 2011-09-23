@@ -11,6 +11,7 @@
     using System.Collections;
     using DD4T.Mvc.Caching;
     using DD4T.Factories;
+    using System.Diagnostics;
 
     public class TridionSiteMapProvider : StaticSiteMapProvider
     {
@@ -72,7 +73,7 @@
 
                 childNode = new TridionSiteMapNode(this,
                     element.Attribute("id").Value, //key
-                    element.Attribute("uri").Value, //uri
+                    element.Attribute("pageId")==null ? "" : element.Attribute("pageId").Value, //uri
                     element.Attribute("url").Value, //url
                     element.Attribute("title").Value, //title
                     element.Attribute("description").Value, //description

@@ -20,6 +20,9 @@ using System.Collections.Generic;
 using System.Web.Caching;
 using System.Web;
 using DD4T.ContentModel.Contracts.Providers;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
 
 namespace DD4T.Providers.SDLTridion2011
 {
@@ -65,6 +68,14 @@ namespace DD4T.Providers.SDLTridion2011
 
         public DateTime GetLastPublishedDateByUrl(string url)
         {
+            // code supplied by Daniel Neagu that does not work because I don't have the DAOs or StorageManagerFactory objects at all....
+            //Com.Tridion.Storage.Dao.BinaryContentDAO bmDAO = (Com.Tridion.Storage.Dao.BinaryContentDAO) Com.Tridion.Storage.StorageManagerFactory.GetDAO(1, "BinaryContent");
+            //TCDURI tcdUri = new TCDURI(uri);
+            //Com.Tridion.Storage.BinaryContent bm = bmDAO.FindByPrimaryKey(1, 23, "variant");
+
+
+
+            
             throw new NotImplementedException();
         }
 
