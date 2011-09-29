@@ -44,7 +44,7 @@ namespace DD4T.Factories
         {
             component = null;
 
-            string content = componentProvider.GetContent(componentUri);
+            string content = ComponentProvider.GetContent(componentUri);
 
             if (string.IsNullOrEmpty(content))
             {
