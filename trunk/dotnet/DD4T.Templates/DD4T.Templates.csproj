@@ -40,27 +40,35 @@
     <Reference Include="System.Xml" />
     <Reference Include="Tridion.Common">
       <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.Common.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.ContentManager">
       <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.ContentManager.Common">
       <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.Common.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.ContentManager.Publishing">
       <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.Publishing.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.ContentManager.TemplateTypes">
       <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.TemplateTypes.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.ContentManager.Templating">
       <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.Templating.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.ContentManager.Templating.SiteEdit">
       <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.Templating.SiteEdit.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Tridion.Logging">
       <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.Logging.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
