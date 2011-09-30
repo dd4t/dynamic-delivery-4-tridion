@@ -50,7 +50,7 @@ namespace DD4T.Templates
 
             // replace the Output item in the package
             package.Remove(outputItem);
-            package.PushItem("Output", package.CreateStringItem(ContentType.Text, outputValue));
+            package.PushItem("Output", package.CreateStringItem(ContentType.Html, outputValue));
         }
 
 
