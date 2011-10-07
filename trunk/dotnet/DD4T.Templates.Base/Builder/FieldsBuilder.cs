@@ -24,12 +24,12 @@ namespace DD4T.Templates.Base.Builder
                {
                    if (fields.ContainsKey(tcmItemField.Name))
                    {
-                       if (mergeAction.Equals(Dynamic.MergeAction.Skip))
+                       if (mergeAction.Equals(Dynamic.MergeAction.Skip) || (mergeAction.Equals(Dynamic.MergeAction.MergeMultiValueSkipSingleValue) && tcmItemField.Definition.MaxOccurs == 1))
                        {
                            continue;
                        }
                        Dynamic.Field f = manager.BuildField(tcmItemField, linkLevels, resolveWidthAndHeight);
-                       if (mergeAction.Equals(Dynamic.MergeAction.Replace))
+                       if (mergeAction.Equals(Dynamic.MergeAction.Replace) || (mergeAction.Equals(Dynamic.MergeAction.MergeMultiValueReplaceSingleValue) && tcmItemField.Definition.MaxOccurs == 1))
                        {
                            fields.Remove(f.Name);
                            fields.Add(f.Name, f);
