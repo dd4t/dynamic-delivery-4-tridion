@@ -249,7 +249,7 @@ namespace DD4T.ContentModel
             set; 
         }
     }
-    public enum MergeAction { Replace, Merge, Skip }
+    public enum MergeAction { Replace, Merge, MergeMultiValueSkipSingleValue, MergeMultiValueReplaceSingleValue, Skip }
 
     [Serializable]
     public class FieldSet : SerializableDictionary<string, IField, Field>, IFieldSet, IXmlSerializable
