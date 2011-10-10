@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IItem.cs" />
     <Compile Include="IFieldSet.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Exceptions\BinaryNotFoundException.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="IOrganizationalItem.cs" />
     <Compile Include="IPage.cs" />
     <Compile Include="IPageTemplate.cs" />
+    <Compile Include="IPublication.cs" />
     <Compile Include="IRepositoryLocal.cs" />
     <Compile Include="ISchema.cs" />
     <Compile Include="IViewable.cs" />
