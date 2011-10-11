@@ -87,28 +87,11 @@ namespace DD4T.Templates.Base.Builder
                  GeneralUtils.TimedLog("finished building metadata fields");
              }
          }
-
-
-
-         GeneralUtils.TimedLog("start retrieving tcm publication");
-         TCM.Repository pub = tcmComponent.ContextRepository;
-         GeneralUtils.TimedLog("finished retrieving tcm publication");
-         GeneralUtils.TimedLog("start building publication");
-         c.Publication = manager.BuildPublication(pub);
-         GeneralUtils.TimedLog("finished building publication");
-
-         GeneralUtils.TimedLog("start retrieving tcm folder");
+         c.Publication = manager.BuildPublication(tcmComponent.ContextRepository);
+         c.OwningPublication = manager.BuildPublication(tcmComponent.OwningRepository);
          TCM.Folder folder = (TCM.Folder) tcmComponent.OrganizationalItem;
-         GeneralUtils.TimedLog("finished retrieving tcm folder");
-         GeneralUtils.TimedLog("start building folder");
          c.Folder = manager.BuildOrganizationalItem(folder);
-         GeneralUtils.TimedLog("finished building folder");
-         GeneralUtils.TimedLog("start building categories");
          c.Categories = manager.BuildCategories(tcmComponent);
-         GeneralUtils.TimedLog("finished building categories");
-
-         GeneralUtils.TimedLog("finished BuildComponent " + c.Title);
-
          return c;
 		}
 	}

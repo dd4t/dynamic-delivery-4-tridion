@@ -17,20 +17,25 @@ namespace DD4T.Templates.Base.Builder
       }
        public static void AddFields(Dynamic.FieldSet fields, TCM.Fields.ItemFields tcmItemFields, int linkLevels, bool resolveWidthAndHeight, Dynamic.MergeAction mergeAction, BuildManager manager)
        {
+           GeneralUtils.TimedLog(string.Format("add fields: found {0} fields",tcmItemFields.Count));
            
            foreach (TCM.Fields.ItemField tcmItemField in tcmItemFields)
            {
+               GeneralUtils.TimedLog("add fields: found " + tcmItemField.Name);
                try
                {
                    if (fields.ContainsKey(tcmItemField.Name))
                    {
+                       GeneralUtils.TimedLog("field exists already, with " + fields[tcmItemField.Name].Values.Count + " values");
                        if (mergeAction.Equals(Dynamic.MergeAction.Skip) || (mergeAction.Equals(Dynamic.MergeAction.MergeMultiValueSkipSingleValue) && tcmItemField.Definition.MaxOccurs == 1))
                        {
+                           GeneralUtils.TimedLog(string.Format("skipping field (merge action {0}, maxoccurs {1}", mergeAction.ToString(), tcmItemField.Definition.MaxOccurs));
                            continue;
                        }
                        Dynamic.Field f = manager.BuildField(tcmItemField, linkLevels, resolveWidthAndHeight);
                        if (mergeAction.Equals(Dynamic.MergeAction.Replace) || (mergeAction.Equals(Dynamic.MergeAction.MergeMultiValueReplaceSingleValue) && tcmItemField.Definition.MaxOccurs == 1))
                        {
+                           GeneralUtils.TimedLog(string.Format("replacing field (merge action {0}, maxoccurs {1}", mergeAction.ToString(), tcmItemField.Definition.MaxOccurs));
                            fields.Remove(f.Name);
                            fields.Add(f.Name, f);
                        }
@@ -111,6 +116,7 @@ namespace DD4T.Templates.Base.Builder
                                                break;
                                            }
                                        }
+                                       GeneralUtils.TimedLog(string.Format("found value {0}, valueExists: {1}", val, valueExists));
                                        if (!valueExists)
                                        {
                                            existingField.Values.Add(val);
