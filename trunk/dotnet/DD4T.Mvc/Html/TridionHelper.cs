@@ -8,25 +8,48 @@ namespace DD4T.Mvc.Html
     {
         public static MvcHtmlString RenderComponentPresentations(this HtmlHelper helper)
         {
-            return RenderComponentPresentations(helper, null);
+            return RenderComponentPresentations(helper, null, null, null);
         }
 
         public static MvcHtmlString RenderComponentPresentations(this HtmlHelper helper, IComponentPresentationRenderer renderer)
         {
-           return RenderComponentPresentations(helper, string.Empty, renderer);
+           return RenderComponentPresentations(helper, null, null, renderer);
         }
 
-        public static MvcHtmlString RenderComponentPresentations(this HtmlHelper helper, string byComponentTemplate, IComponentPresentationRenderer renderer)
+        public static MvcHtmlString RenderComponentPresentationsByView(this HtmlHelper helper, string byComponentTemplate, IComponentPresentationRenderer renderer)
         {
             if (string.IsNullOrEmpty(byComponentTemplate))
                 return RenderComponentPresentations(helper, new string[] { }, null, renderer);
             else
                 return RenderComponentPresentations(helper, new [] {byComponentTemplate}, null, renderer);
         }
+        public static MvcHtmlString RenderComponentPresentationsByView(this HtmlHelper helper, string byComponentTemplate)
+        {
+            if (string.IsNullOrEmpty(byComponentTemplate))
+                return RenderComponentPresentations(helper, new string[] { }, null, null);
+            else
+                return RenderComponentPresentations(helper, new[] { byComponentTemplate }, null, null);
+        }
 
-        public static MvcHtmlString RenderComponentPresentations(this HtmlHelper helper, string[] byComponentTemplate, IComponentPresentationRenderer renderer)
+
+        public static MvcHtmlString RenderComponentPresentationsByView(this HtmlHelper helper, string[] byComponentTemplate, IComponentPresentationRenderer renderer)
         {
             return RenderComponentPresentations(helper, byComponentTemplate, null, renderer);
+        }
+
+        public static MvcHtmlString RenderComponentPresentationsByView(this HtmlHelper helper, string[] byComponentTemplate)
+        {
+            return RenderComponentPresentations(helper, byComponentTemplate, null, null);
+        }
+
+        public static MvcHtmlString RenderComponentPresentationsBySchema(this HtmlHelper helper, string bySchema, IComponentPresentationRenderer renderer)
+        {
+            return RenderComponentPresentations(helper, null, bySchema, renderer);
+        }
+
+        public static MvcHtmlString RenderComponentPresentationsBySchema(this HtmlHelper helper, string bySchema)
+        {
+            return RenderComponentPresentations(helper, null, bySchema, null);
         }
 
         public static MvcHtmlString RenderComponentPresentations(this HtmlHelper helper, string[] byComponentTemplate, string bySchema, IComponentPresentationRenderer renderer)

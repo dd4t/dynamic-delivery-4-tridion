@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Xml;
 using System.Diagnostics;
 using DD4T.ContentModel.Factories;
+using DD4T.ContentModel.Contracts;
 
 
 namespace DD4T.ContentModel
@@ -83,7 +84,7 @@ namespace DD4T.ContentModel
         public int Version { get; set; }
     }
 
-    public class Keyword : TridionItem, IKeyword
+    public class Keyword : RepositoryLocalItem, IKeyword
     {
         [XmlAttribute]
         public string TaxonomyId { get; set; }
@@ -95,7 +96,7 @@ namespace DD4T.ContentModel
 
     }
 
-    public class Category : TridionItem, ICategory
+    public class Category : RepositoryLocalItem, ICategory
     {
         public List<Keyword> Keywords { get; set; }
         [XmlIgnore]
@@ -384,30 +385,34 @@ namespace DD4T.ContentModel
         #endregion Constructors
     }
 
-    public abstract class TridionItem
+    public abstract class TridionItem : IItem
     {
         public string Id { get; set; }
         public string Title { get; set; }
     }
-    public abstract class RepositoryLocalItem : TridionItem
+    public abstract class RepositoryLocalItem : TridionItem, IRepositoryLocal
     {
         public string PublicationId { get; set; }
         public Publication Publication { get; set; }
+        [XmlIgnore]
+        IPublication IRepositoryLocal.Publication
+        {
+            get { return Publication; }
+        }
+        public Publication OwningPublication { get; set; }
+        [XmlIgnore]
+        IPublication IRepositoryLocal.OwningPublication
+        {
+            get { return OwningPublication; }
+        }
     }
 
     public class OrganizationalItem : RepositoryLocalItem, IOrganizationalItem
     {
     }
 
-    public class Publication : TridionItem
+    public class Publication : TridionItem, IPublication
     {
-        public string PublicationId
-        {
-            get
-            {
-                return null;
-            }
-        }
     }
 
     public class TcmUri
