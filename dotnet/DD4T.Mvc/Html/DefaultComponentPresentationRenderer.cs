@@ -23,7 +23,7 @@ namespace DD4T.Mvc.Html
             StringWriter sw = new StringWriter();
             foreach (IComponentPresentation cp in tridionPage.ComponentPresentations)
             {
-                if (!MustInclude(cp.ComponentTemplate, includeComponentTemplate))
+                if (!(includeComponentTemplate==null) && !MustInclude(cp.ComponentTemplate, includeComponentTemplate))
                     continue;
                 if ((!string.IsNullOrEmpty(includeSchema)) && !MustInclude(cp.Component.Schema, includeSchema))
                     continue;
@@ -49,8 +49,7 @@ namespace DD4T.Mvc.Html
                 IField view;
                 if (itemToCheck.MetadataFields != null && itemToCheck.MetadataFields.TryGetValue("view", out view))
                 {
-                    string viewName = FactoryService.ModelFactory.MapComponentViewName(view.Value);
-                    return pattern.Any<string>(item => item.Equals(viewName));
+                    return pattern.Any<string>(item => view.Value.ToLower().StartsWith(item.ToLower()));
                 }
                 else
                 {
@@ -62,13 +61,21 @@ namespace DD4T.Mvc.Html
 
         private bool MustInclude(ISchema itemToCheck, string pattern)
         {
+            bool reverse = false;
+            if (pattern.StartsWith("!"))
+            {
+                // reverse sign of the boolean
+                reverse = true;
+                pattern = pattern.Substring(1);
+            }
+
             if (pattern.StartsWith("tcm:"))
             {
-                return itemToCheck.Id == pattern;
+                return itemToCheck.Id == pattern ^ reverse; // use 'exclusive or' to reverse the sign if necessary!
             }
             else
             {
-                return itemToCheck.Title.StartsWith(pattern);
+                return itemToCheck.Title.ToLower().StartsWith(pattern.ToLower()) ^ reverse;
             }
         }
 

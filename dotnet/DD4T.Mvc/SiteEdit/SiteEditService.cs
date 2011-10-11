@@ -96,23 +96,25 @@ namespace DD4T.Mvc.SiteEdit
         {
             string pubIdWithoutTcm = Convert.ToString(new TcmUri(page.Id).PublicationId);
 
-            try
-            {
+            //try
+            //{
                 if (settings.ContainsKey(pubIdWithoutTcm))
                 {
                     SiteEditSetting setting = settings[pubIdWithoutTcm];
+                    string usePageContext = string.IsNullOrEmpty(setting.PagePublication) ? page.OwningPublication.Id : setting.PagePublication;
+                    TcmUri pageContextUri = new TcmUri(usePageContext);
                     if (setting.Enabled)
                     {
-                        return string.Format(PAGE_SE_Format, page.Id, Convert.ToString(page.Version), setting.PagePublication, setting.ComponentPublication, setting.PublishPublication);
+                        return string.Format(PAGE_SE_Format, page.Id, Convert.ToString(page.Version), pageContextUri.ItemId, setting.ComponentPublication, setting.PublishPublication);
                     }
                 }
                 throw new Exception("Cannot create siteEdit pagetag, publication is not configured to be editable.");
-            }
-            catch (Exception ex)
-            {
-                // Utilities.log.Error("Caught error while generating SiteEdit tags", ex); // TODO: add logging
-                return string.Empty; 
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    // Utilities.log.Error("Caught error while generating SiteEdit tags", ex); // TODO: add logging
+            //    return string.Empty; 
+            //}
         }
 
 

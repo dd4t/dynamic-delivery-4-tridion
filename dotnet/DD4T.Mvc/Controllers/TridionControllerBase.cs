@@ -7,6 +7,7 @@ using DD4T.Mvc.Html;
 using System;
 using System.Web;
 using DD4T.Factories;
+using System.Web.Configuration;
 
 namespace DD4T.Mvc.Controllers
 {
@@ -43,7 +44,7 @@ namespace DD4T.Mvc.Controllers
             return page;
         }
 
-        protected ViewResult GetView(IPage page)
+        protected virtual ViewResult GetView(IPage page)
         {
             string viewName = page.PageTemplate.MetadataFields["view"].Value; //TODO: Errod handling if no meta-data schema is selected on the page template
             return base.View(viewName, page);
@@ -65,6 +66,7 @@ namespace DD4T.Mvc.Controllers
             }
             viewName = componentPresentation.ComponentTemplate.MetadataFields["view"].Values[0];
             return View(viewName, componentPresentation);
+
         }
 
         [HandleError]
@@ -109,6 +111,7 @@ namespace DD4T.Mvc.Controllers
         //        return View("Configuration exception: " + e.Message);
         //    }
         //}
-    
+
+
     }
 }
