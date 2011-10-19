@@ -93,7 +93,6 @@
     <Compile Include="TridionLinkProvider.cs" />
     <Compile Include="TridionPageProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TridionLinkFactory.cs" />
     <Compile Include="TridionTaxonomyProvider.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,10 @@
 ﻿using System;
+using DD4T.ContentModel.Contracts.Providers;
 namespace DD4T.ContentModel.Factories
 {
     public interface IPageFactory
     {
+        IPageProvider PageProvider { get; set; }
         bool TryFindPage(string url, out IPage page);
         IPage FindPage(string url);
         bool TryGetPage(string tcmUri, out IPage page);

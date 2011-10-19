@@ -7,6 +7,7 @@ using System.Reflection;
 
 namespace DD4T.Mvc
 {
+    [Obsolete]
     public static class ServiceLocator
     {
 

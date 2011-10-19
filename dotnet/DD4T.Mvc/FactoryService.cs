@@ -6,6 +6,7 @@ using DD4T.ContentModel.Factories;
 
 namespace DD4T.Mvc
 {
+    [Obsolete]
     public static class FactoryService
     {
         public static IBinaryFactory BinaryFactory 
