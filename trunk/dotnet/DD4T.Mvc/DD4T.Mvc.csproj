@@ -95,6 +95,8 @@
   <ItemGroup>
     <Compile Include="Caching\SchemaComponentsCacheDependency.cs" />
     <Compile Include="Caching\SitemapCacheDependency.cs" />
+    <Compile Include="Controllers\IComponentController.cs" />
+    <Compile Include="Controllers\IPageController.cs" />
     <Compile Include="Controllers\TridionControllerBase.cs" />
     <Compile Include="Database\Binaries.Context1.cs">
       <AutoGen>True</AutoGen>

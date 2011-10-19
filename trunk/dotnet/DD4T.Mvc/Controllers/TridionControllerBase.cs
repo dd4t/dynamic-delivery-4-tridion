@@ -11,22 +11,13 @@ using System.Web.Configuration;
 
 namespace DD4T.Mvc.Controllers
 {
-    public abstract class TridionControllerBase : Controller
+    public abstract class TridionControllerBase : Controller, IPageController, IComponentController
     {
         public IComponentPresentationRenderer componentPresentationRenderer { get; set; }
-        public TridionControllerBase()
-        {
-            PageFactory = new PageFactory();
-            LinkFactory = new LinkFactory();
-            BinaryFactory = new BinaryFactory();
-            ComponentFactory = new ComponentFactory();
-        }
 
-        protected IPageFactory PageFactory { get; private set; }
-        protected ILinkFactory LinkFactory { get; private set; }
-        protected IBinaryFactory BinaryFactory { get; private set; }
-        protected IComponentFactory ComponentFactory { get; private set; }
-        protected IComponentPresentationRenderer ComponentPresentationRenderer { get; private set; }
+        public IPageFactory PageFactory { get; set; }
+        public IComponentFactory ComponentFactory { get; set; }
+        public IComponentPresentationRenderer ComponentPresentationRenderer { get; set; }
 
         protected IPage GetModelForPage(string PageId)
         {

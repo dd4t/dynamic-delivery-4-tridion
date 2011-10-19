@@ -6,7 +6,10 @@ namespace DD4T.Factories
     /// Base class for all factories
     /// </summary>
     public abstract class FactoryBase 
-    {             
+    {
+
+        private int? _publicationId = null;
+
         /// <summary>
         /// Returns the current publicationId
         /// </summary>  
@@ -14,7 +17,13 @@ namespace DD4T.Factories
         {
             get
             {
-                return TridionHelper.PublicationId;
+                if (_publicationId == null)
+                    _publicationId = TridionHelper.PublicationId;
+                return (int)_publicationId;
+            }
+            set
+            {
+                _publicationId = value;
             }
         }
 
