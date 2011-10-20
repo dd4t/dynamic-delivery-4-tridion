@@ -99,13 +99,16 @@ namespace DD4T.Templates.Base.Utils
 				if (targetStructureGroup == null) {
 					log.Debug("no structure group defined, publishing binary with default settings");
 					Component mmComp = (Component)engine.GetObject(item.Properties[Item.ItemPropertyTcmUri]);
-					//Binary binary = engine.PublishingContext.RenderedItem.AddBinary(mmComp);
-               Binary binary = engine.PublishingContext.RenderedItem.AddBinary(mmComp, currentTemplate.Id);
-
+                    // Note: it is dangerous to specify the CT URI as variant ID without a structure group, because it will fail if you publish the same MMC from two or more CTs!
+                    // So I removed the variant ID altogether (QS, 20-10-2011)
+                    log.Debug(string.Format("publishing mm component {0} without variant id", mmComp.Id));
+					Binary binary = engine.PublishingContext.RenderedItem.AddBinary(mmComp);
 					publishedPath = binary.Url;
+                    log.Debug(string.Format("binary is published to url {0}", publishedPath));
 				} else {
 					string fileName = TridionUtils.ConstructFileName(item);
 					log.Debug("publishing binary into structure group " + targetStructureGroup.ItemId.ToString());
+                    StructureGroup targetSG = (StructureGroup) engine.GetObject(targetStructureGroup);
 					itemStream = item.GetAsStream();
 					if (itemStream == null) {
 						// All items can be converted to a stream?
@@ -113,8 +116,12 @@ namespace DD4T.Templates.Base.Utils
 					}
 					byte[] data = new byte[itemStream.Length];
 					itemStream.Read(data, 0, data.Length);
-					publishedPath = engine.AddBinary(itemUri, appliedTemplateUri, targetStructureGroup, data, fileName);
-				}
+					Component mmComp = (Component)engine.GetObject(item.Properties[Item.ItemPropertyTcmUri]);
+                    log.Debug(string.Format("publishing mm component {0} to structure group {1} with variant id {2}", mmComp.Id, targetStructureGroup.ToString(), currentTemplate.Id));
+                    Binary binary = engine.PublishingContext.RenderedItem.AddBinary(mmComp, targetSG, currentTemplate.Id);
+                    publishedPath = binary.Url;
+                    log.Debug(string.Format("binary is published to url {0}", publishedPath));
+                }
 				log.Debug("binary published, published path = " + publishedPath);
 				item.Properties[Item.ItemPropertyPublishedPath] = publishedPath;
 			} finally {
