@@ -8,6 +8,8 @@ using System;
 using System.Web;
 using DD4T.Factories;
 using System.Web.Configuration;
+using System.IO;
+using System.Security;
 
 namespace DD4T.Mvc.Controllers
 {
@@ -76,6 +78,49 @@ namespace DD4T.Mvc.Controllers
                 throw new HttpException(404, "Page cannot be found");
             }
         }
+
+        /// <summary>
+        /// Create IPage from XML in the request and forward to the view
+        /// </summary>
+        /// <example>
+        /// To use, add the following code to the Global.asax.cs of your MVC web application:
+        ///             routes.MapRoute(
+        ///                "PreviewPage",
+        ///                "{*PageId}",
+        ///                new { controller = "Page", action = "PreviewPage" }, // Parameter defaults
+        ///                new { httpMethod = new HttpMethodConstraint("POST") } // Parameter constraints
+        ///            );
+        ///            * This is assuming that you have a controller called PageController which extends TridionControllerBase
+        /// </example>
+        /// <returns></returns>
+        [HandleError]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public System.Web.Mvc.ActionResult PreviewPage()
+        {
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(this.Request.InputStream))
+                {
+                    string pageXml = reader.ReadToEnd();
+                    IPage model = this.PageFactory.GetIPageObject(pageXml);
+                    if (model == null)
+                    {
+                        throw new ModelNotCreatedException("--unknown--");
+                    }
+                    ViewBag.Title = model.Title;
+                    ViewBag.Renderer = ComponentPresentationRenderer;
+                    ViewResult result = GetView(model);
+                    return result;
+                }
+            }
+            catch (SecurityException se)
+            {
+                throw new HttpException(403, se.Message);
+            }
+
+        }
+
 
         public virtual ActionResult ComponentPresentation(string componentPresentationId)
         {
