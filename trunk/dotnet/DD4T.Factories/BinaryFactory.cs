@@ -38,7 +38,7 @@ namespace DD4T.Factories
         public bool TryFindBinary(string url, out IBinary binary)
         {
             binary = null;
-            string cacheKey = String.Format("Binary_{0}", url);
+            string cacheKey = String.Format("Binary_{0}_{1}", url, PublicationId);
             Cache cache = HttpContext.Current.Cache;
             DateTime lastPublishedDate = DateTime.MinValue;
             if (lastPublishedDates.ContainsKey(url))
@@ -79,7 +79,7 @@ namespace DD4T.Factories
         public bool TryGetBinary(string tcmUri, out IBinary binary)
         {
             binary = null;
-            string cacheKey = String.Format("Binary_{0}", tcmUri);
+            string cacheKey = String.Format("Binary_{0}_{1}", tcmUri, PublicationId);
             Cache cache = HttpContext.Current.Cache;
             DateTime lastPublishedDate = DateTime.MinValue;
             if (lastPublishedDates.ContainsKey(tcmUri))

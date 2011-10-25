@@ -16,14 +16,18 @@ namespace DD4T.Mvc.SiteEdit
          */
         public bool Enabled { get; set; }
 
-        public SiteEditSettings()
+        public SiteEditSettings() : this(HttpContext.Current.Server.MapPath(SiteEditConfigurationPath))
+        {
+        }
+
+        public SiteEditSettings(string pathToSiteEditConfiguration)
         {
 
             Enabled = false;
             XmlDocument seConfig = new XmlDocument();
             try
             {
-                seConfig.Load(HttpContext.Current.Server.MapPath(SiteEditConfigurationPath));
+                seConfig.Load(pathToSiteEditConfiguration);
                 string enabled = seConfig.DocumentElement.GetAttribute("enabled");
                 if ("true".Equals(enabled))
                 {

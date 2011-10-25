@@ -19,7 +19,7 @@ namespace DD4T.Mvc.SiteEdit
     public class SiteEditService
     {
 
-        private static SiteEditSettings settings = new SiteEditSettings();
+        public static SiteEditSettings SiteEditSettings = new SiteEditSettings();
 
         /**
          * string Format used to create the Page-level SiteEdit tags.
@@ -77,7 +77,7 @@ namespace DD4T.Mvc.SiteEdit
 
             try
             {
-                return settings.ContainsKey(pubIdWithoutTcm);
+                return SiteEditSettings.ContainsKey(pubIdWithoutTcm);
             }
             catch (Exception ex)
             {
@@ -98,9 +98,9 @@ namespace DD4T.Mvc.SiteEdit
 
             //try
             //{
-                if (settings.ContainsKey(pubIdWithoutTcm))
+            if (SiteEditSettings.ContainsKey(pubIdWithoutTcm))
                 {
-                    SiteEditSetting setting = settings[pubIdWithoutTcm];
+                    SiteEditSetting setting = SiteEditSettings[pubIdWithoutTcm];
                     string usePageContext = string.IsNullOrEmpty(setting.PagePublication) ? page.OwningPublication.Id : setting.PagePublication;
                     TcmUri pageContextUri = new TcmUri(usePageContext);
                     if (setting.Enabled)
@@ -134,9 +134,9 @@ namespace DD4T.Mvc.SiteEdit
            
             try
             {
-                if (settings.ContainsKey(pubIdWithoutTcm))
+                if (SiteEditSettings.ContainsKey(pubIdWithoutTcm))
                 {
-                    SiteEditSetting setting = settings[pubIdWithoutTcm];
+                    SiteEditSetting setting = SiteEditSettings[pubIdWithoutTcm];
                     if (setting.Enabled)
                     {
                         return string.Format(COMPONENT_SE_Format, cp.OrderOnPage,

@@ -17,20 +17,28 @@ namespace DD4T.Mvc.Caching
 
         public string SitemapUrlPath { get; private set; }
 
+        public virtual IPageFactory PageFactory
+        {
+            get
+            {
+                return new PageFactory();
+            }
+        }
+
         public SitemapCacheDependency(int pollTime, string sitemapUrlPath)
         {
             timer = new Timer(
                 new TimerCallback(CheckDependencyCallback),
                 this, 0, pollTime);
             SitemapUrlPath = sitemapUrlPath;
-            IPageFactory pageFactory = new PageFactory();
-            LastPublishDate = pageFactory.GetLastPublishedDateByUrl(SitemapUrlPath);
+            
+            LastPublishDate = PageFactory.GetLastPublishedDateByUrl(SitemapUrlPath);
         }
 
         private void CheckDependencyCallback(object sender)
         {
-            IPageFactory pageFactory = new PageFactory();
-            DateTime lastPublishedDate = pageFactory.GetLastPublishedDateByUrl(SitemapUrlPath);
+           
+            DateTime lastPublishedDate = PageFactory.GetLastPublishedDateByUrl(SitemapUrlPath);
             if (lastPublishedDate > LastPublishDate)
             {
                 base.NotifyDependencyChanged(this, EventArgs.Empty);

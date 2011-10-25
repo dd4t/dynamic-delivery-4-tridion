@@ -12,19 +12,34 @@
     using DD4T.Mvc.Caching;
     using DD4T.Factories;
     using System.Diagnostics;
+    using System.Configuration;
 
     public class TridionSiteMapProvider : StaticSiteMapProvider
     {
         
           // Sitemap attributes which are not considered part of route, you can add your custom attributes here.
         private string[] _excludedAttributes = { "title", "description", "roles", "page", "topmenuposition" };
+        public static readonly string DefaultCacheKey = "rootNode";
 
         private bool ShouldResolveComponentLinks { get; set; }
         private int CacheTime { get; set; }
         private int PollTime { get; set; }
-        public IPageFactory PageFactory { get; set; }
-        public ILinkFactory LinkFactory { get; set; }
+        public virtual IPageFactory PageFactory { get; set; }
+        public virtual ILinkFactory LinkFactory { get; set; }
         public Dictionary<string, SiteMapNode> NodeDictionary { get; set; }
+
+        protected string SiteMapPath
+        {
+            get
+            {
+                if (ConfigurationManager.AppSettings.AllKeys.Contains<string>("SitemapPath"))
+                {
+                    return ConfigurationManager.AppSettings["SitemapPath"];
+                }
+                return "/system/sitemap/sitemap.xml";
+            }
+        }
+
 
         private SiteMapNode ReadSitemapFromXml(string sitemapUrl)
         {
@@ -108,8 +123,6 @@
                 CacheTime = Int32.Parse(attributes["cacheTime"]);
                 PollTime = Int32.Parse(attributes["pollTime"]);
 
-                PageFactory = new PageFactory();
-                LinkFactory = new LinkFactory();
 
                 //if (! PageFactory.HasPageChanged(SitemapUrl))
                 //{
@@ -119,22 +132,35 @@
             }
         }
 
+        public virtual string CacheKey
+        {
+            get
+            {
+                return DefaultCacheKey;
+            }
+        }
+
+        public virtual SitemapCacheDependency GetSitemapCacheDependency (int PollTime, string SiteMapPath)
+        {
+            return new SitemapCacheDependency(PollTime, SiteMapPath);
+        }
+
         public override SiteMapNode BuildSiteMap()
         {
             SiteMapNode rootNode;
 
             //lock (this) //KT: I don't think this is needed. 
             //{
-                rootNode = HttpContext.Current.Cache["rootNode"] as SiteMapNode;
-                if (rootNode == null)
-                {
-                    base.Clear();
-                    //TODO: Get sitemap path from somewhere
-                    rootNode = ReadSitemapFromXml("/system/sitemap/sitemap.xml");
-                    if (rootNode == null) return rootNode; //TODO: Review errorHandling
-                    // Store the root node in the cache.
-                    HttpContext.Current.Cache.Insert("rootNode", rootNode, new SitemapCacheDependency(PollTime, "/system/sitemap/sitemap.xml"));
-                }
+            rootNode = HttpContext.Current.Cache[CacheKey] as SiteMapNode;
+            if (rootNode == null)
+            {
+                base.Clear();
+                //TODO: Get sitemap path from somewhere
+                rootNode = ReadSitemapFromXml(SiteMapPath);
+                if (rootNode == null) return rootNode; //TODO: Review errorHandling
+                // Store the root node in the cache.
+                HttpContext.Current.Cache.Insert(CacheKey, rootNode, GetSitemapCacheDependency(PollTime, SiteMapPath));
+            }
             //}
             return rootNode;
         }

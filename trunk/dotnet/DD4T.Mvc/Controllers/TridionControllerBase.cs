@@ -17,8 +17,8 @@ namespace DD4T.Mvc.Controllers
     {
         public IComponentPresentationRenderer componentPresentationRenderer { get; set; }
 
-        public IPageFactory PageFactory { get; set; }
-        public IComponentFactory ComponentFactory { get; set; }
+        public virtual IPageFactory PageFactory { get; set; }
+        public virtual IComponentFactory ComponentFactory { get; set; }
         public IComponentPresentationRenderer ComponentPresentationRenderer { get; set; }
 
         protected IPage GetModelForPage(string PageId)
