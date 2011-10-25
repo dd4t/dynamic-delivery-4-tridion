@@ -1,7 +1,7 @@
 ﻿using DD4T.ContentModel;
 using DD4T.ContentModel.Factories;
 
-namespace DD4T.Providers.SDLTridion2011
+namespace DD4T.Providers.SDLTridion2009
 {
     using System;
     using System.Collections.Generic;

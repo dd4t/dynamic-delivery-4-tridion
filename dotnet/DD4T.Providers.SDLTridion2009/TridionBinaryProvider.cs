@@ -22,7 +22,7 @@ using System.Web;
 using DD4T.ContentModel.Contracts.Providers;
 using Com.Tridion.Util;
 
-namespace DD4T.Providers.SDLTridion2011
+namespace DD4T.Providers.SDLTridion2009
 {
     [Export(typeof(IBinaryProvider))]
     /// <summary>

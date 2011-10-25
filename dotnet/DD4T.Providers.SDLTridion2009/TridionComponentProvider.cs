@@ -22,7 +22,7 @@ using DD4T.ContentModel.Contracts.Providers;
 using System.Collections;
 using System.Configuration;
 
-namespace DD4T.Providers.SDLTridion2011
+namespace DD4T.Providers.SDLTridion2009
 {
     [Export(typeof(IComponentProvider))]
     /// <summary>
