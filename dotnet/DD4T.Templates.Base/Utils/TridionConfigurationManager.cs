@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.Specialized;
-using System.Configuration;
-using Tridion.ContentManager.ContentManagement;
-using Tridion.ContentManager.Publishing.Rendering;
-using Tridion.ContentManager.CommunicationManagement;
-using Tridion.ContentManager.ContentManagement.Fields;
-using Tridion.ContentManager;
-using Tridion.ContentManager.Templating;
-using System.IO;
 using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
+using Tridion.ContentManager;
+using Tridion.ContentManager.CommunicationManagement;
+using Tridion.ContentManager.ContentManagement;
+using Tridion.ContentManager.ContentManagement.Fields;
+using Tridion.ContentManager.Templating;
 
 namespace DD4T.Templates.Base.Utils
 {
@@ -29,40 +25,56 @@ namespace DD4T.Templates.Base.Utils
     public class TridionConfigurationManager
     {
         #region static
+        private static readonly Dictionary<TcmUri, TridionConfigurationManager> Instances = new Dictionary<TcmUri, TridionConfigurationManager>();
 
-        private static Dictionary<TcmUri, TridionConfigurationManager> instances = new Dictionary<TcmUri, TridionConfigurationManager>();
+        public static TridionConfigurationManager GetInstance(Publication publication)
+        {
+            if (!Instances.ContainsKey(publication.Id))
+            {
+                Instances.Add(publication.Id, new TridionConfigurationManager(publication));
+            }
+            return Instances[publication.Id];
+        }
 
         public static TridionConfigurationManager GetInstance(Engine engine, Publication publication)
         {
-            if (!instances.ContainsKey(publication.Id))
+            if (!Instances.ContainsKey(publication.Id))
             {
-                instances.Add(publication.Id, new TridionConfigurationManager(engine, publication));
+                Instances.Add(publication.Id, new TridionConfigurationManager(engine, publication));
             }
-            return instances[publication.Id];
+            return Instances[publication.Id];
         }
+
         public static TridionConfigurationManager GetInstance(Engine engine, Package package)
         {
             Publication publication = GetPublication(engine, package);
-            if (!instances.ContainsKey(publication.Id))
+            if (!Instances.ContainsKey(publication.Id))
             {
-                instances.Add(publication.Id, new TridionConfigurationManager(engine, publication));
+                Instances.Add(publication.Id, new TridionConfigurationManager(engine, publication));
             }
-            return instances[publication.Id];
+            return Instances[publication.Id];
         }
         #endregion
 
         #region constructors
+        private TridionConfigurationManager(Publication publication)
+        {
+            string tridionConfigPath = string.Format("{0}\\config\\", Tridion.ContentManager.ConfigurationSettings.GetTcmHomeDirectory());
+            string tridionBaseDir = Path.GetDirectoryName(tridionConfigPath);
+            _nvc = new TridionNameValueCollection(publication, Path.Combine(tridionBaseDir, @"DD4T.config"));
+        }
+        
         private TridionConfigurationManager(Engine engine, Publication publication)
         {
             string tridionConfigPath = engine.GetConfiguration().CurrentConfiguration.FilePath;
             string tridionBaseDir = Path.GetDirectoryName(tridionConfigPath);
-            nvc = new TridionNameValueCollection(publication, Path.Combine(tridionBaseDir, @"DD4T.config"));
+            _nvc = new TridionNameValueCollection(publication, Path.Combine(tridionBaseDir, @"DD4T.config"));
         }
         #endregion
 
         #region private
-        private TridionNameValueCollection nvc = null;
-        private Engine engine;
+        private readonly TridionNameValueCollection _nvc = null;
+        //private Engine _engine;
         private static Publication GetPublication(Engine engine, Package package)
         {
             RepositoryLocalObject pubItem = null;
@@ -94,7 +106,6 @@ namespace DD4T.Templates.Base.Utils
             Page page = engine.PublishingContext.RenderContext.ContextItem as Page;
             return page;
         }
-
         #endregion
 
         #region public
@@ -113,7 +124,7 @@ namespace DD4T.Templates.Base.Utils
         {
             get
             {
-                return nvc;
+                return _nvc;
             }
         }
         #endregion
@@ -128,25 +139,23 @@ namespace DD4T.Templates.Base.Utils
         #region constructors
         public TridionNameValueCollection(Publication publication, string configPath)
         {
-            this.publication = publication;
-            this.configurationComponents = null;
-            this.guid = Guid.NewGuid();
+            _publication = publication;
+            _configurationComponents = null;
+            _guid = Guid.NewGuid();
             this.ConfigurationPath = configPath;
         }
-
         #endregion
 
         #region private
-        private Publication publication;
-        private IList<Component> configurationComponents;
-        private Guid guid;
-        private string fieldNameConfigurationComponents = null;
-        private Configuration config = null;
-        private bool checkedPublicationMetadata = false;
-        private bool checkedConfigurationComponents = false;
+        private readonly Publication _publication;
+        private IList<Component> _configurationComponents;
+        private Guid _guid;
+        private string _fieldNameConfigurationComponents = null;
+        private Configuration _config = null;
+        private bool _checkedPublicationMetadata = false;
+        private bool _checkedConfigurationComponents = false;
 
-
-        private bool TryGetValueFromField(ItemField field, out string value)
+        private static bool TryGetValueFromField(ItemField field, out string value)
         {
             value = null;
             if (field is TextField)
@@ -156,6 +165,7 @@ namespace DD4T.Templates.Base.Utils
             }
             return false;
         }
+
         //private bool TryGetValuesFromField(ItemField field, out NameValueCollection nvc)
         //{
         //    nvc = new NameValueCollection();
@@ -199,15 +209,14 @@ namespace DD4T.Templates.Base.Utils
         {
             get
             {
-                if (config == null)
+                if (_config == null)
                 {
-                    ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
-                    configFileMap.ExeConfigFilename = ConfigurationPath;
+                    ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap {ExeConfigFilename = ConfigurationPath};
 
                     // Get the mapped configuration file              
-                    config = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
+                    _config = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
                 }
-                return config;
+                return _config;
             }
         }
 
@@ -215,15 +224,15 @@ namespace DD4T.Templates.Base.Utils
         {
             get
             {
-                if (this.fieldNameConfigurationComponents != null)
+                if (_fieldNameConfigurationComponents != null)
                 {
-                    return this.fieldNameConfigurationComponents;
+                    return _fieldNameConfigurationComponents;
                 }
                 if (Configuration != null)
                 {
                     KeyValueConfigurationElement elmt= Configuration.AppSettings.Settings["ConfigurationComponentsFieldName"];
-                    this.fieldNameConfigurationComponents  = elmt == null ? DefaultConfigurationComponentsFieldName : elmt.Value;
-                    return fieldNameConfigurationComponents;
+                    _fieldNameConfigurationComponents  = elmt == null ? DefaultConfigurationComponentsFieldName : elmt.Value;
+                    return _fieldNameConfigurationComponents;
                 }
                 return DefaultConfigurationComponentsFieldName;
             }
@@ -269,17 +278,17 @@ namespace DD4T.Templates.Base.Utils
                 }
 
                 // before we continue, we want to check if the publication has metadata at all, otherwise the rest of the logic is not necessary anymore
-                if (publication.Metadata == null || publication.MetadataSchema == null)
+                if (_publication.Metadata == null || _publication.MetadataSchema == null)
                 {
                     return string.Empty;
                 }
 
                 // 3. Check if the key is present in the publication metadata
                 ItemFields metadataFields = null;
-                if (!checkedPublicationMetadata)
+                if (!_checkedPublicationMetadata)
                 {
 
-                    metadataFields = new ItemFields(publication.Metadata, publication.MetadataSchema);
+                    metadataFields = new ItemFields(_publication.Metadata, _publication.MetadataSchema);
                     bool foundIt = false;
                     foreach (ItemField field in metadataFields)
                     {
@@ -296,7 +305,7 @@ namespace DD4T.Templates.Base.Utils
                             }
                         }
                     }
-                    checkedPublicationMetadata = true;
+                    _checkedPublicationMetadata = true;
                     if (foundIt)
                     {
                         return base[key] as string;
@@ -304,18 +313,18 @@ namespace DD4T.Templates.Base.Utils
                 }
 
                 // 4. Check if there are configuration components linked from the publication's metadata, and try to locate the key in them
-                if (!checkedConfigurationComponents)
+                if (!_checkedConfigurationComponents)
                 {
-                    checkedConfigurationComponents = true;
+                    _checkedConfigurationComponents = true;
                     if (!metadataFields.Contains(this.FieldNameConfigurationComponents))
                     {
                         // publication metadata has reference to configuration components, we cannot find where the configuration components are
                         return string.Empty;
                     }
 
-                    configurationComponents = ((ComponentLinkField)metadataFields[FieldNameConfigurationComponents]).Values;
+                    _configurationComponents = ((ComponentLinkField)metadataFields[FieldNameConfigurationComponents]).Values;
 
-                    foreach (Component c in configurationComponents)
+                    foreach (Component c in _configurationComponents)
                     {
                         ItemFields fields = new ItemFields(c.Content, c.Schema);
                         foreach (ItemField field in fields)
@@ -330,7 +339,7 @@ namespace DD4T.Templates.Base.Utils
                             }
                         }
                     }
-                    checkedConfigurationComponents = true;
+                    _checkedConfigurationComponents = true;
                     return base[key] as string;
                 }
                 return string.Empty;
