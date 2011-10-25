@@ -77,7 +77,7 @@ namespace DD4T.Factories
 			page = null;
 
 
-			string cacheKey = String.Format("Page_{0}", url);
+			string cacheKey = String.Format("Page_{0}_{1}", url, PublicationId);
 			Cache cache = HttpContext.Current.Cache;
 			DateTime lastPublishedDate = DateTime.MinValue;
 			if (lastPublishedDates.ContainsKey(url))
@@ -116,8 +116,8 @@ namespace DD4T.Factories
         {
             pageContent = string.Empty;
 
-			string cacheKey = String.Format("PageContent_{0}", url);
-			Cache cache = HttpContext.Current.Cache;
+            string cacheKey = String.Format("PageContent_{0}_{1}", url, PublicationId); 
+            Cache cache = HttpContext.Current.Cache;
 			DateTime lastPublishedDate = DateTime.MinValue;
 			if (lastPublishedDates.ContainsKey(url))
 				lastPublishedDate = lastPublishedDates[url];
