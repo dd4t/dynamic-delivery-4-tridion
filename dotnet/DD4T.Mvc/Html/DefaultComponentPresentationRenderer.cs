@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
+using System.Linq;
+using System.Text;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using System.Linq;
-
 using DD4T.ContentModel;
-using System;
-using System.IO;
 
 namespace DD4T.Mvc.Html
 {
@@ -20,20 +19,21 @@ namespace DD4T.Mvc.Html
 
         public MvcHtmlString ComponentPresentations(IPage tridionPage, HtmlHelper htmlHelper, string[] includeComponentTemplate, string includeSchema)
         {
-            StringWriter sw = new StringWriter();
+            StringBuilder sb = new StringBuilder();
             foreach (IComponentPresentation cp in tridionPage.ComponentPresentations)
             {
-                if (!(includeComponentTemplate==null) && !MustInclude(cp.ComponentTemplate, includeComponentTemplate))
+                if (includeComponentTemplate != null && !MustInclude(cp.ComponentTemplate, includeComponentTemplate))
                     continue;
                 if ((!string.IsNullOrEmpty(includeSchema)) && !MustInclude(cp.Component.Schema, includeSchema))
                     continue;
                 cp.Page = tridionPage;
-                sw.Write(RenderComponentPresentation(cp, htmlHelper));
+                sb.Append(RenderComponentPresentation(cp, htmlHelper));
+
             }
-            return MvcHtmlString.Create(sw.ToString());
+            return MvcHtmlString.Create(sb.ToString());
         }
 
-        private bool MustInclude(IComponentTemplate itemToCheck, string[] pattern)
+        private static bool MustInclude(IComponentTemplate itemToCheck, string[] pattern)
         {
             if (pattern.Length == 0)
             {
@@ -59,7 +59,7 @@ namespace DD4T.Mvc.Html
             }
         }
 
-        private bool MustInclude(ISchema itemToCheck, string pattern)
+        private static bool MustInclude(ISchema itemToCheck, string pattern)
         {
             bool reverse = false;
             if (pattern.StartsWith("!"))
@@ -73,13 +73,11 @@ namespace DD4T.Mvc.Html
             {
                 return itemToCheck.Id == pattern ^ reverse; // use 'exclusive or' to reverse the sign if necessary!
             }
-            else
-            {
-                return itemToCheck.Title.ToLower().StartsWith(pattern.ToLower()) ^ reverse;
-            }
+
+            return itemToCheck.Title.ToLower().StartsWith(pattern.ToLower()) ^ reverse;
         }
 
-        private MvcHtmlString RenderComponentPresentation(IComponentPresentation cp, HtmlHelper htmlHelper)
+        private static MvcHtmlString RenderComponentPresentation(IComponentPresentation cp, HtmlHelper htmlHelper)
         {
             string controller = WebConfigurationManager.AppSettings["Controller"];
             string action = WebConfigurationManager.AppSettings["Action"]; 
@@ -94,7 +92,8 @@ namespace DD4T.Mvc.Html
                 action = cp.ComponentTemplate.MetadataFields["action"].Value;
             }
 
-            return ChildActionExtensions.Action(htmlHelper, action, controller, new { componentPresentation = ((ComponentPresentation)cp) });
+            //return ChildActionExtensions.Action(htmlHelper, action, controller, new { componentPresentation = ((ComponentPresentation)cp) });
+            return htmlHelper.Action(action, controller, new { componentPresentation = ((ComponentPresentation)cp) });
         }
 
     }
