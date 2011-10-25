@@ -15,6 +15,7 @@ using System.Xml;
 namespace DD4T.Templates {
 
 	[TcmTemplateTitle("Generate dynamic page")]
+    [TcmTemplateParameterSchema("resource:DD4T.Templates.Resources.Schemas.Dynamic Delivery Parameters.xsd")]
     [TcmDefaultTemplate]
 	public partial class DynamicPage : BasePageTemplate {
         

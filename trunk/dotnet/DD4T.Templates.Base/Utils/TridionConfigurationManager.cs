@@ -36,11 +36,12 @@ namespace DD4T.Templates.Base.Utils
             return Instances[publication.Id];
         }
 
+        [Obsolete("Please use GetInstance(Publication) instead")]
         public static TridionConfigurationManager GetInstance(Engine engine, Publication publication)
         {
             if (!Instances.ContainsKey(publication.Id))
             {
-                Instances.Add(publication.Id, new TridionConfigurationManager(engine, publication));
+                Instances.Add(publication.Id, new TridionConfigurationManager(publication));
             }
             return Instances[publication.Id];
         }
@@ -50,7 +51,7 @@ namespace DD4T.Templates.Base.Utils
             Publication publication = GetPublication(engine, package);
             if (!Instances.ContainsKey(publication.Id))
             {
-                Instances.Add(publication.Id, new TridionConfigurationManager(engine, publication));
+                Instances.Add(publication.Id, new TridionConfigurationManager(publication));
             }
             return Instances[publication.Id];
         }
@@ -64,12 +65,12 @@ namespace DD4T.Templates.Base.Utils
             _nvc = new TridionNameValueCollection(publication, Path.Combine(tridionBaseDir, @"DD4T.config"));
         }
         
-        private TridionConfigurationManager(Engine engine, Publication publication)
-        {
-            string tridionConfigPath = engine.GetConfiguration().CurrentConfiguration.FilePath;
-            string tridionBaseDir = Path.GetDirectoryName(tridionConfigPath);
-            _nvc = new TridionNameValueCollection(publication, Path.Combine(tridionBaseDir, @"DD4T.config"));
-        }
+        //private TridionConfigurationManager(Engine engine, Publication publication)
+        //{
+        //    string tridionConfigPath = engine.GetConfiguration().CurrentConfiguration.FilePath;
+        //    string tridionBaseDir = Path.GetDirectoryName(tridionConfigPath);
+        //    _nvc = new TridionNameValueCollection(publication, Path.Combine(tridionBaseDir, @"DD4T.config"));
+        //}
         #endregion
 
         #region private

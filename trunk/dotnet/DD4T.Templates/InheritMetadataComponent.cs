@@ -12,7 +12,8 @@ using DD4T.Templates.Base.Builder;
 namespace DD4T.Templates
 {
    [TcmTemplateTitle("Add inherited metadata to component")]
-   public partial class InheritMetadataComponent : BaseComponentTemplate
+    [TcmTemplateParameterSchema("resource:DD4T.Templates.Resources.Schemas.Dynamic Delivery Parameters.xsd")]
+    public partial class InheritMetadataComponent : BaseComponentTemplate
    {
       protected Dynamic.MergeAction defaultMergeAction = Dynamic.MergeAction.Skip;
       protected override void TransformComponent(Dynamic.Component component)

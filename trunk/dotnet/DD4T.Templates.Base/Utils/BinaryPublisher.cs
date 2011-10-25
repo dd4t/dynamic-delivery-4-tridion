@@ -8,13 +8,14 @@ using Tridion.ContentManager.Publishing.Rendering;
 using Tridion.ContentManager.Templating;
 using DD4T.Templates.Base.Utils;
 using DD4T.Templates.Base.Xml;
+using System.Text.RegularExpressions;
 
 namespace DD4T.Templates.Base.Utils 
 {
 	public class BinaryPublisher
     {
         protected TemplatingLogger log = TemplatingLogger.GetLogger(typeof(BinaryPublisher));
-        TcmUri targetStructureGroup = null;
+        TcmUri targetStructureGroupUri = null;
         Package package;
         Engine engine;
         Template currentTemplate;
@@ -28,7 +29,7 @@ namespace DD4T.Templates.Base.Utils
          currentTemplate = engine.PublishingContext.ResolvedItem.Template;
 
          // Determine (optional) structure group parameter
-			String targetStructureGroupParam = package.GetValue("PublishBinariesTargetStructureGroup");
+			String targetStructureGroupParam = package.GetValue("sg_PublishBinariesTargetStructureGroup");
          if (targetStructureGroupParam != null)
          {
             if (!TcmUri.IsValid(targetStructureGroupParam))
@@ -39,7 +40,7 @@ namespace DD4T.Templates.Base.Utils
 
             Publication publication = TridionUtils.GetPublicationFromContext(package, engine);
             TcmUri localTargetStructureGroupTcmUri = TridionUtils.GetLocalUri(new TcmUri(publication.Id), new TcmUri(targetStructureGroupParam));
-            targetStructureGroup = new TcmUri(localTargetStructureGroupTcmUri);
+            targetStructureGroupUri = new TcmUri(localTargetStructureGroupTcmUri);
          }
       }
 
@@ -96,7 +97,7 @@ namespace DD4T.Templates.Base.Utils
 
 			try {
 				string publishedPath;
-				if (targetStructureGroup == null) {
+				if (targetStructureGroupUri == null) {
 					log.Debug("no structure group defined, publishing binary with default settings");
 					Component mmComp = (Component)engine.GetObject(item.Properties[Item.ItemPropertyTcmUri]);
                     // Note: it is dangerous to specify the CT URI as variant ID without a structure group, because it will fail if you publish the same MMC from two or more CTs!
@@ -106,20 +107,22 @@ namespace DD4T.Templates.Base.Utils
 					publishedPath = binary.Url;
                     log.Debug(string.Format("binary is published to url {0}", publishedPath));
 				} else {
-					string fileName = TridionUtils.ConstructFileName(item);
-					log.Debug("publishing binary into structure group " + targetStructureGroup.ItemId.ToString());
-                    StructureGroup targetSG = (StructureGroup) engine.GetObject(targetStructureGroup);
+                    Component mmComp = (Component)engine.GetObject(item.Properties[Item.ItemPropertyTcmUri]);
+                    
+					string fileName = ConstructFileName (mmComp, currentTemplate.Id);
+                    StructureGroup targetSG = (StructureGroup) engine.GetObject(targetStructureGroupUri);
 					itemStream = item.GetAsStream();
 					if (itemStream == null) {
 						// All items can be converted to a stream?
 						log.Error(String.Format("Cannot get item '{0}' as stream", itemUri.ToString()));
 					}
-					byte[] data = new byte[itemStream.Length];
-					itemStream.Read(data, 0, data.Length);
-					Component mmComp = (Component)engine.GetObject(item.Properties[Item.ItemPropertyTcmUri]);
-                    log.Debug(string.Format("publishing mm component {0} to structure group {1} with variant id {2}", mmComp.Id, targetStructureGroup.ToString(), currentTemplate.Id));
-                    Binary binary = engine.PublishingContext.RenderedItem.AddBinary(mmComp, targetSG, currentTemplate.Id);
-                    publishedPath = binary.Url;
+                    //byte[] data = new byte[itemStream.Length];
+                    //itemStream.Read(data, 0, data.Length);
+                    //itemStream.Close();
+                    log.Debug(string.Format("publishing mm component {0} to structure group {1} with variant id {2} and filename {3}", mmComp.Id, targetStructureGroupUri.ToString(), currentTemplate.Id, fileName));
+                    Binary b = engine.PublishingContext.RenderedItem.AddBinary(item.GetAsStream(),fileName,targetSG,currentTemplate.Id,mmComp,mmComp.BinaryContent.MultimediaType.MimeType);
+                    publishedPath = b.Url;
+                    //publishedPath = engine.AddBinary(itemUri, appliedTemplateUri, targetStructureGroupUri, data, fileName);
                     log.Debug(string.Format("binary is published to url {0}", publishedPath));
                 }
 				log.Debug("binary published, published path = " + publishedPath);
@@ -128,6 +131,13 @@ namespace DD4T.Templates.Base.Utils
 				if (itemStream != null) itemStream.Close();
 			}
 		}
+
+        private string ConstructFileName(Component mmComp, string variantId)
+        {
+            Regex re = new Regex(@"^(.*)\.([^\.]+)$");
+            return re.Replace(mmComp.BinaryContent.Filename, string.Format("$1_{0}_{1}.$2", mmComp.Id.ToString().Replace(":", ""), variantId.Replace(":", "")));
+        }
+
 		#endregion
 
 	}

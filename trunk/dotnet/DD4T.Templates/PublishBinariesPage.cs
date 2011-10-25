@@ -9,6 +9,7 @@ using DD4T.ContentModel;
 namespace DD4T.Templates
 {
     [TcmTemplateTitle("Publish binaries for page")]
+    [TcmTemplateParameterSchema("resource:DD4T.Templates.Resources.Schemas.Dynamic Delivery Parameters.xsd")]
     public class PublishBinariesPage : BasePageTemplate
     {
         BinaryPublisher binaryPublisher;

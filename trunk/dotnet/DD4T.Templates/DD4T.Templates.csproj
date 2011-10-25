@@ -97,6 +97,12 @@
       <Name>DD4T.Templates.Base</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Schemas\Dynamic Delivery Parameters.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>"$(SolutionDir)..\dependencies\Tridion tools\TcmUploadAssembly.bat" "$(SolutionDir)..\dependencies\Tridion tools\TcmUploadAssembly.exe"  "$(SolutionDir)..\dependencies\Tridion tools\config.xml"  "$(TargetPath)"</PostBuildEvent>
