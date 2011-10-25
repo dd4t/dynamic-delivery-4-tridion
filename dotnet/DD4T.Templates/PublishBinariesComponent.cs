@@ -4,10 +4,12 @@ using Tridion.ContentManager.Templating.Assembly;
 using Dynamic = DD4T.ContentModel;
 using DD4T.Templates.Base;
 using DD4T.Templates.Base.Utils;
+using System.Collections.Generic;
 
 namespace DD4T.Templates
 {
     [TcmTemplateTitle("Publish binaries for component")]
+    [TcmTemplateParameterSchema("resource:DD4T.Templates.Resources.Schemas.Dynamic Delivery Parameters.xsd")]
     public class PublishBinariesComponent : BaseComponentTemplate
     {
         BinaryPublisher binaryPublisher;
@@ -31,49 +33,42 @@ namespace DD4T.Templates
         #endregion
 
         #region Private Members
+        private void PublishAllBinaries(Dynamic.FieldSet fieldSet)
+        {
+            foreach (Dynamic.Field field in fieldSet.Values)
+            {
+                if (field.FieldType == Dynamic.FieldType.ComponentLink || field.FieldType == Dynamic.FieldType.MultiMediaLink)
+                {
+                    foreach (Dynamic.Component linkedComponent in field.LinkedComponentValues)
+                    {
+                        PublishAllBinaries(linkedComponent);
+                    }
+                }
+                if (field.FieldType == Dynamic.FieldType.Embedded)
+                {
+                    foreach (Dynamic.FieldSet embeddedFields in field.EmbeddedValues)
+                    {
+                        PublishAllBinaries(embeddedFields);
+                    }
+                }
+                if (field.FieldType == Dynamic.FieldType.Xhtml)
+                {
+                    for (int i = 0; i < field.Values.Count; i++)
+                    {
+                        string xhtml = field.Values[i];
+                        field.Values[i] = binaryPublisher.PublishBinariesInRichTextField(xhtml);
+                    }
+                }
+            }
+        }
         private void PublishAllBinaries(Dynamic.Component component)
         {
             if (component.ComponentType.Equals(Dynamic.ComponentType.Multimedia))
             {
                 component.Multimedia.Url = binaryPublisher.PublishMultimediaComponent(component.Id);
             }
-            foreach (Dynamic.Field field in component.Fields.Values)
-            {
-                if (field.FieldType == Dynamic.FieldType.ComponentLink || field.FieldType == Dynamic.FieldType.MultiMediaLink)
-                {
-                    foreach (Dynamic.Component linkedComponent in field.LinkedComponentValues)
-                    {
-                        PublishAllBinaries(linkedComponent);
-                    }
-                }
-                if (field.FieldType == Dynamic.FieldType.Xhtml)
-                {
-                    for (int i = 0; i < field.Values.Count; i++)
-                    {
-                        string xhtml = field.Values[i];
-                        field.Values[i] = binaryPublisher.PublishBinariesInRichTextField(xhtml);
-                    }
-                }
-            }
-            foreach (Dynamic.Field field in component.MetadataFields.Values)
-            {
-                if (field.FieldType == Dynamic.FieldType.ComponentLink || field.FieldType == Dynamic.FieldType.MultiMediaLink)
-                {
-                    foreach (Dynamic.Component linkedComponent in field.LinkedComponentValues)
-                    {
-                        PublishAllBinaries(linkedComponent);
-                    }
-                }
-                if (field.FieldType == Dynamic.FieldType.Xhtml)
-                {
-                    for (int i = 0; i < field.Values.Count; i++)
-                    {
-                        string xhtml = field.Values[i];
-                        field.Values[i] = binaryPublisher.PublishBinariesInRichTextField(xhtml);
-                    }
-                }
-            }
-
+            PublishAllBinaries(component.Fields);
+            PublishAllBinaries(component.MetadataFields);
         }
 
         #endregion

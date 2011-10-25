@@ -13,7 +13,8 @@ using DD4T.Templates.Base.Utils;
 namespace DD4T.Templates
 {
    [TcmTemplateTitle("Add inherited metadata to page")]
-   public partial class InheritMetadataPage : BasePageTemplate
+    [TcmTemplateParameterSchema("resource:DD4T.Templates.Resources.Schemas.Dynamic Delivery Parameters.xsd")]
+    public partial class InheritMetadataPage : BasePageTemplate
    {
       protected Dynamic.MergeAction defaultMergeAction = Dynamic.MergeAction.Skip;
      
