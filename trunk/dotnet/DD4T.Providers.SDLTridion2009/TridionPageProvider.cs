@@ -21,7 +21,7 @@ using System.Web.Caching;
 using System.Web;
 using DD4T.ContentModel.Contracts.Providers;
 
-namespace DD4T.Providers.SDLTridion2011
+namespace DD4T.Providers.SDLTridion2009
 {
     [Export(typeof(IPageProvider))]
     /// <summary>
