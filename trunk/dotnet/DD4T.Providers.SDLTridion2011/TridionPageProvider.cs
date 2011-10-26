@@ -105,11 +105,13 @@ namespace DD4T.Providers.SDLTridion2011
             Query pageQuery = new Query();
             ItemTypeCriteria isPage = new ItemTypeCriteria(64);  // TODO There must be an enum of these somewhere
             PageURLCriteria pageUrl = new PageURLCriteria(Url);
-			PublicationCriteria correctSite = new PublicationCriteria(this.PublicationId); //Todo: add logic to determine site on url
 
             Criteria allCriteria = CriteriaFactory.And(isPage, pageUrl);
-            allCriteria.AddCriteria(correctSite);
-
+            if (this.PublicationId != 0)
+            {
+                PublicationCriteria correctSite = new PublicationCriteria(this.PublicationId);
+                allCriteria.AddCriteria(correctSite);
+            }
             pageQuery.Criteria = allCriteria;
 
             string[] resultUris = pageQuery.ExecuteQuery();
