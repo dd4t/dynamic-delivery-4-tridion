@@ -54,6 +54,11 @@ namespace DD4T.Providers.SDLTridion2011
             //Criteria allCriteria = CriteriaFactory.And(isBinary, urlCriteria);
             Criteria allCriteria = urlCriteria;
             findBinary.Criteria = allCriteria;
+            if (this.PublicationId != 0)
+            {
+                PublicationCriteria correctSite = new PublicationCriteria(this.PublicationId);
+                allCriteria.AddCriteria(correctSite);
+            }
 
             string[] binaryUri = findBinary.ExecuteQuery();
 

@@ -24,11 +24,23 @@
         private bool ShouldResolveComponentLinks { get; set; }
         private int CacheTime { get; set; }
         private int PollTime { get; set; }
-        public virtual IPageFactory PageFactory { get; set; }
+        private IPageFactory _pageFactory = null;
+        public virtual IPageFactory PageFactory {
+            get
+            {
+                if (_pageFactory == null)
+                    _pageFactory = new PageFactory();
+                return _pageFactory;
+            }
+            set
+            {
+                _pageFactory = value;
+            }
+        }
         public virtual ILinkFactory LinkFactory { get; set; }
         public Dictionary<string, SiteMapNode> NodeDictionary { get; set; }
 
-        protected string SiteMapPath
+        public virtual string SiteMapPath
         {
             get
             {
@@ -61,7 +73,7 @@
 
             try
             {
-                rootNode = new TridionSiteMapNode(this, String.Empty, String.Empty, String.Empty, String.Empty, String.Empty, new ArrayList(), new NameValueCollection(), new NameValueCollection(), String.Empty);
+                rootNode = new TridionSiteMapNode(this, String.Empty, "root_" + PageFactory.PageProvider.PublicationId, String.Empty, String.Empty, String.Empty, new ArrayList(), new NameValueCollection(), new NameValueCollection(), String.Empty);
                 AddNode(rootNode);
 
                 //Fill down the hierarchy.
@@ -74,6 +86,11 @@
 
             return rootNode;
         }
+
+        //protected override void AddNode(SiteMapNode node, SiteMapNode parentNode)
+        //{
+        //    parentNode.ChildNodes.Add(node);
+        //}
 
         private void AddChildren(SiteMapNode rootNode, IEnumerable<XElement> siteMapNodes, int currentLevel)
         {
@@ -185,7 +202,7 @@
         {
             get
             {
-                return BuildSiteMap(); ;
+                return BuildSiteMap();
             }
         }
 

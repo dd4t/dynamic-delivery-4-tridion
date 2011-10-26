@@ -72,7 +72,7 @@ namespace DD4T.Factories
 
 
         #region IPageFactory Members
-        public bool TryFindPage(string url, out IPage page)
+        public virtual bool TryFindPage(string url, out IPage page)
         {
 			page = null;
 
@@ -80,8 +80,8 @@ namespace DD4T.Factories
 			string cacheKey = String.Format("Page_{0}_{1}", url, PublicationId);
 			Cache cache = HttpContext.Current.Cache;
 			DateTime lastPublishedDate = DateTime.MinValue;
-			if (lastPublishedDates.ContainsKey(url))
-				lastPublishedDate = lastPublishedDates[url];
+			if (lastPublishedDates.ContainsKey(cacheKey))
+                lastPublishedDate = lastPublishedDates[cacheKey];
 
 			var dbLastPublishedDate = PageProvider.GetLastPublishedDateByUrl(url);
 
@@ -94,7 +94,7 @@ namespace DD4T.Factories
 				if (!pageContentFromBroker.Equals(String.Empty)) {
 					page = GetIPageObject(pageContentFromBroker);
 					cache.Insert(cacheKey, page);
-					lastPublishedDates[url] = dbLastPublishedDate;
+					lastPublishedDates[cacheKey] = dbLastPublishedDate;
 					return true;
 				}
 			}
@@ -112,15 +112,15 @@ namespace DD4T.Factories
             return page;
         }
 
-        public bool TryFindPageContent(string url, out string pageContent)
+        public virtual bool TryFindPageContent(string url, out string pageContent)
         {
             pageContent = string.Empty;
 
             string cacheKey = String.Format("PageContent_{0}_{1}", url, PublicationId); 
             Cache cache = HttpContext.Current.Cache;
 			DateTime lastPublishedDate = DateTime.MinValue;
-			if (lastPublishedDates.ContainsKey(url))
-				lastPublishedDate = lastPublishedDates[url];
+            if (lastPublishedDates.ContainsKey(cacheKey))
+                lastPublishedDate = lastPublishedDates[cacheKey];
 
 			var dbLastPublishedDate = PageProvider.GetLastPublishedDateByUrl(url);
 
@@ -135,7 +135,7 @@ namespace DD4T.Factories
 				if (tempPageContent != string.Empty) {
 					pageContent = tempPageContent;
 					cache.Insert(cacheKey, pageContent);
-					lastPublishedDates[url] = dbLastPublishedDate;
+					lastPublishedDates[cacheKey] = dbLastPublishedDate;
 					return true;
 				}
 			}
