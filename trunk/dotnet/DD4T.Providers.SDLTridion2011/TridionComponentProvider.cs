@@ -42,7 +42,8 @@ namespace DD4T.Providers.SDLTridion2011
         {
             
             TcmUri tcmUri = new TcmUri(uri);
-            Tridion.ContentDelivery.DynamicContent.ComponentPresentationFactory cpFactory = new ComponentPresentationFactory(PublicationId);
+
+            Tridion.ContentDelivery.DynamicContent.ComponentPresentationFactory cpFactory = new ComponentPresentationFactory(tcmUri.PublicationId);
             Tridion.ContentDelivery.DynamicContent.ComponentPresentation cp = null;
 
 
@@ -93,142 +94,13 @@ namespace DD4T.Providers.SDLTridion2011
 
         }
 
-        public IList<string> FindComponents(ExtendedQueryParameters queryParameters)
+        public IList<string> FindComponents(DD4T.ContentModel.Contracts.Providers.IQuery query)
         {
-            string[] basedOnSchemas = queryParameters.QuerySchemas;
-            DateTime lastPublishedDate = queryParameters.LastPublishedDate;
-            IList<MetaQueryItem> metaQueryItems = queryParameters.MetaQueryValues;
-            ExtendedQueryParameters.QueryLogic metaQueryLogic = queryParameters.MetaQueryLogic;
-            int maxmimumComponents = queryParameters.MaximumComponents;
+            if (! (query is ITridionQueryWrapper))
+                throw new InvalidCastException("Cannot execute query because it is not based on " + typeof(ITridionQueryWrapper).Name);
 
-            Query q = null;
-            //PublicationCriteria publicationAndLastPublishedDateCriteria = new PublicationCriteria(PublicationId);
-            PublicationCriteria publicationAndLastPublishedDateCriteria = new PublicationCriteria(PublicationId);
-            //format DateTime // 00:00:00.000
-            ItemLastPublishedDateCriteria dateLastPublished = new ItemLastPublishedDateCriteria(lastPublishedDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), Criteria.GreaterThanOrEqual);
-            //publicationAndLastPublishedDateCriteria.AddCriteria(dateLastPublished);
-
-            Criteria basedOnSchemaAndInPublication;
-
-            if (basedOnSchemas.Length > 0)
-            {
-                Criteria[] schemaCriterias = new Criteria[basedOnSchemas.Length];
-                int i = 0;
-                foreach (var schema in basedOnSchemas)
-                {
-                    TcmUri schemaUri = new TcmUri(schema);
-                    schemaCriterias.SetValue(new ItemSchemaCriteria(schemaUri.ItemId), i);
-                    i++;
-                }
-                Criteria basedOnSchema = CriteriaFactory.Or(schemaCriterias);
-                basedOnSchemaAndInPublication = CriteriaFactory.And(publicationAndLastPublishedDateCriteria, basedOnSchema);
-            }
-            else
-            {
-                basedOnSchemaAndInPublication = publicationAndLastPublishedDateCriteria;
-            }
-
-            // Add filtering for meta data
-            Criteria schemasAndMetaData;
-            if (metaQueryItems.Count > 0)
-            {
-                Criteria metaQuery;
-                Criteria[] metaCriterias = new Criteria[metaQueryItems.Count];
-                int metaCount = 0;
-                foreach (MetaQueryItem queryItem in metaQueryItems)
-                {
-                    CustomMetaKeyCriteria metaField = new CustomMetaKeyCriteria(queryItem.MetaField);
-                    CustomMetaValueCriteria metaCriteria;
-                    FieldOperator metaOperator = typeof(Criteria).GetField(queryItem.MetaOperator.ToString()).GetValue(null) as FieldOperator;
-
-                    switch (queryItem.MetaValue.GetType().Name)
-                    {
-                        case "DateTime":
-                            DateTime tempDate = (DateTime)queryItem.MetaValue;
-                            metaCriteria = new CustomMetaValueCriteria(metaField, tempDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), "yyyy-MM-dd HH:mm:ss.SSS", metaOperator);
-                            break;
-                        case "Float":
-                            metaCriteria = new CustomMetaValueCriteria(metaField, (float)queryItem.MetaValue, metaOperator);
-                            break;
-                        case "String":
-                            metaCriteria = new CustomMetaValueCriteria(metaField, queryItem.MetaValue as string, metaOperator);
-                            break;
-                        default:
-                            throw new System.Exception("Unexpected query item data type; " + queryItem.MetaValue.GetType().Name);
-                    }
-
-                    metaCriterias.SetValue(metaCriteria, metaCount);
-                    metaCount++;
-                }
-
-                if (queryParameters.MetaQueryLogic == ExtendedQueryParameters.QueryLogic.AllCriteriaMatch)
-                {
-                    metaQuery = CriteriaFactory.And(metaCriterias);
-                }
-                else
-                {
-                    metaQuery = CriteriaFactory.Or(metaCriterias);
-                }
-                schemasAndMetaData = CriteriaFactory.And(basedOnSchemaAndInPublication, metaQuery);
-            }
-            else
-            {
-                schemasAndMetaData = basedOnSchemaAndInPublication;
-            }
-
-            Criteria allConditions;
-            if (queryParameters.KeywordValues.Count > 0)
-            {
-                Criteria[] keywordCriterias = new Criteria[queryParameters.KeywordValues.Count];
-                int keywordCount = 0;
-                foreach (KeywordItem keyCriteria in queryParameters.KeywordValues)
-                {
-                    TaxonomyKeywordCriteria keywordField = new TaxonomyKeywordCriteria(keyCriteria.CategoryUri, keyCriteria.KeywordUri, false);
-                    keywordCriterias.SetValue(keywordField, keywordCount);
-                    keywordCount++;
-                }
-
-                Criteria keyQuery;
-                if (queryParameters.KeywordQueryLogic == ExtendedQueryParameters.QueryLogic.AllCriteriaMatch)
-                {
-                    keyQuery = CriteriaFactory.And(keywordCriterias);
-                }
-                else
-                {
-                    keyQuery = CriteriaFactory.Or(keywordCriterias);
-                }
-                allConditions = CriteriaFactory.And(schemasAndMetaData, keyQuery);
-            }
-            else
-            {
-                allConditions = schemasAndMetaData;
-            }
-
-
-            q = new Query(allConditions);
-            if (maxmimumComponents != 0 && maxmimumComponents != int.MaxValue)
-            {
-                LimitFilter limitResults = new LimitFilter(maxmimumComponents);
-                q.SetResultFilter(limitResults);
-            }
-
-            // Sort column should either be a standard or custom metaData field
-            SortColumn paramSort;
-            if (typeof(SortParameter).GetField(queryParameters.QuerySortField) != null)
-            {
-                paramSort = typeof(SortParameter).GetField(queryParameters.QuerySortField).GetValue(null) as SortColumn;
-            }
-            else
-            {
-                // Why do we need to tell Tridion what data type the field is! Its in the database already!
-                paramSort = new CustomMetaKeyColumn(queryParameters.QuerySortField, typeof(MetadataType).GetField(queryParameters.SortType.ToString()).GetValue(null) as MetadataType);
-            }
-            SortDirection paramSortDirection = typeof(SortParameter).GetField(queryParameters.QuerySortOrder.ToString()).GetValue(null) as SortDirection;
-            SortParameter sortParameter = new SortParameter(paramSort, paramSortDirection);
-            q.AddSorting(sortParameter);
-            string[] results = q.ExecuteQuery();
-
-            return results;
+            Query tridionQuery = ((ITridionQueryWrapper)query).ToTridionQuery();
+            return tridionQuery.ExecuteQuery();
         }
 
 
