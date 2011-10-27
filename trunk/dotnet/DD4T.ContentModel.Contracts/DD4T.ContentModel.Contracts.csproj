@@ -58,7 +58,6 @@
     <Compile Include="Exceptions\KeywordNotFoundException.cs" />
     <Compile Include="Exceptions\ModelNotCreatedException.cs" />
     <Compile Include="Exceptions\PageNotFoundException.cs" />
-    <Compile Include="ExtendedQueryParameters.cs" />
     <Compile Include="Factories\IBinaryFactory.cs" />
     <Compile Include="Factories\IComponentFactory.cs" />
     <Compile Include="Factories\ILinkFactory.cs" />
@@ -88,6 +87,7 @@
     <Compile Include="Providers\ILinkProvider.cs" />
     <Compile Include="Providers\IPageProvider.cs" />
     <Compile Include="Providers\IProvider.cs" />
+    <Compile Include="Querying\IQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ContentModelContractsClassDiagram.cd" />

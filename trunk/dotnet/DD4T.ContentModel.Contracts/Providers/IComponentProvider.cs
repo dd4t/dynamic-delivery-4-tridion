@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DD4T.ContentModel.Factories;
+using DD4T.ContentModel.Querying;
 
 namespace DD4T.ContentModel.Contracts.Providers
 {
@@ -11,6 +11,7 @@ namespace DD4T.ContentModel.Contracts.Providers
         string GetContent(string uri);
         DateTime GetLastPublishedDate(string uri);
         List<string> GetContentMultiple(string[] componentUris);
-        IList<string> FindComponents(ExtendedQueryParameters queryParameters);
+        IList<string> FindComponents(IQuery queryParameters);
     }
+
 }
