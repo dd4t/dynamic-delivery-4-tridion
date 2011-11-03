@@ -21,6 +21,7 @@ using System.Web;
 using DD4T.ContentModel.Contracts.Providers;
 using System.Collections;
 using System.Configuration;
+using DD4T.ContentModel.Querying;
 
 namespace DD4T.Providers.SDLTridion2009
 {
@@ -93,7 +94,7 @@ namespace DD4T.Providers.SDLTridion2009
 
         }
 
-        public IList<string> FindComponents(ExtendedQueryParameters queryParameters)
+        public IList<string> FindComponents(IQuery queryParameters)
         {
             throw new NotImplementedException();
         }

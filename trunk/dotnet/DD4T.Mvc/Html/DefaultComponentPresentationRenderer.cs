@@ -45,7 +45,7 @@ namespace DD4T.Mvc.Html
             }
             else
             {
-                // pattern does not start with tcm:, we will treat it as a (part of a) title
+                // pattern does not start with tcm:, we will treat it as a (part of a) view
                 IField view;
                 if (itemToCheck.MetadataFields != null && itemToCheck.MetadataFields.TryGetValue("view", out view))
                 {
