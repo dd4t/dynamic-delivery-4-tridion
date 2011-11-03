@@ -31,6 +31,16 @@ namespace DD4T.Providers.SDLTridion2011
                 return componentLink;
             }
         }
+        private Dictionary<int, ComponentLink> _componentLinks = new Dictionary<int, ComponentLink>();
+        private ComponentLink GetComponentLink(TcmUri uri)
+        {
+            if (!_componentLinks.ContainsKey(uri.PublicationId))
+            {
+                _componentLinks.Add(uri.PublicationId, new ComponentLink(uri.PublicationId));
+            }
+            return _componentLinks[uri.PublicationId];
+        }
+
 
 
         public string ResolveLink(string componentUri)
@@ -39,7 +49,7 @@ namespace DD4T.Providers.SDLTridion2011
 
             if (!uri.Equals(emptyTcmUri))
             {
-                Link link = ComponentLink.GetLink(uri.ToString());
+                Link link = GetComponentLink(uri).GetLink(uri.ToString());
                 return link.IsResolved ? link.Url : null;
             }
     
@@ -54,7 +64,7 @@ namespace DD4T.Providers.SDLTridion2011
 
             if (!componentUriToLinkTo.Equals(emptyTcmUri))
             {
-                Link link = ComponentLink.GetLink(pageUri.ToString(), componentUriToLinkTo.ToString(), componentTemplateUri.ToString(), String.Empty, String.Empty, false, false);
+                Link link = GetComponentLink(componentUriToLinkTo).GetLink(pageUri.ToString(), componentUriToLinkTo.ToString(), componentTemplateUri.ToString(), String.Empty, String.Empty, false, false);
                 if (!link.IsResolved)
                 {
                     return null;
@@ -76,6 +86,14 @@ namespace DD4T.Providers.SDLTridion2011
                     componentLink.Dispose();
                     componentLink = null;
                 }
+                foreach (ComponentLink cl in _componentLinks.Values)
+                {
+                    if (cl != null)
+                    {
+                        cl.Dispose();
+                    }
+                }
+                _componentLinks.Clear();
             }
         }
 
