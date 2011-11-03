@@ -20,28 +20,42 @@ namespace DD4T.Factories
 
         //private const string uriPrefix = "tcm:";
         private static TcmUri emptyTcmUri = new TcmUri("tcm:0-0-0");
-        private ILinkProvider linkProvider;
+        private ILinkProvider _linkProvider = null;
+        private Dictionary<int,ILinkProvider> _linkProviders = new Dictionary<int,ILinkProvider>();
 
         public ILinkProvider LinkProvider
         {
             get
             {
                 // TODO: implement DI
-                if (linkProvider == null)
+                if (_linkProvider == null)
                 {
-                    linkProvider = new TridionLinkProvider();
-                    linkProvider.PublicationId = this.PublicationId;
+                    _linkProvider = new TridionLinkProvider();
+                    _linkProvider.PublicationId = this.PublicationId;
                 }
-                return linkProvider;
+                return _linkProvider;
             }
             set
             {
-                linkProvider = value;
+                _linkProvider = value;
             }
         }
  
         public LinkFactory()
         {
+        }
+
+        private ILinkProvider GetLinkProvider(string uri)
+        {
+            TcmUri u = new TcmUri(uri);
+            if (!_linkProviders.ContainsKey(u.PublicationId))
+            {
+                Type t = LinkProvider.GetType();
+                ILinkProvider lp = (ILinkProvider) Activator.CreateInstance(t);
+                lp.PublicationId = u.PublicationId;
+                _linkProviders.Add(u.PublicationId, lp);
+            }
+            return _linkProviders[u.PublicationId];
         }
 
         public string ResolveLink(string componentUri)
@@ -58,7 +72,7 @@ namespace DD4T.Factories
             }
             else
             {
-                string resolvedUrl = LinkProvider.ResolveLink(componentUri);
+                string resolvedUrl = GetLinkProvider(componentUri).ResolveLink(componentUri);
                 if (resolvedUrl == null)
                 {
                     cache.Insert(cacheKey, CACHEVALUE_NULL, null, DateTime.Now.AddSeconds(30), TimeSpan.Zero); //TODO should this be configurable?

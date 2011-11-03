@@ -11,7 +11,8 @@ using DD4T.ContentModel.Exceptions;
 using System.IO;
 using System.Configuration;
 using DD4T.ContentModel.Contracts.Providers;
-using DD4T.Providers.SDLTridion2011;
+using DD4T2011 = DD4T.Providers.SDLTridion2011;
+using DD4T.ContentModel.Querying;
 
 namespace DD4T.Factories
 {
@@ -28,7 +29,7 @@ namespace DD4T.Factories
                 // TODO: implement DI
                 if (componentProvider == null)
                 {
-                    componentProvider = new TridionComponentProvider();
+                    componentProvider = new DD4T2011.TridionComponentProvider();
                     componentProvider.PublicationId = this.PublicationId;
                 }
                 return componentProvider;
@@ -105,7 +106,7 @@ namespace DD4T.Factories
             return components;
         }
 
-        public IList<IComponent> FindComponents(ExtendedQueryParameters queryParameters)
+        public IList<IComponent> FindComponents(IQuery queryParameters)
         {
             var results = ComponentProvider.FindComponents(queryParameters)
                 .Select(c => GetComponent(c))
