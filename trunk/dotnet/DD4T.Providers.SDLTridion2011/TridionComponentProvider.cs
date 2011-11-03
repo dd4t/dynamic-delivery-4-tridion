@@ -21,6 +21,7 @@ using System.Web;
 using DD4T.ContentModel.Contracts.Providers;
 using System.Collections;
 using System.Configuration;
+using DD4T.ContentModel.Querying;
 
 namespace DD4T.Providers.SDLTridion2011
 {
@@ -94,7 +95,7 @@ namespace DD4T.Providers.SDLTridion2011
 
         }
 
-        public IList<string> FindComponents(DD4T.ContentModel.Contracts.Providers.IQuery query)
+        public IList<string> FindComponents(IQuery query)
         {
             if (! (query is ITridionQueryWrapper))
                 throw new InvalidCastException("Cannot execute query because it is not based on " + typeof(ITridionQueryWrapper).Name);
