@@ -18,5 +18,6 @@
         IList<double> NumericValues { get; }
         IList<string> Values { get; }
         string Value { get; }
+        string XPath { get; }
     }
 }
