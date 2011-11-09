@@ -372,6 +372,12 @@ namespace DD4T.ContentModel
             set;
         }
 
+        [XmlAttribute]
+        public string XPath
+        {
+            get;
+            set;
+        }
 
         #endregion Properties
         #region Constructors

@@ -18,9 +18,27 @@ namespace DD4T.Mvc.Html
         {
             return SiteEditComponentPresentation(helper, componentPresentation, "default");
         }
+        public static MvcHtmlString SiteEditComponentPresentation(this HtmlHelper helper, IComponent component, string componentTemplateId, string region)
+        {
+            return SiteEditComponentPresentation(helper, component, componentTemplateId, false, region);
+        }
+        public static MvcHtmlString SiteEditComponentPresentation(this HtmlHelper helper, IComponent component, string componentTemplateId, bool queryBased, string region)
+        {
+            ComponentTemplate ct = new ComponentTemplate();
+            ct.Id = "tcm:10-403-32";
+            ComponentPresentation cp = new ComponentPresentation();
+            cp.Component = component as Component;
+            cp.ComponentTemplate = ct;
+            cp.OrderOnPage = -1;
+            return SiteEditComponentPresentation(helper, cp, queryBased, region);
+        }
         public static MvcHtmlString SiteEditComponentPresentation(this HtmlHelper helper, IComponentPresentation componentPresentation, string region)
         {
-            return new MvcHtmlString(SiteEdit.SiteEditService.GenerateSiteEditComponentTag(componentPresentation, region));
+            return SiteEditComponentPresentation(helper, componentPresentation, false, region);
+        }
+        public static MvcHtmlString SiteEditComponentPresentation(this HtmlHelper helper, IComponentPresentation componentPresentation, bool queryBased, string region)
+        {
+            return new MvcHtmlString(SiteEdit.SiteEditService.GenerateSiteEditComponentTag(componentPresentation, queryBased, region));
         }
         public static MvcHtmlString SiteEditField(this HtmlHelper helper, IComponent component, IField field)
         {
@@ -34,20 +52,22 @@ namespace DD4T.Mvc.Html
 
             if (seEnabled)
             {
-                if (field.EmbeddedSchema != null)
-                {
+                //if (field.EmbeddedSchema != null)
+                //{
                     if (index == -1)
-                        retVal += SiteEditService.GenerateSiteEditFieldMarking(field.Name, field.EmbeddedSchema.RootElementName);
+//                        retVal += SiteEditService.GenerateSiteEditFieldMarking(field.Name, field.EmbeddedSchema.RootElementName);
+                        retVal += SiteEditService.GenerateSiteEditFieldTag(field);
                     else
-                        retVal += SiteEditService.GenerateSiteEditFieldMarking(field.Name, field.EmbeddedSchema.RootElementName, index);
-                }
-                else
-                {
-                    if (index == -1)
-                        retVal += SiteEditService.GenerateSiteEditFieldMarking(field.Name);
-                    else
-                        retVal += SiteEditService.GenerateSiteEditFieldMarking(field.Name, index);
-                }
+//                        retVal += SiteEditService.GenerateSiteEditFieldMarking(field.Name, field.EmbeddedSchema.RootElementName, index);
+                        retVal += SiteEditService.GenerateSiteEditFieldTag(field, index);
+                //}
+                //else
+                //{
+                //    if (index == -1)
+                //        retVal += SiteEditService.GenerateSiteEditFieldMarking(field.Name);
+                //    else
+                //        retVal += SiteEditService.GenerateSiteEditFieldMarking(field.Name, index);
+                //}
             }
             // TODO: handle component links, embedded fields, etc
             return new MvcHtmlString(retVal);
