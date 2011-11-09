@@ -47,8 +47,8 @@ namespace DD4T.Mvc.SiteEdit
                 "\"ComponentID\" : \"{1}\", " + // comp id
                 "\"ComponentTemplateID\" : \"{2}\", " + // ct id
                 "\"ComponentVersion\" : {3}, " + // comp version
-                "\"IsQueryBased\" : false, " + // query will be true for lists; out of scope for now
-                "\"SwapLabel\" : \"{4}\" " + // label with which components can be swapped; so region
+                "\"IsQueryBased\" : {4}, " + // query will be true for lists; out of scope for now
+                "\"SwapLabel\" : \"{5}\" " + // label with which components can be swapped; so region
             "}} -->";
 
         /**
@@ -60,6 +60,8 @@ namespace DD4T.Mvc.SiteEdit
                 "\"IsMultiValued\" : {1}, " + // multivalue?
                 "\"XPath\" : \"{2}\" " +       // xpath of the field
             "}} -->";
+
+
 
 
 
@@ -117,18 +119,28 @@ namespace DD4T.Mvc.SiteEdit
             //}
         }
 
+        /// <summary>
+        /// Generates a SiteEdit tag for a component presentation. Assumes that the component presentation is not query based.
+        /// </summary>
+        /// <param name="cp"></param>
+        /// <param name="region"></param>
+        /// <returns></returns>
+        public static string GenerateSiteEditComponentTag(IComponentPresentation cp, string region)
+        {
+            return GenerateSiteEditComponentTag(cp, false, region);
+        }
 
         /**
          * Generates a SiteEdit tag for a componentpresentation. It also needs to know which region it's in (for component
          * swapping) and the order of the page (for a true unique ID).
          * 
          * @param cp The componentpresentation to mark.
-         * @param orderOnPage The number the componentpresentation has on the page.
+         * @param queryBased Indicates whether the component presentation is the result of a query (true), or if it is really part of the page (false)
          * @param region The region the componentpresentation is to be shown in.
          * @return string representing the JSON SiteEdit tag.
          * @throws Exception When a componentpresentation is given that can not be parsed into a SiteEdit tag.
          */
-        public static string GenerateSiteEditComponentTag(IComponentPresentation cp, string region)
+        public static string GenerateSiteEditComponentTag(IComponentPresentation cp, bool queryBased, string region)
         {
             string pubIdWithoutTcm = Convert.ToString(new TcmUri(cp.Component.Id).PublicationId);
            
@@ -139,10 +151,22 @@ namespace DD4T.Mvc.SiteEdit
                     SiteEditSetting setting = SiteEditSettings[pubIdWithoutTcm];
                     if (setting.Enabled)
                     {
-                        return string.Format(COMPONENT_SE_Format, cp.OrderOnPage,
+
+                        int cpId;
+                        if (queryBased)
+                        {
+                            // for query based CPs, we are responsible for making the ID unique
+                            cpId = GetUniqueCpId();
+                        }
+                        else
+                        {
+                            cpId = cp.OrderOnPage;
+                        }
+                        return string.Format(COMPONENT_SE_Format, cpId,
                                 cp.Component.Id,
                                 cp.ComponentTemplate.Id,
                                 cp.Component.Version,
+                                Convert.ToString(queryBased).ToLower(),
                                 region);
                     }
                 }
@@ -170,11 +194,13 @@ namespace DD4T.Mvc.SiteEdit
          * @param fieldname The Content Manager XML name of the field.
          * @return string representing the JSON SiteEdit tag.
          */
+        [Obsolete("Please use GenerateSiteEditFieldTag instead")]
         public static string GenerateSiteEditFieldMarking(string fieldname)
         {
             return string.Format(FIELD_SE_Format, fieldname, "false", SIMPLE_SE_XPATH_PREFIX + fieldname);
         }
 
+        [Obsolete("Please use GenerateSiteEditFieldTag instead")]
         public static string GenerateSiteEditFieldMarking(string fieldname, string schemaname)
         {
             return string.Format(FIELD_SE_Format,
@@ -209,6 +235,7 @@ namespace DD4T.Mvc.SiteEdit
          * @param MVOrder Order of the MV instance
          * @return
          */
+        [Obsolete("Please use GenerateSiteEditFieldTag instead")]
         public static string GenerateSiteEditFieldMarking(string fieldname, int MVOrder)
         {
             return string.Format(FIELD_SE_Format,
@@ -223,6 +250,41 @@ namespace DD4T.Mvc.SiteEdit
             );
         }
 
+        public static string GenerateSiteEditFieldTag(IField field)
+        {
+             return string.Format(FIELD_SE_Format,
+                    field.Name,
+                    "false",
+                    field.XPath
+            );
+        }
+
+        public static string GenerateSiteEditFieldTag(IField field, int MVOrder)
+        {
+            return string.Format(FIELD_SE_Format,
+                   field.Name,
+                   "true",
+                   string.Format("{0}[{1}]", field.XPath, MVOrder)
+           );
+
+        }
+
+
+        private static int idCounter = 100;
+        private static int GetUniqueCpId()
+        {
+            lock (typeof(SiteEditService))
+            {
+                idCounter++;
+                if (idCounter > 1000)
+                {
+                    idCounter = 100;
+                }
+            }
+            return idCounter;
+        }
+
+
         /**
          * Generates a MV fieldmarking for specific instance of MV field.
          * 
@@ -230,6 +292,7 @@ namespace DD4T.Mvc.SiteEdit
          * @param MVOrder Order of the MV instance
          * @return
          */
+        [Obsolete("Please use GenerateSiteEditFieldTag instead")]
         public static string GenerateSiteEditFieldMarking(string fieldname, string schemaname, int MVOrder)
         {
             return string.Format(FIELD_SE_Format,
