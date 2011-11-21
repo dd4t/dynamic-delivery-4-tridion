@@ -99,5 +99,9 @@ namespace DD4T.Templates.Base.Builder
         {
             return SchemaBuilder.BuildSchema(tcmSchema, this);
         }
+        public virtual void AddXpathToFields(Dynamic.FieldSet fieldSet, string baseXpath)
+        {
+            FieldsBuilder.AddXpathToFields(fieldSet, baseXpath);
+        }
     }
 }
