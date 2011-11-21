@@ -253,7 +253,7 @@ namespace DD4T.Mvc.SiteEdit
         public static string GenerateSiteEditFieldTag(IField field)
         {
              return string.Format(FIELD_SE_Format,
-                    field.Name,
+                    XPath2Name(field.XPath),
                     "false",
                     field.XPath
             );
@@ -262,14 +262,25 @@ namespace DD4T.Mvc.SiteEdit
         public static string GenerateSiteEditFieldTag(IField field, int MVOrder)
         {
             return string.Format(FIELD_SE_Format,
-                   field.Name,
+                   string.Format("{0}{1}", XPath2Name(field.XPath),MVOrder+1),
                    "true",
-                   string.Format("{0}[{1}]", field.XPath, MVOrder)
+                   string.Format("{0}[{1}]", field.XPath, MVOrder+1)
            );
 
         }
 
-
+        private static string XPath2Name(string xpath)
+        {
+            xpath = xpath.Replace("[", "").Replace("]", "");
+            StringBuilder sb = new StringBuilder();
+            string[] segments = xpath.Split('/');           
+            foreach (string segment in segments.Skip<string>(1))
+            {
+                string[] segments2 = segment.Split(':');
+                sb.Append(segments2[1]);
+            }
+            return sb.ToString();
+        }
         private static int idCounter = 100;
         private static int GetUniqueCpId()
         {

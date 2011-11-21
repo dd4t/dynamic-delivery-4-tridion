@@ -103,9 +103,21 @@
                 foreach (var a in element.Attributes())
                     attributes.Add(a.Name.ToString(), a.Value);
 
+                string uri;
+                // for backwards compatibility, the obsolete 'pageId' attribute is supported as synonym for 'uri'
+                try
+                {
+                    uri = element.Attribute("uri") == null ? element.Attribute("pageId").Value : element.Attribute("uri").Value;
+                    uri = uri ?? "";
+                }
+                catch
+                {
+                    uri = "";
+                }
+
                 childNode = new TridionSiteMapNode(this,
                     element.Attribute("id").Value, //key
-                    element.Attribute("pageId")==null ? "" : element.Attribute("pageId").Value, //uri
+                    uri,
                     element.Attribute("url").Value, //url
                     element.Attribute("title").Value, //title
                     element.Attribute("description").Value, //description

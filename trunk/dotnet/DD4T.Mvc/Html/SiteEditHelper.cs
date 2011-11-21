@@ -56,7 +56,7 @@ namespace DD4T.Mvc.Html
                 //{
                     if (index == -1)
 //                        retVal += SiteEditService.GenerateSiteEditFieldMarking(field.Name, field.EmbeddedSchema.RootElementName);
-                        retVal += SiteEditService.GenerateSiteEditFieldTag(field);
+                        retVal += SiteEditService.GenerateSiteEditFieldTag(field, 0);
                     else
 //                        retVal += SiteEditService.GenerateSiteEditFieldMarking(field.Name, field.EmbeddedSchema.RootElementName, index);
                         retVal += SiteEditService.GenerateSiteEditFieldTag(field, index);
