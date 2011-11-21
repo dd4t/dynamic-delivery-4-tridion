@@ -142,5 +142,42 @@ namespace DD4T.Templates.Base.Builder
                }
            }
        }
+
+       public static void AddXpathToFields(Dynamic.FieldSet fieldSet, string baseXpath)
+       {
+          // add XPath properties to all fields
+
+           if (fieldSet == null)
+           {
+               GeneralUtils.TimedLog("Error: fieldSet = null");
+           }
+           if (fieldSet.Values == null)
+           {
+               GeneralUtils.TimedLog("Error: fieldSet.Values = null");
+           }
+           try
+           {
+               foreach (Field f in fieldSet.Values)
+               {
+                   if (f == null)
+                   {
+                       GeneralUtils.TimedLog("Error: field = null");
+                   }
+                   f.XPath = string.Format("{0}/custom:{1}", baseXpath, f.Name);
+                   int i = 1;
+                   if (f.EmbeddedValues != null)
+                   {
+                       foreach (FieldSet subFields in f.EmbeddedValues)
+                       {
+                           AddXpathToFields(subFields, string.Format("{0}/custom:{1}[{2}]", baseXpath, f.Name, i++));
+                       }
+                   }
+               }
+           }
+           catch (Exception e)
+           {
+               GeneralUtils.TimedLog("Caught exception: " + e.Message);
+           }
+       }
    }
 }

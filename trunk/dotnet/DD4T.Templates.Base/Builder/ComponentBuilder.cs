@@ -20,79 +20,82 @@ namespace DD4T.Templates.Base.Builder
 		}
       public static Dynamic.Component BuildComponent(TCM.Component tcmComponent, int linkLevels, bool resolveWidthAndHeight, BuildManager manager)
       {
-         GeneralUtils.TimedLog("start BuildComponent");
-			Dynamic.Component c = new Dynamic.Component();
-			c.Title = tcmComponent.Title;
-			c.Id = tcmComponent.Id.ToString();
-         GeneralUtils.TimedLog("component title = " + c.Title);
+          GeneralUtils.TimedLog("start BuildComponent");
+          Dynamic.Component c = new Dynamic.Component();
+          c.Title = tcmComponent.Title;
+          c.Id = tcmComponent.Id.ToString();
+          GeneralUtils.TimedLog("component title = " + c.Title);
 
-         c.Version = tcmComponent.Version;
-         GeneralUtils.TimedLog("start building schema");
-         c.Schema = manager.BuildSchema(tcmComponent.Schema);
-         GeneralUtils.TimedLog("finished building schema");
-         c.ComponentType = (ComponentType)Enum.Parse(typeof(ComponentType), tcmComponent.ComponentType.ToString());
+          c.Version = tcmComponent.Version;
+          GeneralUtils.TimedLog("start building schema");
+          c.Schema = manager.BuildSchema(tcmComponent.Schema);
+          GeneralUtils.TimedLog("finished building schema");
+          c.ComponentType = (ComponentType)Enum.Parse(typeof(ComponentType), tcmComponent.ComponentType.ToString());
 
-         if (tcmComponent.ComponentType.Equals(TCM.ComponentType.Multimedia))
-         {
-            GeneralUtils.TimedLog("start building multimedia");
-            Multimedia multimedia = new Multimedia();
-            multimedia.MimeType = tcmComponent.BinaryContent.MultimediaType.MimeType;
-            multimedia.Size = tcmComponent.BinaryContent.FileSize;
-            multimedia.FileName = tcmComponent.BinaryContent.Filename;
-            // remove leading dot from extension because microsoft returns this as ".gif"
-            multimedia.FileExtension = System.IO.Path.GetExtension(multimedia.FileName).Substring(1);
+          if (tcmComponent.ComponentType.Equals(TCM.ComponentType.Multimedia))
+          {
+              GeneralUtils.TimedLog("start building multimedia");
+              Multimedia multimedia = new Multimedia();
+              multimedia.MimeType = tcmComponent.BinaryContent.MultimediaType.MimeType;
+              multimedia.Size = tcmComponent.BinaryContent.FileSize;
+              multimedia.FileName = tcmComponent.BinaryContent.Filename;
+              // remove leading dot from extension because microsoft returns this as ".gif"
+              multimedia.FileExtension = System.IO.Path.GetExtension(multimedia.FileName).Substring(1);
 
-            if (resolveWidthAndHeight)
-            {
-               MemoryStream memstream = new MemoryStream();
-               tcmComponent.BinaryContent.WriteToStream(memstream);
-               Image image = Image.FromStream(memstream);
-               memstream.Close();
+              if (resolveWidthAndHeight)
+              {
+                  MemoryStream memstream = new MemoryStream();
+                  tcmComponent.BinaryContent.WriteToStream(memstream);
+                  Image image = Image.FromStream(memstream);
+                  memstream.Close();
 
-               multimedia.Width = image.Size.Width;
-               multimedia.Height = image.Size.Height;
-            }
-            else
-            {
-               multimedia.Width = 0;
-               multimedia.Height = 0;
-            }
-            c.Multimedia = multimedia;
-            GeneralUtils.TimedLog("finished building multimedia");
-         }
-         else
-         {
-            c.Multimedia = null;
-         }
-         c.Fields = new Dynamic.FieldSet();
-         c.MetadataFields = new Dynamic.FieldSet();
-         if (linkLevels > 0)
-         {
-             if (tcmComponent.Content != null)
-             {
-                 GeneralUtils.TimedLog("start retrieving tcm fields");
-                 TCM.Fields.ItemFields tcmFields = new TCM.Fields.ItemFields(tcmComponent.Content, tcmComponent.Schema);
-                 GeneralUtils.TimedLog("finished retrieving tcm fields");
-                 GeneralUtils.TimedLog("start building fields");
-                 c.Fields = manager.BuildFields(tcmFields, linkLevels, resolveWidthAndHeight);
-                 GeneralUtils.TimedLog("finished building fields");
-             }
-             if (tcmComponent.Metadata != null)
-             {
-                 GeneralUtils.TimedLog("start retrieving tcm metadata fields");
-                 TCM.Fields.ItemFields tcmMetadataFields = new TCM.Fields.ItemFields(tcmComponent.Metadata, tcmComponent.MetadataSchema);
-                 GeneralUtils.TimedLog("finished retrieving tcm metadata fields");
-                 GeneralUtils.TimedLog("start building metadata fields");
-                 c.MetadataFields = manager.BuildFields(tcmMetadataFields, linkLevels, resolveWidthAndHeight);
-                 GeneralUtils.TimedLog("finished building metadata fields");
-             }
-         }
-         c.Publication = manager.BuildPublication(tcmComponent.ContextRepository);
-         c.OwningPublication = manager.BuildPublication(tcmComponent.OwningRepository);
-         TCM.Folder folder = (TCM.Folder) tcmComponent.OrganizationalItem;
-         c.Folder = manager.BuildOrganizationalItem(folder);
-         c.Categories = manager.BuildCategories(tcmComponent);
-         return c;
-		}
+                  multimedia.Width = image.Size.Width;
+                  multimedia.Height = image.Size.Height;
+              }
+              else
+              {
+                  multimedia.Width = 0;
+                  multimedia.Height = 0;
+              }
+              c.Multimedia = multimedia;
+              GeneralUtils.TimedLog("finished building multimedia");
+          }
+          else
+          {
+              c.Multimedia = null;
+          }
+          c.Fields = new Dynamic.FieldSet();
+          c.MetadataFields = new Dynamic.FieldSet();
+          if (linkLevels > 0)
+          {
+              if (tcmComponent.Content != null)
+              {
+                  GeneralUtils.TimedLog("start retrieving tcm fields");
+                  TCM.Fields.ItemFields tcmFields = new TCM.Fields.ItemFields(tcmComponent.Content, tcmComponent.Schema);
+                  GeneralUtils.TimedLog("finished retrieving tcm fields");
+                  GeneralUtils.TimedLog("start building fields");
+                  c.Fields = manager.BuildFields(tcmFields, linkLevels, resolveWidthAndHeight);
+                  GeneralUtils.TimedLog("finished building fields");
+              }
+              if (tcmComponent.Metadata != null)
+              {
+                  GeneralUtils.TimedLog("start retrieving tcm metadata fields");
+                  TCM.Fields.ItemFields tcmMetadataFields = new TCM.Fields.ItemFields(tcmComponent.Metadata, tcmComponent.MetadataSchema);
+                  GeneralUtils.TimedLog("finished retrieving tcm metadata fields");
+                  GeneralUtils.TimedLog("start building metadata fields");
+                  c.MetadataFields = manager.BuildFields(tcmMetadataFields, linkLevels, resolveWidthAndHeight);
+                  GeneralUtils.TimedLog("finished building metadata fields");
+              }
+          }
+          c.Publication = manager.BuildPublication(tcmComponent.ContextRepository);
+          c.OwningPublication = manager.BuildPublication(tcmComponent.OwningRepository);
+          TCM.Folder folder = (TCM.Folder)tcmComponent.OrganizationalItem;
+          c.Folder = manager.BuildOrganizationalItem(folder);
+          c.Categories = manager.BuildCategories(tcmComponent);
+
+          manager.AddXpathToFields(c.Fields, "tcm:Content/custom:" + tcmComponent.Schema.RootElementName); // TODO: check if the first part of the XPath is really the root element name, or simply always 'Content'
+          manager.AddXpathToFields(c.MetadataFields, "tcm:Metadata/custom:Metadata");
+          return c;
+      }
 	}
 }
