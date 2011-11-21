@@ -8,6 +8,7 @@ using System.Collections.Specialized;
 using DD4T.ContentModel.Factories;
 using DD4T.Factories;
 using DD4T.ContentModel;
+using System.Text.RegularExpressions;
 
 namespace DD4T.Mvc.Providers
 {
@@ -16,6 +17,10 @@ namespace DD4T.Mvc.Providers
         public TridionSiteMapNode(SiteMapProvider provider, string key, string uri, string url, string title, string description, IList roles, NameValueCollection attributes, NameValueCollection explicitResourceKeys, string implicitResourceKey):
             base(provider, key, url, title, description, roles, attributes, explicitResourceKeys, implicitResourceKey)
         {
+            if (url.StartsWith("tcm:"))
+            {
+                url = MakeDummyUrl(url);
+            }
             Uri = uri;
         }
 
@@ -38,43 +43,48 @@ namespace DD4T.Mvc.Providers
             }
         }
 
-        //public override string Url
-        //{
-        //    get
-        //    {
-        //        return null; //Must return null to allow node to be added to sitemap. Resolving happens in ResolvedUrl
-        //    }
-        //    set
-        //    {
-        //        base.Url = value;
-        //    }
-        //}
-
         public string ResolvedUrl
         {
             get
             {
-                TcmUri tcmUri = new TcmUri(Uri);
-                if (tcmUri.ItemTypeId == 16)
+                if (string.IsNullOrEmpty(Uri))
+                    return string.Empty;
+
+                try
                 {
-                    if (!String.IsNullOrEmpty(Uri))
+                    TcmUri tcmUri = new TcmUri(Uri);
+                    if (tcmUri.ItemTypeId == 16)
                     {
-                        ILinkFactory linkFactory = new LinkFactory();
-                        string resolvedLink = linkFactory.ResolveLink(Uri);
-                        if (!String.IsNullOrEmpty(resolvedLink))
+                        if (!String.IsNullOrEmpty(Uri))
                         {
-                            return resolvedLink;
+                            ILinkFactory linkFactory = new LinkFactory();
+                            string resolvedLink = linkFactory.ResolveLink(Uri);
+                            if (!String.IsNullOrEmpty(resolvedLink))
+                            {
+                                return resolvedLink;
+                            }
                         }
+                        return null;
                     }
-                    return null;
+                    return Url;
                 }
-                
-                return Url;
+                catch
+                {
+                    return string.Empty;
+                }            
             }
         }
 
         public string Uri { get; set; }
 
         public int Level { get; set; }
+
+        private Regex reDummyUrl = new Regex("[^a-zA-Z0-9/\\-_\\.]");
+
+        private string MakeDummyUrl(string inputUrl)
+        {
+            string tmp = reDummyUrl.Replace(inputUrl, "");
+            return tmp.StartsWith("/") ? tmp : "/" + tmp;
+        }
     }
 }
