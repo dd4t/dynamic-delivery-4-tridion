@@ -14,12 +14,14 @@ namespace DD4T.Mvc.Providers
 {
     public class TridionSiteMapNode : SiteMapNode
     {
+        public static string NoUrlFoundPrefix = "/NoUrlInSitemap#";
+
         public TridionSiteMapNode(SiteMapProvider provider, string key, string uri, string url, string title, string description, IList roles, NameValueCollection attributes, NameValueCollection explicitResourceKeys, string implicitResourceKey):
             base(provider, key, url, title, description, roles, attributes, explicitResourceKeys, implicitResourceKey)
         {
             if (url.StartsWith("tcm:"))
             {
-                url = MakeDummyUrl(url);
+                Url = MakeDummyUrl(url);
             }
             Uri = uri;
         }
@@ -43,6 +45,30 @@ namespace DD4T.Mvc.Providers
             }
         }
 
+        public new NameValueCollection Attributes
+        {
+            get
+            {
+                return base.Attributes;
+            }
+        }
+
+        public override string Url
+        {
+            get
+            {
+                if (base.Url.StartsWith(NoUrlFoundPrefix))
+                {
+                    return string.Empty;
+                }
+                return base.Url;
+            }
+            set
+            {
+                base.Url = value;
+            }
+
+        }
         public string ResolvedUrl
         {
             get
@@ -57,8 +83,7 @@ namespace DD4T.Mvc.Providers
                     {
                         if (!String.IsNullOrEmpty(Uri))
                         {
-                            ILinkFactory linkFactory = new LinkFactory();
-                            string resolvedLink = linkFactory.ResolveLink(Uri);
+                            string resolvedLink = ((TridionSiteMapProvider)this.Provider).LinkFactory.ResolveLink(Uri);
                             if (!String.IsNullOrEmpty(resolvedLink))
                             {
                                 return resolvedLink;
@@ -79,12 +104,9 @@ namespace DD4T.Mvc.Providers
 
         public int Level { get; set; }
 
-        private Regex reDummyUrl = new Regex("[^a-zA-Z0-9/\\-_\\.]");
-
         private string MakeDummyUrl(string inputUrl)
         {
-            string tmp = reDummyUrl.Replace(inputUrl, "");
-            return tmp.StartsWith("/") ? tmp : "/" + tmp;
+            return NoUrlFoundPrefix + HttpUtility.HtmlEncode(inputUrl);
         }
     }
 }
