@@ -7,7 +7,7 @@ using System.Web;
 using DD4T.ContentModel;
 using DD4T.ContentModel.Factories;
 using DD4T.ContentModel.Contracts.Providers;
-using DD4T.Providers.SDLTridion2011;
+using DD4T.Providers.SDLTridion2011sp1;
 
 namespace DD4T.Factories
 {
@@ -23,23 +23,24 @@ namespace DD4T.Factories
         private ILinkProvider _linkProvider = null;
         private Dictionary<int,ILinkProvider> _linkProviders = new Dictionary<int,ILinkProvider>();
 
-        public ILinkProvider LinkProvider
-        {
-            get
-            {
-                // TODO: implement DI
-                if (_linkProvider == null)
-                {
-                    _linkProvider = new TridionLinkProvider();
-                    _linkProvider.PublicationId = this.PublicationId;
-                }
-                return _linkProvider;
-            }
-            set
-            {
-                _linkProvider = value;
-            }
-        }
+        public ILinkProvider LinkProvider { get; set; }
+        //public ILinkProvider LinkProvider
+        //{
+        //    get
+        //    {
+        //        // TODO: implement DI
+        //        if (_linkProvider == null)
+        //        {
+        //            _linkProvider = new TridionLinkProvider();
+        //            _linkProvider.PublicationId = this.PublicationId;
+        //        }
+        //        return _linkProvider;
+        //    }
+        //    set
+        //    {
+        //        _linkProvider = value;
+        //    }
+        //}
  
         public LinkFactory()
         {

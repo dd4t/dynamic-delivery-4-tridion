@@ -171,7 +171,7 @@
 
         public virtual SitemapCacheDependency GetSitemapCacheDependency (int PollTime, string SiteMapPath)
         {
-            return new SitemapCacheDependency(PollTime, SiteMapPath);
+            return new SitemapCacheDependency(PollTime, SiteMapPath, PageFactory);
         }
 
         public override SiteMapNode BuildSiteMap()

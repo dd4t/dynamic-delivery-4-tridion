@@ -98,25 +98,17 @@ namespace DD4T.Mvc.SiteEdit
         {
             string pubIdWithoutTcm = Convert.ToString(new TcmUri(page.Id).PublicationId);
 
-            //try
-            //{
             if (SiteEditSettings.ContainsKey(pubIdWithoutTcm))
+            {
+                SiteEditSetting setting = SiteEditSettings[pubIdWithoutTcm];
+                string usePageContext = string.IsNullOrEmpty(setting.PagePublication) ? page.OwningPublication.Id : setting.PagePublication;
+                TcmUri pageContextUri = new TcmUri(usePageContext);
+                if (setting.Enabled)
                 {
-                    SiteEditSetting setting = SiteEditSettings[pubIdWithoutTcm];
-                    string usePageContext = string.IsNullOrEmpty(setting.PagePublication) ? page.OwningPublication.Id : setting.PagePublication;
-                    TcmUri pageContextUri = new TcmUri(usePageContext);
-                    if (setting.Enabled)
-                    {
-                        return string.Format(PAGE_SE_Format, page.Id, Convert.ToString(page.Version), pageContextUri.ItemId, setting.ComponentPublication, setting.PublishPublication);
-                    }
+                    return string.Format(PAGE_SE_Format, page.Id, Convert.ToString(page.Version), pageContextUri.ItemId, setting.ComponentPublication, setting.PublishPublication);
                 }
-                throw new Exception("Cannot create siteEdit pagetag, publication is not configured to be editable.");
-            //}
-            //catch (Exception ex)
-            //{
-            //    // Utilities.log.Error("Caught error while generating SiteEdit tags", ex); // TODO: add logging
-            //    return string.Empty; 
-            //}
+            }
+            return string.Empty;
         }
 
         /// <summary>
@@ -138,45 +130,36 @@ namespace DD4T.Mvc.SiteEdit
          * @param queryBased Indicates whether the component presentation is the result of a query (true), or if it is really part of the page (false)
          * @param region The region the componentpresentation is to be shown in.
          * @return string representing the JSON SiteEdit tag.
-         * @throws Exception When a componentpresentation is given that can not be parsed into a SiteEdit tag.
          */
         public static string GenerateSiteEditComponentTag(IComponentPresentation cp, bool queryBased, string region)
         {
             string pubIdWithoutTcm = Convert.ToString(new TcmUri(cp.Component.Id).PublicationId);
-           
-            try
-            {
-                if (SiteEditSettings.ContainsKey(pubIdWithoutTcm))
-                {
-                    SiteEditSetting setting = SiteEditSettings[pubIdWithoutTcm];
-                    if (setting.Enabled)
-                    {
 
-                        int cpId;
-                        if (queryBased)
-                        {
-                            // for query based CPs, we are responsible for making the ID unique
-                            cpId = GetUniqueCpId();
-                        }
-                        else
-                        {
-                            cpId = cp.OrderOnPage;
-                        }
-                        return string.Format(COMPONENT_SE_Format, cpId,
-                                cp.Component.Id,
-                                cp.ComponentTemplate.Id,
-                                cp.Component.Version,
-                                Convert.ToString(queryBased).ToLower(),
-                                region);
-                    }
-                }
-                throw new Exception("Cannot create siteEdit component tag, publication is not configured to be editable.");
-            }
-            catch (Exception ex)
+            if (SiteEditSettings.ContainsKey(pubIdWithoutTcm))
             {
-                // log.Error("Caught error while generating SiteEdit tags", ex); // TODO: logging
-                return string.Empty;
+                SiteEditSetting setting = SiteEditSettings[pubIdWithoutTcm];
+                if (setting.Enabled)
+                {
+
+                    int cpId;
+                    if (queryBased)
+                    {
+                        // for query based CPs, we are responsible for making the ID unique
+                        cpId = GetUniqueCpId();
+                    }
+                    else
+                    {
+                        cpId = cp.OrderOnPage;
+                    }
+                    return string.Format(COMPONENT_SE_Format, cpId,
+                            cp.Component.Id,
+                            cp.ComponentTemplate.Id,
+                            cp.Component.Version,
+                            Convert.ToString(queryBased).ToLower(),
+                            region);
+                }
             }
+            return string.Empty;
         }
 
         /**
@@ -252,6 +235,8 @@ namespace DD4T.Mvc.SiteEdit
 
         public static string GenerateSiteEditFieldTag(IField field)
         {
+            if (string.IsNullOrEmpty(field.XPath))
+                return string.Empty;
              return string.Format(FIELD_SE_Format,
                     XPath2Name(field.XPath),
                     "false",
@@ -261,6 +246,9 @@ namespace DD4T.Mvc.SiteEdit
 
         public static string GenerateSiteEditFieldTag(IField field, int MVOrder)
         {
+            if (string.IsNullOrEmpty(field.XPath))
+                return string.Empty;
+
             return string.Format(FIELD_SE_Format,
                    string.Format("{0}{1}", XPath2Name(field.XPath),MVOrder+1),
                    "true",

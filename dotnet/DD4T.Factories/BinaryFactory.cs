@@ -7,7 +7,7 @@ using DD4T.ContentModel;
 using System.Web;
 using DD4T.ContentModel.Exceptions;
 using DD4T.ContentModel.Contracts.Providers;
-using DD4T.Providers.SDLTridion2011;
+using DD4T.Providers.SDLTridion2011sp1;
 using System.Web.Caching;
 
 namespace DD4T.Factories
@@ -16,23 +16,24 @@ namespace DD4T.Factories
     {
         private static IDictionary<string, DateTime> lastPublishedDates = new Dictionary<string, DateTime>();
         private IBinaryProvider binaryProvider = null;
-        public IBinaryProvider BinaryProvider
-        {
-            get
-            {
-                // TODO: implement DI
-                if (binaryProvider == null)
-                {
-                    binaryProvider = new TridionBinaryProvider();
-                    binaryProvider.PublicationId = this.PublicationId;
-                }
-                return binaryProvider;
-            }
-            set
-            {
-                binaryProvider = value;
-            }
-        }
+        public IBinaryProvider BinaryProvider { get; set; }
+        //public IBinaryProvider BinaryProvider
+        //{
+        //    get
+        //    {
+        //        // TODO: implement DI
+        //        if (binaryProvider == null)
+        //        {
+        //            binaryProvider = new TridionBinaryProvider();
+        //            binaryProvider.PublicationId = this.PublicationId;
+        //        }
+        //        return binaryProvider;
+        //    }
+        //    set
+        //    {
+        //        binaryProvider = value;
+        //    }
+        //}
 
         #region IBinaryFactory members
         public bool TryFindBinary(string url, out IBinary binary)

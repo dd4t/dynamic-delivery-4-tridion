@@ -9,7 +9,7 @@ using DD4T.ContentModel;
 using DD4T.ContentModel.Factories;
 using DD4T.ContentModel.Exceptions;
 using DD4T.ContentModel.Contracts.Providers;
-using DD4T.Providers.SDLTridion2011;
+using DD4T.Providers.SDLTridion2011sp1;
 
 namespace DD4T.Factories
 {
@@ -17,23 +17,24 @@ namespace DD4T.Factories
     public class TaxonomyFactory : FactoryBase, ITaxonomyFactory
     {
         private ITaxonomyProvider taxonomyProvider = null;
-        public ITaxonomyProvider TaxonomyProvider
-        {
-            get
-            {
-                // TODO: implement DI
-                if (taxonomyProvider == null)
-                {
-                    taxonomyProvider = new TridionTaxonomyProvider();
-                    taxonomyProvider.PublicationId = this.PublicationId;
-                }
-                return taxonomyProvider;
-            }
-            set
-            {
-                taxonomyProvider = value;
-            }
-        }
+        public ITaxonomyProvider TaxonomyProvider { get; set; }
+        //public ITaxonomyProvider TaxonomyProvider
+        //{
+        //    get
+        //    {
+        //        // TODO: implement DI
+        //        if (taxonomyProvider == null)
+        //        {
+        //            taxonomyProvider = new TridionTaxonomyProvider();
+        //            taxonomyProvider.PublicationId = this.PublicationId;
+        //        }
+        //        return taxonomyProvider;
+        //    }
+        //    set
+        //    {
+        //        taxonomyProvider = value;
+        //    }
+        //}
 
         public bool TryGetKeyword(string categoryUriToLookIn, string keywordName, out IKeyword keyword)
         {

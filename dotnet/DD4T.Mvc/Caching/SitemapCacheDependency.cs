@@ -17,16 +17,11 @@ namespace DD4T.Mvc.Caching
 
         public string SitemapUrlPath { get; private set; }
 
-        public virtual IPageFactory PageFactory
-        {
-            get
-            {
-                return new PageFactory();
-            }
-        }
+        public virtual IPageFactory PageFactory { get; set; }
 
-        public SitemapCacheDependency(int pollTime, string sitemapUrlPath)
+        public SitemapCacheDependency(int pollTime, string sitemapUrlPath, IPageFactory pageFactory)
         {
+            this.PageFactory = pageFactory;
             timer = new Timer(
                 new TimerCallback(CheckDependencyCallback),
                 this, 0, pollTime);
