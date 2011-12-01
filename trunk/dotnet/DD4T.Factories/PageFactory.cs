@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Web.Caching;
 using System.Web;
 using DD4T.ContentModel.Contracts.Providers;
-using DD4T.Providers.SDLTridion2011;
 
 namespace DD4T.Factories
 {
@@ -24,37 +23,44 @@ namespace DD4T.Factories
 
 		private static IDictionary<string, DateTime> lastPublishedDates = new Dictionary<string, DateTime>();
         private IPageProvider pageProvider = null;
-        public IPageProvider PageProvider
-        {
-            get
-            {
-                // TODO: implement DI
-                if (pageProvider == null)
-                {
-                    pageProvider = new TridionPageProvider();
-                    pageProvider.PublicationId = this.PublicationId;
-                }
-                return pageProvider;
-            }
-            set
-            {
-                pageProvider = value;
-            }
-        }
+
+        public IPageProvider PageProvider { get; set; }
+
+        //public IPageProvider PageProvider
+        //{
+        //    get
+        //    {
+        //        // TODO: implement DI
+        //        if (pageProvider == null)
+        //        {
+        //            pageProvider = new TridionPageProvider();
+        //            pageProvider.PublicationId = this.PublicationId;
+        //        }
+        //        return pageProvider;
+        //    }
+        //    set
+        //    {
+        //        pageProvider = value;
+        //    }
+        //}
 
         private IComponentFactory _componentFactory = null;
-        public IComponentFactory ComponentFactory
-        {
-            get
-            {
-                if (_componentFactory == null)
-                {
-                    _componentFactory = new ComponentFactory();
+        public IComponentFactory ComponentFactory { get; set; }
+        //{
+        //    get
+        //    {
+        //        if (_componentFactory == null)
+        //        {
+        //            _componentFactory = new ComponentFactory();
                   
-                }
-                return _componentFactory;
-            }
-        }
+        //        }
+        //        return _componentFactory;
+        //    }
+        //    set
+        //    {
+
+        //    }
+        //}
 
         private ILinkFactory _linkFactory = null;
         public ILinkFactory LinkFactory
@@ -264,8 +270,8 @@ namespace DD4T.Factories
             {
                 var serializer = new XmlSerializer(typeof(Page));
 
-                try
-                {
+                //try
+                //{
                     page = (IPage)serializer.Deserialize(reader);
                     // set order on page for each ComponentPresentation
                     int orderOnPage = 0;
@@ -274,11 +280,11 @@ namespace DD4T.Factories
                         cp.OrderOnPage = orderOnPage++;
                     }
                     LoadComponentModelsFromComponentFactory(page);
-                }
-                catch (Exception)
-                {
-                    throw new FieldHasNoValueException();
-                }
+                //}
+                //catch (Exception)
+                //{
+                //    throw new FieldHasNoValueException();
+                //}
             }
             return page;
         }

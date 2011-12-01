@@ -11,7 +11,7 @@ using DD4T.ContentModel.Exceptions;
 using System.IO;
 using System.Configuration;
 using DD4T.ContentModel.Contracts.Providers;
-using DD4T2011 = DD4T.Providers.SDLTridion2011;
+
 using DD4T.ContentModel.Querying;
 
 namespace DD4T.Factories
@@ -22,23 +22,24 @@ namespace DD4T.Factories
     public class ComponentFactory : FactoryBase, IComponentFactory
     {
         private IComponentProvider componentProvider = null;
-        public IComponentProvider ComponentProvider
-        {
-            get
-            {
-                // TODO: implement DI
-                if (componentProvider == null)
-                {
-                    componentProvider = new DD4T2011.TridionComponentProvider();
-                    componentProvider.PublicationId = this.PublicationId;
-                }
-                return componentProvider;
-            }
-            set
-            {
-                componentProvider = value;
-            }
-        }
+        public IComponentProvider ComponentProvider { get; set; }
+        //public IComponentProvider ComponentProvider
+        //{
+        //    get
+        //    {
+        //        // TODO: implement DI
+        //        if (componentProvider == null)
+        //        {
+        //            componentProvider = new DD4T2011.TridionComponentProvider();
+        //            componentProvider.PublicationId = this.PublicationId;
+        //        }
+        //        return componentProvider;
+        //    }
+        //    set
+        //    {
+        //        componentProvider = value;
+        //    }
+        //}
 
         #region IComponentFactory members
         public bool TryGetComponent(string componentUri, out IComponent component)
@@ -109,7 +110,8 @@ namespace DD4T.Factories
         public IList<IComponent> FindComponents(IQuery queryParameters)
         {
             var results = ComponentProvider.FindComponents(queryParameters)
-                .Select(c => GetComponent(c))
+                .Select(c => { IComponent comp = null; TryGetComponent(c, out comp); return comp; })
+                .Where(c => c!= null)
                 .ToList();
             return results;
         }

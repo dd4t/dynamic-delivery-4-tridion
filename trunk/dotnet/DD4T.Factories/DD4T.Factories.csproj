@@ -94,9 +94,9 @@
       <Project>{83F5CFC2-14D5-4190-B51D-7AF7A69B67E9}</Project>
       <Name>DD4T.ContentModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DD4T.Providers.SDLTridion2011\DD4T.Providers.SDLTridion2011.csproj">
-      <Project>{87720B0B-E333-4937-ABEC-76B07B1BCAB9}</Project>
-      <Name>DD4T.Providers.SDLTridion2011</Name>
+    <ProjectReference Include="..\DD4T.Providers.SDLTridion2011sp1\DD4T.Providers.SDLTridion2011sp1.csproj">
+      <Project>{CBD555B9-CA2F-480B-81C9-8E61D92B0075}</Project>
+      <Name>DD4T.Providers.SDLTridion2011sp1</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

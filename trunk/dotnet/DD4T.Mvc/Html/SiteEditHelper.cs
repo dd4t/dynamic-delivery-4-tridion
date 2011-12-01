@@ -25,7 +25,7 @@ namespace DD4T.Mvc.Html
         public static MvcHtmlString SiteEditComponentPresentation(this HtmlHelper helper, IComponent component, string componentTemplateId, bool queryBased, string region)
         {
             ComponentTemplate ct = new ComponentTemplate();
-            ct.Id = "tcm:10-403-32";
+            ct.Id = componentTemplateId;
             ComponentPresentation cp = new ComponentPresentation();
             cp.Component = component as Component;
             cp.ComponentTemplate = ct;
@@ -47,30 +47,14 @@ namespace DD4T.Mvc.Html
 
         public static MvcHtmlString SiteEditField(this HtmlHelper helper, IComponent component, IField field, int index)
         {
-            string retVal = string.Empty;
-            bool seEnabled = SiteEditService.IsSiteEditEnabled(component);
-
-            if (seEnabled)
+            if (SiteEditService.IsSiteEditEnabled(component))
             {
-                //if (field.EmbeddedSchema != null)
-                //{
-                    if (index == -1)
-//                        retVal += SiteEditService.GenerateSiteEditFieldMarking(field.Name, field.EmbeddedSchema.RootElementName);
-                        retVal += SiteEditService.GenerateSiteEditFieldTag(field, 0);
-                    else
-//                        retVal += SiteEditService.GenerateSiteEditFieldMarking(field.Name, field.EmbeddedSchema.RootElementName, index);
-                        retVal += SiteEditService.GenerateSiteEditFieldTag(field, index);
-                //}
-                //else
-                //{
-                //    if (index == -1)
-                //        retVal += SiteEditService.GenerateSiteEditFieldMarking(field.Name);
-                //    else
-                //        retVal += SiteEditService.GenerateSiteEditFieldMarking(field.Name, index);
-                //}
+                if (index == -1)
+                    return new MvcHtmlString(SiteEditService.GenerateSiteEditFieldTag(field, 0));
+                else
+                    return new MvcHtmlString(SiteEditService.GenerateSiteEditFieldTag(field, index));
             }
-            // TODO: handle component links, embedded fields, etc
-            return new MvcHtmlString(retVal);
+            return new MvcHtmlString(string.Empty);
         }
     }
 }
