@@ -15,25 +15,7 @@ namespace DD4T.Factories
     public class BinaryFactory : FactoryBase, IBinaryFactory
     {
         private static IDictionary<string, DateTime> lastPublishedDates = new Dictionary<string, DateTime>();
-        private IBinaryProvider binaryProvider = null;
         public IBinaryProvider BinaryProvider { get; set; }
-        //public IBinaryProvider BinaryProvider
-        //{
-        //    get
-        //    {
-        //        // TODO: implement DI
-        //        if (binaryProvider == null)
-        //        {
-        //            binaryProvider = new TridionBinaryProvider();
-        //            binaryProvider.PublicationId = this.PublicationId;
-        //        }
-        //        return binaryProvider;
-        //    }
-        //    set
-        //    {
-        //        binaryProvider = value;
-        //    }
-        //}
 
         #region IBinaryFactory members
         public bool TryFindBinary(string url, out IBinary binary)
@@ -56,7 +38,7 @@ namespace DD4T.Factories
             {
                 byte[] binaryContent = BinaryProvider.GetBinaryByUrl(url);
 
-                if (!binaryContent.Equals(String.Empty))
+                if (!(binaryContent == null || binaryContent.Length == 0))
                 {
                     binary = GetIBinaryObject(binaryContent, url);
                     cache.Insert(cacheKey, binary);
