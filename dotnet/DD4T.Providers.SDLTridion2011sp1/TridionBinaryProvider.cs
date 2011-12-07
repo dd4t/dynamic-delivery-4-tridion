@@ -26,66 +26,75 @@ using System.Data;
 namespace DD4T.Providers.SDLTridion2011sp1
 {
     /// <summary>
-    /// 
+    /// Provide access to binaries in a Tridion broker instance
     /// </summary>
     public class TridionBinaryProvider : BaseProvider, IBinaryProvider
     {
 
 		private static IDictionary<string, DateTime> lastPublishedDates = new Dictionary<string, DateTime>();
 
+        // NOTE: the BinaryFactory referenced here is part of the Tridion.ContentDelivery namespace
+        // Not to be confused with the BinaryFactory from DD4T. The usage chain is:
+        // DD4T.Factories.BinaryFactory >>> DD4T.Providers.*.TridionBinaryProvider >>> Tridion.ContentDelivery.DynamicContent.BinaryFactory
+        private BinaryFactory _tridionBinaryFactory = null;
+        private BinaryFactory TridionBinaryFactory
+        {
+            get
+            {
+                if (_tridionBinaryFactory == null)
+                    _tridionBinaryFactory = new BinaryFactory();
+                return _tridionBinaryFactory;
+            }
+        }
+
+        private Dictionary<int,ComponentMetaFactory > _tridionComponentMetaFactories = new Dictionary<int,ComponentMetaFactory>();
+        private ComponentMetaFactory GetTridionComponentMetaFactory(int publicationId)
+        {
+                if (! _tridionComponentMetaFactories.ContainsKey(publicationId))
+                    _tridionComponentMetaFactories.Add(publicationId,new ComponentMetaFactory(publicationId));
+                return _tridionComponentMetaFactories[publicationId];
+        }
 
         #region IBinaryProvider Members
 
         public byte[] GetBinaryByUri(string uri)
         {
-            throw new NotImplementedException();
+            Tridion.ContentDelivery.DynamicContent.BinaryFactory factory = new BinaryFactory();
+            BinaryData binaryData = factory.GetBinary(uri.ToString());
+            return binaryData == null ? null : binaryData.Bytes;
         }
 
         public byte[] GetBinaryByUrl(string url)
         {
             string encodedUrl = HttpUtility.UrlPathEncode(url); // ?? why here? why now?
-            
-            Query findBinary = new Query();
-            PublicationURLCriteria urlCriteria = new PublicationURLCriteria(url);
-            //MultimediaCriteria isBinary = new MultimediaCriteria(true);
 
-            //Criteria allCriteria = CriteriaFactory.And(isBinary, urlCriteria);
-            Criteria allCriteria = urlCriteria;
-            findBinary.Criteria = allCriteria;
-            if (this.PublicationId != 0)
-            {
-                PublicationCriteria correctSite = new PublicationCriteria(this.PublicationId);
-                allCriteria.AddCriteria(correctSite);
-            }
+            BinaryMetaFactory bmFactory = new BinaryMetaFactory();
+            BinaryMeta binaryMeta = this.PublicationId == 0 ? (bmFactory.GetMetaByUrl(encodedUrl)[0] as BinaryMeta) : bmFactory.GetMetaByUrl(this.PublicationId, encodedUrl);
+            TcmUri uri = new TcmUri(binaryMeta.PublicationId,binaryMeta.Id,16,0);
 
-            string[] binaryUri = findBinary.ExecuteQuery();
+            Tridion.ContentDelivery.DynamicContent.BinaryFactory factory = new BinaryFactory();
 
-            if (binaryUri.Length == 0)
-            {
-                
-                // TODO: find out how to retrieve binary data
-            }
-
-            throw new NotImplementedException();
+            BinaryData binaryData = string.IsNullOrEmpty(binaryMeta.VariantId) ? factory.GetBinary(uri.ToString()) : factory.GetBinary(uri.ToString(),binaryMeta.VariantId);
+            return binaryData == null ? null : binaryData.Bytes;
         }
 
         public DateTime GetLastPublishedDateByUrl(string url)
         {
-            // code supplied by Daniel Neagu that does not work because I don't have the DAOs or StorageManagerFactory objects at all....
-            //Com.Tridion.Storage.Dao.BinaryContentDAO bmDAO = (Com.Tridion.Storage.Dao.BinaryContentDAO) Com.Tridion.Storage.StorageManagerFactory.GetDAO(1, "BinaryContent");
-            //TCDURI tcdUri = new TCDURI(uri);
-            //Com.Tridion.Storage.BinaryContent bm = bmDAO.FindByPrimaryKey(1, 23, "variant");
+            string encodedUrl = HttpUtility.UrlPathEncode(url); // ?? why here? why now?
+            BinaryMetaFactory bmFactory = new BinaryMetaFactory();
+            BinaryMeta binaryMeta = this.PublicationId == 0 ? (bmFactory.GetMetaByUrl(encodedUrl)[0] as BinaryMeta) : bmFactory.GetMetaByUrl(this.PublicationId, encodedUrl);
 
-
-
-            
-            throw new NotImplementedException();
+            Tridion.ContentDelivery.Meta.IComponentMeta componentMeta = GetTridionComponentMetaFactory(binaryMeta.PublicationId).GetMeta(binaryMeta.Id);
+            return componentMeta == null ? DateTime.MinValue : componentMeta.LastPublicationDate;
         }
 
         public DateTime GetLastPublishedDateByUri(string uri)
         {
-            throw new NotImplementedException();
+            TcmUri tcmUri = new TcmUri(uri);
+            Tridion.ContentDelivery.Meta.IComponentMeta componentMeta = GetTridionComponentMetaFactory(tcmUri.PublicationId).GetMeta(tcmUri.ItemId);
+            return componentMeta == null ? DateTime.MinValue : componentMeta.LastPublicationDate;
         }
+
         #endregion
     }
 }
