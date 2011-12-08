@@ -1,5 +1,5 @@
 #summary Explains the general architecture of DD4T (without going into .NET or Java specifics)
 
-* [http://code.google.com/p/dynamic-delivery-4-tridion/wiki/MVCIntroduction Introduction to MVC]
+* [http://code.google.com/p/dynamic-delivery-4-tridion/wiki/Architecture/MVCIntroduction Introduction to MVC]
 
-* [http://code.google.com/p/dynamic-delivery-4-tridion/wiki/FactoriesAndProviders Factories and providers pattern]
+* [http://code.google.com/p/dynamic-delivery-4-tridion/wiki/Architecture/FactoriesAndProviders Factories and providers pattern]
