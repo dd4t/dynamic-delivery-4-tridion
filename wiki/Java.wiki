@@ -1,4 +1,4 @@
-#summary Explains the general architecture of DD4T (without going into .NET or Java specifics)
+#summary Explains the use of DD4T in a java environment
 
 * [http://code.google.com/p/dynamic-delivery-4-tridion/wiki/Java/Quickstart Quickstart]
 
