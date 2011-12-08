@@ -1,5 +1,5 @@
-#summary MVC Introduction
-We assume that everyone working with DD4T and .NET has at least a basic understanding of the MVC pattern. As a quick refresher, you can check out the flow of a typical ASP.Net MVC page request in the diagram below. 
+#summary Explains how MVC works in general
+We assume that everyone working with DD4T has at least a basic understanding of the MVC pattern. As a quick refresher, you can check out the flow of a typical ASP.Net MVC page request in the diagram below (java-based MVC frameworks are very similar).
 
 http://dynamic-delivery-4-tridion.googlecode.com/svn/wiki/images/MVCflow.png
 
