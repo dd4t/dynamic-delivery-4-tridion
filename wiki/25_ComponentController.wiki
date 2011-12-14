@@ -26,4 +26,4 @@ Normally, the action called will be !ComponentController.!ComponentPresentation.
   # Store the component presentation in the view bag;
   # Dispatch the request to this view, using the component as the model. 
 
-For more information about using component views, see http://dynamic-delivery-4-tridion.googlecode.com/svn/wiki/26_ComponentViews.
+For more information about using component views, see [http://code.google.com/p/dynamic-delivery-4-tridion/wiki/26_ComponentViews Component Views].
