@@ -21,9 +21,12 @@ In the code example above, the word 'heading' is contained within quotes. The na
 
 The last approach is the simplest and most reliable. Just type '/Xml' before the path of the test page you're working with.
 
-E.g.: if your test page has the URL \http://localhost:9991/SDL.Web.Site.Corporate/test/page.html, the XML can be requested with the url \http://localhost:9991/SDL.Web.Site.Corporate/Xml/test/page.html. It works on staging as well!
+E.g.: if your test page has the URL http://myweb/test/page.html, the XML can be requested with the url http://myweb/Xml/test/page.html.
 
 In the XML, just browse to a component presentation and look at the field names.
+
+
+NOTE: for this to work we need to move the Xml action into DD4T (currently it doesn't exist there yet).
 
 
 = Field types =
