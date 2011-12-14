@@ -55,10 +55,10 @@ This is thebody  of the view.
 }}}		
 
 
-The corresponding layout (_CommonLayout.cshtml) could look like this:
+The corresponding layout (!_CommonLayout.cshtml) could look like this:
 
 {{{
-		<html>
+<html>
 <body>
 <div>this is some HTML defined by the layout</div>
 <header>
@@ -79,18 +79,28 @@ Somewhere on the page you will want to show the component presentations. This ca
 The DD4T framework offers a number of helper functions to help you achieve this.
 
 *RenderComponentPresentations*
+
 Example: @Html.RenderComponentPresentations()
+
 Shows all the embedded component presentations on the page.
 
+
 *RenderComponentPresentationsByView(string viewName)*
+
 Example: @Html.RenderComponentPresentationsByView("Caroussel")
+
 Shows component presentations whose component template is associated with a view that starts with 'Caroussel'. Note: it is recommended to group component templates based on the first part of their view name, so similar component presentations can easily be shown in one location on the page.
 
+
 *RenderComponentPresentationsBySchema(string schemaName)*
+
 Example: @Html.RenderComponentPresentationsBySchema("Header")
+
 Shows component presentations whose component is based on a schema with a title starting with 'Header'. 
 
+
 *Reversing the logic*
+
 You can start the schema name with an exclamation mark, to show all CPs whose schema does NOT have a title starting with 'Header'. 
 
 
