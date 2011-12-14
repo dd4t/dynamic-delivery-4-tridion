@@ -12,9 +12,9 @@ The *Content Delivery* system (TCD) is less visible. It is the system that deliv
 
 There are two ways to publish content:
 
-# By creating files (e.g. html, jsp, asp, aspx)
+  # By creating files (e.g. html, jsp, asp, aspx)
 
-# By creating database records
+  # By creating database records
 
 In the latter case, the pages and content are stored in a database called the 'broker'. Tridion offers an extensive API to retrieve the pages and content from the broker.
 
