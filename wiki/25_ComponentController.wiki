@@ -21,9 +21,9 @@ The second will override the first.
 
 Normally, the action called will be !ComponentController.!ComponentPresentation. This action does the following:
 
-# Read the component presentation from the !RouteData;
-# Read the view name from the metadata of the component template;
-# Store the component presentation in the view bag;
-# Dispatch the request to this view, using the component as the model. 
+  # Read the component presentation from the !RouteData;
+  # Read the view name from the metadata of the component template;
+  # Store the component presentation in the view bag;
+  # Dispatch the request to this view, using the component as the model. 
 
 For more information about using component views, see http://dynamic-delivery-4-tridion.googlecode.com/svn/wiki/ComponentViews.
