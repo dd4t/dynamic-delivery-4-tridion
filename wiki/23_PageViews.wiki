@@ -29,7 +29,7 @@ Page views are strongly typed: they use the DD4T.ContentModel.Page class for a m
 
 {{{
 @model DD4T.ContentModel.Page
-&lt;h1&gt;@Model.Title&lt;/h1&gt;
+<h1>@Model.Title</h1>
 }}}		
 
 The first line (with the lower case 'm') tells the view that the model is of the type 'DD4T.ContentModel.Page'. The second line uses the page object to write out its 'Title' property. Note the upper case 'M' when reading from the model.
@@ -58,15 +58,15 @@ This is thebody  of the view.
 The corresponding layout (_CommonLayout.cshtml) could look like this:
 
 {{{
-		&lt;html&gt;
-&lt;body&gt;
-&lt;div&gt;this is some HTML defined by the layout&lt;/div&gt;
-&lt;header&gt;
+		<html>
+<body>
+<div>this is some HTML defined by the layout</div>
+<header>
 @RenderSection('Header')
-&lt;/header&gt;
+</header>
 @RenderBody
-&lt;/body&gt;
-&lt;/html&gt;
+</body>
+</html>
 }}}
 		
 Note that layouts can be bound to the IPage class using the @model directive. This allows you to write out information from the page in the layout, just like you would from the page view.
