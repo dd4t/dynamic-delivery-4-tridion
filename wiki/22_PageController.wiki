@@ -1,6 +1,6 @@
 #summary More about the page controller
 
-The basic functionality of the PageController is described in the page about Dynamic Delivery for Tridion. The available actions in this controller are described in more detail here.
+The basic functionality of the !PageController is described in the page about Dynamic Delivery for Tridion. The available actions in this controller are described in more detail here.
 
 = PageController.Page = 
 This action is normally mapped to all URLs that do not match any of the other rules in an application.
