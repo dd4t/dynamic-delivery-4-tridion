@@ -1,3 +1,5 @@
 #summary Explains the use of DD4T in a .NET environment
 
-* Links will be added here
+[http://code.google.com/p/dynamic-delivery-4-tridion/wiki/21_DD4T_and_dotnet DD4T and .NET (introduction)]
+
+[http://code.google.com/p/dynamic-delivery-4-tridion/wiki/22_PageController Page Controller]
