@@ -1,4 +1,4 @@
-#summary Using the !ComponentController
+#summary Using the ComponentController
 
 While the PageController is basically a straightforward implementation of the 'C' in MVC, the !ComponentController is a little bit different. In most MVC applications, there is only ONE controller and ONE view per request. We have seen in the page about DD4T how the page view is mapped to page templates in Tridion. However, Tridion has two kinds of templates: page templates and component templates. This is a very powerful concept. Let's see why.
 
