@@ -5,16 +5,16 @@ Each page template in Tridion has a metadata field 'view', which contains the na
 = View locations =
 
 MVC looks for a view in multiple locations:
-* /Views/!ControllerName/!ViewName.aspx
-* /Views/!ControllerName/!ViewName.cshtml
-* /Views/Shared/!ViewName.aspx
-* /Views/Shared/!ViewName.cshtml
+  * /Views/!ControllerName/!ViewName.aspx
+  * /Views/!ControllerName/!ViewName.cshtml
+  * /Views/Shared/!ViewName.aspx
+  * /Views/Shared/!ViewName.cshtml
 
 We recommend to create a !PageController and a !ComponentController in each web application. Both classes must subclass !TridionControllerBase from the DD4T framework. That way, the views can be nicely organized as follows:
 
-* Views that are associated with pages are stored in /Views/Page
-* Views that are associated with component presentations are stored in /Views/Component
-* Views that are used by other views are stored in /Views/Shared
+  * Views that are associated with pages are stored in /Views/Page
+  * Views that are associated with component presentations are stored in /Views/Component
+  * Views that are used by other views are stored in /Views/Shared
 
 It is always possible to write your own ViewEngine to organize the views differently.
 
