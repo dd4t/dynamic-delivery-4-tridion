@@ -11,6 +11,7 @@ using System.IO;
 using Tridion.ContentManager.Templating;
 using Tridion.ContentManager.Publishing;
 using DD4T.Templates.Base.Utils;
+using Tcm = Tridion.ContentManager;
 
 
 namespace DD4T.Templates
@@ -25,8 +26,8 @@ namespace DD4T.Templates
         public void Transform(Engine engine, Package package)
         {
 
-            // do NOT execute this logic when we are actually publishing!
-            if (engine.RenderMode == RenderMode.Publish)
+            // do NOT execute this logic when we are actually publishing! (similair for fast track publishing)
+            if (engine.RenderMode == RenderMode.Publish || !Tcm.TcmUri.IsNullOrUriNull(engine.PublishingContext.PublicationTarget.Id))
             {
                 return;
             }
