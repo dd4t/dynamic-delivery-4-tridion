@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace DD4T.ContentModel
 {
@@ -9,6 +10,7 @@ namespace DD4T.ContentModel
     {
         DateTime LastPublishedDate { get; }
         byte[] BinaryData { get; set; }
+        Stream BinaryStream { get; set; }
         string VariantId { get; }
         //IMultimedia Multimedia { get; set; }
         string Url { get; set;  }

@@ -14,6 +14,7 @@ namespace DD4T.ContentModel.Factories
         IComponent GetComponent(string componentUri);
         IList<IComponent> GetComponents(string[] componentUris);
 		IList<IComponent> FindComponents(IQuery queryParameters);
+        IList<IComponent> FindComponents(IQuery queryParameters, int pageIndex, int pageSize, out int totalCount);
         IComponent GetIComponentObject(string componentStringContent);
     }
 }
