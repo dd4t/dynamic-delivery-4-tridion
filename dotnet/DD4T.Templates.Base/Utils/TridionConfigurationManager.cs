@@ -24,14 +24,25 @@ namespace DD4T.Templates.Base.Utils
     /// </summary>
     public class TridionConfigurationManager
     {
-        #region static
-        private static readonly Dictionary<TcmUri, TridionConfigurationManager> Instances = new Dictionary<TcmUri, TridionConfigurationManager>();
+        #region public static
 
         public static TridionConfigurationManager GetInstance(Publication publication)
         {
+            log.Debug(">>GetInstance called for " + publication.Id);
             if (!Instances.ContainsKey(publication.Id))
             {
-                Instances.Add(publication.Id, new TridionConfigurationManager(publication));
+                log.Debug("no instance found, creating new one");
+                AddInstance(publication);
+            }
+            else
+            {
+                log.Debug(string.Format("found instance, publication revision date {0}, config file modification date {1}, cache date {2}", publication.RevisionDate, ConfigurationModificationDate, InstanceCacheDates[publication.Id]));
+                if (InstanceCacheDates[publication.Id].CompareTo(publication.RevisionDate) < 0 || InstanceCacheDatesFS[publication.Id].CompareTo(ConfigurationModificationDate) < 0)
+                {
+                    log.Debug("creating new instance");
+                    RemoveInstance(publication);
+                    AddInstance(publication);
+                }
             }
             return Instances[publication.Id];
         }
@@ -39,30 +50,59 @@ namespace DD4T.Templates.Base.Utils
         [Obsolete("Please use GetInstance(Publication) instead")]
         public static TridionConfigurationManager GetInstance(Engine engine, Publication publication)
         {
-            if (!Instances.ContainsKey(publication.Id))
-            {
-                Instances.Add(publication.Id, new TridionConfigurationManager(publication));
-            }
-            return Instances[publication.Id];
+            return GetInstance(publication);
         }
 
         public static TridionConfigurationManager GetInstance(Engine engine, Package package)
         {
             Publication publication = GetPublication(engine, package);
-            if (!Instances.ContainsKey(publication.Id))
-            {
-                Instances.Add(publication.Id, new TridionConfigurationManager(publication));
-            }
-            return Instances[publication.Id];
+            return GetInstance(publication);
         }
+
+        
+        #endregion
+
+        #region private static
+        protected static TemplatingLogger log = TemplatingLogger.GetLogger(typeof(TridionConfigurationManager));
+        private static readonly Dictionary<TcmUri, TridionConfigurationManager> Instances = new Dictionary<TcmUri, TridionConfigurationManager>();
+        private static readonly Dictionary<TcmUri, DateTime> InstanceCacheDates = new Dictionary<TcmUri, DateTime>();
+        private static readonly Dictionary<TcmUri, DateTime> InstanceCacheDatesFS = new Dictionary<TcmUri, DateTime>();
+        private static void AddInstance(Publication publication)
+        {
+            Instances.Add(publication.Id, new TridionConfigurationManager(publication));
+            InstanceCacheDates.Add(publication.Id, publication.RevisionDate);
+            InstanceCacheDatesFS.Add(publication.Id, ConfigurationModificationDate);
+        }
+        private static void RemoveInstance(Publication publication)
+        {
+            Instances.Remove(publication.Id);
+            InstanceCacheDates.Remove(publication.Id);
+            InstanceCacheDatesFS.Remove(publication.Id);
+        }
+        private static DateTime ConfigurationModificationDate
+        {
+            get
+            {
+                FileInfo fi = new FileInfo(ConfigurationFilePath);
+                return fi.LastWriteTime;
+            }
+        }
+        private static string ConfigurationFilePath
+        {
+            get
+            {
+                string tridionConfigPath = string.Format("{0}\\config\\", Tridion.ContentManager.ConfigurationSettings.GetTcmHomeDirectory());
+                string tridionBaseDir = Path.GetDirectoryName(tridionConfigPath);
+                return Path.Combine(tridionBaseDir, @"DD4T.config");
+            }
+        }
+
         #endregion
 
         #region constructors
         private TridionConfigurationManager(Publication publication)
         {
-            string tridionConfigPath = string.Format("{0}\\config\\", Tridion.ContentManager.ConfigurationSettings.GetTcmHomeDirectory());
-            string tridionBaseDir = Path.GetDirectoryName(tridionConfigPath);
-            _nvc = new TridionNameValueCollection(publication, Path.Combine(tridionBaseDir, @"DD4T.config"));
+            _nvc = new TridionNameValueCollection(publication, ConfigurationFilePath);
         }
         
         //private TridionConfigurationManager(Engine engine, Publication publication)
