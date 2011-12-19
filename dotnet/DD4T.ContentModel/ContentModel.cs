@@ -552,5 +552,7 @@ namespace DD4T.ContentModel
 
         private byte[] binaryData = null;
         private IBinaryFactory Factory { get; set; }
+
+        public System.IO.Stream BinaryStream { get; set; }
     }
 }

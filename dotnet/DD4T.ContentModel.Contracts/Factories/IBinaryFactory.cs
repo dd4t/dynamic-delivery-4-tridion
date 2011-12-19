@@ -14,5 +14,7 @@ namespace DD4T.ContentModel.Factories
         bool TryGetBinaryContent(string tcmUri, out byte[] bytes);
         byte[] GetBinaryContent(string tcmUri);
         bool HasBinaryChanged(string url);
+        DateTime FindLastPublishedDate(string url);
+        bool LoadBinariesAsStream { get; set; }
     }
 }
