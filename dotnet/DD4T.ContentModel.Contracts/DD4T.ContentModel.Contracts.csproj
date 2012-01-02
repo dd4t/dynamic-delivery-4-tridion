@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Caching\ICacheAgent.cs" />
     <Compile Include="IItem.cs" />
     <Compile Include="IFieldSet.cs" />
     <Compile Include="Enums.cs" />

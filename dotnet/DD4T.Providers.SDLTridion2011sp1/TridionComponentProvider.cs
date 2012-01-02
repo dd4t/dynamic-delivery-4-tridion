@@ -3,10 +3,10 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 
-using Tridion.ContentDelivery.DynamicContent;
+using T = Tridion.ContentDelivery.DynamicContent;
 using Tridion.ContentDelivery.DynamicContent.Query;
 using Query = Tridion.ContentDelivery.DynamicContent.Query.Query;
-using Tridion.ContentDelivery.Meta;
+using TMeta = Tridion.ContentDelivery.Meta;
 using Tridion.ContentDelivery.Web.Linking;
 
 using DD4T.ContentModel;
@@ -28,21 +28,30 @@ namespace DD4T.Providers.SDLTridion2011sp1
     /// </summary>
     public class TridionComponentProvider : BaseProvider, IComponentProvider
     {
+
+
+        Dictionary<int,T.ComponentPresentationFactory> _cpFactoryList = null;
+        Dictionary<int,TMeta.ComponentMetaFactory> _cmFactoryList = null;
+
         private string selectByComponentTemplateId;
         private string selectByOutputFormat;
+
         public TridionComponentProvider()
         {
             selectByComponentTemplateId = ConfigurationManager.AppSettings["ComponentFactory.ComponentTemplateId"];
             selectByOutputFormat = ConfigurationManager.AppSettings["ComponentFactory.OutputFormat"];
+            _cpFactoryList = new Dictionary<int,T.ComponentPresentationFactory>();
+            _cmFactoryList = new Dictionary<int,TMeta.ComponentMetaFactory>();
         }
 
+        #region IComponentProvider
         public string GetContent(string uri)
         {
             
             TcmUri tcmUri = new TcmUri(uri);
 
-            Tridion.ContentDelivery.DynamicContent.ComponentPresentationFactory cpFactory = new ComponentPresentationFactory(tcmUri.PublicationId);
-            Tridion.ContentDelivery.DynamicContent.ComponentPresentation cp = null;
+            T.ComponentPresentationFactory cpFactory = GetComponentPresentationFactory(tcmUri.PublicationId);
+            T.ComponentPresentation cp = null;
 
 
             if (!string.IsNullOrEmpty(selectByComponentTemplateId))
@@ -79,11 +88,10 @@ namespace DD4T.Providers.SDLTridion2011sp1
         /// <returns></returns>
         public List<string> GetContentMultiple(string[] componentUris)
         {
-            TcmUri uri = new TcmUri(componentUris.First());
-            ComponentPresentationFactory cpFactory = new ComponentPresentationFactory(uri.PublicationId);
+//            TcmUri uri = new TcmUri(componentUris.First());
             var components =
                 componentUris
-                .Select(componentUri => (Tridion.ContentDelivery.DynamicContent.ComponentPresentation)cpFactory.FindAllComponentPresentations(componentUri)[0])
+                .Select(componentUri => { TcmUri uri = new TcmUri(componentUri); return (T.ComponentPresentation)GetComponentPresentationFactory(uri.PublicationId).FindAllComponentPresentations(componentUri)[0]; })
                 .Where(cp => cp != null)
                 .Select(cp => cp.Content)
                 .ToList();
@@ -91,7 +99,7 @@ namespace DD4T.Providers.SDLTridion2011sp1
             return components;
 
         }
-
+         
         public IList<string> FindComponents(IQuery query)
         {
             if (! (query is ITridionQueryWrapper))
@@ -104,7 +112,29 @@ namespace DD4T.Providers.SDLTridion2011sp1
 
         public DateTime GetLastPublishedDate(string uri)
         {
-            throw new NotImplementedException();
+            TcmUri tcmUri = new TcmUri(uri);
+            TMeta.IComponentMeta cmeta = GetComponentMetaFactory(tcmUri.PublicationId).GetMeta(tcmUri.ItemId);
+            return cmeta == null ? DateTime.Now : cmeta.LastPublicationDate;
         }
+        #endregion
+
+        #region private
+        public TMeta.ComponentMetaFactory GetComponentMetaFactory(int publicationId)
+        {
+            if (!_cmFactoryList.ContainsKey(publicationId))
+            {
+                _cmFactoryList.Add(publicationId, new TMeta.ComponentMetaFactory(publicationId));
+            }
+            return _cmFactoryList[publicationId];
+        }
+        public T.ComponentPresentationFactory GetComponentPresentationFactory(int publicationId)
+        {
+            if (!_cpFactoryList.ContainsKey(publicationId))
+            {
+                _cpFactoryList.Add(publicationId, new T.ComponentPresentationFactory(publicationId));
+            }
+            return _cpFactoryList[publicationId];
+        }
+        #endregion
     }
 }

@@ -14,27 +14,13 @@ using DD4T.Providers.SDLTridion2011sp1;
 namespace DD4T.Factories
 {
 
+    /// <summary>
+    /// Provides access to taxonomies. Note: this class is not tested in any implementation yet! It also is completely uncached. More testing is needed!
+    /// </summary>
     public class TaxonomyFactory : FactoryBase, ITaxonomyFactory
     {
         private ITaxonomyProvider taxonomyProvider = null;
         public ITaxonomyProvider TaxonomyProvider { get; set; }
-        //public ITaxonomyProvider TaxonomyProvider
-        //{
-        //    get
-        //    {
-        //        // TODO: implement DI
-        //        if (taxonomyProvider == null)
-        //        {
-        //            taxonomyProvider = new TridionTaxonomyProvider();
-        //            taxonomyProvider.PublicationId = this.PublicationId;
-        //        }
-        //        return taxonomyProvider;
-        //    }
-        //    set
-        //    {
-        //        taxonomyProvider = value;
-        //    }
-        //}
 
         public bool TryGetKeyword(string categoryUriToLookIn, string keywordName, out IKeyword keyword)
         {
@@ -62,6 +48,11 @@ namespace DD4T.Factories
             throw new KeywordNotFoundException();
         }
 
+
+        public override DateTime GetLastPublishedDateCallBack(string key, object cachedItem)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-﻿using System.Web.Configuration;
+﻿using System.Configuration;
 
 namespace DD4T.Utilities
 {
@@ -13,7 +13,7 @@ namespace DD4T.Utilities
         #endregion
 
         #region private statics
-        private readonly static string webSite = WebConfigurationManager.AppSettings[ACTIVEWEBSITEKEY];
+        private readonly static string webSite = ConfigurationManager.AppSettings[ACTIVEWEBSITEKEY];
         private readonly static string publicationIdKey = string.Format(PUBLICATIONIDKEY, webSite);
         #endregion
 
@@ -27,7 +27,7 @@ namespace DD4T.Utilities
             get
             {
                 //TODO: Errorhandling
-                return int.Parse(WebConfigurationManager.AppSettings[publicationIdKey]);
+                return int.Parse(ConfigurationManager.AppSettings[publicationIdKey]);
             }
         }
         #endregion

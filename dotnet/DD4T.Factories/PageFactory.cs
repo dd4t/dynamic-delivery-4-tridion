@@ -3,15 +3,15 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 
-
 using DD4T.ContentModel;
 using DD4T.ContentModel.Exceptions;
 using DD4T.ContentModel.Factories;
 using System.Collections.Generic;
 
-using System.Web.Caching;
-using System.Web;
 using DD4T.ContentModel.Contracts.Providers;
+using System.Text.RegularExpressions;
+using DD4T.ContentModel.Contracts.Caching;
+using DD4T.Factories.Caching;
 
 namespace DD4T.Factories
 {
@@ -22,85 +22,35 @@ namespace DD4T.Factories
     {
 
 		private static IDictionary<string, DateTime> lastPublishedDates = new Dictionary<string, DateTime>();
-        private IPageProvider pageProvider = null;
+        private static Regex rePageContentByUri = new Regex("PageContent_([0-9]+)_(.*)");
+        private ICacheAgent _cacheAgent = null;
 
         public IPageProvider PageProvider { get; set; }
 
-        //public IPageProvider PageProvider
-        //{
-        //    get
-        //    {
-        //        // TODO: implement DI
-        //        if (pageProvider == null)
-        //        {
-        //            pageProvider = new TridionPageProvider();
-        //            pageProvider.PublicationId = this.PublicationId;
-        //        }
-        //        return pageProvider;
-        //    }
-        //    set
-        //    {
-        //        pageProvider = value;
-        //    }
-        //}
-
-        private IComponentFactory _componentFactory = null;
         public IComponentFactory ComponentFactory { get; set; }
-        //{
-        //    get
-        //    {
-        //        if (_componentFactory == null)
-        //        {
-        //            _componentFactory = new ComponentFactory();
-                  
-        //        }
-        //        return _componentFactory;
-        //    }
-        //    set
-        //    {
 
-        //    }
-        //}
-
-        private ILinkFactory _linkFactory = null;
-        public ILinkFactory LinkFactory
-        {
-            get
-            {
-                if (_linkFactory == null)
-                {
-                    _linkFactory = new LinkFactory();
-
-                }
-                return _linkFactory;
-            }
-        }
+        public ILinkFactory LinkFactory { get; set; }
 
 
         #region IPageFactory Members
         public virtual bool TryFindPage(string url, out IPage page)
         {
+
 			page = null;
 
 
 			string cacheKey = String.Format("Page_{0}_{1}", url, PublicationId);
-			Cache cache = HttpContext.Current.Cache;
-			DateTime lastPublishedDate = DateTime.MinValue;
-			if (lastPublishedDates.ContainsKey(cacheKey))
-                lastPublishedDate = lastPublishedDates[cacheKey];
+			
+            page = (IPage)CacheAgent.Load(cacheKey);
 
-			var dbLastPublishedDate = PageProvider.GetLastPublishedDateByUrl(url);
-
-			if (cache[cacheKey] != null && lastPublishedDate != DateTime.MinValue && lastPublishedDate.Subtract(dbLastPublishedDate).TotalSeconds >= 0) {
-				page = (IPage)cache[cacheKey];
+			if (page != null) {
 				return true;
 			} else {
                 string pageContentFromBroker = PageProvider.GetContentByUrl(url);
 
 				if (!pageContentFromBroker.Equals(String.Empty)) {
 					page = GetIPageObject(pageContentFromBroker);
-					cache.Insert(cacheKey, page);
-					lastPublishedDates[cacheKey] = dbLastPublishedDate;
+					CacheAgent.Store(cacheKey, page);
 					return true;
 				}
 			}
@@ -120,19 +70,14 @@ namespace DD4T.Factories
 
         public virtual bool TryFindPageContent(string url, out string pageContent)
         {
+
             pageContent = string.Empty;
 
-            string cacheKey = String.Format("PageContent_{0}_{1}", url, PublicationId); 
-            Cache cache = HttpContext.Current.Cache;
-			DateTime lastPublishedDate = DateTime.MinValue;
-            if (lastPublishedDates.ContainsKey(cacheKey))
-                lastPublishedDate = lastPublishedDates[cacheKey];
+            string cacheKey = String.Format("PageContent_{0}_{1}", PublicationId, url); 
 
-			var dbLastPublishedDate = PageProvider.GetLastPublishedDateByUrl(url);
-
-			if (cache[cacheKey] != null && lastPublishedDate != DateTime.MinValue && lastPublishedDate.Subtract(dbLastPublishedDate).TotalSeconds >= 0) 
+            pageContent = (string)CacheAgent.Load(cacheKey);
+            if (pageContent != null) 
 			{
-				pageContent = (string)cache[cacheKey];
 				return true;
 			} 
 			else 
@@ -140,8 +85,7 @@ namespace DD4T.Factories
 				string tempPageContent = PageProvider.GetContentByUrl(url);
 				if (tempPageContent != string.Empty) {
 					pageContent = tempPageContent;
-					cache.Insert(cacheKey, pageContent);
-					lastPublishedDates[cacheKey] = dbLastPublishedDate;
+					CacheAgent.Store(cacheKey, pageContent);
 					return true;
 				}
 			}
@@ -165,35 +109,26 @@ namespace DD4T.Factories
         {
             page = null;
 
-			string cacheKey = String.Format("PageByUri_{0}", tcmUri);
-			Cache cache = HttpContext.Current.Cache;
-			DateTime lastPublishedDate = DateTime.MinValue;
-			if (lastPublishedDates.ContainsKey(tcmUri))
-				lastPublishedDate = lastPublishedDates[tcmUri];
+            string cacheKey = String.Format("PageByUri_{0}", tcmUri);
 
-			var dbLastPublishedDate = PageProvider.GetLastPublishedDateByUri(tcmUri);
 
-			if (cache[cacheKey] != null && lastPublishedDate != DateTime.MinValue && lastPublishedDate.Subtract(dbLastPublishedDate).TotalSeconds >= 0) 
-			{
-				page = (IPage)cache[cacheKey];
-				return true;
-			}
-			else
-			{
-				string tempPageContent = PageProvider.GetContentByUri(tcmUri);
-				if (tempPageContent != string.Empty) {
-					page = GetIPageObject(tempPageContent);
-					cache.Insert(cacheKey, page);
-					lastPublishedDates[tcmUri] = dbLastPublishedDate;
+            page = (IPage)CacheAgent.Load(cacheKey);
+            if (page != null)
+            {
+                return true;
+            }
+            string tempPageContent = PageProvider.GetContentByUri(tcmUri);
+            if (tempPageContent != string.Empty)
+            {
+                page = GetIPageObject(tempPageContent);
+                CacheAgent.Store(cacheKey, page);
 
-					return true;
-				}
-			}
-            
+                return true;
+            }
 
             return false;
-            
         }
+
         public IPage GetPage(string tcmUri)
         {
             IPage page;
@@ -210,15 +145,9 @@ namespace DD4T.Factories
             pageContent = string.Empty;
 
 			string cacheKey = String.Format("PageContentByUri_{0}", tcmUri);
-			Cache cache = HttpContext.Current.Cache;
-			DateTime lastPublishedDate = DateTime.MinValue;
-			if (lastPublishedDates.ContainsKey(tcmUri))
-				lastPublishedDate = lastPublishedDates[tcmUri];
-
-			var dbLastPublishedDate = PageProvider.GetLastPublishedDateByUri(tcmUri);
-			if (cache[cacheKey] != null && lastPublishedDate != DateTime.MinValue && lastPublishedDate.Subtract(dbLastPublishedDate).TotalSeconds >= 0)
+            pageContent = (string)CacheAgent.Load(cacheKey);
+            if (pageContent != null)
 			{
-				pageContent = (string)cache[cacheKey];
 				return true;
 			} 
 			else 
@@ -226,8 +155,7 @@ namespace DD4T.Factories
 				string tempPageContent = PageProvider.GetContentByUri(tcmUri);
 				if (tempPageContent != string.Empty) {
 					pageContent = tempPageContent;
-					cache.Insert(cacheKey, pageContent);
-					lastPublishedDates[tcmUri] = dbLastPublishedDate;
+					CacheAgent.Store(cacheKey, pageContent);
 					return true;
 				}
 			}
@@ -299,12 +227,58 @@ namespace DD4T.Factories
             return PageProvider.GetLastPublishedDateByUri(uri);
         }
 
+        public override DateTime GetLastPublishedDateCallBack(string key, object cachedItem)
+        {
+            if (cachedItem is IPage)
+            {
+                return GetLastPublishedDateByUri(((IPage)cachedItem).Id);
+            }
+
+            Match m = rePageContentByUri.Match(key);
+            if (m.Success)
+            {
+                int publicationId = Convert.ToInt32(m.Groups[1].Value);
+                string url = m.Groups[2].Value;
+                return GetLastPublishedDateByUrl(url);
+            }
+
+            if (key.StartsWith("PageContentByUri_"))
+            {
+                string uri = key.Substring("PageContentByUri_".Length);
+                return GetLastPublishedDateByUri(uri);
+            }
+
+
+            throw new Exception (string.Format("GetLastPublishedDateCallBack called for unexpected object type '{0}' or with unexpected key '{1}'", cachedItem.GetType(), key));
+        }
+
         public string[] GetAllPublishedPageUrls(string[] includeExtensions, string[] pathStarts)
         {
             return PageProvider.GetAllPublishedPageUrls(includeExtensions, pathStarts);
         }
 
 
+        /// <summary>
+        /// Get or set the CacheAgent
+        /// </summary>  
+        public override ICacheAgent CacheAgent
+        {
+            get
+            {
+                if (_cacheAgent == null)
+                {
+                    _cacheAgent = new DefaultCacheAgent();
+                    // the next line is the only reason we are overriding this property: to set a callback
+                    _cacheAgent.GetLastPublishDateCallBack = GetLastPublishedDateCallBack;
+                }
+                return _cacheAgent;
+            }
+            set
+            {
+                _cacheAgent = value;
+                _cacheAgent.GetLastPublishDateCallBack = GetLastPublishedDateCallBack;
+            }
+        }
 #endregion
 
         #region private helper methods
