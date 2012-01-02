@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Web.Caching;
 using System.Web;
 using DD4T.ContentModel;
 using DD4T.ContentModel.Factories;
 using DD4T.ContentModel.Contracts.Providers;
 using DD4T.Providers.SDLTridion2011sp1;
+using DD4T.ContentModel.Contracts.Caching;
 
 namespace DD4T.Factories
 {
 
     public class LinkFactory : FactoryBase, ILinkFactory
     {
-        const string CACHEKEY_FORMAT = "Link_{0}";
-        const string CACHEKEY_FORMAT_EXTENDED = "Link_{0}_{1}_{2}";
-        const string CACHEVALUE_NULL = "UnresolvedLink_{0}_{1}_{2}";
+        const string CacheKeyFormat = "Link_{0}";
+        const string CacheKeyFormatExtended = "Link_{0}_{1}_{2}";
+        const string CacheValueNull = "UnresolvedLink_{0}_{1}_{2}";
 
         //private const string uriPrefix = "tcm:";
         private static TcmUri emptyTcmUri = new TcmUri("tcm:0-0-0");
@@ -61,26 +61,26 @@ namespace DD4T.Factories
 
         public string ResolveLink(string componentUri)
         {
-            Cache cache = HttpContext.Current.Cache;
-            string cacheKey = String.Format(CACHEKEY_FORMAT, componentUri);
-            if (cache[cacheKey] != null)
+            string cacheKey = String.Format(CacheKeyFormat, componentUri);
+            string link = (string) CacheAgent.Load(cacheKey);
+            if (link != null)
             {
-                if (cache[cacheKey].Equals(CACHEVALUE_NULL))
+                if (link.Equals(CacheValueNull))
                 {
                     return null;
                 }
-                return (String)cache[cacheKey];
+                return link;
             }
             else
             {
                 string resolvedUrl = GetLinkProvider(componentUri).ResolveLink(componentUri);
                 if (resolvedUrl == null)
                 {
-                    cache.Insert(cacheKey, CACHEVALUE_NULL, null, DateTime.Now.AddSeconds(30), TimeSpan.Zero); //TODO should this be configurable?
+                    CacheAgent.Store(cacheKey, CacheValueNull, "Link", new List<string>() { String.Format(ComponentFactory.CacheKeyFormatByUri, componentUri) }); 
                 }
                 else
                 {
-                    cache.Insert(cacheKey, resolvedUrl, null, DateTime.Now.AddSeconds(30), TimeSpan.Zero); //TODO should this be configurable?
+                    CacheAgent.Store(cacheKey, resolvedUrl, "Link", new List<string>() { String.Format(ComponentFactory.CacheKeyFormatByUri, componentUri) });
                 }
                 return resolvedUrl;
             }
@@ -88,32 +88,34 @@ namespace DD4T.Factories
 
         public string ResolveLink(string sourcePageUri, string componentUri, string excludeComponentTemplateUri)
         {
-            Cache cache = HttpContext.Current.Cache;
-            string cacheKey = String.Format(CACHEKEY_FORMAT_EXTENDED, sourcePageUri, componentUri, excludeComponentTemplateUri);
-            if (cache[cacheKey] != null)
+            string cacheKey = String.Format(CacheKeyFormatExtended, sourcePageUri, componentUri, excludeComponentTemplateUri);
+            string link = (string) CacheAgent.Load(cacheKey);
+            if (link != null)
             {
-                if (cache[cacheKey].Equals(CACHEVALUE_NULL))
+                if (link.Equals(CacheValueNull))
                 {
                     return null;
                 }
-                return (String)cache[cacheKey];
+                return link;
             }
             else
             {
                 string resolvedUrl = LinkProvider.ResolveLink(sourcePageUri, componentUri, excludeComponentTemplateUri);
                 if (resolvedUrl == null)
                 {
-                    cache.Insert(cacheKey, CACHEVALUE_NULL, null, DateTime.Now.AddSeconds(30), TimeSpan.Zero); //TODO should this be configurable?
+                    CacheAgent.Store(cacheKey, CacheValueNull, "Link", new List<string>() { String.Format("ComponentByUri_{0}", componentUri) });
                 }
                 else
                 {
-                    cache.Insert(cacheKey, resolvedUrl, null, DateTime.Now.AddSeconds(30), TimeSpan.Zero); //TODO should this be configurable?
-                }
+                    CacheAgent.Store(cacheKey, resolvedUrl, "Link", new List<string>() { String.Format("ComponentByUri_{0}", componentUri) });
+                } 
                 return resolvedUrl;
             }
         }
-
-
+        public override DateTime GetLastPublishedDateCallBack(string key, object cachedItem)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

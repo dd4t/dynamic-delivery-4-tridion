@@ -81,5 +81,16 @@ namespace DD4T.Providers.SDLTridion2009
             throw new NotImplementedException();
         }
         #endregion
+
+
+        public System.IO.Stream GetBinaryStreamByUri(string uri)
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.IO.Stream GetBinaryStreamByUrl(string url)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

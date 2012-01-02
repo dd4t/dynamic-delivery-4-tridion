@@ -22,6 +22,8 @@ using DD4T.ContentModel.Contracts.Providers;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Collections;
+using System.IO;
 
 namespace DD4T.Providers.SDLTridion2011sp1
 {
@@ -31,7 +33,22 @@ namespace DD4T.Providers.SDLTridion2011sp1
     public class TridionBinaryProvider : BaseProvider, IBinaryProvider
     {
 
-		private static IDictionary<string, DateTime> lastPublishedDates = new Dictionary<string, DateTime>();
+        #region public static
+
+        public static string SqlQuery = "SELECT BC.CONTENT FROM BINARY_CONTENT BC, BINARYVARIANTS BV WHERE BV.URL = @url AND BC.BINARY_ID = BV.BINARY_ID AND BC.PUBLICATION_ID = BV.PUBLICATION_ID AND BC.VARIANT_ID = BV.VARIANT_ID"; 
+
+        #endregion
+
+        #region private stuff
+        private string ConnectionString
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["BinaryProviderBrokerConnectionString"];
+            }
+        }
+
+        private static IDictionary<string, DateTime> lastPublishedDates = new Dictionary<string, DateTime>();
 
         // NOTE: the BinaryFactory referenced here is part of the Tridion.ContentDelivery namespace
         // Not to be confused with the BinaryFactory from DD4T. The usage chain is:
@@ -54,6 +71,8 @@ namespace DD4T.Providers.SDLTridion2011sp1
                     _tridionComponentMetaFactories.Add(publicationId,new ComponentMetaFactory(publicationId));
                 return _tridionComponentMetaFactories[publicationId];
         }
+
+        #endregion
 
         #region IBinaryProvider Members
 
@@ -78,11 +97,24 @@ namespace DD4T.Providers.SDLTridion2011sp1
             return binaryData == null ? null : binaryData.Bytes;
         }
 
+       
         public DateTime GetLastPublishedDateByUrl(string url)
         {
             string encodedUrl = HttpUtility.UrlPathEncode(url); // ?? why here? why now?
             BinaryMetaFactory bmFactory = new BinaryMetaFactory();
-            BinaryMeta binaryMeta = this.PublicationId == 0 ? (bmFactory.GetMetaByUrl(encodedUrl)[0] as BinaryMeta) : bmFactory.GetMetaByUrl(this.PublicationId, encodedUrl);
+            BinaryMeta binaryMeta = null;
+            if (this.PublicationId == 0)
+            {
+                IList metas = bmFactory.GetMetaByUrl(encodedUrl);
+                if (metas.Count == 0)
+                    return DateTime.MinValue; // TODO: use nullable type
+
+                binaryMeta = metas[0] as BinaryMeta;
+            }
+            else
+            {
+                binaryMeta = bmFactory.GetMetaByUrl(this.PublicationId, encodedUrl);
+            }
 
             Tridion.ContentDelivery.Meta.IComponentMeta componentMeta = GetTridionComponentMetaFactory(binaryMeta.PublicationId).GetMeta(binaryMeta.Id);
             return componentMeta == null ? DateTime.MinValue : componentMeta.LastPublicationDate;
@@ -95,6 +127,110 @@ namespace DD4T.Providers.SDLTridion2011sp1
             return componentMeta == null ? DateTime.MinValue : componentMeta.LastPublicationDate;
         }
 
+
+        public System.IO.Stream GetBinaryStreamByUri(string uri)
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.IO.Stream GetBinaryStreamByUrl(string url)
+        {
+            SqlReaderStream stream = null;
+            using (SqlConnection cn = new SqlConnection(ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(SqlQuery, cn);
+                cmd.Parameters.Add("@url", SqlDbType.VarChar, 255); // note: the length of the URL parameter must equal the length of the BINARY_VARIANT.PATH column in the broker database
+                cmd.Parameters["@url"].Value = url;
+                cn.Open();
+                //CommandBehavior.SequentialAccess avoids loading the entire BLOB in-memory.
+                SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.SequentialAccess);
+                if (false == reader.Read())
+                {
+                    reader.Dispose();
+                    return null;
+                }
+                stream = new SqlReaderStream(reader, 0);
+            }
+            return stream;
+        }
         #endregion
+
+    }
+    internal class SqlReaderStream : Stream
+    {
+        private SqlDataReader reader;
+        private int columnIndex;
+        private long position;
+
+        public SqlReaderStream(
+            SqlDataReader reader,
+            int columnIndex)
+        {
+            this.reader = reader;
+            this.columnIndex = columnIndex;
+        }
+
+        public override long Position
+        {
+            get { return position; }
+            set { throw new NotImplementedException(); }
+        }
+
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            long bytesRead = reader.GetBytes(columnIndex, position, buffer, offset, count);
+            position += bytesRead;
+            return (int)bytesRead;
+        }
+
+        public override bool CanRead
+        {
+            get { return true; }
+        }
+
+        public override bool CanSeek
+        {
+            get { return false; }
+        }
+
+        public override bool CanWrite
+        {
+            get { return false; }
+        }
+
+        public override void Flush()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override long Length
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override long Seek(long offset, SeekOrigin origin)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void SetLength(long value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && null != reader)
+            {
+                reader.Dispose();
+                reader = null;
+            }
+            base.Dispose(disposing);
+        }
     }
 }

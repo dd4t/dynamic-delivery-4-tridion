@@ -13,6 +13,8 @@ using System.Configuration;
 using DD4T.ContentModel.Contracts.Providers;
 
 using DD4T.ContentModel.Querying;
+using DD4T.ContentModel.Contracts.Caching;
+using DD4T.Factories.Caching;
 
 namespace DD4T.Factories
 {
@@ -21,30 +23,22 @@ namespace DD4T.Factories
     /// </summary>
     public class ComponentFactory : FactoryBase, IComponentFactory
     {
-        private IComponentProvider componentProvider = null;
         public IComponentProvider ComponentProvider { get; set; }
-        //public IComponentProvider ComponentProvider
-        //{
-        //    get
-        //    {
-        //        // TODO: implement DI
-        //        if (componentProvider == null)
-        //        {
-        //            componentProvider = new DD4T2011.TridionComponentProvider();
-        //            componentProvider.PublicationId = this.PublicationId;
-        //        }
-        //        return componentProvider;
-        //    }
-        //    set
-        //    {
-        //        componentProvider = value;
-        //    }
-        //}
+        public const string CacheKeyFormatByUri = "ComponentByUri_{0}";
+        private ICacheAgent _cacheAgent = null;
 
         #region IComponentFactory members
         public bool TryGetComponent(string componentUri, out IComponent component)
         {
             component = null;
+
+            string cacheKey = String.Format(CacheKeyFormatByUri, componentUri);
+            component = (IComponent)CacheAgent.Load(cacheKey);
+
+            if (component != null)
+            {
+                return true;
+            }
 
             string content = ComponentProvider.GetContent(componentUri);
 
@@ -54,11 +48,9 @@ namespace DD4T.Factories
             }
 
             component = GetIComponentObject(content);
+            CacheAgent.Store(cacheKey, component);
             return true;
-
         }
-
-
 
 
         public IComponent GetComponent(string componentUri)
@@ -107,6 +99,21 @@ namespace DD4T.Factories
             return components;
         }
 
+        public IList<IComponent> FindComponents(IQuery queryParameters, int pageIndex, int pageSize, out int totalCount)
+        {
+            totalCount = 0;
+            IList<string> results = ComponentProvider.FindComponents(queryParameters);
+            totalCount = results.Count;
+
+            return results
+                .Skip(pageIndex*pageSize)
+                .Take(pageSize)
+                .Select(c => { IComponent comp = null; TryGetComponent(c, out comp); return comp; })
+                .Where(c => c!= null)
+                .ToList();
+
+        }
+
         public IList<IComponent> FindComponents(IQuery queryParameters)
         {
             var results = ComponentProvider.FindComponents(queryParameters)
@@ -114,6 +121,41 @@ namespace DD4T.Factories
                 .Where(c => c!= null)
                 .ToList();
             return results;
+        }
+
+        public DateTime GetLastPublishedDate(string uri)
+        {
+            return ComponentProvider.GetLastPublishedDate(uri);
+        }
+
+        public override DateTime GetLastPublishedDateCallBack(string key, object cachedItem)
+        {
+            if (cachedItem is IComponent)
+            {
+                return GetLastPublishedDate(((IComponent)cachedItem).Id);
+            }
+            throw new Exception(string.Format("GetLastPublishedDateCallBack called for unexpected object type '{0}' or with unexpected key '{1}'", cachedItem.GetType(), key));
+        }
+        /// <summary>
+        /// Get or set the CacheAgent
+        /// </summary>  
+        public override ICacheAgent CacheAgent
+        {
+            get
+            {
+                if (_cacheAgent == null)
+                {
+                    _cacheAgent = new DefaultCacheAgent();
+                    // the next line is the only reason we are overriding this property: to set a callback
+                    _cacheAgent.GetLastPublishDateCallBack = GetLastPublishedDateCallBack;
+                }
+                return _cacheAgent;
+            }
+            set
+            {
+                _cacheAgent = value;
+                _cacheAgent.GetLastPublishDateCallBack = GetLastPublishedDateCallBack;
+            }
         }
 
 		#endregion

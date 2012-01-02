@@ -8,7 +8,7 @@ using System.Web;
 using DD4T.ContentModel.Exceptions;
 using DD4T.ContentModel.Contracts.Providers;
 using DD4T.Providers.SDLTridion2011sp1;
-using System.Web.Caching;
+using System.IO;
 
 namespace DD4T.Factories
 {
@@ -20,33 +20,22 @@ namespace DD4T.Factories
         #region IBinaryFactory members
         public bool TryFindBinary(string url, out IBinary binary)
         {
-            binary = null;
-            string cacheKey = String.Format("Binary_{0}_{1}", url, PublicationId);
-            Cache cache = HttpContext.Current.Cache;
-            DateTime lastPublishedDate = DateTime.MinValue;
-            if (lastPublishedDates.ContainsKey(url))
-                lastPublishedDate = lastPublishedDates[url];
+            binary = new Binary();
 
-            var dbLastPublishedDate = BinaryProvider.GetLastPublishedDateByUrl(url);
-
-            if (cache[cacheKey] != null && lastPublishedDate != DateTime.MinValue && lastPublishedDate.Subtract(dbLastPublishedDate).TotalSeconds >= 0)
+            if (LoadBinariesAsStream)
             {
-                binary = (IBinary)cache[cacheKey];
-                return true;
+                binary.BinaryStream = BinaryProvider.GetBinaryStreamByUrl(url);
+                if (binary.BinaryStream == null)
+                    return false;
             }
             else
             {
-                byte[] binaryContent = BinaryProvider.GetBinaryByUrl(url);
-
-                if (!(binaryContent == null || binaryContent.Length == 0))
-                {
-                    binary = GetIBinaryObject(binaryContent, url);
-                    cache.Insert(cacheKey, binary);
-                    lastPublishedDates[url] = dbLastPublishedDate;
-                    return true;
-                }
+                binary.BinaryData = BinaryProvider.GetBinaryByUrl(url);
+                if (binary.BinaryData == null || binary.BinaryData.Length == 0)
+                    return false;
             }
-            return false;
+
+            return true;
         }
 
         public IBinary FindBinary(string url)
@@ -59,35 +48,28 @@ namespace DD4T.Factories
             return binary;
         }
 
+        public DateTime FindLastPublishedDate(string url)
+        {
+            return BinaryProvider.GetLastPublishedDateByUrl(url);
+        }
+
         public bool TryGetBinary(string tcmUri, out IBinary binary)
         {
-            binary = null;
-            string cacheKey = String.Format("Binary_{0}_{1}", tcmUri, PublicationId);
-            Cache cache = HttpContext.Current.Cache;
-            DateTime lastPublishedDate = DateTime.MinValue;
-            if (lastPublishedDates.ContainsKey(tcmUri))
-                lastPublishedDate = lastPublishedDates[tcmUri];
-
-            var dbLastPublishedDate = BinaryProvider.GetLastPublishedDateByUri(tcmUri);
-
-            if (cache[cacheKey] != null && lastPublishedDate != DateTime.MinValue && lastPublishedDate.Subtract(dbLastPublishedDate).TotalSeconds >= 0)
+            binary = new Binary();
+            if (LoadBinariesAsStream)
             {
-                binary = (IBinary)cache[cacheKey];
-                return true;
+                binary.BinaryStream = BinaryProvider.GetBinaryStreamByUri(tcmUri);
+                if (binary.BinaryStream == null)
+                    return false;
             }
             else
             {
-                byte[] binaryContent = BinaryProvider.GetBinaryByUri(tcmUri);
-
-                if (!binaryContent.Equals(String.Empty))
-                {
-                    binary = GetIBinaryObject(binaryContent, tcmUri);
-                    cache.Insert(cacheKey, binary);
-                    lastPublishedDates[tcmUri] = dbLastPublishedDate;
-                    return true;
-                }
+                binary.BinaryData = BinaryProvider.GetBinaryByUri(tcmUri);
+                if (binary.BinaryData == null || binary.BinaryData.Length == 0)
+                    return false;
             }
-            return false;
+            ((Binary)binary).Id = tcmUri;
+            return true;
         }
 
         public IBinary GetBinary(string tcmUri)
@@ -162,8 +144,34 @@ namespace DD4T.Factories
             binary.Url = url;
             return binary;
         }
-
+        private IBinary GetIBinaryObject(Stream binaryStream, string url)
+        {
+            IBinary binary = new Binary();
+            binary.BinaryStream = binaryStream;
+            binary.Url = url;
+            return binary;
+        }
         #endregion
+
+        
+        public static bool DefaultLoadBinariesAsStream = false;
+        private bool _loadBinariesAsStream = DefaultLoadBinariesAsStream;
+        public bool LoadBinariesAsStream
+        {
+            get
+            {
+                return _loadBinariesAsStream;
+            }
+            set
+            {
+                _loadBinariesAsStream = value;
+            }
+        }
+
+        public override DateTime GetLastPublishedDateCallBack(string key, object cachedItem)
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

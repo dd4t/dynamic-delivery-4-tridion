@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="Caching\SchemaComponentsCacheDependency.cs" />
     <Compile Include="Caching\SitemapCacheDependency.cs" />
+    <Compile Include="Caching\WebCacheAgent.cs" />
     <Compile Include="Controllers\IComponentController.cs" />
     <Compile Include="Controllers\IPageController.cs" />
     <Compile Include="Controllers\TridionControllerBase.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="SiteEdit\SiteEditService.cs" />
     <Compile Include="SiteEdit\SiteEditSettings.cs" />
+    <Compile Include="SiteLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DD4T.ContentModel.Contracts\DD4T.ContentModel.Contracts.csproj">
