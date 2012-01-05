@@ -27,7 +27,7 @@ namespace DD4T.Templates
         {
 
             // do NOT execute this logic when we are actually publishing! (similair for fast track publishing)
-            if (engine.RenderMode == RenderMode.Publish || !Tcm.TcmUri.IsNullOrUriNull(engine.PublishingContext.PublicationTarget.Id))
+            if (engine.RenderMode == RenderMode.Publish || (engine.PublishingContext.PublicationTarget != null && !Tcm.TcmUri.IsNullOrUriNull(engine.PublishingContext.PublicationTarget.Id)))
             {
                 return;
             }
@@ -35,7 +35,7 @@ namespace DD4T.Templates
             Item outputItem = package.GetByName("Output");
             String inputValue = package.GetValue("Output");
 
-            if (inputValue == null || inputValue.Length == 0)
+            if (string.IsNullOrEmpty(inputValue))
             {
                 log.Warning("Could not find 'Output' in the package, nothing to preview");
                 return;
@@ -110,11 +110,8 @@ namespace DD4T.Templates
            {
                if (sr != null)
                    sr.Close();
-
            }
            return result;
        }
-
-
     }
 }
