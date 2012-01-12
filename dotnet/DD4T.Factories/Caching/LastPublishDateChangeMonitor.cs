@@ -8,6 +8,7 @@ using System.Timers;
 using DD4T.ContentModel.Factories;
 using DD4T.ContentModel.Contracts.Caching;
 using System.Configuration;
+using DD4T.Utils;
 
 namespace DD4T.Factories.Caching
 {
@@ -27,6 +28,8 @@ namespace DD4T.Factories.Caching
 
         public LastPublishDateChangeMonitor(string key, object cachedItem, GetLastPublishDate getLastPublishDateCallBack)
         {
+            SiteLogger.Debug(">>LastPublishDateChangeMonitor({0}, {1})", key, cachedItem.ToString());
+
             this._key = key;
             this._cachedItem = cachedItem;
             _getLastPublishDateCallBack = getLastPublishDateCallBack;
