@@ -20,6 +20,7 @@ using DD4T.ContentModel.Contracts.Providers;
 using System.Collections;
 using System.Configuration;
 using DD4T.ContentModel.Querying;
+using DD4T.Utils;
 
 namespace DD4T.Providers.SDLTridion2011sp1
 {
@@ -47,10 +48,12 @@ namespace DD4T.Providers.SDLTridion2011sp1
         #region IComponentProvider
         public string GetContent(string uri)
         {
-            
+            SiteLogger.Debug(">>GetContent({0})", LoggingCategory.Performance, uri);
+
             TcmUri tcmUri = new TcmUri(uri);
 
             T.ComponentPresentationFactory cpFactory = GetComponentPresentationFactory(tcmUri.PublicationId);
+
             T.ComponentPresentation cp = null;
 
 
@@ -58,15 +61,23 @@ namespace DD4T.Providers.SDLTridion2011sp1
             {
                 cp = cpFactory.GetComponentPresentation(tcmUri.ItemId, Convert.ToInt32(selectByComponentTemplateId));
                 if (cp != null)
+                {
+                    SiteLogger.Debug("<<GetContent({0}) - by ct id", LoggingCategory.Performance, uri);
                     return cp.Content;
+                }
             }
             if (!string.IsNullOrEmpty(selectByOutputFormat))
             {
                 cp = cpFactory.GetComponentPresentationWithOutputFormat(tcmUri.ItemId, selectByOutputFormat);
                 if (cp != null)
+                {
+                    SiteLogger.Debug("<<GetContent({0}) - by output format", LoggingCategory.Performance, uri);
                     return cp.Content;
+                }
             }
+            SiteLogger.Debug("GetContent: about to find all component presentations for {0}", LoggingCategory.Performance, tcmUri.ToString());
             IList cps = cpFactory.FindAllComponentPresentations(tcmUri.ItemId);
+            SiteLogger.Debug("GetContent: found all component presentations for {0}", LoggingCategory.Performance, tcmUri.ToString());
 
             foreach (Tridion.ContentDelivery.DynamicContent.ComponentPresentation _cp in cps)
             {
@@ -74,10 +85,12 @@ namespace DD4T.Providers.SDLTridion2011sp1
                 {
                     if (_cp.Content.Contains("<Component"))
                     {
+                        SiteLogger.Debug("<<GetContent({0}) - find all", LoggingCategory.Performance, uri);
                         return _cp.Content;
                     }
                 }
             }
+            SiteLogger.Debug("<<GetContent({0}) - not found", LoggingCategory.Performance, uri);
             return string.Empty;
         }
 
@@ -119,19 +132,33 @@ namespace DD4T.Providers.SDLTridion2011sp1
         #endregion
 
         #region private
-        public TMeta.ComponentMetaFactory GetComponentMetaFactory(int publicationId)
+        private object lock1 = new object();
+        private object lock2 = new object();
+        private TMeta.ComponentMetaFactory GetComponentMetaFactory(int publicationId)
         {
-            if (!_cmFactoryList.ContainsKey(publicationId))
+            if (_cmFactoryList.ContainsKey(publicationId))
+                return _cmFactoryList[publicationId];
+
+            lock (lock1)
             {
-                _cmFactoryList.Add(publicationId, new TMeta.ComponentMetaFactory(publicationId));
+                if (!_cmFactoryList.ContainsKey(publicationId)) // we must test again, because in the mean time another thread might have added a record to the dictionary!
+                {
+                    _cmFactoryList.Add(publicationId, new TMeta.ComponentMetaFactory(publicationId)); 
+                }
             }
             return _cmFactoryList[publicationId];
         }
-        public T.ComponentPresentationFactory GetComponentPresentationFactory(int publicationId)
+        private T.ComponentPresentationFactory GetComponentPresentationFactory(int publicationId)
         {
-            if (!_cpFactoryList.ContainsKey(publicationId))
+            if (_cpFactoryList.ContainsKey(publicationId))
+                return _cpFactoryList[publicationId];
+
+            lock (lock2)
             {
-                _cpFactoryList.Add(publicationId, new T.ComponentPresentationFactory(publicationId));
+                if (!_cpFactoryList.ContainsKey(publicationId)) // we must test again, because in the mean time another thread might have added a record to the dictionary!
+                {
+                    _cpFactoryList.Add(publicationId, new T.ComponentPresentationFactory(publicationId));
+                }
             }
             return _cpFactoryList[publicationId];
         }

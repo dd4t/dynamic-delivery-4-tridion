@@ -30,11 +30,18 @@ namespace DD4T.Providers.SDLTridion2011sp1
             }
         }
         private Dictionary<int, ComponentLink> _componentLinks = new Dictionary<int, ComponentLink>();
+        private object lock1 = new object();
         private ComponentLink GetComponentLink(TcmUri uri)
         {
-            if (!_componentLinks.ContainsKey(uri.PublicationId))
+            if (_componentLinks.ContainsKey(uri.PublicationId))
+                return _componentLinks[uri.PublicationId];
+
+            lock (lock1)
             {
-                _componentLinks.Add(uri.PublicationId, new ComponentLink(uri.PublicationId));
+                if (!_componentLinks.ContainsKey(uri.PublicationId)) // we must test again, because in the mean time another thread might have added a record to the dictionary!
+                {
+                    _componentLinks.Add(uri.PublicationId, new ComponentLink(uri.PublicationId));
+                }
             }
             return _componentLinks[uri.PublicationId];
         }
