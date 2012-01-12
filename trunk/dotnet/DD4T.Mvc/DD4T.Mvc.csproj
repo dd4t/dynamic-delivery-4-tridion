@@ -127,7 +127,6 @@
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="SiteEdit\SiteEditService.cs" />
     <Compile Include="SiteEdit\SiteEditSettings.cs" />
-    <Compile Include="SiteLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DD4T.ContentModel.Contracts\DD4T.ContentModel.Contracts.csproj">
@@ -141,6 +140,10 @@
     <ProjectReference Include="..\DD4T.Factories\DD4T.Factories.csproj">
       <Project>{9E96EFE0-7478-4551-A47A-1F04B9F01DF7}</Project>
       <Name>DD4T.Factories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DD4T.Utils\DD4T.Utils.csproj">
+      <Project>{D2CE08BE-7281-4697-ADFE-E7A031CB59EC}</Project>
+      <Name>DD4T.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

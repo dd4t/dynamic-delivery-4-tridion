@@ -15,6 +15,7 @@ using DD4T.ContentModel.Contracts.Providers;
 using DD4T.ContentModel.Querying;
 using DD4T.ContentModel.Contracts.Caching;
 using DD4T.Factories.Caching;
+using DD4T.Utils;
 
 namespace DD4T.Factories
 {
@@ -30,6 +31,8 @@ namespace DD4T.Factories
         #region IComponentFactory members
         public bool TryGetComponent(string componentUri, out IComponent component)
         {
+            SiteLogger.Debug(">>TryGetComponent ({0})", LoggingCategory.Performance, componentUri);
+
             component = null;
 
             string cacheKey = String.Format(CacheKeyFormatByUri, componentUri);
@@ -37,6 +40,7 @@ namespace DD4T.Factories
 
             if (component != null)
             {
+                SiteLogger.Debug("<<TryGetComponent ({0}) - from cache", LoggingCategory.Performance, componentUri);
                 return true;
             }
 
@@ -44,23 +48,32 @@ namespace DD4T.Factories
 
             if (string.IsNullOrEmpty(content))
             {
+                SiteLogger.Debug("<<TryGetComponent ({0}) - from provider", LoggingCategory.Performance, componentUri);
                 return false;
             }
 
+            SiteLogger.Debug("about to create IComponent from content ({0})", LoggingCategory.Performance, componentUri);
             component = GetIComponentObject(content);
+            SiteLogger.Debug("finished creating IComponent from content ({0})", LoggingCategory.Performance, componentUri);
+            SiteLogger.Debug("about to store IComponent in cache ({0})", LoggingCategory.Performance, componentUri);
             CacheAgent.Store(cacheKey, component);
+            SiteLogger.Debug("finished storing IComponent in cache ({0})", LoggingCategory.Performance, componentUri);
+            SiteLogger.Debug("<<TryGetComponent ({0})", LoggingCategory.Performance, componentUri);
             return true;
         }
 
 
         public IComponent GetComponent(string componentUri)
         {
+            SiteLogger.Debug(">>GetComponent ({0})", LoggingCategory.Performance, componentUri);
             IComponent component;
             if (!TryGetComponent(componentUri, out component))
             {
+                SiteLogger.Debug("<<GetComponent ({0}) -- not found", LoggingCategory.Performance, componentUri);
                 throw new ComponentNotFoundException();
             }
 
+            SiteLogger.Debug("<<GetComponent ({0})", LoggingCategory.Performance, componentUri);
             return component;
         }
 
@@ -101,25 +114,32 @@ namespace DD4T.Factories
 
         public IList<IComponent> FindComponents(IQuery queryParameters, int pageIndex, int pageSize, out int totalCount)
         {
+            SiteLogger.Debug(">>FindComponents ({0},{1})", LoggingCategory.Performance, queryParameters.ToString(), Convert.ToString(pageIndex));
             totalCount = 0;
             IList<string> results = ComponentProvider.FindComponents(queryParameters);
             totalCount = results.Count;
 
-            return results
+            var pagedResults = results
                 .Skip(pageIndex*pageSize)
                 .Take(pageSize)
                 .Select(c => { IComponent comp = null; TryGetComponent(c, out comp); return comp; })
                 .Where(c => c!= null)
                 .ToList();
 
+            SiteLogger.Debug("<<FindComponents ({0},{1})", LoggingCategory.Performance, queryParameters.ToString(), Convert.ToString(pageIndex));
+            return pagedResults;
+
         }
 
         public IList<IComponent> FindComponents(IQuery queryParameters)
         {
+            SiteLogger.Debug(">>FindComponents ({0})", LoggingCategory.Performance, queryParameters.ToString());
+
             var results = ComponentProvider.FindComponents(queryParameters)
                 .Select(c => { IComponent comp = null; TryGetComponent(c, out comp); return comp; })
                 .Where(c => c!= null)
                 .ToList();
+            SiteLogger.Debug("<<FindComponents ({0})", LoggingCategory.Performance, queryParameters.ToString());
             return results;
         }
 

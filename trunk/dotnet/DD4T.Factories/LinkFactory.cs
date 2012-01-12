@@ -46,15 +46,25 @@ namespace DD4T.Factories
         {
         }
 
+        private object lock1 = new object();
         private ILinkProvider GetLinkProvider(string uri)
         {
             TcmUri u = new TcmUri(uri);
-            if (!_linkProviders.ContainsKey(u.PublicationId))
+            if (u == null)
+                // invalid uri, return null
+                return null;
+
+            if (_linkProviders.ContainsKey(u.PublicationId))
+                return _linkProviders[u.PublicationId];
+            lock (lock1)
             {
-                Type t = LinkProvider.GetType();
-                ILinkProvider lp = (ILinkProvider) Activator.CreateInstance(t);
-                lp.PublicationId = u.PublicationId;
-                _linkProviders.Add(u.PublicationId, lp);
+                if (!_linkProviders.ContainsKey(u.PublicationId)) // we must test again, because in the mean time another thread might have added a record to the dictionary!
+                {
+                    Type t = LinkProvider.GetType();
+                    ILinkProvider lp = (ILinkProvider)Activator.CreateInstance(t);
+                    lp.PublicationId = u.PublicationId;
+                    _linkProviders.Add(u.PublicationId, lp);
+                }
             }
             return _linkProviders[u.PublicationId];
         }
@@ -73,14 +83,19 @@ namespace DD4T.Factories
             }
             else
             {
-                string resolvedUrl = GetLinkProvider(componentUri).ResolveLink(componentUri);
+                ILinkProvider lp = GetLinkProvider(componentUri);
+                if (lp == null)
+                    return string.Empty;
+                string resolvedUrl = lp.ResolveLink(componentUri);
                 if (resolvedUrl == null)
                 {
-                    CacheAgent.Store(cacheKey, CacheValueNull, "Link", new List<string>() { String.Format(ComponentFactory.CacheKeyFormatByUri, componentUri) }); 
+                    //CacheAgent.Store(cacheKey, "Link", CacheValueNull, new List<string>() { String.Format(ComponentFactory.CacheKeyFormatByUri, componentUri) });
+                    CacheAgent.Store(cacheKey, "Link", CacheValueNull);
                 }
                 else
                 {
-                    CacheAgent.Store(cacheKey, resolvedUrl, "Link", new List<string>() { String.Format(ComponentFactory.CacheKeyFormatByUri, componentUri) });
+                    //CacheAgent.Store(cacheKey, "Link", resolvedUrl, new List<string>() { String.Format(ComponentFactory.CacheKeyFormatByUri, componentUri) });
+                    CacheAgent.Store(cacheKey, "Link", resolvedUrl);
                 }
                 return resolvedUrl;
             }
@@ -103,11 +118,13 @@ namespace DD4T.Factories
                 string resolvedUrl = LinkProvider.ResolveLink(sourcePageUri, componentUri, excludeComponentTemplateUri);
                 if (resolvedUrl == null)
                 {
-                    CacheAgent.Store(cacheKey, CacheValueNull, "Link", new List<string>() { String.Format("ComponentByUri_{0}", componentUri) });
+                    //CacheAgent.Store(cacheKey, "Link", CacheValueNull, new List<string>() { String.Format("ComponentByUri_{0}", componentUri) });
+                    CacheAgent.Store(cacheKey, "Link", CacheValueNull);
                 }
                 else
                 {
-                    CacheAgent.Store(cacheKey, resolvedUrl, "Link", new List<string>() { String.Format("ComponentByUri_{0}", componentUri) });
+                    //CacheAgent.Store(cacheKey, "Link", resolvedUrl, new List<string>() { String.Format("ComponentByUri_{0}", componentUri) });
+                    CacheAgent.Store(cacheKey, "Link", resolvedUrl);
                 } 
                 return resolvedUrl;
             }

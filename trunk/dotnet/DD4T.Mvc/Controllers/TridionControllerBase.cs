@@ -10,6 +10,7 @@ using DD4T.Factories;
 using System.Web.Configuration;
 using System.IO;
 using System.Security;
+using DD4T.Utils;
 
 namespace DD4T.Mvc.Controllers
 {
@@ -124,15 +125,20 @@ namespace DD4T.Mvc.Controllers
 
         public virtual ActionResult ComponentPresentation(string componentPresentationId)
         {
+            SiteLogger.Debug(">>ComponentPresentation", LoggingCategory.Performance);
             try
             {
                 IComponentPresentation model = GetComponentPresentation();
                 ViewBag.Renderer = ComponentPresentationRenderer;
-                return GetView(model);
+                ViewResult result = GetView(model);
+                SiteLogger.Debug("<<ComponentPresentation", LoggingCategory.Performance);
+                return result;
             }
             catch (ConfigurationException e)
             {
-                return View("Configuration exception: " + e.Message);
+                ViewResult result = View("Configuration exception: " + e.Message);
+                SiteLogger.Debug("<<ComponentPresentation", LoggingCategory.Performance);
+                return result;
             }
         }
         //public virtual ActionResult ComponentPresentation(IComponentPresentation cp)

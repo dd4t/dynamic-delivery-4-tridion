@@ -6,6 +6,7 @@ using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using DD4T.ContentModel;
+using DD4T.Utils;
 
 namespace DD4T.Mvc.Html
 {
@@ -19,17 +20,23 @@ namespace DD4T.Mvc.Html
 
         public MvcHtmlString ComponentPresentations(IPage tridionPage, HtmlHelper htmlHelper, string[] includeComponentTemplate, string includeSchema)
         {
+            SiteLogger.Debug(">>ComponentPresentations", LoggingCategory.Performance);
             StringBuilder sb = new StringBuilder();
             foreach (IComponentPresentation cp in tridionPage.ComponentPresentations)
             {
+                SiteLogger.Debug("found cp {0} - {1}", LoggingCategory.Performance, cp.Component.Id, cp.ComponentTemplate.Id);
                 if (includeComponentTemplate != null && !MustInclude(cp.ComponentTemplate, includeComponentTemplate))
                     continue;
                 if ((!string.IsNullOrEmpty(includeSchema)) && !MustInclude(cp.Component.Schema, includeSchema))
                     continue;
+                SiteLogger.Debug("setting page property on cp ", LoggingCategory.Performance);
                 cp.Page = tridionPage;
+                SiteLogger.Debug("about to call RenderComponentPresentation", LoggingCategory.Performance);
                 sb.Append(RenderComponentPresentation(cp, htmlHelper));
+                SiteLogger.Debug("finished calling RenderComponentPresentation", LoggingCategory.Performance);
 
             }
+            SiteLogger.Debug("<<ComponentPresentations", LoggingCategory.Performance);
             return MvcHtmlString.Create(sb.ToString());
         }
 
@@ -92,9 +99,12 @@ namespace DD4T.Mvc.Html
                 action = cp.ComponentTemplate.MetadataFields["action"].Value;
             }
 
-            //return ChildActionExtensions.Action(htmlHelper, action, controller, new { componentPresentation = ((ComponentPresentation)cp) });
-            return htmlHelper.Action(action, controller, new { componentPresentation = ((ComponentPresentation)cp) });
-        }
 
+            SiteLogger.Debug("about to render component presentation with controller {0} and action {1}", LoggingCategory.Performance, controller, action);
+            //return ChildActionExtensions.Action(htmlHelper, action, controller, new { componentPresentation = ((ComponentPresentation)cp) });
+            MvcHtmlString result = htmlHelper.Action(action, controller, new { componentPresentation = ((ComponentPresentation)cp) });
+            SiteLogger.Debug("finished rendering component presentation with controller {0} and action {1}", LoggingCategory.Performance, controller, action);
+            return result;
+        }
     }
 }
