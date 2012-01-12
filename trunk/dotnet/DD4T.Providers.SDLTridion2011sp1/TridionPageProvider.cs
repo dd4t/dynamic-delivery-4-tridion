@@ -18,6 +18,8 @@ using System.Collections.Generic;
 using System.Web.Caching;
 using System.Web;
 using DD4T.ContentModel.Contracts.Providers;
+using DD4T.Utils;
+using System.Collections;
 
 namespace DD4T.Providers.SDLTridion2011sp1
 {
@@ -97,9 +99,13 @@ namespace DD4T.Providers.SDLTridion2011sp1
         /// <returns>String with page xml or empty string if no page was found</returns>
         public string GetContentByUrl(string Url)
         {
+
+            SiteLogger.Debug(">>GetContentByUrl({0})", LoggingCategory.Performance, Url);
             string retVal = string.Empty;
 
+            SiteLogger.Debug("GetContentByUrl: about to create query", LoggingCategory.Performance);
             Query pageQuery = new Query();
+            SiteLogger.Debug("GetContentByUrl: created query", LoggingCategory.Performance);
             ItemTypeCriteria isPage = new ItemTypeCriteria(64);  // TODO There must be an enum of these somewhere
             PageURLCriteria pageUrl = new PageURLCriteria(Url);
 
@@ -110,14 +116,22 @@ namespace DD4T.Providers.SDLTridion2011sp1
                 allCriteria.AddCriteria(correctSite);
             }
             pageQuery.Criteria = allCriteria;
+            SiteLogger.Debug("GetContentByUrl: added criteria to query", LoggingCategory.Performance);
 
+            SiteLogger.Debug("GetContentByUrl: about to execute query", LoggingCategory.Performance);
             string[] resultUris = pageQuery.ExecuteQuery();
+            SiteLogger.Debug("GetContentByUrl: executed query", LoggingCategory.Performance);
+
 
             if (resultUris.Length > 0)
             {
                 PageContentAssembler loadPage = new PageContentAssembler();
+                SiteLogger.Debug("GetContentByUrl: created PageContentAssembler", LoggingCategory.Performance);
+
                 retVal = loadPage.GetContent(resultUris[0]);
+                SiteLogger.Debug("GetContentByUrl: executed PageContentAssembler", LoggingCategory.Performance);
             }
+            SiteLogger.Debug("<<GetContentByUrl({0})", LoggingCategory.Performance, Url);
             return retVal;
         }
 

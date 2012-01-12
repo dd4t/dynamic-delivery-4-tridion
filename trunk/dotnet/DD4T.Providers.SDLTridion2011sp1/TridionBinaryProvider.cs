@@ -65,11 +65,19 @@ namespace DD4T.Providers.SDLTridion2011sp1
         }
 
         private Dictionary<int,ComponentMetaFactory > _tridionComponentMetaFactories = new Dictionary<int,ComponentMetaFactory>();
+
+
+        private object lock1 = new object();
         private ComponentMetaFactory GetTridionComponentMetaFactory(int publicationId)
         {
-                if (! _tridionComponentMetaFactories.ContainsKey(publicationId))
-                    _tridionComponentMetaFactories.Add(publicationId,new ComponentMetaFactory(publicationId));
+            if (_tridionComponentMetaFactories.ContainsKey(publicationId))
                 return _tridionComponentMetaFactories[publicationId];
+            lock (lock1)
+            {
+                if (!_tridionComponentMetaFactories.ContainsKey(publicationId)) // we must test again, because in the mean time another thread might have added a record to the dictionary!
+                    _tridionComponentMetaFactories.Add(publicationId, new ComponentMetaFactory(publicationId));
+            }
+            return _tridionComponentMetaFactories[publicationId];
         }
 
         #endregion
