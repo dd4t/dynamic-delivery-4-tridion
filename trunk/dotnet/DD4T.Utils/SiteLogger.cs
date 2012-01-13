@@ -9,58 +9,58 @@ namespace DD4T.Utils
 
     public static class SiteLogger
     {
-        public static void Debug(string message, params string[] parameters)
+        public static void Debug(string message, params object[] parameters)
         {
             Log(message, LoggingCategory.General, TraceEventType.Verbose, parameters);
         }
 
-        public static void Debug(string message, LoggingCategory category, params string[] parameters)
+        public static void Debug(string message, LoggingCategory category, params object[] parameters)
         {
             Log(message, category, TraceEventType.Verbose, parameters);
         }
 
-        public static void Information(string message, params string[] parameters)
+        public static void Information(string message, params object[] parameters)
         {
             Log(message, LoggingCategory.General, TraceEventType.Information, parameters);
         }
 
-        public static void Information(string message, LoggingCategory category, params string[] parameters)
+        public static void Information(string message, LoggingCategory category, params object[] parameters)
         {
             Log(message, category, TraceEventType.Information, parameters);
         }
 
-        public static void Warning(string message, params string[] parameters)
+        public static void Warning(string message, params object[] parameters)
         {
             Log(message, LoggingCategory.General, TraceEventType.Warning, parameters);
         }
 
-        public static void Warning(string message, LoggingCategory category, params string[] parameters)
+        public static void Warning(string message, LoggingCategory category, params object[] parameters)
         {
             Log(message, category, TraceEventType.Warning, parameters);
         }
 
-        public static void Error(string message, params string[] parameters)
+        public static void Error(string message, params object[] parameters)
         {
             Log(message, LoggingCategory.General, TraceEventType.Error, parameters);
         }
 
-        public static void Error(string message, LoggingCategory category, params string[] parameters)
+        public static void Error(string message, LoggingCategory category, params object[] parameters)
         {
             Log(message, category, TraceEventType.Error, parameters);
         }
 
-        public static void Critical(string message, params string[] parameters)
+        public static void Critical(string message, params object[] parameters)
         {
             Log(message, LoggingCategory.General, TraceEventType.Critical, parameters);
         }
 
-        public static void Critical(string message, LoggingCategory category, params string[] parameters)
+        public static void Critical(string message, LoggingCategory category, params object[] parameters)
         {
             Log(message, category, TraceEventType.Critical, parameters);
         }
 
         private static void Log(string message, LoggingCategory category, TraceEventType severity,
-                                params string[] parameters)
+                                params object[] parameters)
         {
             var logEntry = new LogEntry();
             logEntry.Categories.Add(category.ToString());

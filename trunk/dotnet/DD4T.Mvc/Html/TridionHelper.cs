@@ -55,7 +55,7 @@ namespace DD4T.Mvc.Html
 
         public static MvcHtmlString RenderComponentPresentations(this HtmlHelper helper, string[] byComponentTemplate, string bySchema, IComponentPresentationRenderer renderer)
         {
-            SiteLogger.Debug(">>RenderComponentPresentations", LoggingCategory.Performance);
+            SiteLogger.Information(">>RenderComponentPresentations", LoggingCategory.Performance);
             IComponentPresentationRenderer cpr = renderer;
             if (!(helper.ViewData.Model is IPage))
             {
@@ -75,6 +75,7 @@ namespace DD4T.Mvc.Html
             SiteLogger.Debug("about to call renderer.ComponentPresentations", LoggingCategory.Performance);
             MvcHtmlString output = renderer.ComponentPresentations(tridionPage, helper, byComponentTemplate, bySchema);
             SiteLogger.Debug("finished calling renderer.ComponentPresentations", LoggingCategory.Performance);
+            SiteLogger.Information("<<RenderComponentPresentations", LoggingCategory.Performance);
 
             return output;
         }

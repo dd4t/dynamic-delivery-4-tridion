@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace DD4T.Utilities
+namespace DD4T.Utils
 {
     /// <summary>
     /// Tridion Helper class with usefull methods

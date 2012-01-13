@@ -20,7 +20,7 @@ namespace DD4T.Mvc.Html
 
         public MvcHtmlString ComponentPresentations(IPage tridionPage, HtmlHelper htmlHelper, string[] includeComponentTemplate, string includeSchema)
         {
-            SiteLogger.Debug(">>ComponentPresentations", LoggingCategory.Performance);
+            SiteLogger.Information(">>ComponentPresentations", LoggingCategory.Performance);
             StringBuilder sb = new StringBuilder();
             foreach (IComponentPresentation cp in tridionPage.ComponentPresentations)
             {
@@ -36,7 +36,7 @@ namespace DD4T.Mvc.Html
                 SiteLogger.Debug("finished calling RenderComponentPresentation", LoggingCategory.Performance);
 
             }
-            SiteLogger.Debug("<<ComponentPresentations", LoggingCategory.Performance);
+            SiteLogger.Information("<<ComponentPresentations", LoggingCategory.Performance);
             return MvcHtmlString.Create(sb.ToString());
         }
 

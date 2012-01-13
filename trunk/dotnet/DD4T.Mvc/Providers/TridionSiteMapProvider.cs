@@ -102,28 +102,44 @@
 
         private void AddChildren(SiteMapNode rootNode, IEnumerable<XElement> siteMapNodes, int currentLevel)
         {
-            SiteLogger.Debug(string.Format("started AddChildren for root node {0} at level {1}", rootNode.Title, currentLevel), LoggingCategory.Performance);
+            SiteLogger.Debug(">>AddChildren for root node {0} at level {1}", LoggingCategory.Performance, rootNode.Title, currentLevel);
             foreach (var element in siteMapNodes)
             {
+                SiteLogger.Debug(">>>for loop iteration: {0}", LoggingCategory.Performance, element.ToString());
                 TridionSiteMapNode childNode;
 
+
+                SiteLogger.Debug("about to create NameValueCollection", LoggingCategory.Performance);
                 var attributes = new NameValueCollection();
+                SiteLogger.Debug("finished creating NameValueCollection", LoggingCategory.Performance);
 
                 foreach (var a in element.Attributes())
+                {
+                    SiteLogger.Debug("about to add attribute {0} to NVC", LoggingCategory.Performance, a.Name);
                     attributes.Add(a.Name.ToString(), a.Value);
-
+                    SiteLogger.Debug("finished adding attribute {0} to NVC", LoggingCategory.Performance, a.Name);
+                }
                 string uri;
                 // for backwards compatibility, the obsolete 'pageId' attribute is supported as synonym for 'uri'
                 try
                 {
-                    uri = element.Attribute("uri") == null ? element.Attribute("pageId").Value : element.Attribute("uri").Value;
+                    SiteLogger.Debug("about to retrieve uri", LoggingCategory.Performance);
+                    if (element.Attribute("uri") != null)
+                        uri = element.Attribute("uri").Value;
+                    else if (element.Attribute("pageId") != null)
+                        uri = element.Attribute("pageId").Value;
+                    else
+                        uri = "";
+                    SiteLogger.Debug("finished retrieving uri", LoggingCategory.Performance);
                     uri = uri ?? "";
                 }
                 catch
                 {
+                    SiteLogger.Debug("exception while retrieving uri", LoggingCategory.Performance);
                     uri = "";
                 }
 
+                SiteLogger.Debug("about to create TridionSiteMapNode", LoggingCategory.Performance);
                 childNode = new TridionSiteMapNode(this,
                     element.Attribute("id").Value, //key
                     uri,
@@ -134,17 +150,23 @@
                     attributes, //attributes
                     null, //explicitresourceKeys
                     null) { Level = currentLevel }; // implicitresourceKey
-                
+                SiteLogger.Debug("finished creating TridionSiteMapNode", LoggingCategory.Performance);
 
+                SiteLogger.Debug("about to add TridionSiteMapNode to node dictionary", LoggingCategory.Performance);
                 NodeDictionary.Add(childNode.Key, childNode);
+                SiteLogger.Debug("finished adding TridionSiteMapNode to node dictionary", LoggingCategory.Performance);
 
                 //Use the SiteMapNode AddNode method to add the SiteMapNode to the ChildNodes collection
+                SiteLogger.Debug("about to add node to SiteMap", LoggingCategory.Performance);
                 AddNode(childNode, rootNode);
-                SiteLogger.Debug(string.Format("added node {0} within {1}", childNode.Title, rootNode.Title), LoggingCategory.Performance);
+                SiteLogger.Debug(string.Format("finished adding node to sitemap (title={0}, parent title={1})", childNode.Title, rootNode.Title), LoggingCategory.Performance);
 
                 // Check for children in this node.
                 AddChildren(childNode, element.Elements(), currentLevel + 1);
+                SiteLogger.Debug("<<<for loop iteration: {0}", LoggingCategory.Performance, element.ToString());
             }
+            
+            SiteLogger.Debug("<<AddChildren for root node {0} at level {1}", LoggingCategory.Performance, rootNode.Title, currentLevel);
         }
 
         public virtual bool IsInitialized
