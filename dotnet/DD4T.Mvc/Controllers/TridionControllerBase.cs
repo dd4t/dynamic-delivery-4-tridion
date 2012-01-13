@@ -125,19 +125,19 @@ namespace DD4T.Mvc.Controllers
 
         public virtual ActionResult ComponentPresentation(string componentPresentationId)
         {
-            SiteLogger.Debug(">>ComponentPresentation", LoggingCategory.Performance);
+            SiteLogger.Information(">>ComponentPresentation", LoggingCategory.Performance);
             try
             {
                 IComponentPresentation model = GetComponentPresentation();
                 ViewBag.Renderer = ComponentPresentationRenderer;
                 ViewResult result = GetView(model);
-                SiteLogger.Debug("<<ComponentPresentation", LoggingCategory.Performance);
+                SiteLogger.Information("<<ComponentPresentation", LoggingCategory.Performance);
                 return result;
             }
             catch (ConfigurationException e)
             {
                 ViewResult result = View("Configuration exception: " + e.Message);
-                SiteLogger.Debug("<<ComponentPresentation", LoggingCategory.Performance);
+                SiteLogger.Information("<<ComponentPresentation", LoggingCategory.Performance);
                 return result;
             }
         }

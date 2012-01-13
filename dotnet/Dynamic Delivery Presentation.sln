@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Providers.WebService",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Providers.SDLTridion2011sp1", "DD4T.Providers.SDLTridion2011sp1\DD4T.Providers.SDLTridion2011sp1.csproj", "{CBD555B9-CA2F-480B-81C9-8E61D92B0075}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Providers.Test", "DD4T.Providers.Test\DD4T.Providers.Test.csproj", "{899CC432-25D8-4D65-9D98-95D109300127}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Utils", "DD4T.Utils\DD4T.Utils.csproj", "{D2CE08BE-7281-4697-ADFE-E7A031CB59EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +103,22 @@ Global
 		{CBD555B9-CA2F-480B-81C9-8E61D92B0075}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CBD555B9-CA2F-480B-81C9-8E61D92B0075}.TridionDebug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CBD555B9-CA2F-480B-81C9-8E61D92B0075}.TridionDebug|Any CPU.Build.0 = Debug|Any CPU
+		{899CC432-25D8-4D65-9D98-95D109300127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{899CC432-25D8-4D65-9D98-95D109300127}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{899CC432-25D8-4D65-9D98-95D109300127}.DebugTridion2011|Any CPU.ActiveCfg = Debug|Any CPU
+		{899CC432-25D8-4D65-9D98-95D109300127}.DebugTridion2011|Any CPU.Build.0 = Debug|Any CPU
+		{899CC432-25D8-4D65-9D98-95D109300127}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{899CC432-25D8-4D65-9D98-95D109300127}.Release|Any CPU.Build.0 = Release|Any CPU
+		{899CC432-25D8-4D65-9D98-95D109300127}.TridionDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{899CC432-25D8-4D65-9D98-95D109300127}.TridionDebug|Any CPU.Build.0 = Debug|Any CPU
+		{D2CE08BE-7281-4697-ADFE-E7A031CB59EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2CE08BE-7281-4697-ADFE-E7A031CB59EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2CE08BE-7281-4697-ADFE-E7A031CB59EC}.DebugTridion2011|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2CE08BE-7281-4697-ADFE-E7A031CB59EC}.DebugTridion2011|Any CPU.Build.0 = Debug|Any CPU
+		{D2CE08BE-7281-4697-ADFE-E7A031CB59EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2CE08BE-7281-4697-ADFE-E7A031CB59EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2CE08BE-7281-4697-ADFE-E7A031CB59EC}.TridionDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2CE08BE-7281-4697-ADFE-E7A031CB59EC}.TridionDebug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

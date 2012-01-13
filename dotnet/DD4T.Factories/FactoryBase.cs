@@ -1,7 +1,7 @@
-﻿using DD4T.Utilities;
-using DD4T.ContentModel.Contracts.Caching;
+﻿using DD4T.ContentModel.Contracts.Caching;
 using DD4T.Factories.Caching;
 using System;
+using DD4T.Utils;
 
 namespace DD4T.Factories
 {
