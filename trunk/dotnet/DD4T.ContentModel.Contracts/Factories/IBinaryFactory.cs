@@ -16,5 +16,6 @@ namespace DD4T.ContentModel.Factories
         bool HasBinaryChanged(string url);
         DateTime FindLastPublishedDate(string url);
         bool LoadBinariesAsStream { get; set; }
+        string GetUrlForUri(string uri);
     }
 }

@@ -92,5 +92,11 @@ namespace DD4T.Providers.SDLTridion2009
         {
             throw new NotImplementedException();
         }
+
+
+        public string GetUrlForUri(string uri)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -15,5 +15,6 @@ namespace DD4T.ContentModel.Contracts.Providers
         Stream GetBinaryStreamByUrl(string url);
         DateTime GetLastPublishedDateByUrl(string url);
         DateTime GetLastPublishedDateByUri(string uri);
+        string GetUrlForUri(string uri);
     }
 }

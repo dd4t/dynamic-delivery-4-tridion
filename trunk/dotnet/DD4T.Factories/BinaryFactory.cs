@@ -173,5 +173,11 @@ namespace DD4T.Factories
             throw new NotImplementedException();
         }
 
+
+
+        public string GetUrlForUri(string uri)
+        {
+            return BinaryProvider.GetUrlForUri(uri);
+        }
     }
 }
