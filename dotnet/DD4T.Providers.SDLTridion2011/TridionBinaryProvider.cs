@@ -35,7 +35,16 @@ namespace DD4T.Providers.SDLTridion2011
 
 		private static IDictionary<string, DateTime> lastPublishedDates = new Dictionary<string, DateTime>();
 
-
+        private BinaryMetaFactory _binaryMetaFactory = null;
+        private BinaryMetaFactory BinaryMetaFactory
+        {
+            get
+            {
+                if (_binaryMetaFactory == null)
+                    _binaryMetaFactory = new BinaryMetaFactory();
+                return _binaryMetaFactory;
+            }
+        }
         #region IBinaryProvider Members
 
         public byte[] GetBinaryByUri(string uri)
@@ -99,6 +108,12 @@ namespace DD4T.Providers.SDLTridion2011
         public System.IO.Stream GetBinaryStreamByUrl(string url)
         {
             throw new NotImplementedException();
+        }
+
+        public string GetUrlForUri(string uri)
+        {
+            var item = BinaryMetaFactory.GetMeta(uri);
+            return item.UrlPath ?? string.Empty;
         }
     }
 }

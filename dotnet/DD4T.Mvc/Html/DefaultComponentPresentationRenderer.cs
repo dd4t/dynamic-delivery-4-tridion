@@ -24,11 +24,16 @@ namespace DD4T.Mvc.Html
             StringBuilder sb = new StringBuilder();
             foreach (IComponentPresentation cp in tridionPage.ComponentPresentations)
             {
-                SiteLogger.Debug("found cp {0} - {1}", LoggingCategory.Performance, cp.Component.Id, cp.ComponentTemplate.Id);
                 if (includeComponentTemplate != null && !MustInclude(cp.ComponentTemplate, includeComponentTemplate))
                     continue;
-                if ((!string.IsNullOrEmpty(includeSchema)) && !MustInclude(cp.Component.Schema, includeSchema))
+                if (cp.Component != null && (!string.IsNullOrEmpty(includeSchema)) && !MustInclude(cp.Component.Schema, includeSchema))
                     continue;
+                // Quirijn: if a component presentation was created by a non-DD4T template, its output was stored in RenderedContent
+                // In that case, we simply write it out
+                // Note that this type of component presentations cannot be excluded based on schema, because we do not know the schema
+                if (!string.IsNullOrEmpty(cp.RenderedContent))
+                    return new MvcHtmlString(cp.RenderedContent);
+                SiteLogger.Debug("found cp {0} - {1}", LoggingCategory.Performance, cp.Component.Id, cp.ComponentTemplate.Id);
                 SiteLogger.Debug("setting page property on cp ", LoggingCategory.Performance);
                 cp.Page = tridionPage;
                 SiteLogger.Debug("about to call RenderComponentPresentation", LoggingCategory.Performance);

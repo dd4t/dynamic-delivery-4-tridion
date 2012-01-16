@@ -38,5 +38,11 @@ namespace DD4T.Providers.Test
         {
             throw new NotImplementedException();
         }
+
+
+        public string GetUrlForUri(string uri)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

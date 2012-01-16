@@ -329,10 +329,14 @@ namespace DD4T.Factories
         private void LoadComponentModelsFromComponentFactory(IPage page)
         {
             SiteLogger.Debug(">>LoadComponentModelsFromComponentFactory ({0})", LoggingCategory.Performance, page.Id);
+
             foreach (DD4T.ContentModel.ComponentPresentation cp in page.ComponentPresentations)
             {
+                if (cp.Component == null)
+                    continue;
+
                 // added by QS: only load DCPs from broker if they are in fact dynamic!
-                if (cp.Component != null && cp.IsDynamic)
+                if (cp.IsDynamic)
                 {
                     cp.Component = (Component)ComponentFactory.GetComponent(cp.Component.Id);
                 }
