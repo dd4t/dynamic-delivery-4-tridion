@@ -12,14 +12,22 @@ namespace DD4T.Templates
     [TcmTemplateParameterSchema("resource:DD4T.Templates.Resources.Schemas.Dynamic Delivery Parameters.xsd")]
     public class PublishBinariesComponent : BaseComponentTemplate
     {
-        BinaryPublisher binaryPublisher;
+        private BinaryPublisher _binaryPublisher = null;
+        protected BinaryPublisher BinaryPublisher
+        {
+            get
+            {
+                if (_binaryPublisher == null)
+                    _binaryPublisher = new BinaryPublisher(Package, Engine);
+                return _binaryPublisher;
+            }
+        }
 
         public PublishBinariesComponent() : base(TemplatingLogger.GetLogger(typeof(PublishBinariesComponent))) { }
 
         #region DynamicDeliveryTransformer Members
         protected override void TransformComponent(Dynamic.Component component)
         {
-            binaryPublisher = new BinaryPublisher(Package, Engine);
 
 
             // call helper function to publish all relevant multimedia components
@@ -33,7 +41,7 @@ namespace DD4T.Templates
         #endregion
 
         #region Private Members
-        private void PublishAllBinaries(Dynamic.FieldSet fieldSet)
+        protected void PublishAllBinaries(Dynamic.FieldSet fieldSet)
         {
             foreach (Dynamic.Field field in fieldSet.Values)
             {
@@ -56,16 +64,16 @@ namespace DD4T.Templates
                     for (int i = 0; i < field.Values.Count; i++)
                     {
                         string xhtml = field.Values[i];
-                        field.Values[i] = binaryPublisher.PublishBinariesInRichTextField(xhtml);
+                        field.Values[i] = BinaryPublisher.PublishBinariesInRichTextField(xhtml);
                     }
                 }
             }
         }
-        private void PublishAllBinaries(Dynamic.Component component)
+        protected void PublishAllBinaries(Dynamic.Component component)
         {
             if (component.ComponentType.Equals(Dynamic.ComponentType.Multimedia))
             {
-                component.Multimedia.Url = binaryPublisher.PublishMultimediaComponent(component.Id);
+                component.Multimedia.Url = BinaryPublisher.PublishMultimediaComponent(component.Id);
             }
             PublishAllBinaries(component.Fields);
             PublishAllBinaries(component.MetadataFields);

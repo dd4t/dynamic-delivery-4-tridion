@@ -56,6 +56,8 @@ namespace DD4T.Templates.Base.Builder
                // the component presentation could not be deserialized, this probably not a Dynamic Delivery template
                // just store the output as 'RenderedContent' on the CP
                cp.RenderedContent = renderedContent;
+                // because the CT was not a DD4T CT, we will generate the DD4T XML code here
+               cp.Component = manager.BuildComponent(tcmComponentPresentation.Component);
             }
          }
          cp.ComponentTemplate = manager.BuildComponentTemplate(tcmComponentPresentation.ComponentTemplate);
