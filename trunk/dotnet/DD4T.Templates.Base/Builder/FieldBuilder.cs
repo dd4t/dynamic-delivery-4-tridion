@@ -6,25 +6,33 @@ using TCM = Tridion.ContentManager.ContentManagement;
 using Tridion.ContentManager.ContentManagement.Fields;
 using DD4T.ContentModel.Exceptions;
 using DD4T.ContentModel;
+using Tridion.Logging;
+using Tridion.ContentManager.Templating;
+using DD4T.Templates.Base.Utils;
 
 namespace DD4T.Templates.Base.Builder
 {
     public class FieldBuilder
     {
+        protected static TemplatingLogger log = TemplatingLogger.GetLogger(typeof(FieldBuilder));
         public static Dynamic.Field BuildField(TCM.Fields.ItemField tcmItemField, int linkLevels, bool resolveWidthAndHeight, BuildManager manager)
         {
             Dynamic.Field f = new Dynamic.Field();
 
             if (tcmItemField == null)
             {
+                GeneralUtils.TimedLog("item field is null");
                 throw new FieldHasNoValueException();
             }
             f.Name = tcmItemField.Name;
             if (tcmItemField is TCM.Fields.XhtmlField)
             {
                 TCM.Fields.XhtmlField sField = (TCM.Fields.XhtmlField)tcmItemField;
+                GeneralUtils.TimedLog(string.Format("item field {0} has {1} values", tcmItemField.Name, sField.Values.Count));
                 if (sField.Values.Count == 0)
+                {
                     throw new FieldHasNoValueException();
+                }
                 foreach (string v in sField.Values)
                 {
                     f.Values.Add(v);
@@ -35,6 +43,7 @@ namespace DD4T.Templates.Base.Builder
             if (tcmItemField is TCM.Fields.MultiLineTextField)
             {
                 TCM.Fields.TextField sField = (TCM.Fields.MultiLineTextField)tcmItemField;
+                GeneralUtils.TimedLog(string.Format("item field {0} has {1} values", tcmItemField.Name, sField.Values.Count));
                 if (sField.Values.Count == 0)
                     throw new FieldHasNoValueException();
                 foreach (string v in sField.Values)
@@ -47,6 +56,7 @@ namespace DD4T.Templates.Base.Builder
             if (tcmItemField is TCM.Fields.TextField)
             {
                 TCM.Fields.TextField sField = (TCM.Fields.TextField)tcmItemField;
+                GeneralUtils.TimedLog(string.Format("item field {0} has {1} values", tcmItemField.Name, sField.Values.Count));
                 if (sField.Values.Count == 0)
                     throw new FieldHasNoValueException();
                 foreach (string v in sField.Values)
@@ -59,6 +69,7 @@ namespace DD4T.Templates.Base.Builder
             if (tcmItemField is TCM.Fields.KeywordField)
             {
                 TCM.Fields.KeywordField sField = (TCM.Fields.KeywordField)tcmItemField;
+                GeneralUtils.TimedLog(string.Format("item field {0} has {1} values", tcmItemField.Name, sField.Values.Count));
                 if (sField.Values.Count == 0)
                     throw new FieldHasNoValueException();
                 // we will wrap each linked component in a ContentModel component
@@ -77,6 +88,7 @@ namespace DD4T.Templates.Base.Builder
             if (tcmItemField is TCM.Fields.NumberField)
             {
                 TCM.Fields.NumberField sField = (TCM.Fields.NumberField)tcmItemField;
+                GeneralUtils.TimedLog(string.Format("item field {0} has {1} values", tcmItemField.Name, sField.Values.Count));
                 if (sField.Values.Count == 0)
                     throw new FieldHasNoValueException();
                 f.NumericValues = (List<double>)sField.Values;
@@ -91,6 +103,7 @@ namespace DD4T.Templates.Base.Builder
             if (tcmItemField is TCM.Fields.DateField)
             {
                 TCM.Fields.DateField sField = (TCM.Fields.DateField)tcmItemField;
+                GeneralUtils.TimedLog(string.Format("item field {0} has {1} values", tcmItemField.Name, sField.Values.Count));
                 if (sField.Values.Count == 0)
                     throw new FieldHasNoValueException();
                 f.DateTimeValues = (List<DateTime>)sField.Values;
@@ -105,6 +118,7 @@ namespace DD4T.Templates.Base.Builder
             if (tcmItemField is TCM.Fields.MultimediaLinkField)
             {
                 TCM.Fields.MultimediaLinkField sField = (TCM.Fields.MultimediaLinkField)tcmItemField;
+                GeneralUtils.TimedLog(string.Format("item field {0} has {1} values", tcmItemField.Name, sField.Values.Count));
                 if (sField.Values.Count == 0)
                     throw new FieldHasNoValueException();
 
@@ -126,6 +140,7 @@ namespace DD4T.Templates.Base.Builder
             if (tcmItemField is TCM.Fields.ComponentLinkField)
             {
                 TCM.Fields.ComponentLinkField sField = (TCM.Fields.ComponentLinkField)tcmItemField;
+                GeneralUtils.TimedLog(string.Format("item field {0} has {1} values", tcmItemField.Name, sField.Values.Count));
                 if (sField.Values.Count == 0)
                     throw new FieldHasNoValueException();
                 // we will wrap each linked component in a ContentModel component
@@ -146,6 +161,7 @@ namespace DD4T.Templates.Base.Builder
             if (tcmItemField is TCM.Fields.EmbeddedSchemaField)
             {
                 TCM.Fields.EmbeddedSchemaField sField = (TCM.Fields.EmbeddedSchemaField)tcmItemField;
+                GeneralUtils.TimedLog(string.Format("item field {0} has {1} values", tcmItemField.Name, sField.Values.Count));
                 if (sField.Values.Count == 0)
                     throw new FieldHasNoValueException();
                 // we will wrap each linked component in a ContentModel component

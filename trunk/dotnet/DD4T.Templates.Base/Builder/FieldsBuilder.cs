@@ -19,6 +19,7 @@ namespace DD4T.Templates.Base.Builder
        {
            GeneralUtils.TimedLog(string.Format("add fields: found {0} fields",tcmItemFields.Count));
            
+
            foreach (TCM.Fields.ItemField tcmItemField in tcmItemFields)
            {
                GeneralUtils.TimedLog("add fields: found " + tcmItemField.Name);
