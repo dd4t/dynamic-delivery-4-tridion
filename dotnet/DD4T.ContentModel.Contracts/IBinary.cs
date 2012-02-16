@@ -8,7 +8,6 @@ namespace DD4T.ContentModel
 {
     public interface IBinary : IComponent
     {
-        DateTime LastPublishedDate { get; }
         byte[] BinaryData { get; set; }
         Stream BinaryStream { get; set; }
         string VariantId { get; }

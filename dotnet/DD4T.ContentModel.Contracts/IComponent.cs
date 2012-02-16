@@ -1,6 +1,7 @@
 ﻿namespace DD4T.ContentModel
 {
     using System.Collections.Generic;
+    using System;
 
     public interface IComponent : IRepositoryLocal, IViewable
     {
@@ -15,5 +16,6 @@
         ISchema Schema { get; }
         //string ResolvedUrl { get; set; }
         int Version { get; }
+        DateTime LastPublishedDate { get; }
     }
 }
