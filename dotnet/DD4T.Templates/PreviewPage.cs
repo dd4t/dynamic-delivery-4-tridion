@@ -69,7 +69,7 @@ namespace DD4T.Templates
            //Commenting out above required change to App.Config
            webRequest.ContentType = "application/x-www-form-urlencoded";
            webRequest.Method = "POST";
-           byte[] bytes = Encoding.ASCII.GetBytes(parameters);
+           byte[] bytes = Encoding.UTF8.GetBytes(parameters);
            Stream os = null;
            try
            { // send the Post
