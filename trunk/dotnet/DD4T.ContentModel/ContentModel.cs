@@ -38,6 +38,7 @@ namespace DD4T.ContentModel
     public class Page : RepositoryLocalItem, IPage
     {
         public string Filename { get; set; }
+        public DateTime LastPublishedDate { get; set; }
 
         public PageTemplate PageTemplate { get; set; }
         [XmlIgnore]
@@ -173,6 +174,8 @@ namespace DD4T.ContentModel
     {
 
         #region Properties
+        public DateTime LastPublishedDate { get; set; }
+
         public Schema Schema { get; set; }
         [XmlIgnore]
         ISchema IComponent.Schema
@@ -527,8 +530,6 @@ namespace DD4T.ContentModel
         public Binary()
         {
         }
-
-        public DateTime LastPublishedDate { get; set; }
 
         public byte[] BinaryData
         {
