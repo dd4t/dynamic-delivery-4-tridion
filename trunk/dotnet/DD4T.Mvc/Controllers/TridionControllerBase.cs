@@ -11,6 +11,7 @@ using System.Web.Configuration;
 using System.IO;
 using System.Security;
 using DD4T.Utils;
+using DD4T.ContentModel.Logging;
 
 namespace DD4T.Mvc.Controllers
 {
@@ -125,19 +126,19 @@ namespace DD4T.Mvc.Controllers
 
         public virtual ActionResult ComponentPresentation(string componentPresentationId)
         {
-            SiteLogger.Information(">>ComponentPresentation", LoggingCategory.Performance);
+            LoggerService.Information(">>ComponentPresentation", LoggingCategory.Performance);
             try
             {
                 IComponentPresentation model = GetComponentPresentation();
                 ViewBag.Renderer = ComponentPresentationRenderer;
                 ViewResult result = GetView(model);
-                SiteLogger.Information("<<ComponentPresentation", LoggingCategory.Performance);
+                LoggerService.Information("<<ComponentPresentation", LoggingCategory.Performance);
                 return result;
             }
             catch (ConfigurationException e)
             {
                 ViewResult result = View("Configuration exception: " + e.Message);
-                SiteLogger.Information("<<ComponentPresentation", LoggingCategory.Performance);
+                LoggerService.Information("<<ComponentPresentation", LoggingCategory.Performance);
                 return result;
             }
         }

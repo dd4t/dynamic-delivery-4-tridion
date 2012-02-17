@@ -28,7 +28,7 @@ namespace DD4T.Factories.Caching
 
         public LastPublishDateChangeMonitor(string key, object cachedItem, GetLastPublishDate getLastPublishDateCallBack)
         {
-            SiteLogger.Debug(">>LastPublishDateChangeMonitor({0}, {1})", key, cachedItem.ToString());
+            LoggerService.Debug(">>LastPublishDateChangeMonitor({0}, {1})", key, cachedItem.ToString());
 
             this._key = key;
             this._cachedItem = cachedItem;
@@ -42,7 +42,7 @@ namespace DD4T.Factories.Caching
                 _timer = new Timer();
 
                 int interval = DefaultCallBackInterval;
-                string configuredInterval = ConfigurationManager.AppSettings["CacheSettings_CallBackInterval"];
+                string configuredInterval = ConfigurationHelper.GetSetting("CacheSettings_CallBackInterval");
                 if (! string.IsNullOrEmpty(configuredInterval))
                 {
                     try
@@ -88,6 +88,7 @@ namespace DD4T.Factories.Caching
 
                 // stop the timer, otherwise the check will continue
                 _timer.Stop();
+                _timer.Dispose();
 
                 // one of the items has been republished in Tridion
                 base.OnChanged(null);

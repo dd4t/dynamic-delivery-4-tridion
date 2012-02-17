@@ -22,6 +22,7 @@ using DD4T.ContentModel.Contracts.Providers;
 using System.Collections;
 using System.Configuration;
 using DD4T.ContentModel.Querying;
+using DD4T.Utils;
 
 namespace DD4T.Providers.SDLTridion2009
 {
@@ -35,8 +36,8 @@ namespace DD4T.Providers.SDLTridion2009
         private string selectByOutputFormat;
         public TridionComponentProvider()
         {
-            selectByComponentTemplateId = ConfigurationManager.AppSettings["ComponentFactory.ComponentTemplateId"];
-            selectByOutputFormat = ConfigurationManager.AppSettings["ComponentFactory.OutputFormat"];
+            selectByComponentTemplateId = ConfigurationHelper.SelectComponentByComponentTemplateId;
+            selectByOutputFormat = ConfigurationHelper.SelectComponentByOutputFormat;
         }
 
         public string GetContent(string uri)

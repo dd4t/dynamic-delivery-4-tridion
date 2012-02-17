@@ -69,13 +69,19 @@ namespace DD4T.Mvc.Providers
             }
 
         }
+
+        private string _resolvedUrl = null;
         public string ResolvedUrl
         {
             get
             {
+                if (_resolvedUrl != null)
+                    return _resolvedUrl;
                 if (string.IsNullOrEmpty(Uri))
-                    return string.Empty;
-
+                {
+                    _resolvedUrl = string.Empty;
+                    return _resolvedUrl;
+                }
                 try
                 {
                     TcmUri tcmUri = new TcmUri(Uri);
@@ -86,12 +92,14 @@ namespace DD4T.Mvc.Providers
                             string resolvedLink = ((TridionSiteMapProvider)this.Provider).LinkFactory.ResolveLink(Uri);
                             if (!String.IsNullOrEmpty(resolvedLink))
                             {
-                                return resolvedLink;
+                                _resolvedUrl = resolvedLink;
+                                return _resolvedUrl;
                             }
                         }
                         return null;
                     }
-                    return Url;
+                    _resolvedUrl = Url;
+                    return _resolvedUrl;
                 }
                 catch
                 {

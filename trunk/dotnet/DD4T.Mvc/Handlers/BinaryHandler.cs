@@ -11,12 +11,11 @@
     using DD4T.ContentModel.Factories;
 	using DD4T.Mvc.Database;
     using DD4T.Factories;
-    //using DD4T.Mvc.Database;
+    using DD4T.Utils;
 
     public class BinaryHandler : IHttpHandler
     {
         #region static members
-        private const string BinaryExtensionsConfigKey = "BinaryFileExtensions";
         private const string BinaryHandlerCachingKey = "BinaryHandlerCaching";
 
         #endregion
@@ -37,7 +36,7 @@
             else
             {
                 binary = BinaryFactory.FindBinary(context.Request.Path);
-                int cacheSetting = Convert.ToInt32(ConfigurationManager.AppSettings[BinaryHandlerCachingKey]);
+                int cacheSetting = ConfigurationHelper.BinaryHandlerCacheExpiration;
                 cache.Insert(url, binary, null, DateTime.Now.AddSeconds(cacheSetting), TimeSpan.Zero);
             }
 
