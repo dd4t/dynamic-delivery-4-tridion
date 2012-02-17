@@ -21,6 +21,7 @@ using System.Collections;
 using System.Configuration;
 using DD4T.ContentModel.Querying;
 using DD4T.Utils;
+using DD4T.ContentModel.Logging;
 
 namespace DD4T.Providers.SDLTridion2011sp1
 {
@@ -39,16 +40,16 @@ namespace DD4T.Providers.SDLTridion2011sp1
 
         public TridionComponentProvider()
         {
-            selectByComponentTemplateId = ConfigurationManager.AppSettings["ComponentFactory.ComponentTemplateId"];
-            selectByOutputFormat = ConfigurationManager.AppSettings["ComponentFactory.OutputFormat"];
-            _cpFactoryList = new Dictionary<int,T.ComponentPresentationFactory>();
+            selectByComponentTemplateId = ConfigurationHelper.SelectComponentByComponentTemplateId;
+            selectByOutputFormat = ConfigurationHelper.SelectComponentByOutputFormat;
+            _cpFactoryList = new Dictionary<int, T.ComponentPresentationFactory>();
             _cmFactoryList = new Dictionary<int,TMeta.ComponentMetaFactory>();
         }
 
         #region IComponentProvider
         public string GetContent(string uri)
         {
-            SiteLogger.Debug(">>GetContent({0})", LoggingCategory.Performance, uri);
+            LoggerService.Debug(">>GetContent({0})", LoggingCategory.Performance, uri);
 
             TcmUri tcmUri = new TcmUri(uri);
 
@@ -62,7 +63,7 @@ namespace DD4T.Providers.SDLTridion2011sp1
                 cp = cpFactory.GetComponentPresentation(tcmUri.ItemId, Convert.ToInt32(selectByComponentTemplateId));
                 if (cp != null)
                 {
-                    SiteLogger.Debug("<<GetContent({0}) - by ct id", LoggingCategory.Performance, uri);
+                    LoggerService.Debug("<<GetContent({0}) - by ct id", LoggingCategory.Performance, uri);
                     return cp.Content;
                 }
             }
@@ -71,13 +72,13 @@ namespace DD4T.Providers.SDLTridion2011sp1
                 cp = cpFactory.GetComponentPresentationWithOutputFormat(tcmUri.ItemId, selectByOutputFormat);
                 if (cp != null)
                 {
-                    SiteLogger.Debug("<<GetContent({0}) - by output format", LoggingCategory.Performance, uri);
+                    LoggerService.Debug("<<GetContent({0}) - by output format", LoggingCategory.Performance, uri);
                     return cp.Content;
                 }
             }
-            SiteLogger.Debug("GetContent: about to find all component presentations for {0}", LoggingCategory.Performance, tcmUri.ToString());
+            LoggerService.Debug("GetContent: about to find all component presentations for {0}", LoggingCategory.Performance, tcmUri.ToString());
             IList cps = cpFactory.FindAllComponentPresentations(tcmUri.ItemId);
-            SiteLogger.Debug("GetContent: found all component presentations for {0}", LoggingCategory.Performance, tcmUri.ToString());
+            LoggerService.Debug("GetContent: found all component presentations for {0}", LoggingCategory.Performance, tcmUri.ToString());
 
             foreach (Tridion.ContentDelivery.DynamicContent.ComponentPresentation _cp in cps)
             {
@@ -85,12 +86,12 @@ namespace DD4T.Providers.SDLTridion2011sp1
                 {
                     if (_cp.Content.Contains("<Component"))
                     {
-                        SiteLogger.Debug("<<GetContent({0}) - find all", LoggingCategory.Performance, uri);
+                        LoggerService.Debug("<<GetContent({0}) - find all", LoggingCategory.Performance, uri);
                         return _cp.Content;
                     }
                 }
             }
-            SiteLogger.Debug("<<GetContent({0}) - not found", LoggingCategory.Performance, uri);
+            LoggerService.Debug("<<GetContent({0}) - not found", LoggingCategory.Performance, uri);
             return string.Empty;
         }
 

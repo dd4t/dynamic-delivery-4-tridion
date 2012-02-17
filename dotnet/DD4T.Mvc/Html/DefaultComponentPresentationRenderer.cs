@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using DD4T.ContentModel;
 using DD4T.Utils;
+using DD4T.ContentModel.Logging;
 
 namespace DD4T.Mvc.Html
 {
@@ -20,7 +21,7 @@ namespace DD4T.Mvc.Html
 
         public MvcHtmlString ComponentPresentations(IPage tridionPage, HtmlHelper htmlHelper, string[] includeComponentTemplate, string includeSchema)
         {
-            SiteLogger.Information(">>ComponentPresentations", LoggingCategory.Performance);
+            LoggerService.Information(">>ComponentPresentations", LoggingCategory.Performance);
             StringBuilder sb = new StringBuilder();
             foreach (IComponentPresentation cp in tridionPage.ComponentPresentations)
             {
@@ -33,15 +34,15 @@ namespace DD4T.Mvc.Html
                 // Note that this type of component presentations cannot be excluded based on schema, because we do not know the schema
                 if (!string.IsNullOrEmpty(cp.RenderedContent))
                     return new MvcHtmlString(cp.RenderedContent);
-                SiteLogger.Debug("found cp {0} - {1}", LoggingCategory.Performance, cp.Component.Id, cp.ComponentTemplate.Id);
-                SiteLogger.Debug("setting page property on cp ", LoggingCategory.Performance);
+                LoggerService.Debug("found cp {0} - {1}", LoggingCategory.Performance, cp.Component.Id, cp.ComponentTemplate.Id);
+                LoggerService.Debug("setting page property on cp ", LoggingCategory.Performance);
                 cp.Page = tridionPage;
-                SiteLogger.Debug("about to call RenderComponentPresentation", LoggingCategory.Performance);
+                LoggerService.Debug("about to call RenderComponentPresentation", LoggingCategory.Performance);
                 sb.Append(RenderComponentPresentation(cp, htmlHelper));
-                SiteLogger.Debug("finished calling RenderComponentPresentation", LoggingCategory.Performance);
+                LoggerService.Debug("finished calling RenderComponentPresentation", LoggingCategory.Performance);
 
             }
-            SiteLogger.Information("<<ComponentPresentations", LoggingCategory.Performance);
+            LoggerService.Information("<<ComponentPresentations", LoggingCategory.Performance);
             return MvcHtmlString.Create(sb.ToString());
         }
 
@@ -91,24 +92,24 @@ namespace DD4T.Mvc.Html
 
         private static MvcHtmlString RenderComponentPresentation(IComponentPresentation cp, HtmlHelper htmlHelper)
         {
-            string controller = WebConfigurationManager.AppSettings["Controller"];
-            string action = WebConfigurationManager.AppSettings["Action"]; 
-        
-            
-            if (cp.ComponentTemplate.MetadataFields.ContainsKey("controller"))
+            string controller = ConfigurationHelper.ComponentPresentationController;
+            string action = ConfigurationHelper.ComponentPresentationAction;
+
+
+            if (cp.ComponentTemplate.MetadataFields != null && cp.ComponentTemplate.MetadataFields.ContainsKey("controller"))
             {
                 controller = cp.ComponentTemplate.MetadataFields["controller"].Value;
             }
-            if (cp.ComponentTemplate.MetadataFields.ContainsKey("action"))
+            if (cp.ComponentTemplate.MetadataFields != null && cp.ComponentTemplate.MetadataFields.ContainsKey("action"))
             {
                 action = cp.ComponentTemplate.MetadataFields["action"].Value;
             }
 
 
-            SiteLogger.Debug("about to render component presentation with controller {0} and action {1}", LoggingCategory.Performance, controller, action);
+            LoggerService.Debug("about to render component presentation with controller {0} and action {1}", LoggingCategory.Performance, controller, action);
             //return ChildActionExtensions.Action(htmlHelper, action, controller, new { componentPresentation = ((ComponentPresentation)cp) });
             MvcHtmlString result = htmlHelper.Action(action, controller, new { componentPresentation = ((ComponentPresentation)cp) });
-            SiteLogger.Debug("finished rendering component presentation with controller {0} and action {1}", LoggingCategory.Performance, controller, action);
+            LoggerService.Debug("finished rendering component presentation with controller {0} and action {1}", LoggingCategory.Performance, controller, action);
             return result;
         }
     }

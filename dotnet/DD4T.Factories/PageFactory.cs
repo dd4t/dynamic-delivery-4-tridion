@@ -13,6 +13,8 @@ using System.Text.RegularExpressions;
 using DD4T.ContentModel.Contracts.Caching;
 using DD4T.Factories.Caching;
 using DD4T.Utils;
+using System.Configuration;
+using DD4T.ContentModel.Logging;
 
 namespace DD4T.Factories
 {
@@ -26,50 +28,52 @@ namespace DD4T.Factories
         private static Regex rePageContentByUri = new Regex("PageContent_([0-9]+)_(.*)");
         private ICacheAgent _cacheAgent = null;
 
+        public const string CacheRegion = "Page";
+
+        
         public IPageProvider PageProvider { get; set; }
-
         public IComponentFactory ComponentFactory { get; set; }
-
         public ILinkFactory LinkFactory { get; set; }
 
 
         #region IPageFactory Members
         public virtual bool TryFindPage(string url, out IPage page)
         {
-            SiteLogger.Debug(">>TryFindPage ({0}", LoggingCategory.Performance, url);
+            LoggerService.Debug(">>TryFindPage ({0}", LoggingCategory.Performance, url);
 			page = null;
 
 
 			string cacheKey = String.Format("Page_{0}_{1}", url, PublicationId);
 
 
-            SiteLogger.Debug("about to load page from cache with key {0}", LoggingCategory.Performance, cacheKey);
+            LoggerService.Debug("about to load page from cache with key {0}", LoggingCategory.Performance, cacheKey);
             page = (IPage)CacheAgent.Load(cacheKey);
-            SiteLogger.Debug("finished loading page from cache with key {0}, page found = {1}", LoggingCategory.Performance, cacheKey, Convert.ToString(page != null));
+            LoggerService.Debug("finished loading page from cache with key {0}, page found = {1}", LoggingCategory.Performance, cacheKey, Convert.ToString(page != null));
 
 			if (page != null) {
-                SiteLogger.Debug("<<TryFindPage ({0}", LoggingCategory.Performance, url);
+                LoggerService.Debug("<<TryFindPage ({0}", LoggingCategory.Performance, url);
                 return true;
 			} else {
-                SiteLogger.Debug("about to load page content from provider with url {0}", LoggingCategory.Performance, url);
+                LoggerService.Debug("about to load page content from provider with url {0}", LoggingCategory.Performance, url);
                 string pageContentFromBroker = PageProvider.GetContentByUrl(url);
-                SiteLogger.Debug("finished loading page content from provider with url {0}, has value: {1}", LoggingCategory.Performance, url, Convert.ToString(!(string.IsNullOrEmpty(pageContentFromBroker))));
+                LoggerService.Debug("finished loading page content from provider with url {0}, has value: {1}", LoggingCategory.Performance, url, Convert.ToString(!(string.IsNullOrEmpty(pageContentFromBroker))));
 
-				if (!pageContentFromBroker.Equals(String.Empty)) {
-
-
-                    SiteLogger.Debug("about to create IPage from content for url {0}", LoggingCategory.Performance, url);
+				if (!pageContentFromBroker.Equals(String.Empty)) 
+                {
+                    LoggerService.Debug("about to create IPage from content for url {0}", LoggingCategory.Performance, url);
                     page = GetIPageObject(pageContentFromBroker);
-                    SiteLogger.Debug("finished creating IPage from content for url {0}", LoggingCategory.Performance, url);
-                    SiteLogger.Debug("about to store page in cache with key {0}", LoggingCategory.Performance, cacheKey);
-					CacheAgent.Store(cacheKey, page);
-                    SiteLogger.Debug("finished storing page in cache with key {0}", LoggingCategory.Performance, cacheKey);
-                    SiteLogger.Debug("<<TryFindPage ({0}", LoggingCategory.Performance, url);
+                    if (IncludeLastPublishedDate)
+                        ((Page)page).LastPublishedDate = PageProvider.GetLastPublishedDateByUrl(url);
+                    LoggerService.Debug("finished creating IPage from content for url {0}", LoggingCategory.Performance, url);
+                    LoggerService.Debug("about to store page in cache with key {0}", LoggingCategory.Performance, cacheKey);
+                    CacheAgent.Store(cacheKey, CacheRegion, page);
+                    LoggerService.Debug("finished storing page in cache with key {0}", LoggingCategory.Performance, cacheKey);
+                    LoggerService.Debug("<<TryFindPage ({0}", LoggingCategory.Performance, url);
                     return true;
 				}
 			}
 
-            SiteLogger.Debug("<<TryFindPage ({0}", LoggingCategory.Performance, url);
+            LoggerService.Debug("<<TryFindPage ({0}", LoggingCategory.Performance, url);
             return false;
         }
 
@@ -85,36 +89,36 @@ namespace DD4T.Factories
 
         public virtual bool TryFindPageContent(string url, out string pageContent)
         {
-            SiteLogger.Debug(">>TryFindPageContent ({0}", LoggingCategory.Performance, url);
+            LoggerService.Debug(">>TryFindPageContent ({0}", LoggingCategory.Performance, url);
 
             pageContent = string.Empty;
 
             string cacheKey = String.Format("PageContent_{0}_{1}", PublicationId, url);
 
-            SiteLogger.Debug("about to load page content from cache with key {0}", LoggingCategory.Performance, cacheKey);
+            LoggerService.Debug("about to load page content from cache with key {0}", LoggingCategory.Performance, cacheKey);
             pageContent = (string)CacheAgent.Load(cacheKey);
-            SiteLogger.Debug("finished loading page content from cache with key {0}, pageContent found {1}", LoggingCategory.Performance, cacheKey, Convert.ToString(!(string.IsNullOrEmpty(pageContent))));
+            LoggerService.Debug("finished loading page content from cache with key {0}, pageContent found {1}", LoggingCategory.Performance, cacheKey, Convert.ToString(!(string.IsNullOrEmpty(pageContent))));
             if (pageContent != null) 
 			{
-                SiteLogger.Debug("<<TryFindPageContent ({0}", LoggingCategory.Performance, url);
+                LoggerService.Debug("<<TryFindPageContent ({0}", LoggingCategory.Performance, url);
                 return true;
             } 
 			else 
 			{
-                SiteLogger.Debug("about to load page content from provider with url {0}", LoggingCategory.Performance, url);
+                LoggerService.Debug("about to load page content from provider with url {0}", LoggingCategory.Performance, url);
                 string tempPageContent = PageProvider.GetContentByUrl(url);
-                SiteLogger.Debug("finished loading page content from provider with url {0}, has value: {1}", LoggingCategory.Performance, url, Convert.ToString(!(string.IsNullOrEmpty(tempPageContent))));
+                LoggerService.Debug("finished loading page content from provider with url {0}, has value: {1}", LoggingCategory.Performance, url, Convert.ToString(!(string.IsNullOrEmpty(tempPageContent))));
 				if (tempPageContent != string.Empty) {
 					pageContent = tempPageContent;
-                    SiteLogger.Debug("about to store page in cache with key {0}", LoggingCategory.Performance, cacheKey);
-                    CacheAgent.Store(cacheKey, pageContent);
-                    SiteLogger.Debug("finished storing page in cache with key {0}", LoggingCategory.Performance, cacheKey);
-                    SiteLogger.Debug("<<TryFindPageContent ({0}", LoggingCategory.Performance, url);
+                    LoggerService.Debug("about to store page in cache with key {0}", LoggingCategory.Performance, cacheKey);
+                    CacheAgent.Store(cacheKey, CacheRegion, pageContent);
+                    LoggerService.Debug("finished storing page in cache with key {0}", LoggingCategory.Performance, cacheKey);
+                    LoggerService.Debug("<<TryFindPageContent ({0}", LoggingCategory.Performance, url);
                     return true;
 				}
 			}
 
-            SiteLogger.Debug("<<TryFindPageContent ({0}", LoggingCategory.Performance, url);
+            LoggerService.Debug("<<TryFindPageContent ({0}", LoggingCategory.Performance, url);
             return false;
         }
         public string FindPageContent(string url)
@@ -144,7 +148,10 @@ namespace DD4T.Factories
             if (tempPageContent != string.Empty)
             {
                 page = GetIPageObject(tempPageContent);
-                CacheAgent.Store(cacheKey, page);
+                if (IncludeLastPublishedDate)
+                    ((Page)page).LastPublishedDate = PageProvider.GetLastPublishedDateByUri(tcmUri);
+
+                CacheAgent.Store(cacheKey, CacheRegion, page);
 
                 return true;
             }
@@ -178,7 +185,7 @@ namespace DD4T.Factories
 				string tempPageContent = PageProvider.GetContentByUri(tcmUri);
 				if (tempPageContent != string.Empty) {
 					pageContent = tempPageContent;
-					CacheAgent.Store(cacheKey, pageContent);
+                    CacheAgent.Store(cacheKey, CacheRegion, pageContent);
 					return true;
 				}
 			}
@@ -211,46 +218,46 @@ namespace DD4T.Factories
         /// <returns>IPage object</returns>
         public IPage GetIPageObject(string pageStringContent)
         {
-            SiteLogger.Debug(">>GetIPageObject(string length {0})", LoggingCategory.Performance, Convert.ToString(pageStringContent.Length));
+            LoggerService.Debug(">>GetIPageObject(string length {0})", LoggingCategory.Performance, Convert.ToString(pageStringContent.Length));
 
             IPage page;
             //Create XML Document to hold Xml returned from WCF Client
-            SiteLogger.Debug("GetIPageObject: about to load XML into XmlDocument", LoggingCategory.Performance);
+            LoggerService.Debug("GetIPageObject: about to load XML into XmlDocument", LoggingCategory.Performance);
             XmlDocument pageContent = new XmlDocument();
             pageContent.LoadXml(pageStringContent);
-            SiteLogger.Debug("GetIPageObject: finished loading XML into XmlDocument", LoggingCategory.Performance);
+            LoggerService.Debug("GetIPageObject: finished loading XML into XmlDocument", LoggingCategory.Performance);
 
             //Load XML into Reader for deserialization
             using (var reader = new XmlNodeReader(pageContent.DocumentElement))
             {
 
 
-                SiteLogger.Debug("GetIPageObject: about to create XmlSerializer", LoggingCategory.Performance);
+                LoggerService.Debug("GetIPageObject: about to create XmlSerializer", LoggingCategory.Performance);
                 var serializer = new XmlSerializer(typeof(Page));
-                SiteLogger.Debug("GetIPageObject: finished creating XmlSerializer", LoggingCategory.Performance);
+                LoggerService.Debug("GetIPageObject: finished creating XmlSerializer", LoggingCategory.Performance);
 
                 //try
                 //{
 
-                SiteLogger.Debug("GetIPageObject: about to deserialize", LoggingCategory.Performance);
+                LoggerService.Debug("GetIPageObject: about to deserialize", LoggingCategory.Performance);
                 page = (IPage)serializer.Deserialize(reader);
-                SiteLogger.Debug("GetIPageObject: finished deserializing", LoggingCategory.Performance);
+                LoggerService.Debug("GetIPageObject: finished deserializing", LoggingCategory.Performance);
                 // set order on page for each ComponentPresentation
                     int orderOnPage = 0;
                     foreach (IComponentPresentation cp in page.ComponentPresentations)
                     {
                         cp.OrderOnPage = orderOnPage++;
                     }
-                    SiteLogger.Debug("GetIPageObject: about to load DCPs", LoggingCategory.Performance);
+                    LoggerService.Debug("GetIPageObject: about to load DCPs", LoggingCategory.Performance);
                     LoadComponentModelsFromComponentFactory(page);
-                    SiteLogger.Debug("GetIPageObject: finished loading DCPs", LoggingCategory.Performance);
+                    LoggerService.Debug("GetIPageObject: finished loading DCPs", LoggingCategory.Performance);
                 //}
                 //catch (Exception)
                 //{
                 //    throw new FieldHasNoValueException();
                 //}
             }
-            SiteLogger.Debug("<<GetIPageObject(string length {0})", LoggingCategory.Performance, Convert.ToString(pageStringContent.Length));
+            LoggerService.Debug("<<GetIPageObject(string length {0})", LoggingCategory.Performance, Convert.ToString(pageStringContent.Length));
             return page;
         }
 
@@ -266,11 +273,13 @@ namespace DD4T.Factories
 
         public override DateTime GetLastPublishedDateCallBack(string key, object cachedItem)
         {
-            SiteLogger.Debug(">>GetLastPublishedDateCallBack {0}", LoggingCategory.Performance, key);
+            LoggerService.Debug(">>GetLastPublishedDateCallBack {0}", LoggingCategory.Performance, key);
+            if (cachedItem == null)
+                return DateTime.Now; // this will force the item to be removed from the cache
             if (cachedItem is IPage)
             {
                 DateTime dt = GetLastPublishedDateByUri(((IPage)cachedItem).Id);
-                SiteLogger.Debug("<<GetLastPublishedDateCallBack {0}", LoggingCategory.Performance, key);
+                LoggerService.Debug("<<GetLastPublishedDateCallBack {0}", LoggingCategory.Performance, key);
                 return dt;
             }
 
@@ -280,7 +289,7 @@ namespace DD4T.Factories
                 int publicationId = Convert.ToInt32(m.Groups[1].Value);
                 string url = m.Groups[2].Value;
                 DateTime dt = GetLastPublishedDateByUrl(url);
-                SiteLogger.Debug("<<GetLastPublishedDateCallBack {0} -- regex", LoggingCategory.Performance, key);
+                LoggerService.Debug("<<GetLastPublishedDateCallBack {0} -- regex", LoggingCategory.Performance, key);
                 return dt;
             }
 
@@ -288,7 +297,7 @@ namespace DD4T.Factories
             {
                 string uri = key.Substring("PageContentByUri_".Length);
                 DateTime dt = GetLastPublishedDateByUri(uri);
-                SiteLogger.Debug("<<GetLastPublishedDateCallBack {0} -- 'PageContentByUri_'", LoggingCategory.Performance, key);
+                LoggerService.Debug("<<GetLastPublishedDateCallBack {0} -- 'PageContentByUri_'", LoggingCategory.Performance, key);
                 return dt;
             }
 
@@ -325,10 +334,11 @@ namespace DD4T.Factories
         }
 #endregion
 
+
         #region private helper methods
         private void LoadComponentModelsFromComponentFactory(IPage page)
         {
-            SiteLogger.Debug(">>LoadComponentModelsFromComponentFactory ({0})", LoggingCategory.Performance, page.Id);
+            LoggerService.Debug(">>LoadComponentModelsFromComponentFactory ({0})", LoggingCategory.Performance, page.Id);
 
             foreach (DD4T.ContentModel.ComponentPresentation cp in page.ComponentPresentations)
             {
@@ -341,14 +351,14 @@ namespace DD4T.Factories
                     cp.Component = (Component)ComponentFactory.GetComponent(cp.Component.Id);
                 }
 
-                SiteLogger.Debug("about to resolve links in component {0}", LoggingCategory.Performance, cp.Component.Id);
+                LoggerService.Debug("about to resolve links in component {0}", LoggingCategory.Performance, cp.Component.Id);
                 foreach (Field tempField in cp.Component.Fields.Values.Where(item => item.FieldType == FieldType.Xhtml))
                 {
                     resolveLinks(tempField, new TcmUri(page.Id));
                 }
-                SiteLogger.Debug("finished resolving links in DCPs on page {0}", LoggingCategory.Performance, page.Id);
+                LoggerService.Debug("finished resolving links in DCPs on page {0}", LoggingCategory.Performance, page.Id);
             }
-            SiteLogger.Debug("<<LoadComponentModelsFromComponentFactory ({0})", LoggingCategory.Performance, page.Id);
+            LoggerService.Debug("<<LoadComponentModelsFromComponentFactory ({0})", LoggingCategory.Performance, page.Id);
         }
 
         private void resolveLinks(Field richTextField, TcmUri pageUri)

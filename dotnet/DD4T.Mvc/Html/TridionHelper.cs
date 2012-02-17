@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using DD4T.ContentModel;
 using DD4T.Utils;
+using DD4T.ContentModel.Logging;
 
 namespace DD4T.Mvc.Html
 {
@@ -55,27 +56,27 @@ namespace DD4T.Mvc.Html
 
         public static MvcHtmlString RenderComponentPresentations(this HtmlHelper helper, string[] byComponentTemplate, string bySchema, IComponentPresentationRenderer renderer)
         {
-            SiteLogger.Information(">>RenderComponentPresentations", LoggingCategory.Performance);
+            LoggerService.Information(">>RenderComponentPresentations", LoggingCategory.Performance);
             IComponentPresentationRenderer cpr = renderer;
             if (!(helper.ViewData.Model is IPage))
             {
                 return new MvcHtmlString("<!-- RenderComponentPresentations can only be used if the model is an instance of IPage -->");
             }
 
-            SiteLogger.Debug("about to cast object as IPage", LoggingCategory.Performance);
+            LoggerService.Debug("about to cast object as IPage", LoggingCategory.Performance);
             IPage tridionPage = helper.ViewData.Model as IPage;
-            SiteLogger.Debug("finished casting object as IPage", LoggingCategory.Performance);
+            LoggerService.Debug("finished casting object as IPage", LoggingCategory.Performance);
             if (renderer == null)
             {
-                SiteLogger.Debug("about to create DefaultComponentPresentationRenderer", LoggingCategory.Performance);
+                LoggerService.Debug("about to create DefaultComponentPresentationRenderer", LoggingCategory.Performance);
                 renderer = DefaultComponentPresentationRenderer.Create();
-                SiteLogger.Debug("finished creating DefaultComponentPresentationRenderer", LoggingCategory.Performance);
+                LoggerService.Debug("finished creating DefaultComponentPresentationRenderer", LoggingCategory.Performance);
             }
 
-            SiteLogger.Debug("about to call renderer.ComponentPresentations", LoggingCategory.Performance);
+            LoggerService.Debug("about to call renderer.ComponentPresentations", LoggingCategory.Performance);
             MvcHtmlString output = renderer.ComponentPresentations(tridionPage, helper, byComponentTemplate, bySchema);
-            SiteLogger.Debug("finished calling renderer.ComponentPresentations", LoggingCategory.Performance);
-            SiteLogger.Information("<<RenderComponentPresentations", LoggingCategory.Performance);
+            LoggerService.Debug("finished calling renderer.ComponentPresentations", LoggingCategory.Performance);
+            LoggerService.Information("<<RenderComponentPresentations", LoggingCategory.Performance);
 
             return output;
         }

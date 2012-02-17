@@ -16,6 +16,7 @@ using DD4T.ContentModel.Querying;
 using DD4T.ContentModel.Contracts.Caching;
 using DD4T.Factories.Caching;
 using DD4T.Utils;
+using DD4T.ContentModel.Logging;
 
 namespace DD4T.Factories
 {
@@ -26,12 +27,13 @@ namespace DD4T.Factories
     {
         public IComponentProvider ComponentProvider { get; set; }
         public const string CacheKeyFormatByUri = "ComponentByUri_{0}";
+        public const string CacheRegion = "Component";
         private ICacheAgent _cacheAgent = null;
 
         #region IComponentFactory members
         public bool TryGetComponent(string componentUri, out IComponent component)
         {
-            SiteLogger.Debug(">>TryGetComponent ({0})", LoggingCategory.Performance, componentUri);
+            LoggerService.Debug(">>TryGetComponent ({0})", LoggingCategory.Performance, componentUri);
 
             component = null;
 
@@ -40,7 +42,7 @@ namespace DD4T.Factories
 
             if (component != null)
             {
-                SiteLogger.Debug("<<TryGetComponent ({0}) - from cache", LoggingCategory.Performance, componentUri);
+                LoggerService.Debug("<<TryGetComponent ({0}) - from cache", LoggingCategory.Performance, componentUri);
                 return true;
             }
 
@@ -48,32 +50,35 @@ namespace DD4T.Factories
 
             if (string.IsNullOrEmpty(content))
             {
-                SiteLogger.Debug("<<TryGetComponent ({0}) - from provider", LoggingCategory.Performance, componentUri);
+                LoggerService.Debug("<<TryGetComponent ({0}) - from provider", LoggingCategory.Performance, componentUri);
                 return false;
             }
 
-            SiteLogger.Debug("about to create IComponent from content ({0})", LoggingCategory.Performance, componentUri);
+            LoggerService.Debug("about to create IComponent from content ({0})", LoggingCategory.Performance, componentUri);
             component = GetIComponentObject(content);
-            SiteLogger.Debug("finished creating IComponent from content ({0})", LoggingCategory.Performance, componentUri);
-            SiteLogger.Debug("about to store IComponent in cache ({0})", LoggingCategory.Performance, componentUri);
-            CacheAgent.Store(cacheKey, component);
-            SiteLogger.Debug("finished storing IComponent in cache ({0})", LoggingCategory.Performance, componentUri);
-            SiteLogger.Debug("<<TryGetComponent ({0})", LoggingCategory.Performance, componentUri);
+            LoggerService.Debug("finished creating IComponent from content ({0})", LoggingCategory.Performance, componentUri);
+
+            if (IncludeLastPublishedDate)
+                ((Component)component).LastPublishedDate = ComponentProvider.GetLastPublishedDate(componentUri);
+            LoggerService.Debug("about to store IComponent in cache ({0})", LoggingCategory.Performance, componentUri);
+            CacheAgent.Store(cacheKey, CacheRegion, component);
+            LoggerService.Debug("finished storing IComponent in cache ({0})", LoggingCategory.Performance, componentUri);
+            LoggerService.Debug("<<TryGetComponent ({0})", LoggingCategory.Performance, componentUri);
             return true;
         }
 
 
         public IComponent GetComponent(string componentUri)
         {
-            SiteLogger.Debug(">>GetComponent ({0})", LoggingCategory.Performance, componentUri);
+            LoggerService.Debug(">>GetComponent ({0})", LoggingCategory.Performance, componentUri);
             IComponent component;
             if (!TryGetComponent(componentUri, out component))
             {
-                SiteLogger.Debug("<<GetComponent ({0}) -- not found", LoggingCategory.Performance, componentUri);
+                LoggerService.Debug("<<GetComponent ({0}) -- not found", LoggingCategory.Performance, componentUri);
                 throw new ComponentNotFoundException();
             }
 
-            SiteLogger.Debug("<<GetComponent ({0})", LoggingCategory.Performance, componentUri);
+            LoggerService.Debug("<<GetComponent ({0})", LoggingCategory.Performance, componentUri);
             return component;
         }
 
@@ -114,7 +119,7 @@ namespace DD4T.Factories
 
         public IList<IComponent> FindComponents(IQuery queryParameters, int pageIndex, int pageSize, out int totalCount)
         {
-            SiteLogger.Debug(">>FindComponents ({0},{1})", LoggingCategory.Performance, queryParameters.ToString(), Convert.ToString(pageIndex));
+            LoggerService.Debug(">>FindComponents ({0},{1})", LoggingCategory.Performance, queryParameters.ToString(), Convert.ToString(pageIndex));
             totalCount = 0;
             IList<string> results = ComponentProvider.FindComponents(queryParameters);
             totalCount = results.Count;
@@ -126,20 +131,20 @@ namespace DD4T.Factories
                 .Where(c => c!= null)
                 .ToList();
 
-            SiteLogger.Debug("<<FindComponents ({0},{1})", LoggingCategory.Performance, queryParameters.ToString(), Convert.ToString(pageIndex));
+            LoggerService.Debug("<<FindComponents ({0},{1})", LoggingCategory.Performance, queryParameters.ToString(), Convert.ToString(pageIndex));
             return pagedResults;
 
         }
 
         public IList<IComponent> FindComponents(IQuery queryParameters)
         {
-            SiteLogger.Debug(">>FindComponents ({0})", LoggingCategory.Performance, queryParameters.ToString());
+            LoggerService.Debug(">>FindComponents ({0})", LoggingCategory.Performance, queryParameters.ToString());
 
             var results = ComponentProvider.FindComponents(queryParameters)
                 .Select(c => { IComponent comp = null; TryGetComponent(c, out comp); return comp; })
                 .Where(c => c!= null)
                 .ToList();
-            SiteLogger.Debug("<<FindComponents ({0})", LoggingCategory.Performance, queryParameters.ToString());
+            LoggerService.Debug("<<FindComponents ({0})", LoggingCategory.Performance, queryParameters.ToString());
             return results;
         }
 
@@ -150,6 +155,8 @@ namespace DD4T.Factories
 
         public override DateTime GetLastPublishedDateCallBack(string key, object cachedItem)
         {
+            if (cachedItem == null)
+                return DateTime.Now; // this will force the item to be removed from the cache
             if (cachedItem is IComponent)
             {
                 return GetLastPublishedDate(((IComponent)cachedItem).Id);

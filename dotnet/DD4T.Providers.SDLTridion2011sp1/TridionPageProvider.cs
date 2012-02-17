@@ -20,6 +20,7 @@ using System.Web;
 using DD4T.ContentModel.Contracts.Providers;
 using DD4T.Utils;
 using System.Collections;
+using DD4T.ContentModel.Logging;
 
 namespace DD4T.Providers.SDLTridion2011sp1
 {
@@ -82,9 +83,10 @@ namespace DD4T.Providers.SDLTridion2011sp1
 
             // Need to get PageMeta data to find all the urls
             List<string> pageUrls = new List<string>();
-            PageMetaFactory metaFactory = new PageMetaFactory(PublicationId); //Todo: add logic to determine site on url
             foreach (string uri in pageUris)
             {
+                TcmUri tcmUri = new TcmUri(uri);
+                PageMetaFactory metaFactory = GetPageMetaFactory(tcmUri.PublicationId);
                 IPageMeta currentMeta = metaFactory.GetMeta(uri);
                 pageUrls.Add(currentMeta.UrlPath);
             }
@@ -100,12 +102,12 @@ namespace DD4T.Providers.SDLTridion2011sp1
         public string GetContentByUrl(string Url)
         {
 
-            SiteLogger.Debug(">>GetContentByUrl({0})", LoggingCategory.Performance, Url);
+            LoggerService.Debug(">>GetContentByUrl({0})", LoggingCategory.Performance, Url);
             string retVal = string.Empty;
 
-            SiteLogger.Debug("GetContentByUrl: about to create query", LoggingCategory.Performance);
+            LoggerService.Debug("GetContentByUrl: about to create query", LoggingCategory.Performance);
             Query pageQuery = new Query();
-            SiteLogger.Debug("GetContentByUrl: created query", LoggingCategory.Performance);
+            LoggerService.Debug("GetContentByUrl: created query", LoggingCategory.Performance);
             ItemTypeCriteria isPage = new ItemTypeCriteria(64);  // TODO There must be an enum of these somewhere
             PageURLCriteria pageUrl = new PageURLCriteria(Url);
 
@@ -116,22 +118,22 @@ namespace DD4T.Providers.SDLTridion2011sp1
                 allCriteria.AddCriteria(correctSite);
             }
             pageQuery.Criteria = allCriteria;
-            SiteLogger.Debug("GetContentByUrl: added criteria to query", LoggingCategory.Performance);
+            LoggerService.Debug("GetContentByUrl: added criteria to query", LoggingCategory.Performance);
 
-            SiteLogger.Debug("GetContentByUrl: about to execute query", LoggingCategory.Performance);
+            LoggerService.Debug("GetContentByUrl: about to execute query", LoggingCategory.Performance);
             string[] resultUris = pageQuery.ExecuteQuery();
-            SiteLogger.Debug("GetContentByUrl: executed query", LoggingCategory.Performance);
+            LoggerService.Debug("GetContentByUrl: executed query", LoggingCategory.Performance);
 
 
             if (resultUris.Length > 0)
             {
                 PageContentAssembler loadPage = new PageContentAssembler();
-                SiteLogger.Debug("GetContentByUrl: created PageContentAssembler", LoggingCategory.Performance);
+                LoggerService.Debug("GetContentByUrl: created PageContentAssembler", LoggingCategory.Performance);
 
                 retVal = loadPage.GetContent(resultUris[0]);
-                SiteLogger.Debug("GetContentByUrl: executed PageContentAssembler", LoggingCategory.Performance);
+                LoggerService.Debug("GetContentByUrl: executed PageContentAssembler", LoggingCategory.Performance);
             }
-            SiteLogger.Debug("<<GetContentByUrl({0})", LoggingCategory.Performance, Url);
+            LoggerService.Debug("<<GetContentByUrl({0})", LoggingCategory.Performance, Url);
             return retVal;
         }
 
@@ -167,8 +169,10 @@ namespace DD4T.Providers.SDLTridion2011sp1
             }
         }
 
-		public DateTime GetLastPublishedDateByUri(string uri) {
-			PageMetaFactory pMetaFactory = new PageMetaFactory(PublicationId);
+		public DateTime GetLastPublishedDateByUri(string uri) 
+        {
+            TcmUri tcmUri = new TcmUri(uri);
+			PageMetaFactory pMetaFactory = GetPageMetaFactory(tcmUri.PublicationId);
 			var pageInfo = pMetaFactory.GetMeta(uri);
 
 			if (pageInfo == null) {
@@ -177,6 +181,25 @@ namespace DD4T.Providers.SDLTridion2011sp1
 				return pageInfo.LastPublicationDate;
 			}
 		}
+
+
+        private object lock1 = new object();
+        private Dictionary<int, PageMetaFactory> _pmFactoryList = new Dictionary<int,PageMetaFactory>();
+        private PageMetaFactory GetPageMetaFactory(int publicationId)
+        {
+            if (_pmFactoryList.ContainsKey(publicationId))
+                return _pmFactoryList[publicationId];
+
+            lock (lock1)
+            {
+                if (!_pmFactoryList.ContainsKey(publicationId)) // we must test again, because in the mean time another thread might have added a record to the dictionary!
+                {
+                    _pmFactoryList.Add(publicationId, new PageMetaFactory(publicationId));
+                }
+            }
+            return _pmFactoryList[publicationId];
+        }
+
         #endregion
     }
 }

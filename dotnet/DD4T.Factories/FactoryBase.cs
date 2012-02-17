@@ -2,6 +2,7 @@
 using DD4T.Factories.Caching;
 using System;
 using DD4T.Utils;
+using System.Configuration;
 
 namespace DD4T.Factories
 {
@@ -57,5 +58,17 @@ namespace DD4T.Factories
                 _cacheAgent = value;
             }
         }
+
+        #region private properties
+        protected bool IncludeLastPublishedDate
+        {
+            get
+            {
+                return ConfigurationHelper.IncludeLastPublishedDate;
+            }
+        }
+        #endregion
+
+
     }
 }

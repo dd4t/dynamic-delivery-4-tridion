@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Caching\NullCacheAgent.cs" />
     <Compile Include="Caching\DefaultCacheAgent.cs" />
     <Compile Include="Caching\LastPublishDateChangeMonitor.cs" />
     <Compile Include="ComponentFactory.cs" />

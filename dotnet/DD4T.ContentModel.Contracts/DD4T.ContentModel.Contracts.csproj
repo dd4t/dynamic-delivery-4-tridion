@@ -81,6 +81,7 @@
     <Compile Include="IRepositoryLocal.cs" />
     <Compile Include="ISchema.cs" />
     <Compile Include="IViewable.cs" />
+    <Compile Include="Logging\ILogWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ITaxonomyProvider.cs" />
     <Compile Include="Providers\IBinaryProvider.cs" />
