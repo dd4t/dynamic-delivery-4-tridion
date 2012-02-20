@@ -15,6 +15,7 @@ using DD4T.ContentModel;
 using DD4T.ContentModel.Exceptions;
 using DD4T.Mvc;
 using DD4T.Mvc.Html;
+using Sample.Web.Mvc.Unity;
 
 namespace Sample.Web.Mvc.Controllers
 {
@@ -32,7 +33,7 @@ namespace Sample.Web.Mvc.Controllers
             : base()
         {
             // TODO: implement DI
-            componentPresentationRenderer = ServiceLocator.GetInstance<IComponentPresentationRenderer>();
+            componentPresentationRenderer = UnityHelper.GetInstance<IComponentPresentationRenderer>();
         }
         #endregion
 
