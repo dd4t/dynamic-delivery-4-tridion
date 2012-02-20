@@ -1,5 +1,5 @@
 #labels Tableofcontents
-  *Architecture
+  * Architecture
     * [11_MVCIntroduction MVC + Tridion = DD4T]
     * [12_FactoriesAndProviders Factories and Providers]
   * .NET
