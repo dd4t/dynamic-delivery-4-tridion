@@ -67,18 +67,11 @@ namespace DD4T.Mvc.Controllers
         [HandleError]
         public virtual ActionResult Page(string pageId)
         {
-            try
-            {
-                IPage model = GetModelForPage(pageId);
-                if (model == null) { throw new PageNotFoundException(); }
-                ViewBag.Title = model.Title;
-                ViewBag.Renderer = ComponentPresentationRenderer;
-                return GetView(model);
-            }
-            catch (PageNotFoundException)
-            {
-                throw new HttpException(404, "Page cannot be found");
-            }
+            IPage model = GetModelForPage(pageId);
+            if (model == null) { throw new HttpException(404, "Page cannot be found"); }
+            ViewBag.Title = model.Title;
+            ViewBag.Renderer = ComponentPresentationRenderer;
+            return GetView(model);
         }
 
         /// <summary>

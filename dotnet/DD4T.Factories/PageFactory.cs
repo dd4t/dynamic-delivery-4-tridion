@@ -1,20 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
-
 using DD4T.ContentModel;
+using DD4T.ContentModel.Contracts.Caching;
+using DD4T.ContentModel.Contracts.Providers;
 using DD4T.ContentModel.Exceptions;
 using DD4T.ContentModel.Factories;
-using System.Collections.Generic;
-
-using DD4T.ContentModel.Contracts.Providers;
-using System.Text.RegularExpressions;
-using DD4T.ContentModel.Contracts.Caching;
+using DD4T.ContentModel.Logging;
 using DD4T.Factories.Caching;
 using DD4T.Utils;
-using System.Configuration;
-using DD4T.ContentModel.Logging;
 
 namespace DD4T.Factories
 {
