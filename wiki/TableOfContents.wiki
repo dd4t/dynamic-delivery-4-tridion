@@ -7,9 +7,9 @@
     * [21_DD4T_and_dotnet Connection DD4T to .NET]
     * [23_PageViews Using Page Views]
     * [26_ComponentViews How to write a component view for DD4T]
+    * [22_PageController Page Controller]
     * [25_ComponentController Using the componentcontroller]
     * [24_HtmlHelpers HtmlHelpers, separating the code from the views]
-    * [22_PageController Page Controller]
   * Java
     * [31_Quickstart Quickstart]
     * [32_BuildingWithMaven  Building With Maven]
