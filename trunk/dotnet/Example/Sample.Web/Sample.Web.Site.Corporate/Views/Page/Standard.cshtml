@@ -8,10 +8,10 @@
 }
 
 <h1>Top menu</h1>
-    @Html.SiteMapMenu(SiteMap.RootNode, Model, Sample.Web.Model.Contracts.MenuType.TopMenu)
+    @*Html.SiteMapMenu(SiteMap.RootNode, Model, Sample.Web.Model.Contracts.MenuType.TopMenu)*@
 
 <h1>Left menu</h1>
-    @Html.SiteMapMenu(SiteMap.RootNode, Model, Sample.Web.Model.Contracts.MenuType.LeftMenu)
+    @*Html.SiteMapMenu(SiteMap.RootNode, Model, Sample.Web.Model.Contracts.MenuType.LeftMenu)*@
 
 <h2>Standard</h2>
 
@@ -21,7 +21,7 @@ Page id: @Model.Id<br />
 
 View name: @Model.PageTemplate.MetadataFields["view"].Value
 
-<div style="background-color:lightgreen">
+<div class="article">
     @Html.RenderComponentPresentations()
 </div>
 
