@@ -1,6 +1,4 @@
 #labels Tableofcontents
-#sidebar TableOfContents
-
 * [Architecture]
     * [11_MVCIntroduction MVC + Tridion = DD4T]
     * [12_FactoriesAndProviders Factories and Providers]
