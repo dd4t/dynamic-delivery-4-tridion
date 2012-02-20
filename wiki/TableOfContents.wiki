@@ -11,5 +11,5 @@
   * [24_HtmlHelpers HtmlHelpers, separating the code from the views]
   * [22_PageController Page Controller]
 * Java
-  * [31_Java Quickstart]
+  * [31_Quickstart Quickstart]
   * [32_BuildingWithMaven  Building With Maven]
