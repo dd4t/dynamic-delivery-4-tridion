@@ -1,22 +1,18 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using DD4T.ContentModel.Factories;
-using DD4T.ContentModel;
-using System.Collections;
 using System.Xml;
 using System.Xml.Serialization;
-using DD4T.ContentModel.Exceptions;
-using System.IO;
-using System.Configuration;
-using DD4T.ContentModel.Contracts.Providers;
-
-using DD4T.ContentModel.Querying;
+using DD4T.ContentModel;
 using DD4T.ContentModel.Contracts.Caching;
+using DD4T.ContentModel.Contracts.Providers;
+using DD4T.ContentModel.Exceptions;
+using DD4T.ContentModel.Factories;
+using DD4T.ContentModel.Logging;
+using DD4T.ContentModel.Querying;
 using DD4T.Factories.Caching;
 using DD4T.Utils;
-using DD4T.ContentModel.Logging;
 
 namespace DD4T.Factories
 {

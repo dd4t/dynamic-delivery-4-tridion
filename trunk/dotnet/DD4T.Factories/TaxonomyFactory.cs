@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Xml;
-using System.Xml.Serialization;
 using DD4T.ContentModel;
-using DD4T.ContentModel.Factories;
-using DD4T.ContentModel.Exceptions;
 using DD4T.ContentModel.Contracts.Providers;
-using DD4T.Providers.SDLTridion2011sp1;
+using DD4T.ContentModel.Exceptions;
+using DD4T.ContentModel.Factories;
 
 namespace DD4T.Factories
 {
