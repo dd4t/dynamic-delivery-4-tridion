@@ -2,7 +2,7 @@
 * Architecture
   * [11_MVCIntroduction MVC + Tridion = DD4T]
   * [12_FactoriesAndProviders Factories and Providers]
-* [DotNet .NET]
+* .NET
   * [40_Templates First things first]
   * [21_DD4T_and_dotnet Connection DD4T to .NET]
   * [23_PageViews Using Page Views]
