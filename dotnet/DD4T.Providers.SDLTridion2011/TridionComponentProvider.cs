@@ -4,9 +4,11 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 
+using T = Tridion.ContentDelivery.DynamicContent;
 using Tridion.ContentDelivery.DynamicContent;
 using Tridion.ContentDelivery.DynamicContent.Query;
 using Query = Tridion.ContentDelivery.DynamicContent.Query.Query;
+using TMeta = Tridion.ContentDelivery.Meta;
 using Tridion.ContentDelivery.Meta;
 using Tridion.ContentDelivery.Web.Linking;
 
@@ -32,12 +34,19 @@ namespace DD4T.Providers.SDLTridion2011
     /// </summary>
     public class TridionComponentProvider : BaseProvider, IComponentProvider
     {
+        Dictionary<int, T.ComponentPresentationFactory> _cpFactoryList = null;
+        Dictionary<int, TMeta.ComponentMetaFactory> _cmFactoryList = null;
+
+        private object lock1 = new object();
+        private object lock2 = new object();
+
         private string selectByComponentTemplateId;
         private string selectByOutputFormat;
         public TridionComponentProvider()
         {
             selectByComponentTemplateId = ConfigurationHelper.SelectComponentByComponentTemplateId;
             selectByOutputFormat = ConfigurationHelper.SelectComponentByOutputFormat;
+            _cmFactoryList = new Dictionary<int, TMeta.ComponentMetaFactory>();
         }
 
         public string GetContent(string uri)
@@ -108,7 +117,24 @@ namespace DD4T.Providers.SDLTridion2011
 
         public DateTime GetLastPublishedDate(string uri)
         {
-            throw new NotImplementedException();
+            TcmUri tcmUri = new TcmUri(uri);
+            TMeta.IComponentMeta cmeta = GetComponentMetaFactory(tcmUri.PublicationId).GetMeta(tcmUri.ItemId);
+            return cmeta == null ? DateTime.Now : cmeta.LastPublicationDate;
+        }
+
+        private TMeta.ComponentMetaFactory GetComponentMetaFactory(int publicationId)
+        {
+            if (_cmFactoryList.ContainsKey(publicationId))
+                return _cmFactoryList[publicationId];
+
+            lock (lock1)
+            {
+                if (!_cmFactoryList.ContainsKey(publicationId)) // we must test again, because in the mean time another thread might have added a record to the dictionary!
+                {
+                    _cmFactoryList.Add(publicationId, new TMeta.ComponentMetaFactory(publicationId));
+                }
+            }
+            return _cmFactoryList[publicationId];
         }
     }
 }
