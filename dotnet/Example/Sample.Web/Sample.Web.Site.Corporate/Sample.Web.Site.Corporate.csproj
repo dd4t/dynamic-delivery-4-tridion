@@ -23,6 +23,8 @@
     <SccProvider>
     </SccProvider>
     <UseIISExpress>false</UseIISExpress>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Sample.Web\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -198,7 +200,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Sample.Web.Mvc\Sample.Web.Mvc.csproj">
       <Project>{688354A0-541C-46B2-863C-A1CC4A69FF09}</Project>
-      <Name>SDL.Web.Mvc</Name>
+      <Name>Sample.Web.Mvc</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -262,4 +264,5 @@
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
