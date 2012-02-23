@@ -105,7 +105,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)..\dependencies\Tridion tools\TcmUploadAssembly.bat" "$(SolutionDir)..\dependencies\Tridion tools\TcmUploadAssembly.exe"  "$(SolutionDir)..\dependencies\Tridion tools\config.xml"  "$(TargetPath)"</PostBuildEvent>
+    <PostBuildEvent>REM "$(SolutionDir)..\dependencies\Tridion tools\TcmUploadAssembly.bat" "$(SolutionDir)..\dependencies\Tridion tools\TcmUploadAssembly.exe"  "$(SolutionDir)..\dependencies\Tridion tools\config.xml"  "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
