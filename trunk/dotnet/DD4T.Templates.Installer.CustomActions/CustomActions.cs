@@ -38,7 +38,12 @@ namespace DD4T.Templates.Installer.CustomActions
 
             var tridionHomeDir = Tridion.ContentManager.ConfigurationSettings.GetTcmHomeDirectory();
             var tcmUploadAssembly = string.Format(@"{0}{1}", tridionHomeDir, relPathTcmUploadAssembly);
-          
+            //If we cannot find TcmUploadAssembly: exit
+            if (!File.Exists(tcmUploadAssembly))
+            {
+                throw new Exception(Resources.CanNotFindTcmUploadAssembly);
+            }
+
             string userName = Context.Parameters["USERNAME"];
             string passWord = Context.Parameters["PASSWORD"];
             string cmeUrl = Context.Parameters["CME_URL"];
@@ -46,24 +51,34 @@ namespace DD4T.Templates.Installer.CustomActions
             string rawAssemblyPath = Context.Parameters["ASSEMBLYPATH"];
 
             var templatesDllPath = string.Format(@"{0}\{1}",Path.GetDirectoryName(rawAssemblyPath), TemplatesDllName);
-           
+
             //Debugger.Launch();
             ProcessStartInfo start = new ProcessStartInfo();
-            start.Arguments = string.Format(" \"{0}\" /targeturl:{1} /folder:{2} /username:{3} /password:{4}", templatesDllPath, cmeUrl, folderUri, userName, passWord);
+            start.Arguments = string.Format(" \"{0}\" /targeturl:{1} /folder:{2} /username:{3} /password:{4} /verbose", templatesDllPath, cmeUrl, folderUri, userName, passWord);
             start.FileName = tcmUploadAssembly;
             start.WindowStyle = ProcessWindowStyle.Hidden;
             start.CreateNoWindow = true;
+            start.RedirectStandardOutput = true;
+            start.UseShellExecute = false;
             int exitCode = 0;
+            StringBuilder output = new StringBuilder();
             using (Process proc = Process.Start(start))
-            {
-                proc.WaitForExit(10000);
-                exitCode = proc.ExitCode;
+            {                         
+                using (StreamReader sr = proc.StandardOutput)
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        output.AppendLine(line);                       
+                    }
+                }
+                proc.WaitForExit();
+                exitCode = proc.ExitCode;                
             }
 
             if (exitCode != 0)
-            {
-                string errorMessage = String.Format("{0}. {1}: {2}:{3}", Resources.ErrorTcmUploadAssembly, Resources.ErrorAdditionalInfo, Resources.Exitcode, exitCode);
-                throw new Exception(errorMessage);
+            {                               
+                throw new Exception(string.Format(Resources.ErrorMessage, exitCode, output.ToString()));
             }
         }
         #endregion

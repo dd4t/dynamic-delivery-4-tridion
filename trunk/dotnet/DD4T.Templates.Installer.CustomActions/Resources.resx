@@ -117,13 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ErrorAdditionalInfo" xml:space="preserve">
-    <value>Additional information</value>
+  <data name="CanNotFindTcmUploadAssembly" xml:space="preserve">
+    <value>Could not find the TcmUploadAssembly tool. Verify that this tool exists in the following directory: %TRIDION_HOME%\bin\client</value>
   </data>
-  <data name="ErrorTcmUploadAssembly" xml:space="preserve">
-    <value>Unable to upload the DD4T Templates to Tridion. Please verify your input</value>
-  </data>
-  <data name="Exitcode" xml:space="preserve">
-    <value>Exitcode</value>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>Unable to upload the DD4T Templates into SDL Tridion. Please verify your input. Additional info: Exitcode: {0}. Output from TcmUploadAssembly: {1}</value>
   </data>
 </root>
