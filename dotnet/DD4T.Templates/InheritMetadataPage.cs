@@ -17,7 +17,25 @@ namespace DD4T.Templates
     public partial class InheritMetadataPage : BasePageTemplate
    {
       protected Dynamic.MergeAction defaultMergeAction = Dynamic.MergeAction.Skip;
-     
+
+
+
+      private int LinkLevels
+      {
+          get
+          {
+              if (HasPackageValue(Package, "LinkLevels"))
+              {
+                  return Convert.ToInt32(Package.GetValue("LinkLevels"));
+              }
+              else
+              {
+                  GeneralUtils.TimedLog("no link levels configured, using default level " + this.DefaultLinkLevels);
+                  return this.DefaultLinkLevels;
+              }
+          }
+      }
+
       protected override void TransformPage(Dynamic.Page page)
       {
           GeneralUtils.TimedLog("start TransformPage with id " + page.Id);
@@ -56,7 +74,7 @@ namespace DD4T.Templates
                GeneralUtils.TimedLog(string.Format("about to merge {0} fields on structure group with {1} fields on page ", tcmFields.Count, page.MetadataFields.Count));
 
                // change
-               FieldsBuilder.AddFields(page.MetadataFields, tcmFields, 1, false, mergeAction, Manager);
+               FieldsBuilder.AddFields(page.MetadataFields, tcmFields, LinkLevels, false, mergeAction, Manager);
                GeneralUtils.TimedLog(string.Format("finished merging, we now have {0} fields on structure group and {1} fields on page ", tcmFields.Count, page.MetadataFields.Count));
             }
             tcmSG = tcmSG.OrganizationalItem as StructureGroup;
