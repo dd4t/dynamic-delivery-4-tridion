@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
@@ -23,7 +22,6 @@ using DD4T.ContentModel.Contracts.Providers;
 
 namespace DD4T.Providers.SDLTridion2009
 {
-    [Export(typeof(IPageProvider))]
     /// <summary>
     /// 
     /// </summary>

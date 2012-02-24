@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
@@ -26,7 +25,6 @@ using System.Data;
 
 namespace DD4T.Providers.SDLTridion2011
 {
-    [Export(typeof(IBinaryProvider))]
     /// <summary>
     /// 
     /// </summary>

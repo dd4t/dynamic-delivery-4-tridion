@@ -31,7 +31,9 @@ namespace DD4T.Utils
         public const string ActiveWebsiteAlt1 = "Site.ActiveWebSite";
         public const string DefaultPage = "DD4T.DefaultPage";
         public const string DefaultPageAlt1 = "DefaultPage";
-
+        public const string ShowAnchors = "DD4T.ShowAnchors";
+        public const string LinkToAnchor = "DD4T.LinkToAnchor";
+        public const string UseUriAsAnchor = "DD4T.UseUriAsAnchor";
     }
 
     public static class ConfigurationHelper
@@ -134,7 +136,29 @@ namespace DD4T.Utils
             }
         }
 
+        public static bool ShowAnchors
+        {
+            get
+            {
+                return SafeGetConfigSettingAsBoolean(ConfigurationKeys.ShowAnchors);
+            }
+        }
 
+        public static bool LinkToAnchor
+        {
+            get
+            {
+                return SafeGetConfigSettingAsBoolean(ConfigurationKeys.LinkToAnchor);
+            }
+        }
+
+        public static bool UseUriAsAnchor
+        {
+            get
+            {
+                return SafeGetConfigSettingAsBoolean(ConfigurationKeys.UseUriAsAnchor);
+            }
+        }
         private static int SafeGetConfigSettingAsInt(params string[] keys)
         {
             string setting = SafeGetConfigSettingAsString(keys);

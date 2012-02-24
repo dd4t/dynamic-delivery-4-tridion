@@ -1,4 +1,6 @@
 ﻿using System.Configuration;
+using DD4T.ContentModel;
+using System;
 
 namespace DD4T.Utils
 {
@@ -31,6 +33,17 @@ namespace DD4T.Utils
                 return ConfigurationHelper.GetSettingAsInt(string.Format(PublicationIdKey, webSite), string.Format(PublicationIdKeyAlt1, webSite));
             }
         }
+
+        public static string GetLocalAnchor(IComponentPresentation cp)
+        {
+            return ConfigurationHelper.UseUriAsAnchor ? Convert.ToString(new TcmUri(cp.Component.Id).ItemId) : Convert.ToString(cp.OrderOnPage);
+        }
+
+        public static string GetLocalAnchorTag(TcmUri pageUri, TcmUri componentUri, TcmUri componentTemplateUri, string nativeAnchor)
+        {
+            return ConfigurationHelper.UseUriAsAnchor ? Convert.ToString(componentUri.ItemId) : nativeAnchor;
+        }
+
         #endregion
     }
 }
