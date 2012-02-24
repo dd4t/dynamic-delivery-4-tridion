@@ -473,6 +473,13 @@ namespace DD4T.ContentModel
             }
             return string.Format("tcm:{0}-{1}-{2}", this.PublicationId, this.ItemId, this.ItemTypeId);
         }
+        public static TcmUri NullUri
+        {
+            get
+            {
+                return new TcmUri(0, 0, 0, 0);
+            }
+        }
     }
 
     public class Multimedia : IMultimedia
