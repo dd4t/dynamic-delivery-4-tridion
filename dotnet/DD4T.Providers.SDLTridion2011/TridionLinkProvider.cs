@@ -7,16 +7,32 @@ namespace DD4T.Providers.SDLTridion2011
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.ComponentModel.Composition;
     using Tridion.ContentDelivery.Web.Linking;
     using System.Web.Caching;
     using System.Web;
     using DD4T.ContentModel.Contracts.Providers;
     using System.Diagnostics;
+    using DD4T.Utils;
 
-    [Export(typeof(ILinkProvider))]
+    
     public class TridionLinkProvider : BaseProvider, ILinkProvider, IDisposable
     {
+
+        protected static bool LinkToAnchor
+        {
+            get
+            {
+                return ConfigurationHelper.LinkToAnchor;
+            }
+        }
+        protected static bool UseUriAsAnchor
+        {
+            get
+            {
+                return ConfigurationHelper.UseUriAsAnchor;
+            }
+        }
+
 
         private ComponentLink componentLink = null;
         //private const string uriPrefix = "tcm:";
@@ -32,7 +48,7 @@ namespace DD4T.Providers.SDLTridion2011
             }
         }
         private Dictionary<int, ComponentLink> _componentLinks = new Dictionary<int, ComponentLink>();
-        private ComponentLink GetComponentLink(TcmUri uri)
+        protected ComponentLink GetComponentLink(TcmUri uri)
         {
             if (!_componentLinks.ContainsKey(uri.PublicationId))
             {
@@ -45,18 +61,11 @@ namespace DD4T.Providers.SDLTridion2011
 
         public string ResolveLink(string componentUri)
         {
-            TcmUri uri = new TcmUri(componentUri);
+            return ResolveLink(TcmUri.NullUri.ToString(), componentUri, TcmUri.NullUri.ToString());
 
-            if (!uri.Equals(emptyTcmUri))
-            {
-                Link link = GetComponentLink(uri).GetLink(uri.ToString());
-                return link.IsResolved ? link.Url : null;
-            }
-    
-            return null;
         }
 
-        public string ResolveLink(string sourcePageUri, string componentUri, string excludeComponentTemplateUri)
+        public virtual string ResolveLink(string sourcePageUri, string componentUri, string excludeComponentTemplateUri)
         {
             TcmUri componentUriToLinkTo = new TcmUri(componentUri);
             TcmUri pageUri = new TcmUri(sourcePageUri);
@@ -64,12 +73,12 @@ namespace DD4T.Providers.SDLTridion2011
 
             if (!componentUriToLinkTo.Equals(emptyTcmUri))
             {
-                Link link = GetComponentLink(componentUriToLinkTo).GetLink(pageUri.ToString(), componentUriToLinkTo.ToString(), componentTemplateUri.ToString(), String.Empty, String.Empty, false, false);
+                Link link = GetComponentLink(componentUriToLinkTo).GetLink(pageUri.ToString(), componentUriToLinkTo.ToString(), componentTemplateUri.ToString(), String.Empty, String.Empty, false, LinkToAnchor);
                 if (!link.IsResolved)
                 {
                     return null;
                 }
-                return link.Url;
+                return LinkToAnchor && link.Anchor != "0" ? string.Format("{0}#{1}", link.Url, TridionHelper.GetLocalAnchorTag(pageUri, componentUriToLinkTo, componentTemplateUri, link.Anchor)) : link.Url;
             }
 
             return null;
