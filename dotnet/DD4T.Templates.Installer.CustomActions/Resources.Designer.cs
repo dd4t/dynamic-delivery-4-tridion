@@ -61,29 +61,20 @@ namespace DD4T.Templates.Installer.CustomActions {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Additional information.
+        ///   Looks up a localized string similar to Could not find the TcmUploadAssembly tool. Verify that this tool exists in the following directory: %TRIDION_HOME%\bin\client.
         /// </summary>
-        internal static string ErrorAdditionalInfo {
+        internal static string CanNotFindTcmUploadAssembly {
             get {
-                return ResourceManager.GetString("ErrorAdditionalInfo", resourceCulture);
+                return ResourceManager.GetString("CanNotFindTcmUploadAssembly", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to upload the DD4T Templates to Tridion. Please verify your input.
+        ///   Looks up a localized string similar to Unable to upload the DD4T Templates into SDL Tridion. Please verify your input. Additional info: Exitcode: {0}. Output from TcmUploadAssembly: {1}.
         /// </summary>
-        internal static string ErrorTcmUploadAssembly {
+        internal static string ErrorMessage {
             get {
-                return ResourceManager.GetString("ErrorTcmUploadAssembly", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Exitcode.
-        /// </summary>
-        internal static string Exitcode {
-            get {
-                return ResourceManager.GetString("Exitcode", resourceCulture);
+                return ResourceManager.GetString("ErrorMessage", resourceCulture);
             }
         }
     }
