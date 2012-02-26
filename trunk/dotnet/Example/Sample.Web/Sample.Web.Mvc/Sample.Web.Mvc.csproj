@@ -64,6 +64,9 @@
     <Reference Include="EntityFramework">
       <HintPath>..\..\Dependencies\Third Party\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -94,6 +97,7 @@
     <Compile Include="HtmlHelpers\RichTextHelper.cs" />
     <Compile Include="HtmlHelpers\SiteMapHelper.cs" />
     <Compile Include="HtmlHelpers\SiteMapMenuHelper.cs" />
+    <Compile Include="Logging\Log4NetLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unity\UnityDependencyResolver.cs" />
     <Compile Include="Unity\UnityHelper.cs" />
