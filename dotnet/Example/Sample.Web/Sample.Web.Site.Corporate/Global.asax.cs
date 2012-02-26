@@ -4,6 +4,7 @@ using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using System.Configuration;
 using Sample.Web.Mvc.Unity;
+using log4net.Config;
 
 namespace SampleWebsite
 {
@@ -61,6 +62,8 @@ namespace SampleWebsite
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            XmlConfigurator.Configure();
 
             IUnityContainer container = new UnityContainer();
             UnityConfigurationSection section
