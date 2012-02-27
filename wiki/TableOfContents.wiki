@@ -4,6 +4,7 @@
     * [12_FactoriesAndProviders Factories and Providers]
   * .NET
     * [40_Templates First things first]
+    * [41_Quickstartdotnet Quickstart]
     * [21_DD4T_and_dotnet Connection DD4T to .NET]
     * [23_PageViews Using Page Views]
     * [26_ComponentViews How to write a component view for DD4T]
