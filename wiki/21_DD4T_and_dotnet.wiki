@@ -29,7 +29,7 @@ DD4T solves this problem by making sure the pages and content are published to t
 
 The following diagram shows the key parts of the architecture:
 
-http://dynamic-delivery-4-tridion.googlecode.com/svn/wiki/images/XMLFlow.png
+http://dynamic-delivery-4-tridion.googlecode.com/svn/wiki/images/XMLflow.png
 
 
 
