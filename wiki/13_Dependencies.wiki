@@ -17,5 +17,5 @@ Examples of how DD4T can be used:
 = Work in progress =  
   The diagram shows the desired situation; the reality at this moment is different:
   * There is no DD4T.Web; this logic is included in DD4T.Mvc (result: some DD4T functionality like sitemaps require MVC 3.0 now, where this would not be strictly necessary)
-  * There are too many dependencies on DD4T.ContentModel because it contains the TcmUri class. This class must be moved to Contracts, reducing the number of dependencies.  
+  * There are too many dependencies on DD4T.\ContentModel because it contains the \TcmUri class. This class must be moved to Contracts, reducing the number of dependencies.  
   * The providers should ONLY contain code that interact with a source system such as Tridion.
