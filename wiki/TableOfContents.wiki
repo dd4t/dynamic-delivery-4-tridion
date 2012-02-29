@@ -2,6 +2,7 @@
   * Architecture
     * [11_MVCIntroduction MVC + Tridion = DD4T]
     * [12_FactoriesAndProviders Factories and Providers]
+    * [13_Dependencies Assemblies and Dependencies]
   * .NET
     * [40_Templates First things first]
     * [41_QuickstartDotNet Quickstart]
