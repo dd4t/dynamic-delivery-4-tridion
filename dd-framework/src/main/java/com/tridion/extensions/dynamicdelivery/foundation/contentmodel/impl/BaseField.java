@@ -30,7 +30,7 @@ import com.tridion.extensions.dynamicdelivery.foundation.contentmodel.Field;
 import com.tridion.extensions.dynamicdelivery.foundation.contentmodel.FieldSet;
 import com.tridion.extensions.dynamicdelivery.foundation.contentmodel.Field.FieldType;
 
-public abstract class BaseField {
+public abstract class BaseField implements Field {
 	@Element(name = "name")
 	private String name;
 	@ElementList(name = "textValues", required = false)
@@ -45,6 +45,8 @@ public abstract class BaseField {
 	private List<FieldSet> embeddedValues;
 	@Attribute(required = false)
 	private FieldType fieldType;
+	@Attribute(required = false)
+	private String xPath;
 
 	/**
 	 * Note: it seems like simplexml does this automatically so it is not needed.
@@ -143,6 +145,24 @@ public abstract class BaseField {
 		this.name = name;
 	}
 
+	/**
+	 * Get xPath value for the field
+	 * @return
+	 */
+	@Override
+	public String getXPath() {
+		return xPath;
+	}
+
+	/**
+	 * Set xPath value for the field
+	 * @param xPath
+	 */
+	@Override
+	public void setXPath(String xPath) {
+		this.xPath = xPath;		
+	}
+	
 	/**
 	 * Set the field type
 	 * 
