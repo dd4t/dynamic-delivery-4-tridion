@@ -1,0 +1,30 @@
+﻿@using DD4T.Mvc.Html;
+@using Sample.Web.Mvc.HtmlHelpers;
+
+@model DD4T.ContentModel.Component
+@{
+        Layout = "";
+}
+
+<h3>Example</h3>
+
+Component title: @Model.Title<br />
+
+Component id: @Model.Id<br />
+
+Component schema: @Model.Schema.Title<br />
+
+
+Body field:
+@Html.SiteEditField(@Model, @Model.Fields["Body"]);
+@Model.Fields["Body"].Value.ResolveRichText()
+
+
+Embedded features field:
+@Html.SiteEditField(@Model, @Model.Fields["Features"])
+
+
+Embedded features field #2:
+@Html.SiteEditField(@Model, @Model.Fields["Features"], 2)
+
+<hr />
