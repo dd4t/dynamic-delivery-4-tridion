@@ -53,7 +53,7 @@ namespace DD4T.Mvc.Html
                 cp.Page = tridionPage;
                 LoggerService.Debug("about to call RenderComponentPresentation", LoggingCategory.Performance);
                 if (ShowAnchors)
-                    sb.Append(string.Format("<a name=\"{0}\" id=\"{0}\"></a>", DD4T.Utils.TridionHelper.GetLocalAnchor(cp)));
+                    sb.Append(string.Format("<a id=\"{0}\"></a>", DD4T.Utils.TridionHelper.GetLocalAnchor(cp)));
                 sb.Append(RenderComponentPresentation(cp, htmlHelper));
                 LoggerService.Debug("finished calling RenderComponentPresentation", LoggingCategory.Performance);
 
