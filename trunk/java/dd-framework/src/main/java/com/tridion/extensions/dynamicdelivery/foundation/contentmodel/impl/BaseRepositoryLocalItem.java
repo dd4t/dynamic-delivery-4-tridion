@@ -33,6 +33,9 @@ public abstract class BaseRepositoryLocalItem extends BaseItem implements
 	@Element(name = "publication", required = false)
 	private Publication publication;
 
+	@Element(name = "owningPublication", required = false)
+	private Publication owningPublication;
+
 	@Element(name = "folder", required = false)
 	private OrganizationalItem organizationalItem;
 
@@ -52,6 +55,22 @@ public abstract class BaseRepositoryLocalItem extends BaseItem implements
 		this.organizationalItem = organizationalItem;
 	}
 
+	/**
+	 * Get the publication
+	 */
+	@Override
+	public Publication getOwningPublication() {
+		return owningPublication;
+	}
+
+	/**
+	 * Set the publication
+	 */
+	@Override
+	public void setOwningPublication(Publication publication) {
+		this.owningPublication = publication;
+	}
+	
 	/**
 	 * Get the publication
 	 */

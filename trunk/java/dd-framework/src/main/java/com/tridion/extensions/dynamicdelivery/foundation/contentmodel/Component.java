@@ -15,6 +15,8 @@
  */
 package com.tridion.extensions.dynamicdelivery.foundation.contentmodel;
 
+import java.util.Date;
+
 import com.tridion.extensions.dynamicdelivery.foundation.contentmodel.PublishedItem;
 
 /**
@@ -50,4 +52,19 @@ public interface Component extends PublishedItem {
 	public void setResolvedUrl(String resolvedUrl);
 	
 
+	/**
+	 * Get the last published date
+	 * 
+	 * @return the last published date
+	 */
+	public Date getLastPublishedDate();
+
+	/**
+	 * Set the last published date
+	 * 
+	 * @param last published date
+	 */
+	public void setLastPublishedDate(Date date);
+
+	
 }

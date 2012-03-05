@@ -20,11 +20,10 @@ import org.simpleframework.xml.Element;
 import com.tridion.extensions.dynamicdelivery.foundation.contentmodel.Schema;
 
 public class SchemaImpl extends BaseRepositoryLocalItem implements Schema {
-    @Element(name = "rootElement", required = true)
+    @Element(name = "rootElement", required = false)
     private String rootElement;
 
     public String getRootElement() {
-    
         return rootElement;
     }
 

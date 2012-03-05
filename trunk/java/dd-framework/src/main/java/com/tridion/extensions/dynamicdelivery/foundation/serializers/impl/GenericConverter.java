@@ -64,6 +64,9 @@ public class GenericConverter implements Converter<Object> {
 		if("publication".equals(name)){
 			object = (PublicationImpl) serializer.deserialize(node, PublicationImpl.class);
 		}
+		else if("owningPublication".equals(name)){
+			object = (PublicationImpl) serializer.deserialize(node, PublicationImpl.class);
+		}
 		else if("component".equals(name)){
 			object = (GenericComponentImpl) serializer.deserialize(node, GenericComponentImpl.class);			
 		}

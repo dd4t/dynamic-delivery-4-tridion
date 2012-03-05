@@ -46,6 +46,19 @@ public interface Field {
 	public void setName(String name);
 
 	/**
+	 * Get the xPath of the field (used for SiteEdit)
+	 * 
+	 * @return the xPath of the field
+	 */
+	public String getXPath();
+
+	/**
+	 * Set the xPath of the field (used for SiteEdit)
+	 * 
+	 * @param name
+	 */
+	public void setXPath(String xPath);
+	/**
 	 * Set the field type
 	 * 
 	 * @param fieldType
