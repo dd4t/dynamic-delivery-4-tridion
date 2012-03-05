@@ -117,7 +117,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\ConvertFirstCharToLowerCase.xslt" />
     <EmbeddedResource Include="Resources\ConvertFullNameToLowerCase.xslt" />
-    <EmbeddedResource Include="Resources\ConvertToJava.xslt" />
+    <EmbeddedResource Include="Resources\ConvertToJava.xslt">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DD4T.ContentModel.Contracts\DD4T.ContentModel.Contracts.csproj">
