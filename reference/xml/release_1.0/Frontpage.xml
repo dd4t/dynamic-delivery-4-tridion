@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<page>
+  <id>tcm:15-23984-64</id>
+  <title>Homepage</title>
+  <publication>
+    <id>tcm:0-15-1</id>
+    <title>500 SKF Master (EN-GB)</title>
+  </publication>
+  <fileName>index2</fileName>
+  <pageTemplate>
+    <id>tcm:15-159-128</id>
+    <title>Homepage</title>
+    <publication>
+      <id>tcm:0-15-1</id>
+      <title>500 SKF Master (EN-GB)</title>
+    </publication>
+    <fileExtension>html</fileExtension>
+    <metadata>
+      <item>
+        <string>view</string>
+        <field fieldType="Text">
+          <name>view</name>
+          <textValues>
+            <string>home</string>
+          </textValues>
+          <numericValues />
+          <dateTimeValues />
+          <linkedComponentValues />
+          <embeddedValues />
+        </field>
+      </item>
+    </metadata>
+    <folder>
+      <id>tcm:15-184-2</id>
+      <title>Page Templates</title>
+      <publicationId>tcm:0-15-1</publicationId>
+    </folder>
+  </pageTemplate>
+  <metadata />
+  <componentPresentations>
+    <componentPresentation>
+      <component>
+        <id>tcm:15-399</id>
+        <title>UTC Sublanding Main Text</title>
+        <publication>
+          <id>tcm:0-15-1</id>
+          <title>500 SKF Master (EN-GB)</title>
+        </publication>
+        <schema>
+          <id>tcm:15-119-8</id>
+          <title>Text</title>
+          <publication>
+            <id>tcm:0-15-1</id>
+            <title>500 SKF Master (EN-GB)</title>
+          </publication>
+          <folder>
+            <id>tcm:15-106-2</id>
+            <title>Schemas</title>
+            <publicationId>tcm:0-15-1</publicationId>
+          </folder>
+          <rootElement>text</rootElement>
+        </schema>
+        <fields>
+          <item>
+            <string>title</string>
+            <field fieldType="Xhtml">
+              <name>title</name>
+              <textValues>
+                <string>About SKF</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+          <item>
+            <string>paragraph</string>
+            <field fieldType="Embedded">
+              <name>paragraph</name>
+              <textValues />
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues>
+                <fieldSet>
+                  <schema>
+                    <id>tcm:15-107-8</id>
+                    <title>ParagraphEmbedded</title>
+                    <rootElement>Paragraph</rootElement>
+                  </schema>
+                  <fields>
+                    <item>
+                      <string>behaviour</string>
+                      <field fieldType="Text">
+                        <name>behaviour</name>
+                        <textValues>
+                          <string>Paragraph</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>text</string>
+                      <field fieldType="Xhtml">
+                        <name>text</name>
+                        <textValues>
+                          <string>&lt;p xmlns="http://www.w3.org/1999/xhtml"&gt;Being environmentally- and ecologically-conscious has always played a central role in our day-to-day operations. SKF was very early in issuing a corporate environmental policy back in 1989. SKF was also among the first multinational companies to receive a global ISO14001 certification, covering 63 units in 17 countries.&lt;/p&gt;&lt;p xmlns="http://www.w3.org/1999/xhtml"&gt;We have a firm commitment to contributing to ecologically sustainable development. Consequently we continually strive for higher efficiency in our consumption of materials, use of energy, and at the same time, reduce waste and emissions from our operations.&lt;/p&gt;</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>image</string>
+                      <field fieldType="Embedded">
+                        <name>image</name>
+                        <textValues />
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues>
+                          <fieldSet>
+                            <schema>
+                              <id>tcm:15-30060-8</id>
+                              <title>MultipleParagraphImageEmbedded</title>
+                              <rootElement>multipleparagraphimageembedded</rootElement>
+                            </schema>
+                            <fields />
+                          </fieldSet>
+                        </embeddedValues>
+                      </field>
+                    </item>
+                  </fields>
+                </fieldSet>
+              </embeddedValues>
+            </field>
+          </item>
+        </fields>
+        <metadata>
+          <item>
+            <string>generalmetadata</string>
+            <field fieldType="Embedded">
+              <name>generalmetadata</name>
+              <textValues />
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues>
+                <fieldSet>
+                  <schema>
+                    <id>tcm:15-946-8</id>
+                    <title>GeneralMetadataEmbedded</title>
+                    <rootElement>generalmetadataembedded</rootElement>
+                  </schema>
+                  <fields>
+                    <item>
+                      <string>products</string>
+                      <field fieldType="Keyword" categoryName="Products" categoryId="tcm:15-649-512">
+                        <name>products</name>
+                        <textValues>
+                          <string>Bearings</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>services</string>
+                      <field fieldType="Keyword" categoryName="Services" categoryId="tcm:15-653-512">
+                        <name>services</name>
+                        <textValues>
+                          <string>_No Services</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>industries</string>
+                      <field fieldType="Keyword" categoryName="Industries" categoryId="tcm:15-654-512">
+                        <name>industries</name>
+                        <textValues>
+                          <string>_No industries</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>language</string>
+                      <field fieldType="Keyword" categoryName="Language" categoryId="tcm:15-655-512">
+                        <name>language</name>
+                        <textValues>
+                          <string>Chinese simplified</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>mandatory</string>
+                      <field fieldType="Text">
+                        <name>mandatory</name>
+                        <textValues>
+                          <string>Not mandatory</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                  </fields>
+                </fieldSet>
+              </embeddedValues>
+            </field>
+          </item>
+        </metadata>
+        <componentType>Normal</componentType>
+        <folder>
+          <id>tcm:15-143-2</id>
+          <title>070 About SKF</title>
+          <publicationId>tcm:0-15-1</publicationId>
+        </folder>
+        <categories />
+        <version>14</version>
+      </component>
+      <componentTemplate>
+        <id>tcm:15-381-32</id>
+        <title>Text (Main)</title>
+        <publication>
+          <id>tcm:0-15-1</id>
+          <title>500 SKF Master (EN-GB)</title>
+        </publication>
+        <outputFormat>HTML Fragment</outputFormat>
+        <metadata>
+          <item>
+            <string>view</string>
+            <field fieldType="Text">
+              <name>view</name>
+              <textValues>
+                <string>mainText</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+          <item>
+            <string>region</string>
+            <field fieldType="Text">
+              <name>region</name>
+              <textValues>
+                <string>Main</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+        </metadata>
+        <folder>
+          <id>tcm:15-183-2</id>
+          <title>Component Templates</title>
+          <publicationId>tcm:0-15-1</publicationId>
+        </folder>
+      </componentTemplate>
+    </componentPresentation>
+  </componentPresentations>
+  <structureGroup>
+    <id>tcm:15-22-4</id>
+    <title>Root</title>
+    <publicationId>tcm:0-15-1</publicationId>
+  </structureGroup>
+  <categories />
+  <version>4</version>
+</page>

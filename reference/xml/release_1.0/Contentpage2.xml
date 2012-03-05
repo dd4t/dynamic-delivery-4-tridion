@@ -1,0 +1,1574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<page>
+  <id>tcm:10-3004-64</id>
+  <title>Industry Offer/Solution page</title>
+  <publication>
+    <id>tcm:0-10-1</id>
+    <title>500 SKF Master (EN-GB)</title>
+  </publication>
+  <fileName>industry4</fileName>
+  <pageTemplate>
+    <id>tcm:10-157-128</id>
+    <title>Content page</title>
+    <publication>
+      <id>tcm:0-10-1</id>
+      <title>500 SKF Master (EN-GB)</title>
+    </publication>
+    <fileExtension>html</fileExtension>
+    <metadata>
+      <item>
+        <string>view</string>
+        <field fieldType="Text">
+          <name>view</name>
+          <textValues>
+            <string>3-column</string>
+          </textValues>
+          <numericValues />
+          <dateTimeValues />
+          <linkedComponentValues />
+          <embeddedValues />
+        </field>
+      </item>
+    </metadata>
+    <folder>
+      <id>tcm:10-184-2</id>
+      <title>Page Templates</title>
+      <publicationId>tcm:0-15-1</publicationId>
+    </folder>
+  </pageTemplate>
+  <metadata>
+    <item>
+      <string>include</string>
+      <field fieldType="Text">
+        <name>include</name>
+        <textValues>
+          <string>Yes</string>
+        </textValues>
+        <numericValues />
+        <dateTimeValues />
+        <linkedComponentValues />
+        <embeddedValues />
+      </field>
+    </item>
+  </metadata>
+  <componentPresentations>
+    <componentPresentation>
+      <component>
+        <id>tcm:10-20854</id>
+        <title>Main Text</title>
+        <publication>
+          <id>tcm:0-15-1</id>
+          <title>500 SKF Master (EN-GB)</title>
+        </publication>
+        <schema>
+          <id>tcm:10-119-8</id>
+          <title>Text</title>
+          <publication>
+            <id>tcm:0-15-1</id>
+            <title>500 SKF Master (EN-GB)</title>
+          </publication>
+          <folder>
+            <id>tcm:10-106-2</id>
+            <title>Schemas</title>
+            <publicationId>tcm:0-15-1</publicationId>
+          </folder>
+          <rootElement>text</rootElement>
+        </schema>
+        <fields>
+          <item>
+            <string>title</string>
+            <field fieldType="Xhtml">
+              <name>title</name>
+              <textValues>
+                <string>
+                  &amp;lt;This is a title&amp;gt;
+                  &lt;br xmlns="http://www.w3.org/1999/xhtml" /&gt;
+                </string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+          <item>
+            <string>paragraph</string>
+            <field fieldType="Embedded">
+              <name>paragraph</name>
+              <textValues />
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues>
+                <fieldSet>
+                  <schema>
+                    <id>tcm:10-107-8</id>
+                    <title>ParagraphEmbedded</title>
+                    <rootElement>Paragraph</rootElement>
+                  </schema>
+                  <fields>
+                    <item>
+                      <string>behaviour</string>
+                      <field fieldType="Text">
+                        <name>behaviour</name>
+                        <textValues>
+                          <string>Paragraph</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>text</string>
+                      <field fieldType="Xhtml">
+                        <name>text</name>
+                        <textValues>
+                          <string>
+                            &amp;lt;This is a paragraph with some text&amp;gt;
+                            &lt;br xmlns="http://www.w3.org/1999/xhtml" /&gt;
+                          </string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>image</string>
+                      <field fieldType="Embedded">
+                        <name>image</name>
+                        <textValues />
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues>
+                          <fieldSet>
+                            <schema>
+                              <id>tcm:10-30060-8</id>
+                              <title>MultipleParagraphImageEmbedded</title>
+                              <rootElement>multipleparagraphimageembedded</rootElement>
+                            </schema>
+                            <fields />
+                          </fieldSet>
+                        </embeddedValues>
+                      </field>
+                    </item>
+                  </fields>
+                </fieldSet>
+              </embeddedValues>
+            </field>
+          </item>
+        </fields>
+        <metadata>
+          <item>
+            <string>generalmetadata</string>
+            <field fieldType="Embedded">
+              <name>generalmetadata</name>
+              <textValues />
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues>
+                <fieldSet>
+                  <schema>
+                    <id>tcm:10-946-8</id>
+                    <title>GeneralMetadataEmbedded</title>
+                    <rootElement>generalmetadataembedded</rootElement>
+                  </schema>
+                  <fields>
+                    <item>
+                      <string>products</string>
+                      <field fieldType="Keyword" categoryName="Products" categoryId="tcm:10-649-512">
+                        <name>products</name>
+                        <textValues>
+                          <string>_No products</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>services</string>
+                      <field fieldType="Keyword" categoryName="Services" categoryId="tcm:10-653-512">
+                        <name>services</name>
+                        <textValues>
+                          <string>_No Services</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>industries</string>
+                      <field fieldType="Keyword" categoryName="Industries" categoryId="tcm:10-654-512">
+                        <name>industries</name>
+                        <textValues>
+                          <string>_No industries</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>language</string>
+                      <field fieldType="Keyword" categoryName="Language" categoryId="tcm:10-655-512">
+                        <name>language</name>
+                        <textValues>
+                          <string>Chinese simplified</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>mandatory</string>
+                      <field fieldType="Text">
+                        <name>mandatory</name>
+                        <textValues>
+                          <string>Not mandatory</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                  </fields>
+                </fieldSet>
+              </embeddedValues>
+            </field>
+          </item>
+        </metadata>
+        <componentType>Normal</componentType>
+        <folder>
+          <id>tcm:10-7311-2</id>
+          <title>Industry Offer/Solution components</title>
+          <publicationId>tcm:0-15-1</publicationId>
+        </folder>
+        <categories />
+        <version>5</version>
+      </component>
+      <componentTemplate>
+        <id>tcm:10-381-32</id>
+        <title>Text (Main)</title>
+        <publication>
+          <id>tcm:0-15-1</id>
+          <title>500 SKF Master (EN-GB)</title>
+        </publication>
+        <outputFormat>HTML Fragment</outputFormat>
+        <metadata>
+          <item>
+            <string>view</string>
+            <field fieldType="Text">
+              <name>view</name>
+              <textValues>
+                <string>mainText</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+          <item>
+            <string>region</string>
+            <field fieldType="Text">
+              <name>region</name>
+              <textValues>
+                <string>Main</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+        </metadata>
+        <folder>
+          <id>tcm:10-183-2</id>
+          <title>Component Templates</title>
+          <publicationId>tcm:0-15-1</publicationId>
+        </folder>
+      </componentTemplate>
+    </componentPresentation>
+    <componentPresentation>
+      <component>
+        <id>tcm:10-20876</id>
+        <title>Tabs Text</title>
+        <publication>
+          <id>tcm:0-15-1</id>
+          <title>500 SKF Master (EN-GB)</title>
+        </publication>
+        <schema>
+          <id>tcm:10-719-8</id>
+          <title>Tabs</title>
+          <publication>
+            <id>tcm:0-15-1</id>
+            <title>500 SKF Master (EN-GB)</title>
+          </publication>
+          <folder>
+            <id>tcm:10-106-2</id>
+            <title>Schemas</title>
+            <publicationId>tcm:0-15-1</publicationId>
+          </folder>
+          <rootElement>tabs</rootElement>
+        </schema>
+        <fields>
+          <item>
+            <string>tabs</string>
+            <field fieldType="Embedded">
+              <name>tabs</name>
+              <textValues />
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues>
+                <fieldSet>
+                  <schema>
+                    <id>tcm:10-718-8</id>
+                    <title>TabEmbedded</title>
+                    <rootElement>tab_embedded</rootElement>
+                  </schema>
+                  <fields>
+                    <item>
+                      <string>header</string>
+                      <field fieldType="Text">
+                        <name>header</name>
+                        <textValues>
+                          <string>&lt;Tab header 1&gt;</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>type</string>
+                      <field fieldType="Text">
+                        <name>type</name>
+                        <textValues>
+                          <string>Main Text</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>content</string>
+                      <field fieldType="Embedded">
+                        <name>content</name>
+                        <textValues />
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues>
+                          <fieldSet>
+                            <schema>
+                              <id>tcm:10-30204-8</id>
+                              <title>TabLinkEmbedded</title>
+                              <rootElement>tablinkembedded</rootElement>
+                            </schema>
+                            <fields />
+                          </fieldSet>
+                        </embeddedValues>
+                      </field>
+                    </item>
+                  </fields>
+                </fieldSet>
+                <fieldSet>
+                  <schema>
+                    <id>tcm:10-718-8</id>
+                    <title>TabEmbedded</title>
+                    <rootElement>tab_embedded</rootElement>
+                  </schema>
+                  <fields>
+                    <item>
+                      <string>header</string>
+                      <field fieldType="Text">
+                        <name>header</name>
+                        <textValues>
+                          <string>&lt;Tab header 2&gt;</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>type</string>
+                      <field fieldType="Text">
+                        <name>type</name>
+                        <textValues>
+                          <string>Main Text</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>content</string>
+                      <field fieldType="Embedded">
+                        <name>content</name>
+                        <textValues />
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues>
+                          <fieldSet>
+                            <schema>
+                              <id>tcm:10-30204-8</id>
+                              <title>TabLinkEmbedded</title>
+                              <rootElement>tablinkembedded</rootElement>
+                            </schema>
+                            <fields />
+                          </fieldSet>
+                        </embeddedValues>
+                      </field>
+                    </item>
+                  </fields>
+                </fieldSet>
+                <fieldSet>
+                  <schema>
+                    <id>tcm:10-718-8</id>
+                    <title>TabEmbedded</title>
+                    <rootElement>tab_embedded</rootElement>
+                  </schema>
+                  <fields>
+                    <item>
+                      <string>header</string>
+                      <field fieldType="Text">
+                        <name>header</name>
+                        <textValues>
+                          <string>&lt;Tab header 3&gt;</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>type</string>
+                      <field fieldType="Text">
+                        <name>type</name>
+                        <textValues>
+                          <string>Main Text</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>content</string>
+                      <field fieldType="Embedded">
+                        <name>content</name>
+                        <textValues />
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues>
+                          <fieldSet>
+                            <schema>
+                              <id>tcm:10-30204-8</id>
+                              <title>TabLinkEmbedded</title>
+                              <rootElement>tablinkembedded</rootElement>
+                            </schema>
+                            <fields />
+                          </fieldSet>
+                        </embeddedValues>
+                      </field>
+                    </item>
+                  </fields>
+                </fieldSet>
+                <fieldSet>
+                  <schema>
+                    <id>tcm:10-718-8</id>
+                    <title>TabEmbedded</title>
+                    <rootElement>tab_embedded</rootElement>
+                  </schema>
+                  <fields>
+                    <item>
+                      <string>header</string>
+                      <field fieldType="Text">
+                        <name>header</name>
+                        <textValues>
+                          <string>&lt;Tab header 4&gt;</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>type</string>
+                      <field fieldType="Text">
+                        <name>type</name>
+                        <textValues>
+                          <string>Main Text</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>content</string>
+                      <field fieldType="Embedded">
+                        <name>content</name>
+                        <textValues />
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues>
+                          <fieldSet>
+                            <schema>
+                              <id>tcm:10-30204-8</id>
+                              <title>TabLinkEmbedded</title>
+                              <rootElement>tablinkembedded</rootElement>
+                            </schema>
+                            <fields />
+                          </fieldSet>
+                        </embeddedValues>
+                      </field>
+                    </item>
+                  </fields>
+                </fieldSet>
+                <fieldSet>
+                  <schema>
+                    <id>tcm:10-718-8</id>
+                    <title>TabEmbedded</title>
+                    <rootElement>tab_embedded</rootElement>
+                  </schema>
+                  <fields>
+                    <item>
+                      <string>header</string>
+                      <field fieldType="Text">
+                        <name>header</name>
+                        <textValues>
+                          <string>&lt;Tab header 5&gt;</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>type</string>
+                      <field fieldType="Text">
+                        <name>type</name>
+                        <textValues>
+                          <string>Main Text</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>content</string>
+                      <field fieldType="Embedded">
+                        <name>content</name>
+                        <textValues />
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues>
+                          <fieldSet>
+                            <schema>
+                              <id>tcm:10-30204-8</id>
+                              <title>TabLinkEmbedded</title>
+                              <rootElement>tablinkembedded</rootElement>
+                            </schema>
+                            <fields />
+                          </fieldSet>
+                        </embeddedValues>
+                      </field>
+                    </item>
+                  </fields>
+                </fieldSet>
+              </embeddedValues>
+            </field>
+          </item>
+        </fields>
+        <metadata />
+        <componentType>Normal</componentType>
+        <folder>
+          <id>tcm:10-7311-2</id>
+          <title>Industry Offer/Solution components</title>
+          <publicationId>tcm:0-15-1</publicationId>
+        </folder>
+        <categories />
+        <version>1</version>
+      </component>
+      <componentTemplate>
+        <id>tcm:10-368-32</id>
+        <title>Tabs (Main)</title>
+        <publication>
+          <id>tcm:0-15-1</id>
+          <title>500 SKF Master (EN-GB)</title>
+        </publication>
+        <outputFormat>HTML Fragment</outputFormat>
+        <metadata>
+          <item>
+            <string>view</string>
+            <field fieldType="Text">
+              <name>view</name>
+              <textValues>
+                <string>tabs</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+          <item>
+            <string>region</string>
+            <field fieldType="Text">
+              <name>region</name>
+              <textValues>
+                <string>Main</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+        </metadata>
+        <folder>
+          <id>tcm:10-183-2</id>
+          <title>Component Templates</title>
+          <publicationId>tcm:0-15-1</publicationId>
+        </folder>
+      </componentTemplate>
+    </componentPresentation>
+    <componentPresentation>
+      <component>
+        <id>tcm:10-20878</id>
+        <title>Small Campaign</title>
+        <publication>
+          <id>tcm:0-15-1</id>
+          <title>500 SKF Master (EN-GB)</title>
+        </publication>
+        <schema>
+          <id>tcm:10-172-8</id>
+          <title>Campaign banners</title>
+          <publication>
+            <id>tcm:0-15-1</id>
+            <title>500 SKF Master (EN-GB)</title>
+          </publication>
+          <folder>
+            <id>tcm:10-106-2</id>
+            <title>Schemas</title>
+            <publicationId>tcm:0-15-1</publicationId>
+          </folder>
+          <rootElement>campaignbanners</rootElement>
+        </schema>
+        <fields>
+          <item>
+            <string>campaigns</string>
+            <field fieldType="Embedded">
+              <name>campaigns</name>
+              <textValues />
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues>
+                <fieldSet>
+                  <schema>
+                    <id>tcm:10-171-8</id>
+                    <title>CampaignEmbedded</title>
+                    <rootElement>campaignembedded</rootElement>
+                  </schema>
+                  <fields>
+                    <item>
+                      <string>image_flash</string>
+                      <field fieldType="MultiMediaLink">
+                        <name>image_flash</name>
+                        <textValues>
+                          <string>tcm:10-24612</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues>
+                          <component>
+                            <id>tcm:10-24612</id>
+                            <title>Small campaign image</title>
+                            <publication>
+                              <id>tcm:0-15-1</id>
+                              <title>500 SKF Master (EN-GB)</title>
+                            </publication>
+                            <schema>
+                              <id>tcm:10-7449-8</id>
+                              <title>MM Multimedia Campaign Banner</title>
+                              <publication>
+                                <id>tcm:0-15-1</id>
+                                <title>500 SKF Master (EN-GB)</title>
+                              </publication>
+                              <folder>
+                                <id>tcm:10-657-2</id>
+                                <title>MultiMedia</title>
+                                <publicationId>tcm:0-15-1</publicationId>
+                              </folder>
+                              <rootElement>undefined</rootElement>
+                            </schema>
+                            <fields />
+                            <metadata />
+                            <componentType>Multimedia</componentType>
+                            <multimedia>
+                              <url>/Preview/Images/Campaign%20Small_tcm_15-24612.png</url>
+                              <mimeType>image/png</mimeType>
+                              <fileName>Campaign Small.png</fileName>
+                              <fileExtension>png</fileExtension>
+                              <size>35932</size>
+                              <width>0</width>
+                              <height>0</height>
+                            </multimedia>
+                            <folder>
+                              <id>tcm:10-662-2</id>
+                              <title>MultiMedia Assets</title>
+                              <publicationId>tcm:0-15-1</publicationId>
+                            </folder>
+                            <categories />
+                            <version>1</version>
+                          </component>
+                        </linkedComponentValues>
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>title</string>
+                      <field fieldType="Text">
+                        <name>title</name>
+                        <textValues>
+                          <string>&lt;Campaign Title&gt;</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>titlecolor</string>
+                      <field fieldType="Text">
+                        <name>titlecolor</name>
+                        <textValues>
+                          <string>White</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>internallink</string>
+                      <field fieldType="ComponentLink">
+                        <name>internallink</name>
+                        <textValues>
+                          <string>tcm:10-20863</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues>
+                          <component>
+                            <id>tcm:10-20863</id>
+                            <title>Link</title>
+                            <publication>
+                              <id>tcm:0-15-1</id>
+                              <title>500 SKF Master (EN-GB)</title>
+                            </publication>
+                            <schema>
+                              <id>tcm:10-119-8</id>
+                              <title>Text</title>
+                              <publication>
+                                <id>tcm:0-15-1</id>
+                                <title>500 SKF Master (EN-GB)</title>
+                              </publication>
+                              <folder>
+                                <id>tcm:10-106-2</id>
+                                <title>Schemas</title>
+                                <publicationId>tcm:0-15-1</publicationId>
+                              </folder>
+                              <rootElement>text</rootElement>
+                            </schema>
+                            <fields>
+                              <item>
+                                <string>title</string>
+                                <field fieldType="Xhtml">
+                                  <name>title</name>
+                                  <textValues>
+                                    <string>
+                                      Link
+                                      &lt;br xmlns="http://www.w3.org/1999/xhtml" /&gt;
+                                    </string>
+                                  </textValues>
+                                  <numericValues />
+                                  <dateTimeValues />
+                                  <linkedComponentValues />
+                                  <embeddedValues />
+                                </field>
+                              </item>
+                              <item>
+                                <string>paragraph</string>
+                                <field fieldType="Embedded">
+                                  <name>paragraph</name>
+                                  <textValues />
+                                  <numericValues />
+                                  <dateTimeValues />
+                                  <linkedComponentValues />
+                                  <embeddedValues>
+                                    <fieldSet>
+                                      <schema>
+                                        <id>tcm:10-107-8</id>
+                                        <title>ParagraphEmbedded</title>
+                                        <rootElement>Paragraph</rootElement>
+                                      </schema>
+                                      <fields>
+                                        <item>
+                                          <string>behaviour</string>
+                                          <field fieldType="Text">
+                                            <name>behaviour</name>
+                                            <textValues>
+                                              <string>Paragraph</string>
+                                            </textValues>
+                                            <numericValues />
+                                            <dateTimeValues />
+                                            <linkedComponentValues />
+                                            <embeddedValues />
+                                          </field>
+                                        </item>
+                                        <item>
+                                          <string>text</string>
+                                          <field fieldType="Xhtml">
+                                            <name>text</name>
+                                            <textValues>
+                                              <string>
+                                                &amp;lt;Lorem ipsum&amp;gt;
+                                                &lt;br xmlns="http://www.w3.org/1999/xhtml" /&gt;
+                                              </string>
+                                            </textValues>
+                                            <numericValues />
+                                            <dateTimeValues />
+                                            <linkedComponentValues />
+                                            <embeddedValues />
+                                          </field>
+                                        </item>
+                                      </fields>
+                                    </fieldSet>
+                                  </embeddedValues>
+                                </field>
+                              </item>
+                            </fields>
+                            <metadata>
+                              <item>
+                                <string>generalmetadata</string>
+                                <field fieldType="Embedded">
+                                  <name>generalmetadata</name>
+                                  <textValues />
+                                  <numericValues />
+                                  <dateTimeValues />
+                                  <linkedComponentValues />
+                                  <embeddedValues>
+                                    <fieldSet>
+                                      <schema>
+                                        <id>tcm:10-946-8</id>
+                                        <title>GeneralMetadataEmbedded</title>
+                                        <rootElement>generalmetadataembedded</rootElement>
+                                      </schema>
+                                      <fields>
+                                        <item>
+                                          <string>products</string>
+                                          <field fieldType="Keyword" categoryName="Products" categoryId="tcm:10-649-512">
+                                            <name>products</name>
+                                            <textValues>
+                                              <string>_No products</string>
+                                            </textValues>
+                                            <numericValues />
+                                            <dateTimeValues />
+                                            <linkedComponentValues />
+                                            <embeddedValues />
+                                          </field>
+                                        </item>
+                                        <item>
+                                          <string>services</string>
+                                          <field fieldType="Keyword" categoryName="Services" categoryId="tcm:10-653-512">
+                                            <name>services</name>
+                                            <textValues>
+                                              <string>_No Services</string>
+                                            </textValues>
+                                            <numericValues />
+                                            <dateTimeValues />
+                                            <linkedComponentValues />
+                                            <embeddedValues />
+                                          </field>
+                                        </item>
+                                        <item>
+                                          <string>industries</string>
+                                          <field fieldType="Keyword" categoryName="Industries" categoryId="tcm:10-654-512">
+                                            <name>industries</name>
+                                            <textValues>
+                                              <string>_No industries</string>
+                                            </textValues>
+                                            <numericValues />
+                                            <dateTimeValues />
+                                            <linkedComponentValues />
+                                            <embeddedValues />
+                                          </field>
+                                        </item>
+                                        <item>
+                                          <string>language</string>
+                                          <field fieldType="Keyword" categoryName="Language" categoryId="tcm:10-655-512">
+                                            <name>language</name>
+                                            <textValues>
+                                              <string>Chinese simplified</string>
+                                            </textValues>
+                                            <numericValues />
+                                            <dateTimeValues />
+                                            <linkedComponentValues />
+                                            <embeddedValues />
+                                          </field>
+                                        </item>
+                                      </fields>
+                                    </fieldSet>
+                                  </embeddedValues>
+                                </field>
+                              </item>
+                            </metadata>
+                            <componentType>Normal</componentType>
+                            <folder>
+                              <id>tcm:10-6375-2</id>
+                              <title>Site-edit components</title>
+                              <publicationId>tcm:0-15-1</publicationId>
+                            </folder>
+                            <categories />
+                            <version>1</version>
+                          </component>
+                        </linkedComponentValues>
+                        <embeddedValues />
+                      </field>
+                    </item>
+                  </fields>
+                </fieldSet>
+              </embeddedValues>
+            </field>
+          </item>
+        </fields>
+        <metadata>
+          <item>
+            <string>code</string>
+            <field fieldType="Keyword" categoryName="Campaign code" categoryId="tcm:10-1740-512">
+              <name>code</name>
+              <textValues>
+                <string>1002 (test Campaign code)</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+        </metadata>
+        <componentType>Normal</componentType>
+        <folder>
+          <id>tcm:10-7311-2</id>
+          <title>Industry Offer/Solution components</title>
+          <publicationId>tcm:0-15-1</publicationId>
+        </folder>
+        <categories>
+          <category>
+            <id>tcm:10-1740-512</id>
+            <title>Campaign code</title>
+            <keywords>
+              <keyword taxonomyId="tcm:10-1740-512" path="\Campaign code\1002 (test Campaign code)">
+                <id>tcm:10-7522-1024</id>
+                <title>1002 (test Campaign code)</title>
+              </keyword>
+            </keywords>
+          </category>
+        </categories>
+        <version>3</version>
+      </component>
+      <componentTemplate>
+        <id>tcm:10-375-32</id>
+        <title>Campaign 200px (Side)</title>
+        <publication>
+          <id>tcm:0-15-1</id>
+          <title>500 SKF Master (EN-GB)</title>
+        </publication>
+        <outputFormat>HTML Fragment</outputFormat>
+        <metadata>
+          <item>
+            <string>view</string>
+            <field fieldType="Text">
+              <name>view</name>
+              <textValues>
+                <string>campaignBanner</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+          <item>
+            <string>region</string>
+            <field fieldType="Text">
+              <name>region</name>
+              <textValues>
+                <string>Side</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+          <item>
+            <string>uiType</string>
+            <field fieldType="Text">
+              <name>uiType</name>
+              <textValues>
+                <string>side</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+        </metadata>
+        <folder>
+          <id>tcm:10-183-2</id>
+          <title>Component Templates</title>
+          <publicationId>tcm:0-15-1</publicationId>
+        </folder>
+      </componentTemplate>
+    </componentPresentation>
+    <componentPresentation>
+      <component>
+        <id>tcm:10-30041</id>
+        <title>Contact SKF, Side</title>
+        <publication>
+          <id>tcm:0-15-1</id>
+          <title>500 SKF Master (EN-GB)</title>
+        </publication>
+        <schema>
+          <id>tcm:10-447-8</id>
+          <title>Widget</title>
+          <publication>
+            <id>tcm:0-15-1</id>
+            <title>500 SKF Master (EN-GB)</title>
+          </publication>
+          <folder>
+            <id>tcm:10-106-2</id>
+            <title>Schemas</title>
+            <publicationId>tcm:0-15-1</publicationId>
+          </folder>
+          <rootElement>widget</rootElement>
+        </schema>
+        <fields>
+          <item>
+            <string>widget</string>
+            <field fieldType="Text">
+              <name>widget</name>
+              <textValues>
+                <string>Contact SKF</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+        </fields>
+        <metadata />
+        <componentType>Normal</componentType>
+        <folder>
+          <id>tcm:10-7832-2</id>
+          <title>Widget</title>
+          <publicationId>tcm:0-15-1</publicationId>
+        </folder>
+        <categories />
+        <version>2</version>
+      </component>
+      <componentTemplate>
+        <id>tcm:10-13999-32</id>
+        <title>Widget (Side)</title>
+        <publication>
+          <id>tcm:0-15-1</id>
+          <title>500 SKF Master (EN-GB)</title>
+        </publication>
+        <outputFormat>HTML Fragment</outputFormat>
+        <metadata>
+          <item>
+            <string>view</string>
+            <field fieldType="Text">
+              <name>view</name>
+              <textValues>
+                <string>widgetSide</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+          <item>
+            <string>region</string>
+            <field fieldType="Text">
+              <name>region</name>
+              <textValues>
+                <string>Side</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+          <item>
+            <string>uiType</string>
+            <field fieldType="Text">
+              <name>uiType</name>
+              <textValues>
+                <string>side</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+        </metadata>
+        <folder>
+          <id>tcm:10-183-2</id>
+          <title>Component Templates</title>
+          <publicationId>tcm:0-15-1</publicationId>
+        </folder>
+      </componentTemplate>
+    </componentPresentation>
+    <componentPresentation>
+      <component>
+        <id>tcm:10-30042</id>
+        <title>Distributor locator, Side</title>
+        <publication>
+          <id>tcm:0-15-1</id>
+          <title>500 SKF Master (EN-GB)</title>
+        </publication>
+        <schema>
+          <id>tcm:10-447-8</id>
+          <title>Widget</title>
+          <publication>
+            <id>tcm:0-15-1</id>
+            <title>500 SKF Master (EN-GB)</title>
+          </publication>
+          <folder>
+            <id>tcm:10-106-2</id>
+            <title>Schemas</title>
+            <publicationId>tcm:0-15-1</publicationId>
+          </folder>
+          <rootElement>widget</rootElement>
+        </schema>
+        <fields>
+          <item>
+            <string>widget</string>
+            <field fieldType="Text">
+              <name>widget</name>
+              <textValues>
+                <string>Distributor locator</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+        </fields>
+        <metadata />
+        <componentType>Normal</componentType>
+        <folder>
+          <id>tcm:10-7832-2</id>
+          <title>Widget</title>
+          <publicationId>tcm:0-15-1</publicationId>
+        </folder>
+        <categories />
+        <version>1</version>
+      </component>
+      <componentTemplate>
+        <id>tcm:10-13999-32</id>
+        <title>Widget (Side)</title>
+        <publication>
+          <id>tcm:0-15-1</id>
+          <title>500 SKF Master (EN-GB)</title>
+        </publication>
+        <outputFormat>HTML Fragment</outputFormat>
+        <metadata>
+          <item>
+            <string>view</string>
+            <field fieldType="Text">
+              <name>view</name>
+              <textValues>
+                <string>widgetSide</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+          <item>
+            <string>region</string>
+            <field fieldType="Text">
+              <name>region</name>
+              <textValues>
+                <string>Side</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+          <item>
+            <string>uiType</string>
+            <field fieldType="Text">
+              <name>uiType</name>
+              <textValues>
+                <string>side</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+        </metadata>
+        <folder>
+          <id>tcm:10-183-2</id>
+          <title>Component Templates</title>
+          <publicationId>tcm:0-15-1</publicationId>
+        </folder>
+      </componentTemplate>
+    </componentPresentation>
+    <componentPresentation>
+      <component>
+        <id>tcm:10-20864</id>
+        <title>Accordion</title>
+        <publication>
+          <id>tcm:0-15-1</id>
+          <title>500 SKF Master (EN-GB)</title>
+        </publication>
+        <schema>
+          <id>tcm:10-720-8</id>
+          <title>Accordion</title>
+          <publication>
+            <id>tcm:0-15-1</id>
+            <title>500 SKF Master (EN-GB)</title>
+          </publication>
+          <folder>
+            <id>tcm:10-106-2</id>
+            <title>Schemas</title>
+            <publicationId>tcm:0-15-1</publicationId>
+          </folder>
+          <rootElement>accordion</rootElement>
+        </schema>
+        <fields>
+          <item>
+            <string>title</string>
+            <field fieldType="Text">
+              <name>title</name>
+              <textValues>
+                <string>&lt;Accordion title&gt;</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+          <item>
+            <string>content</string>
+            <field fieldType="Embedded">
+              <name>content</name>
+              <textValues />
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues>
+                <fieldSet>
+                  <schema>
+                    <id>tcm:10-623-8</id>
+                    <title>AccordionEmbedded</title>
+                    <rootElement>accordionembedded</rootElement>
+                  </schema>
+                  <fields>
+                    <item>
+                      <string>header</string>
+                      <field fieldType="Text">
+                        <name>header</name>
+                        <textValues>
+                          <string>&lt;Accordion header 1&gt;</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>type</string>
+                      <field fieldType="Text">
+                        <name>type</name>
+                        <textValues>
+                          <string>Promos</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>content</string>
+                      <field fieldType="Embedded">
+                        <name>content</name>
+                        <textValues />
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues>
+                          <fieldSet>
+                            <schema>
+                              <id>tcm:10-30197-8</id>
+                              <title>AccordionLinkEmbedded</title>
+                              <rootElement>accordionlinkembedded</rootElement>
+                            </schema>
+                            <fields />
+                          </fieldSet>
+                          <fieldSet>
+                            <schema>
+                              <id>tcm:10-30197-8</id>
+                              <title>AccordionLinkEmbedded</title>
+                              <rootElement>accordionlinkembedded</rootElement>
+                            </schema>
+                            <fields />
+                          </fieldSet>
+                          <fieldSet>
+                            <schema>
+                              <id>tcm:10-30197-8</id>
+                              <title>AccordionLinkEmbedded</title>
+                              <rootElement>accordionlinkembedded</rootElement>
+                            </schema>
+                            <fields />
+                          </fieldSet>
+                        </embeddedValues>
+                      </field>
+                    </item>
+                  </fields>
+                </fieldSet>
+                <fieldSet>
+                  <schema>
+                    <id>tcm:10-623-8</id>
+                    <title>AccordionEmbedded</title>
+                    <rootElement>accordionembedded</rootElement>
+                  </schema>
+                  <fields>
+                    <item>
+                      <string>header</string>
+                      <field fieldType="Text">
+                        <name>header</name>
+                        <textValues>
+                          <string>&lt;Accordion header 2&gt;</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>type</string>
+                      <field fieldType="Text">
+                        <name>type</name>
+                        <textValues>
+                          <string>Only documents</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                  </fields>
+                </fieldSet>
+                <fieldSet>
+                  <schema>
+                    <id>tcm:10-623-8</id>
+                    <title>AccordionEmbedded</title>
+                    <rootElement>accordionembedded</rootElement>
+                  </schema>
+                  <fields>
+                    <item>
+                      <string>header</string>
+                      <field fieldType="Text">
+                        <name>header</name>
+                        <textValues>
+                          <string>&lt;Accordion header 3&gt;</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>type</string>
+                      <field fieldType="Text">
+                        <name>type</name>
+                        <textValues>
+                          <string>Only documents</string>
+                        </textValues>
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues />
+                      </field>
+                    </item>
+                    <item>
+                      <string>content</string>
+                      <field fieldType="Embedded">
+                        <name>content</name>
+                        <textValues />
+                        <numericValues />
+                        <dateTimeValues />
+                        <linkedComponentValues />
+                        <embeddedValues>
+                          <fieldSet>
+                            <schema>
+                              <id>tcm:10-30197-8</id>
+                              <title>AccordionLinkEmbedded</title>
+                              <rootElement>accordionlinkembedded</rootElement>
+                            </schema>
+                            <fields />
+                          </fieldSet>
+                          <fieldSet>
+                            <schema>
+                              <id>tcm:10-30197-8</id>
+                              <title>AccordionLinkEmbedded</title>
+                              <rootElement>accordionlinkembedded</rootElement>
+                            </schema>
+                            <fields />
+                          </fieldSet>
+                          <fieldSet>
+                            <schema>
+                              <id>tcm:10-30197-8</id>
+                              <title>AccordionLinkEmbedded</title>
+                              <rootElement>accordionlinkembedded</rootElement>
+                            </schema>
+                            <fields />
+                          </fieldSet>
+                          <fieldSet>
+                            <schema>
+                              <id>tcm:10-30197-8</id>
+                              <title>AccordionLinkEmbedded</title>
+                              <rootElement>accordionlinkembedded</rootElement>
+                            </schema>
+                            <fields />
+                          </fieldSet>
+                        </embeddedValues>
+                      </field>
+                    </item>
+                  </fields>
+                </fieldSet>
+              </embeddedValues>
+            </field>
+          </item>
+        </fields>
+        <metadata />
+        <componentType>Normal</componentType>
+        <folder>
+          <id>tcm:10-7311-2</id>
+          <title>Industry Offer/Solution components</title>
+          <publicationId>tcm:0-15-1</publicationId>
+        </folder>
+        <categories />
+        <version>2</version>
+      </component>
+      <componentTemplate>
+        <id>tcm:10-365-32</id>
+        <title>Accordion (Side)</title>
+        <publication>
+          <id>tcm:0-15-1</id>
+          <title>500 SKF Master (EN-GB)</title>
+        </publication>
+        <outputFormat>HTML Fragment</outputFormat>
+        <metadata>
+          <item>
+            <string>view</string>
+            <field fieldType="Text">
+              <name>view</name>
+              <textValues>
+                <string>accordion</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+          <item>
+            <string>region</string>
+            <field fieldType="Text">
+              <name>region</name>
+              <textValues>
+                <string>Side</string>
+              </textValues>
+              <numericValues />
+              <dateTimeValues />
+              <linkedComponentValues />
+              <embeddedValues />
+            </field>
+          </item>
+        </metadata>
+        <folder>
+          <id>tcm:10-183-2</id>
+          <title>Component Templates</title>
+          <publicationId>tcm:0-15-1</publicationId>
+        </folder>
+      </componentTemplate>
+    </componentPresentation>
+  </componentPresentations>
+  <structureGroup>
+    <id>tcm:10-424-4</id>
+    <title>020 Seals</title>
+    <publicationId>tcm:0-15-1</publicationId>
+  </structureGroup>
+  <categories />
+  <version>2</version>
+</page>
