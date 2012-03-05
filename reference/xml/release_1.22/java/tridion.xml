@@ -1,0 +1,2199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page>
+	<id>tcm:10-802-64</id>
+	<title>SDL Tridion</title>
+	<publication>
+		<id>tcm:0-10-1</id>
+		<title>05 SDL EN</title>
+	</publication>
+	<owningPublication>
+		<id>tcm:0-10-1</id>
+		<title>05 SDL EN</title>
+	</owningPublication>
+	<fileName>tridion</fileName>
+	<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+	<pageTemplate>
+		<id>tcm:10-712-128</id>
+		<title>Standard</title>
+		<publication>
+			<id>tcm:0-10-1</id>
+			<title>05 SDL EN</title>
+		</publication>
+		<fileExtension>html</fileExtension>
+		<metadata>
+			<item>
+				<string>view</string>
+				<field fieldType="Text">
+					<name>view</name>
+					<textValues>
+						<string>standard</string>
+					</textValues>
+					<numericValues/>
+					<dateTimeValues/>
+					<linkedComponentValues/>
+					<embeddedValues/>
+				</field>
+			</item>
+		</metadata>
+		<folder>
+			<id>tcm:10-10-2</id>
+			<title>Page Templates</title>
+			<publicationId>tcm:0-10-1</publicationId>
+		</folder>
+	</pageTemplate>
+	<metadata>
+		<item>
+			<string>Robots</string>
+			<field fieldType="Text">
+				<name>Robots</name>
+				<textValues>
+					<string>index, follow</string>
+				</textValues>
+				<numericValues/>
+				<dateTimeValues/>
+				<linkedComponentValues/>
+				<embeddedValues/>
+			</field>
+		</item>
+		<item>
+			<string>TaxonomyForNavigation</string>
+			<field fieldType="Text">
+				<name>TaxonomyForNavigation</name>
+				<textValues>
+					<string>Product</string>
+				</textValues>
+				<numericValues/>
+				<dateTimeValues/>
+				<linkedComponentValues/>
+				<embeddedValues/>
+			</field>
+		</item>
+		<item>
+			<string>NonTranslatedContent</string>
+			<field fieldType="ComponentLink">
+				<name>NonTranslatedContent</name>
+				<textValues>
+					<string>tcm:10-3006</string>
+				</textValues>
+				<numericValues/>
+				<dateTimeValues/>
+				<linkedComponentValues>
+					<component>
+						<id>tcm:10-3006</id>
+						<title>Stubbing Content</title>
+						<publication>
+							<id>tcm:0-10-1</id>
+							<title>05 SDL EN</title>
+						</publication>
+						<owningPublication>
+							<id>tcm:0-3-1</id>
+							<title>02c Content Parent (EN)</title>
+						</owningPublication>
+						<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+						<schema>
+							<id>tcm:10-2990-8</id>
+							<title>Header For Non Translated Content</title>
+							<publication>
+								<id>tcm:0-10-1</id>
+								<title>05 SDL EN</title>
+							</publication>
+							<folder>
+								<id>tcm:10-6-2</id>
+								<title>Content Schemas</title>
+								<publicationId>tcm:0-10-1</publicationId>
+							</folder>
+							<rootElement>HeaderForNonTranslatedContent</rootElement>
+						</schema>
+						<fields>
+							<item>
+								<string>Paragraph</string>
+								<field fieldType="Embedded" xPath="tcm:Content/custom:HeaderForNonTranslatedContent/custom:Paragraph">
+									<name>Paragraph</name>
+									<textValues/>
+									<numericValues/>
+									<dateTimeValues/>
+									<linkedComponentValues/>
+									<embeddedValues>
+										<fieldSet>
+											<fields>
+												<item>
+													<string>Heading</string>
+													<field fieldType="MultiLineText" xPath="tcm:Content/custom:HeaderForNonTranslatedContent/custom:Paragraph[1]/custom:Heading">
+														<name>Heading</name>
+														<textValues>
+															<string>Stubbing Content</string>
+														</textValues>
+														<numericValues/>
+														<dateTimeValues/>
+														<linkedComponentValues/>
+														<embeddedValues/>
+													</field>
+												</item>
+												<item>
+													<string>BodyText</string>
+													<field fieldType="Xhtml" xPath="tcm:Content/custom:HeaderForNonTranslatedContent/custom:Paragraph[1]/custom:BodyText">
+														<name>BodyText</name>
+														<textValues>
+															<string>&lt;p xmlns="http://www.w3.org/1999/xhtml"&gt;Businesses are being tasked with delivering a positive customer experience for an ever larger, ever more diverse, global customer base, across additional service channels. Customer self service initially meant publishing a web page. The advent of email, chat and forums has not diminished the need for the web site or knowledge base but has served to complement all of the new channels that have since emerged. For global companies, this experience of communication needs to be consistent across languages and provide a balance between meeting their own brand expectations for communication across a specific channel with the customer’s expectation for immediacy.&lt;/p&gt;</string>
+														</textValues>
+														<numericValues/>
+														<dateTimeValues/>
+														<linkedComponentValues/>
+														<embeddedValues/>
+													</field>
+												</item>
+												<item>
+													<string>Image</string>
+													<field fieldType="MultiMediaLink" xPath="tcm:Content/custom:HeaderForNonTranslatedContent/custom:Paragraph[1]/custom:Image">
+														<name>Image</name>
+														<textValues>
+															<string>tcm:10-2867</string>
+														</textValues>
+														<numericValues/>
+														<dateTimeValues/>
+														<linkedComponentValues>
+															<component>
+																<id>tcm:10-2867</id>
+																<title>shutterstock_82375567_P</title>
+																<publication>
+																	<id>tcm:0-10-1</id>
+																	<title>05 SDL EN</title>
+																</publication>
+																<owningPublication>
+																	<id>tcm:0-3-1</id>
+																	<title>02c Content Parent (EN)</title>
+																</owningPublication>
+																<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+																<schema>
+																	<id>tcm:10-46-8</id>
+																	<title>Image</title>
+																	<publication>
+																		<id>tcm:0-10-1</id>
+																		<title>05 SDL EN</title>
+																	</publication>
+																	<folder>
+																		<id>tcm:10-12-2</id>
+																		<title>Multimedia Schemas</title>
+																		<publicationId>tcm:0-10-1</publicationId>
+																	</folder>
+																	<rootElement/>
+																</schema>
+																<fields/>
+																<metadata/>
+																<componentType>Multimedia</componentType>
+																<multimedia>
+																	<url>/Preview/Images/shutterstock_82375567_P_tcm10-2867.png</url>
+																	<mimeType>image/png</mimeType>
+																	<fileName>shutterstock_82375567_P.png</fileName>
+																	<fileExtension>png</fileExtension>
+																	<size>93525</size>
+																	<width>0</width>
+																	<height>0</height>
+																</multimedia>
+																<folder>
+																	<id>tcm:10-71-2</id>
+																	<title>Highlight (266x208 or min 266x140) used to be 265x192</title>
+																	<publicationId>tcm:0-10-1</publicationId>
+																</folder>
+																<categories>
+																	<category>
+																		<id>tcm:10-119-512</id>
+																		<title>ImageKeyword</title>
+																		<keywords/>
+																	</category>
+																	<category>
+																		<id>tcm:10-80-512</id>
+																		<title>Product</title>
+																		<keywords/>
+																	</category>
+																	<category>
+																		<id>tcm:10-82-512</id>
+																		<title>Solution</title>
+																		<keywords/>
+																	</category>
+																	<category>
+																		<id>tcm:10-81-512</id>
+																		<title>Service</title>
+																		<keywords/>
+																	</category>
+																</categories>
+																<version>1</version>
+															</component>
+														</linkedComponentValues>
+														<embeddedValues/>
+													</field>
+												</item>
+											</fields>
+											<schema>
+												<id>tcm:10-477-8</id>
+												<title>Paragraph</title>
+												<publication>
+													<id>tcm:0-10-1</id>
+													<title>05 SDL EN</title>
+												</publication>
+												<folder>
+													<id>tcm:10-7-2</id>
+													<title>Embedded Schemas</title>
+													<publicationId>tcm:0-10-1</publicationId>
+												</folder>
+												<rootElement>Paragraph</rootElement>
+											</schema>
+										</fieldSet>
+									</embeddedValues>
+								</field>
+							</item>
+						</fields>
+						<metadata/>
+						<componentType>Normal</componentType>
+						<folder>
+							<id>tcm:10-233-2</id>
+							<title>Miscellaneous</title>
+							<publicationId>tcm:0-10-1</publicationId>
+						</folder>
+						<categories/>
+						<version>3</version>
+					</component>
+				</linkedComponentValues>
+				<embeddedValues/>
+			</field>
+		</item>
+		<item>
+			<string>Keywords</string>
+			<field fieldType="Text">
+				<name>Keywords</name>
+				<textValues>
+					<string>SDL</string>
+					<string>Language Services</string>
+					<string>Translation</string>
+					<string>Content</string>
+				</textValues>
+				<numericValues/>
+				<dateTimeValues/>
+				<linkedComponentValues/>
+				<embeddedValues/>
+			</field>
+		</item>
+		<item>
+			<string>Description</string>
+			<field fieldType="Text">
+				<name>Description</name>
+				<textValues>
+					<string>SDL for Global Information Management</string>
+				</textValues>
+				<numericValues/>
+				<dateTimeValues/>
+				<linkedComponentValues/>
+				<embeddedValues/>
+			</field>
+		</item>
+		<item>
+			<string>StagingUrl</string>
+			<field fieldType="Text">
+				<name>StagingUrl</name>
+				<textValues>
+					<string>http://dev.staging.sdl.com/preview</string>
+				</textValues>
+				<numericValues/>
+				<dateTimeValues/>
+				<linkedComponentValues/>
+				<embeddedValues/>
+			</field>
+		</item>
+		<item>
+			<string>IsTranslated</string>
+			<field fieldType="Text">
+				<name>IsTranslated</name>
+				<textValues>
+					<string>True</string>
+				</textValues>
+				<numericValues/>
+				<dateTimeValues/>
+				<linkedComponentValues/>
+			</field>
+		</item>
+	</metadata>
+	<componentPresentations>
+		<componentPresentation>
+			<component>
+				<id>tcm:10-754</id>
+				<title>SDL Tridion</title>
+				<publication>
+					<id>tcm:0-10-1</id>
+					<title>05 SDL EN</title>
+				</publication>
+				<owningPublication>
+					<id>tcm:0-3-1</id>
+					<title>02c Content Parent (EN)</title>
+				</owningPublication>
+				<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+				<schema>
+					<id>tcm:10-465-8</id>
+					<title>Header With Image</title>
+					<publication>
+						<id>tcm:0-10-1</id>
+						<title>05 SDL EN</title>
+					</publication>
+					<folder>
+						<id>tcm:10-6-2</id>
+						<title>Content Schemas</title>
+						<publicationId>tcm:0-10-1</publicationId>
+					</folder>
+					<rootElement>HeaderImage</rootElement>
+				</schema>
+				<fields/>
+				<metadata/>
+				<componentType>Normal</componentType>
+				<folder>
+					<id>tcm:10-83-2</id>
+					<title>030 Products</title>
+					<publicationId>tcm:0-10-1</publicationId>
+				</folder>
+				<categories>
+					<category>
+						<id>tcm:10-79-512</id>
+						<title>Content Type</title>
+						<keywords>
+							<keyword taxonomyId="tcm:10-79-512" path="\Content Type\Other">
+								<id>tcm:10-835-1024</id>
+								<title>Other</title>
+							</keyword>
+						</keywords>
+					</category>
+					<category>
+						<id>tcm:10-80-512</id>
+						<title>Product</title>
+						<keywords>
+							<keyword taxonomyId="tcm:10-80-512" path="\Product\010 Web Content Management\SDL Tridion">
+								<id>tcm:10-755-1024</id>
+								<title>SDL Tridion</title>
+							</keyword>
+						</keywords>
+					</category>
+					<category>
+						<id>tcm:10-81-512</id>
+						<title>Service</title>
+						<keywords/>
+					</category>
+					<category>
+						<id>tcm:10-82-512</id>
+						<title>Solution</title>
+						<keywords/>
+					</category>
+					<category>
+						<id>tcm:10-93-512</id>
+						<title>Navigation</title>
+						<keywords/>
+					</category>
+				</categories>
+				<version>9</version>
+			</component>
+			<componentTemplate>
+				<id>tcm:10-519-32</id>
+				<title>Header Content</title>
+				<publication>
+					<id>tcm:0-10-1</id>
+					<title>05 SDL EN</title>
+				</publication>
+				<outputFormat>HTML Fragment</outputFormat>
+				<metadata>
+					<item>
+						<string>view</string>
+						<field fieldType="Text">
+							<name>view</name>
+							<textValues>
+								<string>HeaderContent</string>
+							</textValues>
+							<numericValues/>
+							<dateTimeValues/>
+							<linkedComponentValues/>
+							<embeddedValues/>
+						</field>
+					</item>
+				</metadata>
+				<folder>
+					<id>tcm:10-11-2</id>
+					<title>Component Templates</title>
+					<publicationId>tcm:0-10-1</publicationId>
+				</folder>
+			</componentTemplate>
+			<isDynamic>true</isDynamic>
+		</componentPresentation>
+		<componentPresentation>
+			<component>
+				<id>tcm:10-1664</id>
+				<title>Test content carousel</title>
+				<publication>
+					<id>tcm:0-10-1</id>
+					<title>05 SDL EN</title>
+				</publication>
+				<owningPublication>
+					<id>tcm:0-3-1</id>
+					<title>02c Content Parent (EN)</title>
+				</owningPublication>
+				<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+				<schema>
+					<id>tcm:10-471-8</id>
+					<title>Carousel</title>
+					<publication>
+						<id>tcm:0-10-1</id>
+						<title>05 SDL EN</title>
+					</publication>
+					<folder>
+						<id>tcm:10-6-2</id>
+						<title>Content Schemas</title>
+						<publicationId>tcm:0-10-1</publicationId>
+					</folder>
+					<rootElement>Carousel</rootElement>
+				</schema>
+				<fields>
+					<item>
+						<string>CarouselItems</string>
+						<field fieldType="Embedded" xPath="tcm:Content/custom:Carousel/custom:CarouselItems">
+							<name>CarouselItems</name>
+							<textValues/>
+							<numericValues/>
+							<dateTimeValues/>
+							<linkedComponentValues/>
+							<embeddedValues>
+								<fieldSet>
+									<fields>
+										<item>
+											<string>Title</string>
+											<field fieldType="MultiLineText" xPath="tcm:Content/custom:Carousel/custom:CarouselItems[1]/custom:Title">
+												<name>Title</name>
+												<textValues>
+													<string>Test carousel slide 1</string>
+												</textValues>
+												<numericValues/>
+												<dateTimeValues/>
+												<linkedComponentValues/>
+												<embeddedValues/>
+											</field>
+										</item>
+										<item>
+											<string>BodyText</string>
+											<field fieldType="MultiLineText" xPath="tcm:Content/custom:Carousel/custom:CarouselItems[1]/custom:BodyText">
+												<name>BodyText</name>
+												<textValues>
+													<string>ssd;lia sah ouidgh vaskcnio vu ugsui o sagisdisd dsuifsia7g sa g7g79gsg dkb aivbkasj ds sadiluvba s u</string>
+												</textValues>
+												<numericValues/>
+												<dateTimeValues/>
+												<linkedComponentValues/>
+												<embeddedValues/>
+											</field>
+										</item>
+										<item>
+											<string>Link</string>
+											<field fieldType="ComponentLink" xPath="tcm:Content/custom:Carousel/custom:CarouselItems[1]/custom:Link">
+												<name>Link</name>
+												<textValues>
+													<string>tcm:10-1031</string>
+												</textValues>
+												<numericValues/>
+												<dateTimeValues/>
+												<linkedComponentValues>
+													<component>
+														<id>tcm:10-1031</id>
+														<title>Header: Products</title>
+														<publication>
+															<id>tcm:0-10-1</id>
+															<title>05 SDL EN</title>
+														</publication>
+														<owningPublication>
+															<id>tcm:0-3-1</id>
+															<title>02c Content Parent (EN)</title>
+														</owningPublication>
+														<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+														<schema>
+															<id>tcm:10-465-8</id>
+															<title>Header With Image</title>
+															<publication>
+																<id>tcm:0-10-1</id>
+																<title>05 SDL EN</title>
+															</publication>
+															<folder>
+																<id>tcm:10-6-2</id>
+																<title>Content Schemas</title>
+																<publicationId>tcm:0-10-1</publicationId>
+															</folder>
+															<rootElement>HeaderImage</rootElement>
+														</schema>
+														<fields>
+															<item>
+																<string>Title</string>
+																<field fieldType="Text" xPath="tcm:Content/custom:HeaderImage/custom:Title">
+																	<name>Title</name>
+																	<textValues>
+																		<string>Products</string>
+																	</textValues>
+																	<numericValues/>
+																	<dateTimeValues/>
+																	<linkedComponentValues/>
+																	<embeddedValues/>
+																</field>
+															</item>
+															<item>
+																<string>Subtitle</string>
+																<field fieldType="MultiLineText" xPath="tcm:Content/custom:HeaderImage/custom:Subtitle">
+																	<name>Subtitle</name>
+																	<textValues>
+																		<string>Tools for Web Content Management, Structured Content, eCommerce and Localization</string>
+																	</textValues>
+																	<numericValues/>
+																	<dateTimeValues/>
+																	<linkedComponentValues/>
+																	<embeddedValues/>
+																</field>
+															</item>
+															<item>
+																<string>Image</string>
+																<field fieldType="MultiMediaLink" xPath="tcm:Content/custom:HeaderImage/custom:Image">
+																	<name>Image</name>
+																	<textValues>
+																		<string>tcm:10-1443</string>
+																	</textValues>
+																	<numericValues/>
+																	<dateTimeValues/>
+																	<linkedComponentValues>
+																		<component>
+																			<id>tcm:10-1443</id>
+																			<title>getty_92913822</title>
+																			<publication>
+																				<id>tcm:0-10-1</id>
+																				<title>05 SDL EN</title>
+																			</publication>
+																			<owningPublication>
+																				<id>tcm:0-3-1</id>
+																				<title>02c Content Parent (EN)</title>
+																			</owningPublication>
+																			<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+																			<schema>
+																				<id>tcm:10-46-8</id>
+																				<title>Image</title>
+																				<publication>
+																					<id>tcm:0-10-1</id>
+																					<title>05 SDL EN</title>
+																				</publication>
+																				<folder>
+																					<id>tcm:10-12-2</id>
+																					<title>Multimedia Schemas</title>
+																					<publicationId>tcm:0-10-1</publicationId>
+																				</folder>
+																				<rootElement/>
+																			</schema>
+																			<fields/>
+																			<metadata/>
+																			<componentType>Multimedia</componentType>
+																			<multimedia>
+																				<url>/Preview/Images/getty_92913822_tcm10-1443.png</url>
+																				<mimeType>image/png</mimeType>
+																				<fileName>getty_92913822.png</fileName>
+																				<fileExtension>png</fileExtension>
+																				<size>486411</size>
+																				<width>0</width>
+																				<height>0</height>
+																			</multimedia>
+																			<folder>
+																				<id>tcm:10-69-2</id>
+																				<title>Header 1074x741</title>
+																				<publicationId>tcm:0-10-1</publicationId>
+																			</folder>
+																			<categories>
+																				<category>
+																					<id>tcm:10-119-512</id>
+																					<title>ImageKeyword</title>
+																					<keywords/>
+																				</category>
+																				<category>
+																					<id>tcm:10-80-512</id>
+																					<title>Product</title>
+																					<keywords/>
+																				</category>
+																				<category>
+																					<id>tcm:10-82-512</id>
+																					<title>Solution</title>
+																					<keywords/>
+																				</category>
+																				<category>
+																					<id>tcm:10-81-512</id>
+																					<title>Service</title>
+																					<keywords/>
+																				</category>
+																			</categories>
+																			<version>1</version>
+																		</component>
+																	</linkedComponentValues>
+																	<embeddedValues/>
+																</field>
+															</item>
+															<item>
+																<string>HighlightSection</string>
+																<field fieldType="Embedded" xPath="tcm:Content/custom:HeaderImage/custom:HighlightSection">
+																	<name>HighlightSection</name>
+																	<textValues/>
+																	<numericValues/>
+																	<dateTimeValues/>
+																	<linkedComponentValues/>
+																	<embeddedValues>
+																		<fieldSet>
+																			<fields>
+																				<item>
+																					<string>Title</string>
+																					<field fieldType="Text" xPath="tcm:Content/custom:HeaderImage/custom:HighlightSection[1]/custom:Title">
+																						<name>Title</name>
+																						<textValues>
+																							<string>Title</string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues/>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																				<item>
+																					<string>Text</string>
+																					<field fieldType="Text" xPath="tcm:Content/custom:HeaderImage/custom:HighlightSection[1]/custom:Text">
+																						<name>Text</name>
+																						<textValues>
+																							<string> Industry's first cloud platform for real-time automated translation  Industry's first cloud platform for real-time automated translation </string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues/>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																				<item>
+																					<string>Link</string>
+																					<field fieldType="ComponentLink" xPath="tcm:Content/custom:HeaderImage/custom:HighlightSection[1]/custom:Link">
+																						<name>Link</name>
+																						<textValues>
+																							<string>tcm:10-754</string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues>
+																							<component>
+																								<id>tcm:10-754</id>
+																								<title>SDL Tridion</title>
+																								<publication>
+																									<id>tcm:0-10-1</id>
+																									<title>05 SDL EN</title>
+																								</publication>
+																								<owningPublication>
+																									<id>tcm:0-3-1</id>
+																									<title>02c Content Parent (EN)</title>
+																								</owningPublication>
+																								<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+																								<schema>
+																									<id>tcm:10-465-8</id>
+																									<title>Header With Image</title>
+																									<publication>
+																										<id>tcm:0-10-1</id>
+																										<title>05 SDL EN</title>
+																									</publication>
+																									<folder>
+																										<id>tcm:10-6-2</id>
+																										<title>Content Schemas</title>
+																										<publicationId>tcm:0-10-1</publicationId>
+																									</folder>
+																									<rootElement>HeaderImage</rootElement>
+																								</schema>
+																								<fields/>
+																								<metadata/>
+																								<componentType>Normal</componentType>
+																								<folder>
+																									<id>tcm:10-83-2</id>
+																									<title>030 Products</title>
+																									<publicationId>tcm:0-10-1</publicationId>
+																								</folder>
+																								<categories>
+																									<category>
+																										<id>tcm:10-79-512</id>
+																										<title>Content Type</title>
+																										<keywords>
+																											<keyword taxonomyId="tcm:10-79-512" path="\Content Type\Other">
+																												<id>tcm:10-835-1024</id>
+																												<title>Other</title>
+																											</keyword>
+																										</keywords>
+																									</category>
+																									<category>
+																										<id>tcm:10-80-512</id>
+																										<title>Product</title>
+																										<keywords>
+																											<keyword taxonomyId="tcm:10-80-512" path="\Product\010 Web Content Management\SDL Tridion">
+																												<id>tcm:10-755-1024</id>
+																												<title>SDL Tridion</title>
+																											</keyword>
+																										</keywords>
+																									</category>
+																									<category>
+																										<id>tcm:10-81-512</id>
+																										<title>Service</title>
+																										<keywords/>
+																									</category>
+																									<category>
+																										<id>tcm:10-82-512</id>
+																										<title>Solution</title>
+																										<keywords/>
+																									</category>
+																									<category>
+																										<id>tcm:10-93-512</id>
+																										<title>Navigation</title>
+																										<keywords/>
+																									</category>
+																								</categories>
+																								<version>9</version>
+																							</component>
+																						</linkedComponentValues>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																			</fields>
+																			<schema>
+																				<id>tcm:10-479-8</id>
+																				<title>Highlight Section Item</title>
+																				<publication>
+																					<id>tcm:0-10-1</id>
+																					<title>05 SDL EN</title>
+																				</publication>
+																				<folder>
+																					<id>tcm:10-7-2</id>
+																					<title>Embedded Schemas</title>
+																					<publicationId>tcm:0-10-1</publicationId>
+																				</folder>
+																				<rootElement>HighlightSectionItem</rootElement>
+																			</schema>
+																		</fieldSet>
+																		<fieldSet>
+																			<fields>
+																				<item>
+																					<string>Title</string>
+																					<field fieldType="Text" xPath="tcm:Content/custom:HeaderImage/custom:HighlightSection[2]/custom:Title">
+																						<name>Title</name>
+																						<textValues>
+																							<string>Global WCM</string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues/>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																				<item>
+																					<string>Text</string>
+																					<field fieldType="Text" xPath="tcm:Content/custom:HeaderImage/custom:HighlightSection[2]/custom:Text">
+																						<name>Text</name>
+																						<textValues>
+																							<string>Meeting today's online marketing content challenge</string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues/>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																				<item>
+																					<string>Link</string>
+																					<field fieldType="ComponentLink" xPath="tcm:Content/custom:HeaderImage/custom:HighlightSection[2]/custom:Link">
+																						<name>Link</name>
+																						<textValues>
+																							<string>tcm:10-1018</string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues>
+																							<component>
+																								<id>tcm:10-1018</id>
+																								<title>BeGlobal Header</title>
+																								<publication>
+																									<id>tcm:0-10-1</id>
+																									<title>05 SDL EN</title>
+																								</publication>
+																								<owningPublication>
+																									<id>tcm:0-3-1</id>
+																									<title>02c Content Parent (EN)</title>
+																								</owningPublication>
+																								<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+																								<schema>
+																									<id>tcm:10-984-8</id>
+																									<title>Header For Product</title>
+																									<publication>
+																										<id>tcm:0-10-1</id>
+																										<title>05 SDL EN</title>
+																									</publication>
+																									<folder>
+																										<id>tcm:10-6-2</id>
+																										<title>Content Schemas</title>
+																										<publicationId>tcm:0-10-1</publicationId>
+																									</folder>
+																									<rootElement>HeaderProduct</rootElement>
+																								</schema>
+																								<fields/>
+																								<metadata/>
+																								<componentType>Normal</componentType>
+																								<folder>
+																									<id>tcm:10-136-2</id>
+																									<title>BeGlobal</title>
+																									<publicationId>tcm:0-10-1</publicationId>
+																								</folder>
+																								<categories>
+																									<category>
+																										<id>tcm:10-80-512</id>
+																										<title>Product</title>
+																										<keywords>
+																											<keyword taxonomyId="tcm:10-80-512" path="\Product\020 Automated Translation\010 SDL BeGlobal">
+																												<id>tcm:10-824-1024</id>
+																												<title>010 SDL BeGlobal</title>
+																											</keyword>
+																										</keywords>
+																									</category>
+																								</categories>
+																								<version>13</version>
+																							</component>
+																						</linkedComponentValues>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																			</fields>
+																			<schema>
+																				<id>tcm:10-479-8</id>
+																				<title>Highlight Section Item</title>
+																				<publication>
+																					<id>tcm:0-10-1</id>
+																					<title>05 SDL EN</title>
+																				</publication>
+																				<folder>
+																					<id>tcm:10-7-2</id>
+																					<title>Embedded Schemas</title>
+																					<publicationId>tcm:0-10-1</publicationId>
+																				</folder>
+																				<rootElement>HighlightSectionItem</rootElement>
+																			</schema>
+																		</fieldSet>
+																	</embeddedValues>
+																</field>
+															</item>
+															<item>
+																<string>ContentType</string>
+																<field fieldType="Keyword" categoryName="Content Type" categoryId="tcm:10-79-512" xPath="tcm:Content/custom:HeaderImage/custom:ContentType">
+																	<name>ContentType</name>
+																	<textValues>
+																		<string>Other</string>
+																	</textValues>
+																	<numericValues/>
+																	<dateTimeValues/>
+																	<linkedComponentValues/>
+																	<embeddedValues/>
+																</field>
+															</item>
+														</fields>
+														<metadata>
+															<item>
+																<string>Navigation</string>
+																<field fieldType="Keyword" categoryName="Navigation" categoryId="tcm:10-93-512" xPath="tcm:Metadata/custom:Metadata/custom:Navigation">
+																	<name>Navigation</name>
+																	<textValues>
+																		<string>010 Products</string>
+																	</textValues>
+																	<numericValues/>
+																	<dateTimeValues/>
+																	<linkedComponentValues/>
+																	<embeddedValues/>
+																</field>
+															</item>
+														</metadata>
+														<componentType>Normal</componentType>
+														<folder>
+															<id>tcm:10-83-2</id>
+															<title>030 Products</title>
+															<publicationId>tcm:0-10-1</publicationId>
+														</folder>
+														<categories>
+															<category>
+																<id>tcm:10-79-512</id>
+																<title>Content Type</title>
+																<keywords>
+																	<keyword taxonomyId="tcm:10-79-512" path="\Content Type\Other">
+																		<id>tcm:10-835-1024</id>
+																		<title>Other</title>
+																	</keyword>
+																</keywords>
+															</category>
+															<category>
+																<id>tcm:10-80-512</id>
+																<title>Product</title>
+																<keywords/>
+															</category>
+															<category>
+																<id>tcm:10-81-512</id>
+																<title>Service</title>
+																<keywords/>
+															</category>
+															<category>
+																<id>tcm:10-82-512</id>
+																<title>Solution</title>
+																<keywords/>
+															</category>
+															<category>
+																<id>tcm:10-93-512</id>
+																<title>Navigation</title>
+																<keywords>
+																	<keyword taxonomyId="tcm:10-93-512" path="\Navigation\010 Products">
+																		<id>tcm:10-1021-1024</id>
+																		<title>010 Products</title>
+																	</keyword>
+																</keywords>
+															</category>
+														</categories>
+														<version>8</version>
+													</component>
+												</linkedComponentValues>
+												<embeddedValues/>
+											</field>
+										</item>
+										<item>
+											<string>Image</string>
+											<field fieldType="MultiMediaLink" xPath="tcm:Content/custom:Carousel/custom:CarouselItems[1]/custom:Image">
+												<name>Image</name>
+												<textValues>
+													<string>tcm:10-1627</string>
+												</textValues>
+												<numericValues/>
+												<dateTimeValues/>
+												<linkedComponentValues>
+													<component>
+														<id>tcm:10-1627</id>
+														<title>SmartTarget</title>
+														<publication>
+															<id>tcm:0-10-1</id>
+															<title>05 SDL EN</title>
+														</publication>
+														<owningPublication>
+															<id>tcm:0-3-1</id>
+															<title>02c Content Parent (EN)</title>
+														</owningPublication>
+														<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+														<schema>
+															<id>tcm:10-46-8</id>
+															<title>Image</title>
+															<publication>
+																<id>tcm:0-10-1</id>
+																<title>05 SDL EN</title>
+															</publication>
+															<folder>
+																<id>tcm:10-12-2</id>
+																<title>Multimedia Schemas</title>
+																<publicationId>tcm:0-10-1</publicationId>
+															</folder>
+															<rootElement/>
+														</schema>
+														<fields/>
+														<metadata/>
+														<componentType>Multimedia</componentType>
+														<multimedia>
+															<url>/Preview/Images/SmartTarget_tcm10-1627.png</url>
+															<mimeType>image/png</mimeType>
+															<fileName>SmartTarget.png</fileName>
+															<fileExtension>png</fileExtension>
+															<size>88028</size>
+															<width>0</width>
+															<height>0</height>
+														</multimedia>
+														<folder>
+															<id>tcm:10-131-2</id>
+															<title>Download covers</title>
+															<publicationId>tcm:0-10-1</publicationId>
+														</folder>
+														<categories>
+															<category>
+																<id>tcm:10-119-512</id>
+																<title>ImageKeyword</title>
+																<keywords/>
+															</category>
+															<category>
+																<id>tcm:10-80-512</id>
+																<title>Product</title>
+																<keywords/>
+															</category>
+															<category>
+																<id>tcm:10-82-512</id>
+																<title>Solution</title>
+																<keywords/>
+															</category>
+															<category>
+																<id>tcm:10-81-512</id>
+																<title>Service</title>
+																<keywords/>
+															</category>
+														</categories>
+														<version>2</version>
+													</component>
+												</linkedComponentValues>
+												<embeddedValues/>
+											</field>
+										</item>
+									</fields>
+									<schema>
+										<id>tcm:10-469-8</id>
+										<title>Carousel Item</title>
+										<publication>
+											<id>tcm:0-10-1</id>
+											<title>05 SDL EN</title>
+										</publication>
+										<folder>
+											<id>tcm:10-7-2</id>
+											<title>Embedded Schemas</title>
+											<publicationId>tcm:0-10-1</publicationId>
+										</folder>
+										<rootElement>CarouselItem</rootElement>
+									</schema>
+								</fieldSet>
+								<fieldSet>
+									<fields>
+										<item>
+											<string>Title</string>
+											<field fieldType="MultiLineText" xPath="tcm:Content/custom:Carousel/custom:CarouselItems[2]/custom:Title">
+												<name>Title</name>
+												<textValues>
+													<string>Test carousel slide 2</string>
+												</textValues>
+												<numericValues/>
+												<dateTimeValues/>
+												<linkedComponentValues/>
+												<embeddedValues/>
+											</field>
+										</item>
+										<item>
+											<string>BodyText</string>
+											<field fieldType="MultiLineText" xPath="tcm:Content/custom:Carousel/custom:CarouselItems[2]/custom:BodyText">
+												<name>BodyText</name>
+												<textValues>
+													<string>ssd;lia sah ouidgh vaskcnio vu ugsui o sagisdisd dsuifsia7g sa g7g79gsg dkb aivbkasj ds sadiluvba s u</string>
+												</textValues>
+												<numericValues/>
+												<dateTimeValues/>
+												<linkedComponentValues/>
+												<embeddedValues/>
+											</field>
+										</item>
+										<item>
+											<string>Link</string>
+											<field fieldType="ComponentLink" xPath="tcm:Content/custom:Carousel/custom:CarouselItems[2]/custom:Link">
+												<name>Link</name>
+												<textValues>
+													<string>tcm:10-1593</string>
+												</textValues>
+												<numericValues/>
+												<dateTimeValues/>
+												<linkedComponentValues>
+													<component>
+														<id>tcm:10-1593</id>
+														<title>Internationalization Header</title>
+														<publication>
+															<id>tcm:0-10-1</id>
+															<title>05 SDL EN</title>
+														</publication>
+														<owningPublication>
+															<id>tcm:0-3-1</id>
+															<title>02c Content Parent (EN)</title>
+														</owningPublication>
+														<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+														<schema>
+															<id>tcm:10-990-8</id>
+															<title>Header For Service</title>
+															<publication>
+																<id>tcm:0-10-1</id>
+																<title>05 SDL EN</title>
+															</publication>
+															<folder>
+																<id>tcm:10-6-2</id>
+																<title>Content Schemas</title>
+																<publicationId>tcm:0-10-1</publicationId>
+															</folder>
+															<rootElement>HeaderService</rootElement>
+														</schema>
+														<fields>
+															<item>
+																<string>Title</string>
+																<field fieldType="Text" xPath="tcm:Content/custom:HeaderService/custom:Title">
+																	<name>Title</name>
+																	<textValues>
+																		<string>Internationalizationready for international markets </string>
+																	</textValues>
+																	<numericValues/>
+																	<dateTimeValues/>
+																	<linkedComponentValues/>
+																	<embeddedValues/>
+																</field>
+															</item>
+															<item>
+																<string>Image</string>
+																<field fieldType="MultiMediaLink" xPath="tcm:Content/custom:HeaderService/custom:Image">
+																	<name>Image</name>
+																	<textValues>
+																		<string>tcm:10-1453</string>
+																	</textValues>
+																	<numericValues/>
+																	<dateTimeValues/>
+																	<linkedComponentValues>
+																		<component>
+																			<id>tcm:10-1453</id>
+																			<title>corbis_42-21636887</title>
+																			<publication>
+																				<id>tcm:0-10-1</id>
+																				<title>05 SDL EN</title>
+																			</publication>
+																			<owningPublication>
+																				<id>tcm:0-3-1</id>
+																				<title>02c Content Parent (EN)</title>
+																			</owningPublication>
+																			<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+																			<schema>
+																				<id>tcm:10-46-8</id>
+																				<title>Image</title>
+																				<publication>
+																					<id>tcm:0-10-1</id>
+																					<title>05 SDL EN</title>
+																				</publication>
+																				<folder>
+																					<id>tcm:10-12-2</id>
+																					<title>Multimedia Schemas</title>
+																					<publicationId>tcm:0-10-1</publicationId>
+																				</folder>
+																				<rootElement/>
+																			</schema>
+																			<fields/>
+																			<metadata/>
+																			<componentType>Multimedia</componentType>
+																			<multimedia>
+																				<url>/Preview/Images/corbis_42-21636887_tcm10-1453.png</url>
+																				<mimeType>image/png</mimeType>
+																				<fileName>corbis_42-21636887.png</fileName>
+																				<fileExtension>png</fileExtension>
+																				<size>708111</size>
+																				<width>0</width>
+																				<height>0</height>
+																			</multimedia>
+																			<folder>
+																				<id>tcm:10-69-2</id>
+																				<title>Header 1074x741</title>
+																				<publicationId>tcm:0-10-1</publicationId>
+																			</folder>
+																			<categories>
+																				<category>
+																					<id>tcm:10-119-512</id>
+																					<title>ImageKeyword</title>
+																					<keywords/>
+																				</category>
+																				<category>
+																					<id>tcm:10-80-512</id>
+																					<title>Product</title>
+																					<keywords/>
+																				</category>
+																				<category>
+																					<id>tcm:10-82-512</id>
+																					<title>Solution</title>
+																					<keywords/>
+																				</category>
+																				<category>
+																					<id>tcm:10-81-512</id>
+																					<title>Service</title>
+																					<keywords/>
+																				</category>
+																			</categories>
+																			<version>1</version>
+																		</component>
+																	</linkedComponentValues>
+																	<embeddedValues/>
+																</field>
+															</item>
+															<item>
+																<string>HighlightSection</string>
+																<field fieldType="Embedded" xPath="tcm:Content/custom:HeaderService/custom:HighlightSection">
+																	<name>HighlightSection</name>
+																	<textValues/>
+																	<numericValues/>
+																	<dateTimeValues/>
+																	<linkedComponentValues/>
+																	<embeddedValues>
+																		<fieldSet>
+																			<fields>
+																				<item>
+																					<string>Title</string>
+																					<field fieldType="Text" xPath="tcm:Content/custom:HeaderService/custom:HighlightSection[1]/custom:Title">
+																						<name>Title</name>
+																						<textValues>
+																							<string>Decrease time-to-market: embrace cultural and technical diversity </string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues/>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																				<item>
+																					<string>Text</string>
+																					<field fieldType="Text" xPath="tcm:Content/custom:HeaderService/custom:HighlightSection[1]/custom:Text">
+																						<name>Text</name>
+																						<textValues>
+																							<string>Let SDL prepare your product for international markets, so that you can focus on developing it. Our internationalization capabilities are customized to meet your needs. </string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues/>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																				<item>
+																					<string>Image</string>
+																					<field fieldType="MultiMediaLink" xPath="tcm:Content/custom:HeaderService/custom:HighlightSection[1]/custom:Image">
+																						<name>Image</name>
+																						<textValues>
+																							<string>tcm:10-1460</string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues>
+																							<component>
+																								<id>tcm:10-1460</id>
+																								<title>jupiter_114857835</title>
+																								<publication>
+																									<id>tcm:0-10-1</id>
+																									<title>05 SDL EN</title>
+																								</publication>
+																								<owningPublication>
+																									<id>tcm:0-3-1</id>
+																									<title>02c Content Parent (EN)</title>
+																								</owningPublication>
+																								<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+																								<schema>
+																									<id>tcm:10-46-8</id>
+																									<title>Image</title>
+																									<publication>
+																										<id>tcm:0-10-1</id>
+																										<title>05 SDL EN</title>
+																									</publication>
+																									<folder>
+																										<id>tcm:10-12-2</id>
+																										<title>Multimedia Schemas</title>
+																										<publicationId>tcm:0-10-1</publicationId>
+																									</folder>
+																									<rootElement/>
+																								</schema>
+																								<fields/>
+																								<metadata/>
+																								<componentType>Multimedia</componentType>
+																								<multimedia>
+																									<url>/Preview/Images/jupiter_114857835_tcm10-1460.png</url>
+																									<mimeType>image/png</mimeType>
+																									<fileName>jupiter_114857835.png</fileName>
+																									<fileExtension>png</fileExtension>
+																									<size>46241</size>
+																									<width>0</width>
+																									<height>0</height>
+																								</multimedia>
+																								<folder>
+																									<id>tcm:10-71-2</id>
+																									<title>Highlight (266x208 or min 266x140) used to be 265x192</title>
+																									<publicationId>tcm:0-10-1</publicationId>
+																								</folder>
+																								<categories>
+																									<category>
+																										<id>tcm:10-119-512</id>
+																										<title>ImageKeyword</title>
+																										<keywords>
+																											<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\clouds">
+																												<id>tcm:10-1195-1024</id>
+																												<title>clouds</title>
+																											</keyword>
+																											<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\woman">
+																												<id>tcm:10-1467-1024</id>
+																												<title>woman</title>
+																											</keyword>
+																											<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\sky">
+																												<id>tcm:10-1194-1024</id>
+																												<title>sky</title>
+																											</keyword>
+																											<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\roof">
+																												<id>tcm:10-1298-1024</id>
+																												<title>roof</title>
+																											</keyword>
+																											<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\newspaper">
+																												<id>tcm:10-1299-1024</id>
+																												<title>newspaper</title>
+																											</keyword>
+																											<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\one">
+																												<id>tcm:10-1205-1024</id>
+																												<title>one</title>
+																											</keyword>
+																											<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\wall">
+																												<id>tcm:10-1300-1024</id>
+																												<title>wall</title>
+																											</keyword>
+																											<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\leaning">
+																												<id>tcm:10-1301-1024</id>
+																												<title>leaning</title>
+																											</keyword>
+																											<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\holding">
+																												<id>tcm:10-1302-1024</id>
+																												<title>holding</title>
+																											</keyword>
+																											<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\smiling">
+																												<id>tcm:10-1303-1024</id>
+																												<title>smiling</title>
+																											</keyword>
+																										</keywords>
+																									</category>
+																									<category>
+																										<id>tcm:10-80-512</id>
+																										<title>Product</title>
+																										<keywords/>
+																									</category>
+																									<category>
+																										<id>tcm:10-82-512</id>
+																										<title>Solution</title>
+																										<keywords/>
+																									</category>
+																									<category>
+																										<id>tcm:10-81-512</id>
+																										<title>Service</title>
+																										<keywords/>
+																									</category>
+																								</categories>
+																								<version>3</version>
+																							</component>
+																						</linkedComponentValues>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																			</fields>
+																			<schema>
+																				<id>tcm:10-479-8</id>
+																				<title>Highlight Section Item</title>
+																				<publication>
+																					<id>tcm:0-10-1</id>
+																					<title>05 SDL EN</title>
+																				</publication>
+																				<folder>
+																					<id>tcm:10-7-2</id>
+																					<title>Embedded Schemas</title>
+																					<publicationId>tcm:0-10-1</publicationId>
+																				</folder>
+																				<rootElement>HighlightSectionItem</rootElement>
+																			</schema>
+																		</fieldSet>
+																		<fieldSet>
+																			<fields>
+																				<item>
+																					<string>Title</string>
+																					<field fieldType="Text" xPath="tcm:Content/custom:HeaderService/custom:HighlightSection[2]/custom:Title">
+																						<name>Title</name>
+																						<textValues>
+																							<string>Global Solution</string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues/>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																				<item>
+																					<string>Text</string>
+																					<field fieldType="Text" xPath="tcm:Content/custom:HeaderService/custom:HighlightSection[2]/custom:Text">
+																						<name>Text</name>
+																						<textValues>
+																							<string>SDL has the experience and resources to help you expand to global markets.   </string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues/>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																				<item>
+																					<string>Link</string>
+																					<field fieldType="ComponentLink" xPath="tcm:Content/custom:HeaderService/custom:HighlightSection[2]/custom:Link">
+																						<name>Link</name>
+																						<textValues>
+																							<string>tcm:10-1032</string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues>
+																							<component>
+																								<id>tcm:10-1032</id>
+																								<title>Header: Services</title>
+																								<publication>
+																									<id>tcm:0-10-1</id>
+																									<title>05 SDL EN</title>
+																								</publication>
+																								<owningPublication>
+																									<id>tcm:0-3-1</id>
+																									<title>02c Content Parent (EN)</title>
+																								</owningPublication>
+																								<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+																								<schema>
+																									<id>tcm:10-465-8</id>
+																									<title>Header With Image</title>
+																									<publication>
+																										<id>tcm:0-10-1</id>
+																										<title>05 SDL EN</title>
+																									</publication>
+																									<folder>
+																										<id>tcm:10-6-2</id>
+																										<title>Content Schemas</title>
+																										<publicationId>tcm:0-10-1</publicationId>
+																									</folder>
+																									<rootElement>HeaderImage</rootElement>
+																								</schema>
+																								<fields/>
+																								<metadata/>
+																								<componentType>Normal</componentType>
+																								<folder>
+																									<id>tcm:10-107-2</id>
+																									<title>020 Services</title>
+																									<publicationId>tcm:0-10-1</publicationId>
+																								</folder>
+																								<categories>
+																									<category>
+																										<id>tcm:10-79-512</id>
+																										<title>Content Type</title>
+																										<keywords>
+																											<keyword taxonomyId="tcm:10-79-512" path="\Content Type\Other">
+																												<id>tcm:10-835-1024</id>
+																												<title>Other</title>
+																											</keyword>
+																										</keywords>
+																									</category>
+																									<category>
+																										<id>tcm:10-80-512</id>
+																										<title>Product</title>
+																										<keywords/>
+																									</category>
+																									<category>
+																										<id>tcm:10-81-512</id>
+																										<title>Service</title>
+																										<keywords/>
+																									</category>
+																									<category>
+																										<id>tcm:10-82-512</id>
+																										<title>Solution</title>
+																										<keywords/>
+																									</category>
+																									<category>
+																										<id>tcm:10-93-512</id>
+																										<title>Navigation</title>
+																										<keywords>
+																											<keyword taxonomyId="tcm:10-93-512" path="\Navigation\020 Services">
+																												<id>tcm:10-1024-1024</id>
+																												<title>020 Services</title>
+																											</keyword>
+																										</keywords>
+																									</category>
+																								</categories>
+																								<version>7</version>
+																							</component>
+																						</linkedComponentValues>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																			</fields>
+																			<schema>
+																				<id>tcm:10-479-8</id>
+																				<title>Highlight Section Item</title>
+																				<publication>
+																					<id>tcm:0-10-1</id>
+																					<title>05 SDL EN</title>
+																				</publication>
+																				<folder>
+																					<id>tcm:10-7-2</id>
+																					<title>Embedded Schemas</title>
+																					<publicationId>tcm:0-10-1</publicationId>
+																				</folder>
+																				<rootElement>HighlightSectionItem</rootElement>
+																			</schema>
+																		</fieldSet>
+																	</embeddedValues>
+																</field>
+															</item>
+														</fields>
+														<metadata>
+															<item>
+																<string>CurrentService</string>
+																<field fieldType="Keyword" categoryName="Service" categoryId="tcm:10-81-512" xPath="tcm:Metadata/custom:Metadata/custom:CurrentService">
+																	<name>CurrentService</name>
+																	<textValues>
+																		<string>040 Internationalization</string>
+																	</textValues>
+																	<numericValues/>
+																	<dateTimeValues/>
+																	<linkedComponentValues/>
+																	<embeddedValues/>
+																</field>
+															</item>
+														</metadata>
+														<componentType>Normal</componentType>
+														<folder>
+															<id>tcm:10-123-2</id>
+															<title>Language Services</title>
+															<publicationId>tcm:0-10-1</publicationId>
+														</folder>
+														<categories>
+															<category>
+																<id>tcm:10-81-512</id>
+																<title>Service</title>
+																<keywords>
+																	<keyword taxonomyId="tcm:10-81-512" path="\Service\020 Language Services\040 Internationalization">
+																		<id>tcm:10-1499-1024</id>
+																		<title>040 Internationalization</title>
+																	</keyword>
+																</keywords>
+															</category>
+														</categories>
+														<version>9</version>
+													</component>
+												</linkedComponentValues>
+												<embeddedValues/>
+											</field>
+										</item>
+										<item>
+											<string>Image</string>
+											<field fieldType="MultiMediaLink" xPath="tcm:Content/custom:Carousel/custom:CarouselItems[2]/custom:Image">
+												<name>Image</name>
+												<textValues>
+													<string>tcm:10-1454</string>
+												</textValues>
+												<numericValues/>
+												<dateTimeValues/>
+												<linkedComponentValues>
+													<component>
+														<id>tcm:10-1454</id>
+														<title>getty_10197424</title>
+														<publication>
+															<id>tcm:0-10-1</id>
+															<title>05 SDL EN</title>
+														</publication>
+														<owningPublication>
+															<id>tcm:0-3-1</id>
+															<title>02c Content Parent (EN)</title>
+														</owningPublication>
+														<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+														<schema>
+															<id>tcm:10-46-8</id>
+															<title>Image</title>
+															<publication>
+																<id>tcm:0-10-1</id>
+																<title>05 SDL EN</title>
+															</publication>
+															<folder>
+																<id>tcm:10-12-2</id>
+																<title>Multimedia Schemas</title>
+																<publicationId>tcm:0-10-1</publicationId>
+															</folder>
+															<rootElement/>
+														</schema>
+														<fields/>
+														<metadata/>
+														<componentType>Multimedia</componentType>
+														<multimedia>
+															<url>/Preview/Images/getty_10197424_tcm10-1454.png</url>
+															<mimeType>image/png</mimeType>
+															<fileName>getty_10197424.png</fileName>
+															<fileExtension>png</fileExtension>
+															<size>46291</size>
+															<width>0</width>
+															<height>0</height>
+														</multimedia>
+														<folder>
+															<id>tcm:10-71-2</id>
+															<title>Highlight (266x208 or min 266x140) used to be 265x192</title>
+															<publicationId>tcm:0-10-1</publicationId>
+														</folder>
+														<categories>
+															<category>
+																<id>tcm:10-119-512</id>
+																<title>ImageKeyword</title>
+																<keywords/>
+															</category>
+															<category>
+																<id>tcm:10-80-512</id>
+																<title>Product</title>
+																<keywords/>
+															</category>
+															<category>
+																<id>tcm:10-82-512</id>
+																<title>Solution</title>
+																<keywords/>
+															</category>
+															<category>
+																<id>tcm:10-81-512</id>
+																<title>Service</title>
+																<keywords/>
+															</category>
+														</categories>
+														<version>1</version>
+													</component>
+												</linkedComponentValues>
+												<embeddedValues/>
+											</field>
+										</item>
+									</fields>
+									<schema>
+										<id>tcm:10-469-8</id>
+										<title>Carousel Item</title>
+										<publication>
+											<id>tcm:0-10-1</id>
+											<title>05 SDL EN</title>
+										</publication>
+										<folder>
+											<id>tcm:10-7-2</id>
+											<title>Embedded Schemas</title>
+											<publicationId>tcm:0-10-1</publicationId>
+										</folder>
+										<rootElement>CarouselItem</rootElement>
+									</schema>
+								</fieldSet>
+								<fieldSet>
+									<fields>
+										<item>
+											<string>Title</string>
+											<field fieldType="MultiLineText" xPath="tcm:Content/custom:Carousel/custom:CarouselItems[3]/custom:Title">
+												<name>Title</name>
+												<textValues>
+													<string>Test carousel slide 3</string>
+												</textValues>
+												<numericValues/>
+												<dateTimeValues/>
+												<linkedComponentValues/>
+												<embeddedValues/>
+											</field>
+										</item>
+										<item>
+											<string>BodyText</string>
+											<field fieldType="MultiLineText" xPath="tcm:Content/custom:Carousel/custom:CarouselItems[3]/custom:BodyText">
+												<name>BodyText</name>
+												<textValues>
+													<string>ssd;lia sah ouidgh vaskcnio vu ugsui o sagisdisd dsuifsia7g sa g7g79gsg dkb aivbkasj ds sadiluvba s u</string>
+												</textValues>
+												<numericValues/>
+												<dateTimeValues/>
+												<linkedComponentValues/>
+												<embeddedValues/>
+											</field>
+										</item>
+										<item>
+											<string>Link</string>
+											<field fieldType="ComponentLink" xPath="tcm:Content/custom:Carousel/custom:CarouselItems[3]/custom:Link">
+												<name>Link</name>
+												<textValues>
+													<string>tcm:10-1504</string>
+												</textValues>
+												<numericValues/>
+												<dateTimeValues/>
+												<linkedComponentValues>
+													<component>
+														<id>tcm:10-1504</id>
+														<title>Header: Brand Management</title>
+														<publication>
+															<id>tcm:0-10-1</id>
+															<title>05 SDL EN</title>
+														</publication>
+														<owningPublication>
+															<id>tcm:0-3-1</id>
+															<title>02c Content Parent (EN)</title>
+														</owningPublication>
+														<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+														<schema>
+															<id>tcm:10-988-8</id>
+															<title>Header For Solution</title>
+															<publication>
+																<id>tcm:0-10-1</id>
+																<title>05 SDL EN</title>
+															</publication>
+															<folder>
+																<id>tcm:10-6-2</id>
+																<title>Content Schemas</title>
+																<publicationId>tcm:0-10-1</publicationId>
+															</folder>
+															<rootElement>HeaderSolution</rootElement>
+														</schema>
+														<fields>
+															<item>
+																<string>Title</string>
+																<field fieldType="Text" xPath="tcm:Content/custom:HeaderSolution/custom:Title">
+																	<name>Title</name>
+																	<textValues>
+																		<string>Brand Management</string>
+																	</textValues>
+																	<numericValues/>
+																	<dateTimeValues/>
+																	<linkedComponentValues/>
+																	<embeddedValues/>
+																</field>
+															</item>
+															<item>
+																<string>Text</string>
+																<field fieldType="MultiLineText" xPath="tcm:Content/custom:HeaderSolution/custom:Text">
+																	<name>Text</name>
+																	<textValues>
+																		<string>sub headingasdf;lkjasd;flkjasdf</string>
+																	</textValues>
+																	<numericValues/>
+																	<dateTimeValues/>
+																	<linkedComponentValues/>
+																	<embeddedValues/>
+																</field>
+															</item>
+															<item>
+																<string>Image</string>
+																<field fieldType="MultiMediaLink" xPath="tcm:Content/custom:HeaderSolution/custom:Image">
+																	<name>Image</name>
+																	<textValues>
+																		<string>tcm:10-1448</string>
+																	</textValues>
+																	<numericValues/>
+																	<dateTimeValues/>
+																	<linkedComponentValues>
+																		<component>
+																			<id>tcm:10-1448</id>
+																			<title>veer_1936242</title>
+																			<publication>
+																				<id>tcm:0-10-1</id>
+																				<title>05 SDL EN</title>
+																			</publication>
+																			<owningPublication>
+																				<id>tcm:0-3-1</id>
+																				<title>02c Content Parent (EN)</title>
+																			</owningPublication>
+																			<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+																			<schema>
+																				<id>tcm:10-46-8</id>
+																				<title>Image</title>
+																				<publication>
+																					<id>tcm:0-10-1</id>
+																					<title>05 SDL EN</title>
+																				</publication>
+																				<folder>
+																					<id>tcm:10-12-2</id>
+																					<title>Multimedia Schemas</title>
+																					<publicationId>tcm:0-10-1</publicationId>
+																				</folder>
+																				<rootElement/>
+																			</schema>
+																			<fields/>
+																			<metadata/>
+																			<componentType>Multimedia</componentType>
+																			<multimedia>
+																				<url>/Preview/Images/veer_1936242_tcm10-1448.png</url>
+																				<mimeType>image/png</mimeType>
+																				<fileName>veer_1936242.png</fileName>
+																				<fileExtension>png</fileExtension>
+																				<size>1348283</size>
+																				<width>0</width>
+																				<height>0</height>
+																			</multimedia>
+																			<folder>
+																				<id>tcm:10-69-2</id>
+																				<title>Header 1074x741</title>
+																				<publicationId>tcm:0-10-1</publicationId>
+																			</folder>
+																			<categories>
+																				<category>
+																					<id>tcm:10-119-512</id>
+																					<title>ImageKeyword</title>
+																					<keywords>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\people">
+																							<id>tcm:10-1191-1024</id>
+																							<title>people</title>
+																						</keyword>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\woman">
+																							<id>tcm:10-1467-1024</id>
+																							<title>woman</title>
+																						</keyword>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\sun">
+																							<id>tcm:10-1239-1024</id>
+																							<title>sun</title>
+																						</keyword>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\forest">
+																							<id>tcm:10-1240-1024</id>
+																							<title>forest</title>
+																						</keyword>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\green">
+																							<id>tcm:10-1201-1024</id>
+																							<title>green</title>
+																						</keyword>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\hands">
+																							<id>tcm:10-1241-1024</id>
+																							<title>hands</title>
+																						</keyword>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\trees">
+																							<id>tcm:10-1242-1024</id>
+																							<title>trees</title>
+																						</keyword>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\one">
+																							<id>tcm:10-1205-1024</id>
+																							<title>one</title>
+																						</keyword>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\open">
+																							<id>tcm:10-1243-1024</id>
+																							<title>open</title>
+																						</keyword>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\outdoor">
+																							<id>tcm:10-1206-1024</id>
+																							<title>outdoor</title>
+																						</keyword>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\arms">
+																							<id>tcm:10-1244-1024</id>
+																							<title>arms</title>
+																						</keyword>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\lifestyle">
+																							<id>tcm:10-1228-1024</id>
+																							<title>lifestyle</title>
+																						</keyword>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\nature">
+																							<id>tcm:10-1204-1024</id>
+																							<title>nature</title>
+																						</keyword>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\stretch">
+																							<id>tcm:10-1245-1024</id>
+																							<title>stretch</title>
+																						</keyword>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\standing">
+																							<id>tcm:10-1246-1024</id>
+																							<title>standing</title>
+																						</keyword>
+																						<keyword taxonomyId="tcm:10-119-512" path="\ImageKeyword\asian">
+																							<id>tcm:10-1247-1024</id>
+																							<title>asian</title>
+																						</keyword>
+																					</keywords>
+																				</category>
+																				<category>
+																					<id>tcm:10-80-512</id>
+																					<title>Product</title>
+																					<keywords/>
+																				</category>
+																				<category>
+																					<id>tcm:10-82-512</id>
+																					<title>Solution</title>
+																					<keywords/>
+																				</category>
+																				<category>
+																					<id>tcm:10-81-512</id>
+																					<title>Service</title>
+																					<keywords/>
+																				</category>
+																			</categories>
+																			<version>3</version>
+																		</component>
+																	</linkedComponentValues>
+																	<embeddedValues/>
+																</field>
+															</item>
+															<item>
+																<string>HighlightSection</string>
+																<field fieldType="Embedded" xPath="tcm:Content/custom:HeaderSolution/custom:HighlightSection">
+																	<name>HighlightSection</name>
+																	<textValues/>
+																	<numericValues/>
+																	<dateTimeValues/>
+																	<linkedComponentValues/>
+																	<embeddedValues>
+																		<fieldSet>
+																			<fields>
+																				<item>
+																					<string>Title</string>
+																					<field fieldType="Text" xPath="tcm:Content/custom:HeaderSolution/custom:HighlightSection[1]/custom:Title">
+																						<name>Title</name>
+																						<textValues>
+																							<string>blabla</string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues/>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																				<item>
+																					<string>Text</string>
+																					<field fieldType="Text" xPath="tcm:Content/custom:HeaderSolution/custom:HighlightSection[1]/custom:Text">
+																						<name>Text</name>
+																						<textValues>
+																							<string>a;lkajsd;lfkasdf</string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues/>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																			</fields>
+																			<schema>
+																				<id>tcm:10-479-8</id>
+																				<title>Highlight Section Item</title>
+																				<publication>
+																					<id>tcm:0-10-1</id>
+																					<title>05 SDL EN</title>
+																				</publication>
+																				<folder>
+																					<id>tcm:10-7-2</id>
+																					<title>Embedded Schemas</title>
+																					<publicationId>tcm:0-10-1</publicationId>
+																				</folder>
+																				<rootElement>HighlightSectionItem</rootElement>
+																			</schema>
+																		</fieldSet>
+																		<fieldSet>
+																			<fields>
+																				<item>
+																					<string>Title</string>
+																					<field fieldType="Text" xPath="tcm:Content/custom:HeaderSolution/custom:HighlightSection[2]/custom:Title">
+																						<name>Title</name>
+																						<textValues>
+																							<string>sadfa</string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues/>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																				<item>
+																					<string>Text</string>
+																					<field fieldType="Text" xPath="tcm:Content/custom:HeaderSolution/custom:HighlightSection[2]/custom:Text">
+																						<name>Text</name>
+																						<textValues>
+																							<string>sdgadsgfasefasef</string>
+																						</textValues>
+																						<numericValues/>
+																						<dateTimeValues/>
+																						<linkedComponentValues/>
+																						<embeddedValues/>
+																					</field>
+																				</item>
+																			</fields>
+																			<schema>
+																				<id>tcm:10-479-8</id>
+																				<title>Highlight Section Item</title>
+																				<publication>
+																					<id>tcm:0-10-1</id>
+																					<title>05 SDL EN</title>
+																				</publication>
+																				<folder>
+																					<id>tcm:10-7-2</id>
+																					<title>Embedded Schemas</title>
+																					<publicationId>tcm:0-10-1</publicationId>
+																				</folder>
+																				<rootElement>HighlightSectionItem</rootElement>
+																			</schema>
+																		</fieldSet>
+																	</embeddedValues>
+																</field>
+															</item>
+														</fields>
+														<metadata>
+															<item>
+																<string>CurrentSolution</string>
+																<field fieldType="Keyword" categoryName="Solution" categoryId="tcm:10-82-512" xPath="tcm:Metadata/custom:Metadata/custom:CurrentSolution">
+																	<name>CurrentSolution</name>
+																	<textValues>
+																		<string>010 Brand Management</string>
+																	</textValues>
+																	<numericValues/>
+																	<dateTimeValues/>
+																	<linkedComponentValues/>
+																	<embeddedValues/>
+																</field>
+															</item>
+														</metadata>
+														<componentType>Normal</componentType>
+														<folder>
+															<id>tcm:10-106-2</id>
+															<title>010 Solutions</title>
+															<publicationId>tcm:0-10-1</publicationId>
+														</folder>
+														<categories>
+															<category>
+																<id>tcm:10-82-512</id>
+																<title>Solution</title>
+																<keywords>
+																	<keyword taxonomyId="tcm:10-82-512" path="\Solution\020 By Business Need\010 Brand Management">
+																		<id>tcm:10-857-1024</id>
+																		<title>010 Brand Management</title>
+																	</keyword>
+																</keywords>
+															</category>
+														</categories>
+														<version>1</version>
+													</component>
+												</linkedComponentValues>
+												<embeddedValues/>
+											</field>
+										</item>
+										<item>
+											<string>Image</string>
+											<field fieldType="MultiMediaLink" xPath="tcm:Content/custom:Carousel/custom:CarouselItems[3]/custom:Image">
+												<name>Image</name>
+												<textValues>
+													<string>tcm:10-1148</string>
+												</textValues>
+												<numericValues/>
+												<dateTimeValues/>
+												<linkedComponentValues>
+													<component>
+														<id>tcm:10-1148</id>
+														<title>122134113</title>
+														<publication>
+															<id>tcm:0-10-1</id>
+															<title>05 SDL EN</title>
+														</publication>
+														<owningPublication>
+															<id>tcm:0-3-1</id>
+															<title>02c Content Parent (EN)</title>
+														</owningPublication>
+														<lastPublishedDate>0001-01-01T00:00:00</lastPublishedDate>
+														<schema>
+															<id>tcm:10-46-8</id>
+															<title>Image</title>
+															<publication>
+																<id>tcm:0-10-1</id>
+																<title>05 SDL EN</title>
+															</publication>
+															<folder>
+																<id>tcm:10-12-2</id>
+																<title>Multimedia Schemas</title>
+																<publicationId>tcm:0-10-1</publicationId>
+															</folder>
+															<rootElement/>
+														</schema>
+														<fields/>
+														<metadata/>
+														<componentType>Multimedia</componentType>
+														<multimedia>
+															<url>/Preview/Images/122134113_tcm10-1148.jpg</url>
+															<mimeType>image/jpeg</mimeType>
+															<fileName>122134113.jpg</fileName>
+															<fileExtension>jpg</fileExtension>
+															<size>28345</size>
+															<width>0</width>
+															<height>0</height>
+														</multimedia>
+														<folder>
+															<id>tcm:10-117-2</id>
+															<title>Content images</title>
+															<publicationId>tcm:0-10-1</publicationId>
+														</folder>
+														<categories>
+															<category>
+																<id>tcm:10-119-512</id>
+																<title>ImageKeyword</title>
+																<keywords/>
+															</category>
+															<category>
+																<id>tcm:10-80-512</id>
+																<title>Product</title>
+																<keywords/>
+															</category>
+															<category>
+																<id>tcm:10-82-512</id>
+																<title>Solution</title>
+																<keywords/>
+															</category>
+															<category>
+																<id>tcm:10-81-512</id>
+																<title>Service</title>
+																<keywords/>
+															</category>
+														</categories>
+														<version>1</version>
+													</component>
+												</linkedComponentValues>
+												<embeddedValues/>
+											</field>
+										</item>
+									</fields>
+									<schema>
+										<id>tcm:10-469-8</id>
+										<title>Carousel Item</title>
+										<publication>
+											<id>tcm:0-10-1</id>
+											<title>05 SDL EN</title>
+										</publication>
+										<folder>
+											<id>tcm:10-7-2</id>
+											<title>Embedded Schemas</title>
+											<publicationId>tcm:0-10-1</publicationId>
+										</folder>
+										<rootElement>CarouselItem</rootElement>
+									</schema>
+								</fieldSet>
+							</embeddedValues>
+						</field>
+					</item>
+				</fields>
+				<metadata/>
+				<componentType>Normal</componentType>
+				<folder>
+					<id>tcm:10-83-2</id>
+					<title>030 Products</title>
+					<publicationId>tcm:0-10-1</publicationId>
+				</folder>
+				<categories/>
+				<version>3</version>
+			</component>
+			<componentTemplate>
+				<id>tcm:10-595-32</id>
+				<title>Carousel Content</title>
+				<publication>
+					<id>tcm:0-10-1</id>
+					<title>05 SDL EN</title>
+				</publication>
+				<outputFormat>HTML Fragment</outputFormat>
+				<metadata>
+					<item>
+						<string>view</string>
+						<field fieldType="Text">
+							<name>view</name>
+							<textValues>
+								<string>CarouselContent</string>
+							</textValues>
+							<numericValues/>
+							<dateTimeValues/>
+							<linkedComponentValues/>
+							<embeddedValues/>
+						</field>
+					</item>
+					<item>
+						<string>nocache</string>
+						<field fieldType="Text">
+							<name>nocache</name>
+							<textValues>
+								<string>No</string>
+							</textValues>
+							<numericValues/>
+							<dateTimeValues/>
+							<linkedComponentValues/>
+							<embeddedValues/>
+						</field>
+					</item>
+				</metadata>
+				<folder>
+					<id>tcm:10-11-2</id>
+					<title>Component Templates</title>
+					<publicationId>tcm:0-10-1</publicationId>
+				</folder>
+			</componentTemplate>
+			<isDynamic>false</isDynamic>
+		</componentPresentation>
+	</componentPresentations>
+	<structureGroup>
+		<id>tcm:10-23-4</id>
+		<title>030 Products</title>
+		<publicationId>tcm:0-10-1</publicationId>
+	</structureGroup>
+	<categories/>
+	<version>5</version>
+</page>
