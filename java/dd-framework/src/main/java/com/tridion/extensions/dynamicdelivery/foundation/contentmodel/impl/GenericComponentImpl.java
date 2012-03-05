@@ -15,6 +15,7 @@
  */
 package com.tridion.extensions.dynamicdelivery.foundation.contentmodel.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ import com.tridion.extensions.dynamicdelivery.foundation.contentmodel.HasContent
 import com.tridion.extensions.dynamicdelivery.foundation.contentmodel.HasMetadata;
 import com.tridion.extensions.dynamicdelivery.foundation.contentmodel.HasMultimedia;
 import com.tridion.extensions.dynamicdelivery.foundation.contentmodel.Multimedia;
+import com.tridion.extensions.dynamicdelivery.foundation.util.DateUtils;
 
 public class GenericComponentImpl extends BaseComponent implements
 		GenericComponent, HasContent, HasMetadata, HasMultimedia {
@@ -41,6 +43,8 @@ public class GenericComponentImpl extends BaseComponent implements
 	protected ComponentType componentType;
 	@Element(name = "multimedia", required = false)
 	private Multimedia multimedia;
+	@Element(name = "lastPublishedDate", required = false)
+	protected String lastPublishedDateAsString;
 
 	@ElementList(name = "categories", required = false, type = CategoryImpl.class)
 	private List<Category> categories;
@@ -132,4 +136,17 @@ public class GenericComponentImpl extends BaseComponent implements
 	public List<Category> getCategories() {
 		return categories;
 	}
+
+	@Override
+	public Date getLastPublishedDate() {
+		if (lastPublishedDateAsString == null || lastPublishedDateAsString.equals(""))
+			return new Date();
+		return DateUtils.convertStringToDate(lastPublishedDateAsString);
+	}
+
+	@Override
+	public void setLastPublishedDate(Date date) {
+		this.lastPublishedDateAsString = date.toGMTString();		
+	}	
+
 }

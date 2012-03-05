@@ -41,6 +41,19 @@ public interface RepositoryLocalItem extends Item {
 	 * 
 	 * @return
 	 */
+	public Publication getOwningPublication();
+
+	/**
+	 * Set the owning publication
+	 * 
+	 * @param publication
+	 */
+	public void setOwningPublication(Publication publication);
+	/**
+	 * Get the owning publication
+	 * 
+	 * @return
+	 */
 	public Publication getPublication();
 
 	/**

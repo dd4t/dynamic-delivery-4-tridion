@@ -56,5 +56,13 @@ public interface ComponentPresentation {
 	 * Get the rendered content
 	 */ 
 	public String getRenderedContent();
+	
+
+	/**
+	 * Return true if the component presentation is dynamic (i.e. available in the broker database as a separate item)
+	 * @return
+	 */
+	public boolean isDynamic();
+	
 
 }

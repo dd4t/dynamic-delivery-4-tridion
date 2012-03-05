@@ -15,6 +15,7 @@
  */
 package com.tridion.extensions.dynamicdelivery.foundation.contentmodel.impl;
 
+import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 
 import com.tridion.extensions.dynamicdelivery.foundation.contentmodel.Component;
@@ -32,6 +33,8 @@ public class ComponentPresentationImpl implements ComponentPresentation {
 	private Component component;
 	@Element(name = "componentTemplate", required = false)
 	private ComponentTemplate componentTemplate;
+	@Element(name = "isDynamic", required = false)
+	private boolean isDynamic;
 
 	@Element(name = "renderedContent", required = false)
 	private String renderedContent;
@@ -78,5 +81,10 @@ public class ComponentPresentationImpl implements ComponentPresentation {
 
 	public String getRenderedContent() {
 		return renderedContent;
+	}
+
+	@Override
+	public boolean isDynamic() {
+		return this.isDynamic;
 	}
 }

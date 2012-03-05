@@ -15,6 +15,7 @@
  */
 package com.tridion.extensions.dynamicdelivery.foundation.contentmodel.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,7 @@ import com.tridion.extensions.dynamicdelivery.foundation.contentmodel.GenericPag
 import com.tridion.extensions.dynamicdelivery.foundation.contentmodel.HasMetadata;
 import com.tridion.extensions.dynamicdelivery.foundation.contentmodel.PageTemplate;
 import com.tridion.extensions.dynamicdelivery.foundation.contentmodel.StructureGroup;
+import com.tridion.extensions.dynamicdelivery.foundation.util.DateUtils;
 
 @Root(name = "page")
 public class GenericPageImpl extends BasePage implements GenericPage, HasMetadata {
@@ -40,7 +42,7 @@ public class GenericPageImpl extends BasePage implements GenericPage, HasMetadat
 	@ElementList(name = "categories", required = false, type = CategoryImpl.class)
 	private List<Category> categories;
 
-	@Element(name = "fileName")
+	@Element(name = "fileName") 
 	protected String fileName;
 	@Element(name = "pageTemplate")
 	protected PageTemplate pageTemplate;
@@ -50,7 +52,9 @@ public class GenericPageImpl extends BasePage implements GenericPage, HasMetadat
 	protected StructureGroup structureGroup;
 	@Element(name = "version")
 	protected int version;
-
+	@Element(name = "lastPublishedDate", required = false)
+	protected String lastPublishedDateAsString;
+	
 	public int getVersion() {
 	    
 	    return version;
@@ -141,5 +145,17 @@ public class GenericPageImpl extends BasePage implements GenericPage, HasMetadat
 
 	public void setStructureGroup(StructureGroup structureGroup) {
 		this.structureGroup = structureGroup;
+	}
+
+	@Override
+	public Date getLastPublishedDate() {
+		if (lastPublishedDateAsString == null || lastPublishedDateAsString.equals(""))
+			return new Date();
+		return DateUtils.convertStringToDate(lastPublishedDateAsString);
+	}
+
+	@Override
+	public void setLastPublishedDate(Date date) {
+		this.lastPublishedDateAsString = date.toGMTString();		
 	}	
 }

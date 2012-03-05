@@ -15,6 +15,8 @@
  */
 package com.tridion.extensions.dynamicdelivery.foundation.contentmodel;
 
+import java.util.Date;
+
 public interface Page extends PublishedItem {
 	/**
 	 * Get the metadata schema
@@ -30,4 +32,21 @@ public interface Page extends PublishedItem {
 	 */
 	public void setSchema(Schema schema);
 
+	/**
+	 * Get the last published date
+	 * 
+	 * @return the last published date
+	 */
+	public Date getLastPublishedDate();
+
+	/**
+	 * Set the last published date
+	 * 
+	 * @param last published date
+	 */
+	public void setLastPublishedDate(Date date);
+
+	
+	
+	
 }

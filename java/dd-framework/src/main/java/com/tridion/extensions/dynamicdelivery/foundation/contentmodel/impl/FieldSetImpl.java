@@ -32,7 +32,7 @@ public class FieldSetImpl implements FieldSet {
     @ElementMap(name = "fields", keyType = String.class, valueType = Field.class, entry = "item", required = false)
     private Map<String, Field> content;
     
-    @Element(name = "schema")
+    @Element(name = "schema", required = true)
     private Schema schema;
 
     public void setSchema(Schema schema) {

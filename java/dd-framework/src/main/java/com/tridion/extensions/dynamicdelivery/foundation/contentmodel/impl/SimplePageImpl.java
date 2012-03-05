@@ -15,8 +15,22 @@
  */
 package com.tridion.extensions.dynamicdelivery.foundation.contentmodel.impl;
 
+import java.util.Date;
+
 import com.tridion.extensions.dynamicdelivery.foundation.contentmodel.SimplePage;
 
 public class SimplePageImpl extends BasePage implements SimplePage {
+
+	@Override
+	public Date getLastPublishedDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLastPublishedDate(Date date) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
