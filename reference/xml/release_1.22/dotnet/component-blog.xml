@@ -1,0 +1,489 @@
+<Component>
+	<Id>tcm:10-1972</Id>
+	<Title>Test_Blog1</Title>
+	<Publication>
+		<Id>tcm:0-10-1</Id>
+		<Title>05 SDL EN</Title>
+	</Publication>
+	<OwningPublication>
+		<Id>tcm:0-10-1</Id>
+		<Title>05 SDL EN</Title>
+	</OwningPublication>
+	<LastPublishedDate>0001-01-01T00:00:00</LastPublishedDate>
+	<Schema>
+		<Id>tcm:10-1884-8</Id>
+		<Title>Blog Post</Title>
+		<Publication>
+			<Id>tcm:0-10-1</Id>
+			<Title>05 SDL EN</Title>
+		</Publication>
+		<Folder>
+			<Id>tcm:10-6-2</Id>
+			<Title>Content Schemas</Title>
+			<PublicationId>tcm:0-10-1</PublicationId>
+		</Folder>
+		<RootElementName>BlogPost</RootElementName>
+	</Schema>
+	<Fields>
+		<item>
+			<key>
+				<string>Title</string>
+			</key>
+			<value>
+				<Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" FieldType="Text" XPath="tcm:Content/custom:BlogPost/custom:Title">
+					<Name>Title</Name>
+					<Values>
+						<string>blog1</string>
+					</Values>
+					<NumericValues/>
+					<DateTimeValues/>
+					<LinkedComponentValues/>
+				</Field>
+			</value>
+		</item>
+		<item>
+			<key>
+				<string>Paragraph</string>
+			</key>
+			<value>
+				<Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" FieldType="Embedded" XPath="tcm:Content/custom:BlogPost/custom:Paragraph">
+					<Name>Paragraph</Name>
+					<Values/>
+					<NumericValues/>
+					<DateTimeValues/>
+					<LinkedComponentValues/>
+					<EmbeddedValues>
+						<FieldSet>
+							<item>
+								<key>
+									<string>Heading</string>
+								</key>
+								<value>
+									<Field FieldType="MultiLineText" XPath="tcm:Content/custom:BlogPost/custom:Paragraph[1]/custom:Heading">
+										<Name>Heading</Name>
+										<Values>
+											<string>title of first blog</string>
+										</Values>
+										<NumericValues/>
+										<DateTimeValues/>
+										<LinkedComponentValues/>
+									</Field>
+								</value>
+							</item>
+							<item>
+								<key>
+									<string>BodyText</string>
+								</key>
+								<value>
+									<Field FieldType="Xhtml" XPath="tcm:Content/custom:BlogPost/custom:Paragraph[1]/custom:BodyText">
+										<Name>BodyText</Name>
+										<Values>
+											<string>The Weather Station application adds new dimensions to ‘checking the weather.’ A full-featured Silverlight application built with Telerik Silverlight components, it uses a map-based Metro UI to integrate geographical and numeric data for a seamless user experience. Upon starting it detects your location and shows the weather forecast for the next five days. It also lets you create a list of favorite cities for quick access on future visits. Built with touch in mind this application is ideal for all sorts of public locations, kiosks, hotel lobbies, etc. The Weather Station demo application was created to illustrate the power and versatility of Telerik’s data visualization controls. Utilizing the map, chart, gauge, sparklines, and grid as core presentation elements, this application provides a look at how you can combine various Telerik RadControls to create a seamless and engaging experience. The Weather Station application  adds new dimensions to ‘checking the weather.’ A full-featured Silverlight application built with Telerik Silverlight components, it uses a map-based Metro UI to integrate geographical and numeric data for a seamless user experience. Upon starting it detects your location and shows the weather forecast for the next five days. It also lets you create a list of favorite cities for quick access on future visits. Built with touch in mind this application is ideal for all sorts of public locations, kiosks, hotel lobbies, etc. The Weather Station demo application was created to illustrate the power and versatility of Telerik’s data visualization controls. Utilizing the map, chart, gauge, sparklines, and grid as core presentation elements, this application provides a look at how you can combine various Telerik RadControls to create a seamless and engaging experience.</string>
+										</Values>
+										<NumericValues/>
+										<DateTimeValues/>
+										<LinkedComponentValues/>
+									</Field>
+								</value>
+							</item>
+							<item>
+								<key>
+									<string>Image</string>
+								</key>
+								<value>
+									<Field FieldType="MultiMediaLink" XPath="tcm:Content/custom:BlogPost/custom:Paragraph[1]/custom:Image">
+										<Name>Image</Name>
+										<Values>
+											<string>tcm:10-1448</string>
+										</Values>
+										<NumericValues/>
+										<DateTimeValues/>
+										<LinkedComponentValues>
+											<Component>
+												<Id>tcm:10-1448</Id>
+												<Title>veer_1936242</Title>
+												<Publication>
+													<Id>tcm:0-10-1</Id>
+													<Title>05 SDL EN</Title>
+												</Publication>
+												<OwningPublication>
+													<Id>tcm:0-3-1</Id>
+													<Title>02c Content Parent (EN)</Title>
+												</OwningPublication>
+												<LastPublishedDate>0001-01-01T00:00:00</LastPublishedDate>
+												<Schema>
+													<Id>tcm:10-46-8</Id>
+													<Title>Image</Title>
+													<Publication>
+														<Id>tcm:0-10-1</Id>
+														<Title>05 SDL EN</Title>
+													</Publication>
+													<Folder>
+														<Id>tcm:10-12-2</Id>
+														<Title>Multimedia Schemas</Title>
+														<PublicationId>tcm:0-10-1</PublicationId>
+													</Folder>
+													<RootElementName/>
+												</Schema>
+												<Fields/>
+												<MetadataFields>
+													<item>
+														<key>
+															<string>ImageDescription</string>
+														</key>
+														<value>
+															<Field FieldType="Keyword" CategoryName="ImageKeyword" CategoryId="tcm:10-119-512" XPath="tcm:Metadata/custom:Metadata/custom:ImageDescription">
+																<Name>ImageDescription</Name>
+																<Values>
+																	<string>people</string>
+																	<string>woman</string>
+																	<string>sun</string>
+																	<string>forest</string>
+																	<string>green</string>
+																	<string>hands</string>
+																	<string>trees</string>
+																	<string>one</string>
+																	<string>open</string>
+																	<string>outdoor</string>
+																	<string>arms</string>
+																	<string>lifestyle</string>
+																	<string>nature</string>
+																	<string>stretch</string>
+																	<string>standing</string>
+																	<string>asian</string>
+																</Values>
+																<NumericValues/>
+																<DateTimeValues/>
+																<LinkedComponentValues/>
+															</Field>
+														</value>
+													</item>
+												</MetadataFields>
+												<ComponentType>Multimedia</ComponentType>
+												<Multimedia>
+													<Url>/Preview/Images/resized/veer_1936242_tcm10-1448_tcm5-1905-32.png</Url>
+													<MimeType>image/png</MimeType>
+													<FileName>veer_1936242.png</FileName>
+													<FileExtension>png</FileExtension>
+													<Size>1348283</Size>
+													<Width>0</Width>
+													<Height>0</Height>
+												</Multimedia>
+												<Folder>
+													<Id>tcm:10-69-2</Id>
+													<Title>Header 1074x741</Title>
+													<PublicationId>tcm:0-10-1</PublicationId>
+												</Folder>
+												<Categories>
+													<Category>
+														<Id>tcm:10-119-512</Id>
+														<Title>ImageKeyword</Title>
+														<Keywords>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\people">
+																<Id>tcm:10-1191-1024</Id>
+																<Title>people</Title>
+															</Keyword>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\woman">
+																<Id>tcm:10-1467-1024</Id>
+																<Title>woman</Title>
+															</Keyword>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\sun">
+																<Id>tcm:10-1239-1024</Id>
+																<Title>sun</Title>
+															</Keyword>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\forest">
+																<Id>tcm:10-1240-1024</Id>
+																<Title>forest</Title>
+															</Keyword>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\green">
+																<Id>tcm:10-1201-1024</Id>
+																<Title>green</Title>
+															</Keyword>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\hands">
+																<Id>tcm:10-1241-1024</Id>
+																<Title>hands</Title>
+															</Keyword>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\trees">
+																<Id>tcm:10-1242-1024</Id>
+																<Title>trees</Title>
+															</Keyword>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\one">
+																<Id>tcm:10-1205-1024</Id>
+																<Title>one</Title>
+															</Keyword>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\open">
+																<Id>tcm:10-1243-1024</Id>
+																<Title>open</Title>
+															</Keyword>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\outdoor">
+																<Id>tcm:10-1206-1024</Id>
+																<Title>outdoor</Title>
+															</Keyword>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\arms">
+																<Id>tcm:10-1244-1024</Id>
+																<Title>arms</Title>
+															</Keyword>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\lifestyle">
+																<Id>tcm:10-1228-1024</Id>
+																<Title>lifestyle</Title>
+															</Keyword>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\nature">
+																<Id>tcm:10-1204-1024</Id>
+																<Title>nature</Title>
+															</Keyword>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\stretch">
+																<Id>tcm:10-1245-1024</Id>
+																<Title>stretch</Title>
+															</Keyword>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\standing">
+																<Id>tcm:10-1246-1024</Id>
+																<Title>standing</Title>
+															</Keyword>
+															<Keyword TaxonomyId="tcm:10-119-512" Path="\ImageKeyword\asian">
+																<Id>tcm:10-1247-1024</Id>
+																<Title>asian</Title>
+															</Keyword>
+														</Keywords>
+													</Category>
+													<Category>
+														<Id>tcm:10-80-512</Id>
+														<Title>Product</Title>
+														<Keywords/>
+													</Category>
+													<Category>
+														<Id>tcm:10-82-512</Id>
+														<Title>Solution</Title>
+														<Keywords/>
+													</Category>
+													<Category>
+														<Id>tcm:10-81-512</Id>
+														<Title>Service</Title>
+														<Keywords/>
+													</Category>
+												</Categories>
+												<Version>3</Version>
+											</Component>
+										</LinkedComponentValues>
+									</Field>
+								</value>
+							</item>
+						</FieldSet>
+						<FieldSet>
+							<item>
+								<key>
+									<string>Heading</string>
+								</key>
+								<value>
+									<Field FieldType="MultiLineText" XPath="tcm:Content/custom:BlogPost/custom:Paragraph[2]/custom:Heading">
+										<Name>Heading</Name>
+										<Values>
+											<string>title 2</string>
+										</Values>
+										<NumericValues/>
+										<DateTimeValues/>
+										<LinkedComponentValues/>
+									</Field>
+								</value>
+							</item>
+							<item>
+								<key>
+									<string>BodyText</string>
+								</key>
+								<value>
+									<Field FieldType="Xhtml" XPath="tcm:Content/custom:BlogPost/custom:Paragraph[2]/custom:BodyText">
+										<Name>BodyText</Name>
+										<Values>
+											<string>The Weather Station application adds new dimensions to ‘checking the weather.’ A full-featured Silverlight application built with Telerik Silverlight components, it uses a map-based Metro UI to integrate geographical and numeric data for a seamless user experience. Upon starting it detects your location and shows the weather forecast for the next five days. It also lets you create a list of favorite cities for quick access on future visits. Built with touch in mind this application is ideal for all sorts of public locations, kiosks, hotel lobbies, etc. The Weather Station demo application was created to illustrate the power and versatility of Telerik’s data visualization controls. Utilizing the map, chart, gauge, sparklines, and grid as core presentation elements, this application provides a look at how you can combine various Telerik RadControls to create a seamless and engaging experience. The Weather Station application adds new  dimensions to ‘checking the weather.’ A full-featured Silverlight application built with Telerik Silverlight components, it uses a map-based Metro UI to integrate geographical and numeric data for a seamless user experience. Upon starting it detects your location and shows the weather forecast for the next five days. It also lets you create a list of favorite cities for quick access on future visits. Built with touch in mind this application is ideal for all sorts of public locations, kiosks, hotel lobbies, etc. The Weather Station demo application was created to illustrate the power and versatility of Telerik’s data visualization controls. Utilizing the map, chart, gauge, sparklines, and grid as core presentation elements, this application provides a look at how you can combine various Telerik RadControls to create a seamless and engaging experience.</string>
+										</Values>
+										<NumericValues/>
+										<DateTimeValues/>
+										<LinkedComponentValues/>
+									</Field>
+								</value>
+							</item>
+							<item>
+								<key>
+									<string>Image</string>
+								</key>
+								<value>
+									<Field FieldType="MultiMediaLink" XPath="tcm:Content/custom:BlogPost/custom:Paragraph[2]/custom:Image">
+										<Name>Image</Name>
+										<Values>
+											<string>tcm:10-1145</string>
+										</Values>
+										<NumericValues/>
+										<DateTimeValues/>
+										<LinkedComponentValues>
+											<Component>
+												<Id>tcm:10-1145</Id>
+												<Title>121493860</Title>
+												<Publication>
+													<Id>tcm:0-10-1</Id>
+													<Title>05 SDL EN</Title>
+												</Publication>
+												<OwningPublication>
+													<Id>tcm:0-3-1</Id>
+													<Title>02c Content Parent (EN)</Title>
+												</OwningPublication>
+												<LastPublishedDate>0001-01-01T00:00:00</LastPublishedDate>
+												<Schema>
+													<Id>tcm:10-46-8</Id>
+													<Title>Image</Title>
+													<Publication>
+														<Id>tcm:0-10-1</Id>
+														<Title>05 SDL EN</Title>
+													</Publication>
+													<Folder>
+														<Id>tcm:10-12-2</Id>
+														<Title>Multimedia Schemas</Title>
+														<PublicationId>tcm:0-10-1</PublicationId>
+													</Folder>
+													<RootElementName/>
+												</Schema>
+												<Fields/>
+												<MetadataFields/>
+												<ComponentType>Multimedia</ComponentType>
+												<Multimedia>
+													<Url>/Preview/Images/resized/121493860_tcm10-1145_tcm5-1905-32.jpg</Url>
+													<MimeType>image/jpeg</MimeType>
+													<FileName>121493860.jpg</FileName>
+													<FileExtension>jpg</FileExtension>
+													<Size>27451</Size>
+													<Width>0</Width>
+													<Height>0</Height>
+												</Multimedia>
+												<Folder>
+													<Id>tcm:10-117-2</Id>
+													<Title>Content images</Title>
+													<PublicationId>tcm:0-10-1</PublicationId>
+												</Folder>
+												<Categories>
+													<Category>
+														<Id>tcm:10-119-512</Id>
+														<Title>ImageKeyword</Title>
+														<Keywords/>
+													</Category>
+													<Category>
+														<Id>tcm:10-80-512</Id>
+														<Title>Product</Title>
+														<Keywords/>
+													</Category>
+													<Category>
+														<Id>tcm:10-82-512</Id>
+														<Title>Solution</Title>
+														<Keywords/>
+													</Category>
+													<Category>
+														<Id>tcm:10-81-512</Id>
+														<Title>Service</Title>
+														<Keywords/>
+													</Category>
+												</Categories>
+												<Version>1</Version>
+											</Component>
+										</LinkedComponentValues>
+									</Field>
+								</value>
+							</item>
+						</FieldSet>
+					</EmbeddedValues>
+					<EmbeddedSchema>
+						<Id>tcm:10-477-8</Id>
+						<Title>Paragraph</Title>
+						<Publication>
+							<Id>tcm:0-10-1</Id>
+							<Title>05 SDL EN</Title>
+						</Publication>
+						<Folder>
+							<Id>tcm:10-7-2</Id>
+							<Title>Embedded Schemas</Title>
+							<PublicationId>tcm:0-10-1</PublicationId>
+						</Folder>
+						<RootElementName>Paragraph</RootElementName>
+					</EmbeddedSchema>
+				</Field>
+			</value>
+		</item>
+		<item>
+			<key>
+				<string>Keywords</string>
+			</key>
+			<value>
+				<Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" FieldType="Keyword" CategoryName="BlogTopic" CategoryId="tcm:10-160-512" XPath="tcm:Content/custom:BlogPost/custom:Keywords">
+					<Name>Keywords</Name>
+					<Values>
+						<string>Web Content Management</string>
+					</Values>
+					<NumericValues/>
+					<DateTimeValues/>
+					<LinkedComponentValues/>
+				</Field>
+			</value>
+		</item>
+		<item>
+			<key>
+				<string>Author</string>
+			</key>
+			<value>
+				<Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" FieldType="Keyword" CategoryName="Blogger" CategoryId="tcm:10-158-512" XPath="tcm:Content/custom:BlogPost/custom:Author">
+					<Name>Author</Name>
+					<Values>
+						<string>Mark Lancaster</string>
+					</Values>
+					<NumericValues/>
+					<DateTimeValues/>
+					<LinkedComponentValues/>
+				</Field>
+			</value>
+		</item>
+	</Fields>
+	<MetadataFields>
+		<item>
+			<key>
+				<string>ReleaseDate</string>
+			</key>
+			<value>
+				<Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" FieldType="Date" XPath="tcm:Metadata/custom:Metadata/custom:ReleaseDate">
+					<Name>ReleaseDate</Name>
+					<Values>
+						<string>12/15/2011 12:14:01 PM</string>
+					</Values>
+					<NumericValues/>
+					<DateTimeValues>
+						<dateTime>2011-12-15T12:14:01</dateTime>
+					</DateTimeValues>
+					<LinkedComponentValues/>
+				</Field>
+			</value>
+		</item>
+	</MetadataFields>
+	<ComponentType>Normal</ComponentType>
+	<Folder>
+		<Id>tcm:10-26-2</Id>
+		<Title>Content</Title>
+		<PublicationId>tcm:0-10-1</PublicationId>
+	</Folder>
+	<Categories>
+		<Category>
+			<Id>tcm:10-160-512</Id>
+			<Title>BlogTopic</Title>
+			<Keywords>
+				<Keyword TaxonomyId="tcm:10-160-512" Path="\BlogTopic\Web Content Management">
+					<Id>tcm:10-1890-1024</Id>
+					<Title>Web Content Management</Title>
+				</Keyword>
+			</Keywords>
+		</Category>
+		<Category>
+			<Id>tcm:10-158-512</Id>
+			<Title>Blogger</Title>
+			<Keywords>
+				<Keyword TaxonomyId="tcm:10-158-512" Path="\Blogger\Mark Lancaster">
+					<Id>tcm:10-1904-1024</Id>
+					<Title>Mark Lancaster</Title>
+				</Keyword>
+			</Keywords>
+		</Category>
+	</Categories>
+	<Version>1</Version>
+</Component>
