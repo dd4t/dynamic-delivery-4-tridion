@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Providers.SDLTridion20
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Providers.LocalDatabase", "DD4T.Providers.LocalDatabase\DD4T.Providers.LocalDatabase.csproj", "{0227A3C2-4F9E-4459-A5B8-2E2803F552AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Providers.WebService", "DD4T.Providers.WebService\DD4T.Providers.WebService.csproj", "{F3D9A389-D6C7-4E38-A403-F10943541DCB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Providers.SDLTridion2011sp1", "DD4T.Providers.SDLTridion2011sp1\DD4T.Providers.SDLTridion2011sp1.csproj", "{CBD555B9-CA2F-480B-81C9-8E61D92B0075}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Providers.Test", "DD4T.Providers.Test\DD4T.Providers.Test.csproj", "{899CC432-25D8-4D65-9D98-95D109300127}"
@@ -89,14 +87,6 @@ Global
 		{0227A3C2-4F9E-4459-A5B8-2E2803F552AB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0227A3C2-4F9E-4459-A5B8-2E2803F552AB}.TridionDebug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0227A3C2-4F9E-4459-A5B8-2E2803F552AB}.TridionDebug|Any CPU.Build.0 = Debug|Any CPU
-		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.DebugTridion2011|Any CPU.ActiveCfg = Debug|Any CPU
-		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.DebugTridion2011|Any CPU.Build.0 = Debug|Any CPU
-		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.TridionDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F3D9A389-D6C7-4E38-A403-F10943541DCB}.TridionDebug|Any CPU.Build.0 = Debug|Any CPU
 		{CBD555B9-CA2F-480B-81C9-8E61D92B0075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CBD555B9-CA2F-480B-81C9-8E61D92B0075}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBD555B9-CA2F-480B-81C9-8E61D92B0075}.DebugTridion2011|Any CPU.ActiveCfg = Debug|Any CPU
