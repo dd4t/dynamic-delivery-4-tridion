@@ -26,7 +26,7 @@ namespace DD4T.Templates.Installer.CustomActions
         {
             State = stateSaver;
             base.Install(stateSaver);
-            RecycleTridionAppPool(); // Note: I added this but it doesn't seem to work yet..
+            RecycleTridionAppPool(); 
             UploadTemplatesToTridion();
 
         }
@@ -56,7 +56,7 @@ namespace DD4T.Templates.Installer.CustomActions
                     {
                         //Console.WriteLine("\t\tVirtual Dir: {0}", virtDir.Path);
                         //Console.WriteLine("\tPhysical path: {0}", virtDir.PhysicalPath);
-                        if (Path.GetFullPath(virtDir.PhysicalPath) == Path.GetFullPath(TridionWebPath))
+                        if (Path.GetFullPath(virtDir.PhysicalPath.TrimEnd('\\')).Equals(Path.GetFullPath(TridionWebPath.TrimEnd('\\')), StringComparison.InvariantCultureIgnoreCase))
                         {
                             //Console.WriteLine("found Tridion web site");
                             return app.ApplicationPoolName;
