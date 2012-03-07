@@ -12,13 +12,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dynamic Delivery Publishing Solution Items", "Dynamic Delivery Publishing Solution Items", "{DB974FDB-3490-4356-BB72-876E5185A973}"
 	ProjectSection(SolutionItems) = preProject
 		Dynamic Delivery Publishing Solution Items\dynamicdelivery.snk = Dynamic Delivery Publishing Solution Items\dynamicdelivery.snk
+		..\dependencies\Tridion tools\TcmUploadAssembly.exe = ..\dependencies\Tridion tools\TcmUploadAssembly.exe
 	EndProjectSection
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DD4T.Templates.Installer", "DD4T.Templates.Installer\DD4T.Templates.Installer.vdproj", "{87372FAF-E41B-4177-B6E8-89CD2C4E57B3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Templates.Installer.CustomActions", "DD4T.Templates.Installer.CustomActions\DD4T.Templates.Installer.CustomActions.csproj", "{F0C03A14-CF4A-4E77-BBF7-F881BF70FB95}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestQ", "TestQ\TestQ.csproj", "{2C6EBA78-E342-4E73-8B59-8FDCA3A9CAC1}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
@@ -94,16 +93,6 @@ Global
 		{F0C03A14-CF4A-4E77-BBF7-F881BF70FB95}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F0C03A14-CF4A-4E77-BBF7-F881BF70FB95}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F0C03A14-CF4A-4E77-BBF7-F881BF70FB95}.Release|x86.ActiveCfg = Release|Any CPU
-		{2C6EBA78-E342-4E73-8B59-8FDCA3A9CAC1}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{2C6EBA78-E342-4E73-8B59-8FDCA3A9CAC1}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{2C6EBA78-E342-4E73-8B59-8FDCA3A9CAC1}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{2C6EBA78-E342-4E73-8B59-8FDCA3A9CAC1}.Debug|x86.ActiveCfg = Debug|x86
-		{2C6EBA78-E342-4E73-8B59-8FDCA3A9CAC1}.Debug|x86.Build.0 = Debug|x86
-		{2C6EBA78-E342-4E73-8B59-8FDCA3A9CAC1}.Release|Any CPU.ActiveCfg = Release|x86
-		{2C6EBA78-E342-4E73-8B59-8FDCA3A9CAC1}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{2C6EBA78-E342-4E73-8B59-8FDCA3A9CAC1}.Release|Mixed Platforms.Build.0 = Release|x86
-		{2C6EBA78-E342-4E73-8B59-8FDCA3A9CAC1}.Release|x86.ActiveCfg = Release|x86
-		{2C6EBA78-E342-4E73-8B59-8FDCA3A9CAC1}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

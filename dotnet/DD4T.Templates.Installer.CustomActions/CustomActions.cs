@@ -26,7 +26,7 @@ namespace DD4T.Templates.Installer.CustomActions
         {
             State = stateSaver;
             base.Install(stateSaver);
-            RecycleTridionAppPool(); 
+            //RecycleTridionAppPool(); 
             UploadTemplatesToTridion();
 
         }
@@ -92,12 +92,12 @@ namespace DD4T.Templates.Installer.CustomActions
 
         protected void UploadTemplatesToTridion()
         {
-            const string TemplatesDllName = "DD4T.Templates.dll";
-            const string relPathTcmUploadAssembly = @"bin\client\TcmUploadAssembly.exe";
+            const string TemplatesDllName = "DD4T.Templates.merged.dll";
+            const string relPathTcmUploadAssembly = @"TcmUploadAssembly.exe";
 
+            string cwd = Path.GetDirectoryName(Context.Parameters["ASSEMBLYPATH"]);
 
-            var tridionHomeDir = Tridion.ContentManager.ConfigurationSettings.GetTcmHomeDirectory();
-            var tcmUploadAssembly = string.Format(@"{0}{1}", tridionHomeDir, relPathTcmUploadAssembly);
+            var tcmUploadAssembly = string.Format(@"{0}\{1}", cwd, relPathTcmUploadAssembly);
             //If we cannot find TcmUploadAssembly: exit
             if (!File.Exists(tcmUploadAssembly))
             {
@@ -110,7 +110,7 @@ namespace DD4T.Templates.Installer.CustomActions
             string folderUri = Context.Parameters["FOLDER_URI"];
             string rawAssemblyPath = Context.Parameters["ASSEMBLYPATH"];
 
-            var templatesDllPath = string.Format(@"{0}\{1}",Path.GetDirectoryName(rawAssemblyPath), TemplatesDllName);
+            var templatesDllPath = string.Format(@"{0}\{1}",cwd, TemplatesDllName);
 
             //Debugger.Launch();
             ProcessStartInfo start = new ProcessStartInfo();

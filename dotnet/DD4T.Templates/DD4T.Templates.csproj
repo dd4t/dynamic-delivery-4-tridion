@@ -38,37 +38,33 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tridion.Common">
-      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.Common.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Tridion.Common, Version=6.1.0.25, Culture=neutral, PublicKeyToken=349a39f202fa9b53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\Tridion 2011 SP1 DLLs\Tridion.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.ContentManager">
-      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Tridion.ContentManager, Version=6.1.0.996, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\Tridion 2011 SP1 DLLs\Tridion.ContentManager.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.ContentManager.Common">
-      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.Common.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Tridion.ContentManager.Common, Version=6.1.0.996, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\Tridion 2011 SP1 DLLs\Tridion.ContentManager.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.ContentManager.Publishing">
-      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.Publishing.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Tridion.ContentManager.Publishing, Version=6.1.0.996, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\Tridion 2011 SP1 DLLs\Tridion.ContentManager.Publishing.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.ContentManager.TemplateTypes">
-      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.TemplateTypes.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Tridion.ContentManager.TemplateTypes, Version=6.1.0.996, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\Tridion 2011 SP1 DLLs\Tridion.ContentManager.TemplateTypes.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.ContentManager.Templating">
-      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.Templating.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Tridion.ContentManager.Templating, Version=6.1.0.996, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\Tridion 2011 SP1 DLLs\Tridion.ContentManager.Templating.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.ContentManager.Templating.SiteEdit">
-      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.Templating.SiteEdit.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Tridion.Logging">
-      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.Logging.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Tridion.Logging, Version=6.1.0.25, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\Tridion 2011 SP1 DLLs\Tridion.Logging.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -105,7 +101,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>REM "$(SolutionDir)..\dependencies\Tridion tools\TcmUploadAssembly.bat" "$(SolutionDir)..\dependencies\Tridion tools\TcmUploadAssembly.exe"  "$(SolutionDir)..\dependencies\Tridion tools\config.xml"  "$(TargetPath)"</PostBuildEvent>
+    <PostBuildEvent>REM "$(SolutionDir)..\dependencies\Tridion tools\TcmUploadAssembly.bat" "$(SolutionDir)..\dependencies\Tridion tools\TcmUploadAssembly.exe"  "$(SolutionDir)..\dependencies\Tridion tools\config.xml"  "$(TargetPath)"
+"$(SolutionDir)Dynamic Delivery Publishing Solution Items\ilmerge" /lib:"C:\Windows\Microsoft.NET\Framework\v4.0.30319" /t:dll /targetplatform:v4,C:\Windows\Microsoft.NET\Framework\v4.0.30319 /out:"$(TargetDir)$(ProjectName).merged.dll" "$(TargetDir)DD4T.ContentModel.Contracts.dll" "$(TargetDir)DD4T.ContentModel.dll" "$(TargetDir)DD4T.Templates.Base.dll"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
