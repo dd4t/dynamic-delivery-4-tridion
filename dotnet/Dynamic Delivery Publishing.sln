@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dynamic Delivery Publishing Solution Items", "Dynamic Delivery Publishing Solution Items", "{DB974FDB-3490-4356-BB72-876E5185A973}"
 	ProjectSection(SolutionItems) = preProject
 		Dynamic Delivery Publishing Solution Items\dynamicdelivery.snk = Dynamic Delivery Publishing Solution Items\dynamicdelivery.snk
+		Dynamic Delivery Publishing Solution Items\ILMerge.exe = Dynamic Delivery Publishing Solution Items\ILMerge.exe
 		..\dependencies\Tridion tools\TcmUploadAssembly.exe = ..\dependencies\Tridion tools\TcmUploadAssembly.exe
 	EndProjectSection
 EndProject
