@@ -10,6 +10,7 @@ using DD4T.Templates.Base.Builder;
 using DD4T.Templates.Base.Utils;
 using Dynamic = DD4T.ContentModel;
 using System.Configuration;
+using Microsoft.Xml.Serialization.GeneratedAssembly;
 
 namespace DD4T.Templates.Base
 {
@@ -43,7 +44,7 @@ namespace DD4T.Templates.Base
                 GeneralUtils.TimedLog("start retrieving previous Output from package");
                 String inputValue = package.GetValue("Output");
                 GeneralUtils.TimedLog("start creating serializer");
-                serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Page));
+                serializer = new PageSerializer();
                 GeneralUtils.TimedLog("finished creating serializer");
                 TextReader tr = new StringReader(inputValue);
                 GeneralUtils.TimedLog("start deserializing from package");
@@ -58,7 +59,7 @@ namespace DD4T.Templates.Base
                 page = GetDynamicPage(Manager);
                 GeneralUtils.TimedLog("Finished creating dynamic page with title " + page.Title);
                 GeneralUtils.TimedLog("start creating serializer");
-                serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Page));
+                serializer = new PageSerializer();
                 GeneralUtils.TimedLog("finished creating serializer");
             }
 
