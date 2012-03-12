@@ -9,6 +9,7 @@ using Tridion.ContentManager.Templating;
 using DD4T.Templates.Base.Builder;
 using DD4T.Templates.Base.Utils;
 using Dynamic = DD4T.ContentModel;
+using Microsoft.Xml.Serialization.GeneratedAssembly;
 
 namespace DD4T.Templates.Base
 {
@@ -43,7 +44,8 @@ namespace DD4T.Templates.Base
                 GeneralUtils.TimedLog("start deserializing");
                 TextReader tr = new StringReader(inputValue);
                 GeneralUtils.TimedLog("start creating serializer");
-                serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Component));
+                // serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Component));
+                serializer = new ComponentSerializer();
                 GeneralUtils.TimedLog("finished creating serializer");
                 component = (Dynamic.Component)serializer.Deserialize(tr);
                 GeneralUtils.TimedLog("finished deserializing from package");
@@ -54,7 +56,8 @@ namespace DD4T.Templates.Base
                 GeneralUtils.TimedLog("Could not find 'Output' in the package");
                 GeneralUtils.TimedLog("Start creating dynamic component from current component in the package");
                 GeneralUtils.TimedLog("start creating serializer");
-                serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Component));
+                serializer = new ComponentSerializer();
+                // serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Component));
                 GeneralUtils.TimedLog("finished creating serializer");
                 component = GetDynamicComponent(Manager);
                 GeneralUtils.TimedLog("Finished creating dynamic component with title " + component.Title);
@@ -73,30 +76,40 @@ namespace DD4T.Templates.Base
             }
             var sw = new StringWriter();
             var ms = new MemoryStream();
+            GeneralUtils.TimedLog("debug 1");
             XmlWriter writer = new XmlTextWriterFormattedNoDeclaration(ms, Encoding.UTF8);
             string outputValue;
+            GeneralUtils.TimedLog("debug 2");
             //Create our own namespaces for the output
             var ns = new XmlSerializerNamespaces();
 
             //Add an empty namespace and empty value
             ns.Add("", "");
+            GeneralUtils.TimedLog("debug 3");
 
             serializer.Serialize(writer, component, ns);
+            GeneralUtils.TimedLog("debug 4");
             outputValue = Encoding.UTF8.GetString(ms.ToArray());
+            GeneralUtils.TimedLog("debug 5");
 
             // for some reason, the .NET serializer leaves an invalid character at the start of the string
             // we will remove everything up to the first < so that the XML can be deserialized later!
             Regex re = new Regex("^[^<]+");
             outputValue = re.Replace(outputValue, "");
+            GeneralUtils.TimedLog("debug 6");
 
             if (hasOutput)
             {
+                GeneralUtils.TimedLog("debug 7");
                 Item outputItem = package.GetByName("Output");
+                GeneralUtils.TimedLog("debug 8");
                 package.Remove(outputItem);
+                GeneralUtils.TimedLog("debug 9");
                 package.PushItem(Package.OutputName, package.CreateStringItem(ContentType.Xml, outputValue));
             }
             else
             {
+                GeneralUtils.TimedLog("debug 10");
                 package.PushItem(Package.OutputName, package.CreateStringItem(ContentType.Xml, outputValue));
             }
 

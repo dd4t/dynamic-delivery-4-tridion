@@ -101,8 +101,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>REM "$(SolutionDir)..\dependencies\Tridion tools\TcmUploadAssembly.bat" "$(SolutionDir)..\dependencies\Tridion tools\TcmUploadAssembly.exe"  "$(SolutionDir)..\dependencies\Tridion tools\config.xml"  "$(TargetPath)"
-"$(SolutionDir)Dynamic Delivery Publishing Solution Items\ilmerge" /lib:"C:\Windows\Microsoft.NET\Framework\v4.0.30319" /t:dll /targetplatform:v4,C:\Windows\Microsoft.NET\Framework\v4.0.30319 /out:"$(TargetDir)$(ProjectName).merged.dll" "$(TargetDir)DD4T.ContentModel.Contracts.dll" "$(TargetDir)DD4T.ContentModel.dll" "$(TargetDir)DD4T.Templates.Base.dll"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)Dynamic Delivery Publishing Solution Items\ilmerge" /lib:"C:\Windows\Microsoft.NET\Framework\v4.0.30319" /t:dll /targetplatform:v4,C:\Windows\Microsoft.NET\Framework\v4.0.30319 /out:"$(TargetDir)$(ProjectName).merged.dll" "$(TargetDir)DD4T.ContentModel.Contracts.dll" "$(TargetDir)DD4T.ContentModel.dll" "$(TargetDir)DD4T.Templates.Base.dll" "$(TargetDir)DD4T.ContentModel.XmlSerializers.dll" "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
