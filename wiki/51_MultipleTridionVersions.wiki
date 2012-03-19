@@ -6,7 +6,7 @@ The thing to realize is that Tridion templates are never executed on the develop
 
 In the DD4T environment, we are not allowed to upload the actual Tridion DLLs to the source code repository - after all, Tridion is commercial software. Instead, we set up a number of folders where the system expects to find these DLLs. If (or the company you work for) you have a valid Tridion license, you can simply copy these DLLs into the folder of your choice.
 
-The Tridion DLLs must be copied to the following folder: trunk\dependencies\Tridion \<VERSION> DLLs. E.g.: if you plan to develop DD4T templates and you are using Tridion 2009, copy the required DLLs to trunk\dependencies\Tridion 2009 DLLs. you can find out which DLLs you need to copy by looking at the 'missing files.txt' in the 'Tridion <VERSION> DLLs' folder.
+The Tridion DLLs must be copied to the following folder: trunk\dependencies\Tridion `<VERSION>` DLLs. E.g.: if you plan to develop DD4T templates and you are using Tridion 2009, copy the required DLLs to trunk\dependencies\Tridion 2009 DLLs. you can find out which DLLs you need to copy by looking at the 'missing files.txt' in the 'Tridion <VERSION> DLLs' folder.
 Next, copy the same files to the folder 'trunk\dependencies\Tridion Active'. 
 Note: you should never check in any of these DLLs! 
 
