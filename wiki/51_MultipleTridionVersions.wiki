@@ -12,7 +12,7 @@ Note: you should never check in any of these DLLs!
 
 
 = Working with multiple Tridion versions =
-Imagine you want to test your DD4T templates on multiple Tridion systems, each with its own version. In that case, you must first make sure you copy the the relevant DLLs to each of the 'Tridion <VERSION> DLLs' folders. For example, if you want to test with Tridion 2011 GA as well as 2011 SP1, you need to copy the correct DLLs to 'Tridion 2011 DLLs' and 'Tridion 2011 SP1 DLLs'.
+Imagine you want to test your DD4T templates on multiple Tridion systems, each with its own version. In that case, you must first make sure you copy the the relevant DLLs to each of the '`Tridion <VERSION> DLLs`' folders. For example, if you want to test with Tridion 2011 GA as well as 2011 SP1, you need to copy the correct DLLs to 'Tridion 2011 DLLs' and 'Tridion 2011 SP1 DLLs'.
 
 You can now switch between Tridion versions easily, using the Tridion Version Switcher.exe. This tool can be found in the trunk\dependencies folder. Just double-click and select the version of your choice. The tool will remove all DLLs from the 'Tridion Active' folder, and copy all DLLs from the version-specific folder into the 'Tridion Active' folder.
 
