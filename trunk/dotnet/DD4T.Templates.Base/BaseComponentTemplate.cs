@@ -9,6 +9,7 @@ using Tridion.ContentManager.Templating;
 using DD4T.Templates.Base.Builder;
 using DD4T.Templates.Base.Utils;
 using Dynamic = DD4T.ContentModel;
+using Microsoft.Xml.Serialization.GeneratedAssembly;
 
 namespace DD4T.Templates.Base
 {
@@ -43,7 +44,8 @@ namespace DD4T.Templates.Base
                 GeneralUtils.TimedLog("start deserializing");
                 TextReader tr = new StringReader(inputValue);
                 GeneralUtils.TimedLog("start creating serializer");
-                serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Component));
+                // serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Component));
+                serializer = new ComponentSerializer();
                 GeneralUtils.TimedLog("finished creating serializer");
                 component = (Dynamic.Component)serializer.Deserialize(tr);
                 GeneralUtils.TimedLog("finished deserializing from package");
@@ -54,7 +56,8 @@ namespace DD4T.Templates.Base
                 GeneralUtils.TimedLog("Could not find 'Output' in the package");
                 GeneralUtils.TimedLog("Start creating dynamic component from current component in the package");
                 GeneralUtils.TimedLog("start creating serializer");
-                serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Component));
+                serializer = new ComponentSerializer();
+                // serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Component));
                 GeneralUtils.TimedLog("finished creating serializer");
                 component = GetDynamicComponent(Manager);
                 GeneralUtils.TimedLog("Finished creating dynamic component with title " + component.Title);
