@@ -345,7 +345,16 @@ namespace DD4T.Factories
                 // added by QS: only load DCPs from broker if they are in fact dynamic!
                 if (cp.IsDynamic)
                 {
-                    cp.Component = (Component)ComponentFactory.GetComponent(cp.Component.Id);
+                    try
+                    {
+                        Component c = (Component)ComponentFactory.GetComponent(cp.Component.Id)
+                        cp.Component = c;
+                    }
+                    catch (ComponentNotFoundException)
+                    {
+                        // DCPs can be unpublished while the page that they are embedded on remain published
+                        // in this case, simply ignore the exception (the 'stub' component is still on the page)
+                    }
                 }
 
                 LoggerService.Debug("about to resolve links in component {0}", LoggingCategory.Performance, cp.Component.Id);
