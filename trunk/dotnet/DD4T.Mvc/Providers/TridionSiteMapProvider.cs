@@ -136,54 +136,20 @@
             foreach (var element in siteMapNodes)
             {
                 LoggerService.Debug(">>>for loop iteration: {0}", LoggingCategory.Performance, element.ToString());
-                TridionSiteMapNode childNode;
-
-
-                LoggerService.Debug("about to create NameValueCollection", LoggingCategory.Performance);
-                var attributes = new NameValueCollection();
-                LoggerService.Debug("finished creating NameValueCollection", LoggingCategory.Performance);
-
-                foreach (var a in element.Attributes())
-                {
-                    LoggerService.Debug("about to add attribute {0} to NVC", LoggingCategory.Performance, a.Name);
-                    attributes.Add(a.Name.ToString(), a.Value);
-                    LoggerService.Debug("finished adding attribute {0} to NVC", LoggingCategory.Performance, a.Name);
-                }
-                string uri;
-                // for backwards compatibility, the obsolete 'pageId' attribute is supported as synonym for 'uri'
-                try
-                {
-                    LoggerService.Debug("about to retrieve uri", LoggingCategory.Performance);
-                    if (element.Attribute("uri") != null)
-                        uri = element.Attribute("uri").Value;
-                    else if (element.Attribute("pageId") != null)
-                        uri = element.Attribute("pageId").Value;
-                    else
-                        uri = "";
-                    LoggerService.Debug("finished retrieving uri", LoggingCategory.Performance);
-                    uri = uri ?? "";
-                }
-                catch
-                {
-                    LoggerService.Debug("exception while retrieving uri", LoggingCategory.Performance);
-                    uri = "";
-                }
-
-                LoggerService.Debug("about to create TridionSiteMapNode", LoggingCategory.Performance);
-                childNode = new TridionSiteMapNode(this,
-                    element.Attribute("id").Value, //key
-                    uri,
-                    element.Attribute("url").Value, //url
-                    element.Attribute("title").Value, //title
-                    element.Attribute("description").Value, //description
-                    null, //roles
-                    attributes, //attributes
-                    null, //explicitresourceKeys
-                    null) { Level = currentLevel }; // implicitresourceKey
+                SiteMapNode childNode = CreateNodeFromElement(element, currentLevel);
+                //childNode = new TridionSiteMapNode(this,
+                //    element.Attribute("id").Value, //key
+                //    uri,
+                //    element.Attribute("url").Value, //url
+                //    element.Attribute("title").Value, //title
+                //    element.Attribute("description").Value, //description
+                //    null, //roles
+                //    attributes, //attributes
+                //    null, //explicitresourceKeys
+                //    null) { Level = currentLevel }; // implicitresourceKey
                 LoggerService.Debug("finished creating TridionSiteMapNode", LoggingCategory.Performance);
 
                 LoggerService.Debug("about to add TridionSiteMapNode to node dictionary", LoggingCategory.Performance);
-                NodeDictionary.Add(childNode.Key, childNode);
                 LoggerService.Debug("finished adding TridionSiteMapNode to node dictionary", LoggingCategory.Performance);
 
                 //Use the SiteMapNode AddNode method to add the SiteMapNode to the ChildNodes collection
@@ -197,6 +163,45 @@
             }
             
             LoggerService.Debug("<<AddChildren for root node {0} at level {1}", LoggingCategory.Performance, rootNode.Title, currentLevel);
+        }
+
+        protected virtual SiteMapNode CreateNodeFromElement(XElement element, int currentLevel)
+        {
+            var attributes = new NameValueCollection();
+            foreach (var a in element.Attributes())
+            {
+                attributes.Add(a.Name.ToString(), a.Value);
+            }
+
+            string uri;
+            try
+            {
+                if (element.Attribute("uri") != null)
+                    uri = element.Attribute("uri").Value;
+                else if (element.Attribute("pageId") != null)
+                    uri = element.Attribute("pageId").Value;
+                else
+                    uri = "";
+            }
+            catch
+            {
+                LoggerService.Debug("exception while retrieving uri", LoggingCategory.General);
+                uri = "";
+            }
+            SiteMapNode childNode = new TridionSiteMapNode(this,
+                element.Attribute("id").Value, //key
+                uri,
+                element.Attribute("url").Value, //url
+                element.Attribute("title").Value, //title
+                element.Attribute("description").Value, //description
+                null, //roles
+                attributes, //attributes
+                null, //explicitresourceKeys
+                null) { Level = currentLevel }; // implicitresourceKey
+
+            NodeDictionary.Add(childNode.Key, childNode);
+
+            return childNode;
         }
 
         public virtual bool IsInitialized
