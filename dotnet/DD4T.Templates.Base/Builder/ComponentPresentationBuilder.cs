@@ -7,61 +7,64 @@ using Tridion.ContentManager.Templating;
 using System.Xml.Serialization;
 using System.IO;
 using DD4T.Templates.Base.Utils;
+using Microsoft.Xml.Serialization.GeneratedAssembly;
 
 namespace DD4T.Templates.Base.Builder
 {
-   public class ComponentPresentationBuilder
-   {
-      static XmlSerializer serializer = null;
+    public class ComponentPresentationBuilder
+    {
+        static XmlSerializer serializer = null;
 
-      public static Dynamic.ComponentPresentation BuildComponentPresentation(TCM.ComponentPresentation tcmComponentPresentation, Engine engine, int linkLevels, bool resolveWidthAndHeight, BuildManager manager)
-      {
-         Dynamic.ComponentPresentation cp = new Dynamic.ComponentPresentation();
+        public static Dynamic.ComponentPresentation BuildComponentPresentation(TCM.ComponentPresentation tcmComponentPresentation, Engine engine, int linkLevels, bool resolveWidthAndHeight, BuildManager manager)
+        {
+            Dynamic.ComponentPresentation cp = new Dynamic.ComponentPresentation();
 
 
-         // render the component presentation using its own CT
-         // but first, set a parameter in the context so that the CT will know it is beng called
-         // from a DynamicDelivery page template
-         if (engine.PublishingContext.RenderContext != null && !engine.PublishingContext.RenderContext.ContextVariables.Contains(BasePageTemplate.VariableNameCalledFromDynamicDelivery))
-         {
-            engine.PublishingContext.RenderContext.ContextVariables.Add(BasePageTemplate.VariableNameCalledFromDynamicDelivery, BasePageTemplate.VariableValueCalledFromDynamicDelivery);
-         }
-
-         string renderedContent = engine.RenderComponentPresentation(tcmComponentPresentation.Component.Id, tcmComponentPresentation.ComponentTemplate.Id);
-         engine.PublishingContext.RenderContext.ContextVariables.Remove(BasePageTemplate.VariableNameCalledFromDynamicDelivery);
-
-         renderedContent = TridionUtils.StripTcdlTags(renderedContent);
-
-         if (tcmComponentPresentation.ComponentTemplate.IsRepositoryPublishable)
-         {
-            // ignore the rendered CP, because it is already available in the broker
-            // instead, we will render a very simple version without any links
-             cp.Component = manager.BuildComponent(tcmComponentPresentation.Component, 0, false); // linkLevels = 0 means: only summarize the component
-             cp.IsDynamic = true;
-         }
-         else
-         {
-             cp.IsDynamic = false;
-            TextReader tr = new StringReader(renderedContent);
-            if (serializer == null)
+            // render the component presentation using its own CT
+            // but first, set a parameter in the context so that the CT will know it is beng called
+            // from a DynamicDelivery page template
+            if (engine.PublishingContext.RenderContext != null && !engine.PublishingContext.RenderContext.ContextVariables.Contains(BasePageTemplate.VariableNameCalledFromDynamicDelivery))
             {
-               serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Component));
+                engine.PublishingContext.RenderContext.ContextVariables.Add(BasePageTemplate.VariableNameCalledFromDynamicDelivery, BasePageTemplate.VariableValueCalledFromDynamicDelivery);
             }
-            try
+
+            string renderedContent = engine.RenderComponentPresentation(tcmComponentPresentation.Component.Id, tcmComponentPresentation.ComponentTemplate.Id);
+            engine.PublishingContext.RenderContext.ContextVariables.Remove(BasePageTemplate.VariableNameCalledFromDynamicDelivery);
+
+            renderedContent = TridionUtils.StripTcdlTags(renderedContent);
+
+            if (tcmComponentPresentation.ComponentTemplate.IsRepositoryPublishable)
             {
-               cp.Component = (Dynamic.Component)serializer.Deserialize(tr);
+                // ignore the rendered CP, because it is already available in the broker
+                // instead, we will render a very simple version without any links
+                cp.Component = manager.BuildComponent(tcmComponentPresentation.Component, 0, false); // linkLevels = 0 means: only summarize the component
+                cp.IsDynamic = true;
             }
-            catch
+            else
             {
-               // the component presentation could not be deserialized, this probably not a Dynamic Delivery template
-               // just store the output as 'RenderedContent' on the CP
-               cp.RenderedContent = renderedContent;
-                // because the CT was not a DD4T CT, we will generate the DD4T XML code here
-               cp.Component = manager.BuildComponent(tcmComponentPresentation.Component);
+                cp.IsDynamic = false;
+                TextReader tr = new StringReader(renderedContent);
+                if (serializer == null)
+                {
+                    serializer = new ComponentSerializer();
+                    //serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Component));
+                }
+                try
+                {
+                    cp.Component = (Dynamic.Component)serializer.Deserialize(tr);
+                }
+                catch (Exception e)
+                {
+                    TemplatingLogger.GetLogger(typeof(ComponentPresentationBuilder)).Error("exception while deserializing into CP: " + e.Message);
+                    // the component presentation could not be deserialized, this probably not a Dynamic Delivery template
+                    // just store the output as 'RenderedContent' on the CP
+                    cp.RenderedContent = renderedContent;
+                    // because the CT was not a DD4T CT, we will generate the DD4T XML code here
+                    cp.Component = manager.BuildComponent(tcmComponentPresentation.Component);
+                }
             }
-         }
-         cp.ComponentTemplate = manager.BuildComponentTemplate(tcmComponentPresentation.ComponentTemplate);
-         return cp;
-      }
-   }
+            cp.ComponentTemplate = manager.BuildComponentTemplate(tcmComponentPresentation.ComponentTemplate);
+            return cp;
+        }
+    }
 }
