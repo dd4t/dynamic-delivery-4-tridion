@@ -347,7 +347,7 @@ namespace DD4T.Factories
                 {
                     try
                     {
-                        Component c = (Component)ComponentFactory.GetComponent(cp.Component.Id)
+                        Component c = (Component)ComponentFactory.GetComponent(cp.Component.Id);
                         cp.Component = c;
                     }
                     catch (ComponentNotFoundException)
