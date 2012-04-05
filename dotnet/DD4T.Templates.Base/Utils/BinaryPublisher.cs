@@ -154,9 +154,13 @@ namespace DD4T.Templates.Base.Utils
         private static string ConstructFileName(Component mmComp, string variantId)
         {
             Regex re = new Regex(@"^(.*)\.([^\.]+)$");
-            return re.Replace(mmComp.BinaryContent.Filename, string.Format("$1_{0}_{1}.$2", mmComp.Id.ToString().Replace(":", ""), variantId.Replace(":", "")));
+            string fileName = mmComp.BinaryContent.Filename;
+            if (!String.IsNullOrEmpty(fileName))
+            {
+                fileName = Path.GetFileName(fileName);
+            }
+            return re.Replace(fileName, string.Format("$1_{0}_{1}.$2", mmComp.Id.ToString().Replace(":", ""), variantId.Replace(":", "")));
         }
-
         #endregion
 
     }
