@@ -13,7 +13,7 @@ namespace DD4T.Templates.Base.Builder
    // TODO: add OrganizationalItem element inside component (+ page, etc)
    public class ComponentBuilder
    {
-      protected TemplatingLogger log = TemplatingLogger.GetLogger(typeof(ComponentBuilder));
+      protected static TemplatingLogger log = TemplatingLogger.GetLogger(typeof(ComponentBuilder));
       public static Dynamic.Component BuildComponent(TCM.Component tcmComponent, BuildManager manager)
       {
           return BuildComponent(tcmComponent, 1, false, manager);
@@ -44,13 +44,22 @@ namespace DD4T.Templates.Base.Builder
 
               if (resolveWidthAndHeight)
               {
-                  MemoryStream memstream = new MemoryStream();
-                  tcmComponent.BinaryContent.WriteToStream(memstream);
-                  Image image = Image.FromStream(memstream);
-                  memstream.Close();
+                  try
+                  {
+                      MemoryStream memstream = new MemoryStream();
+                      tcmComponent.BinaryContent.WriteToStream(memstream);
+                      Image image = Image.FromStream(memstream);
+                      memstream.Close();
 
-                  multimedia.Width = image.Size.Width;
-                  multimedia.Height = image.Size.Height;
+                      multimedia.Width = image.Size.Width;
+                      multimedia.Height = image.Size.Height;
+                  }
+                  catch (Exception e)
+                  {
+                      log.Warning("error retrieving width and height of image: " + e.Message);
+                      multimedia.Width = 0;
+                      multimedia.Height = 0;
+                  }
               }
               else
               {
