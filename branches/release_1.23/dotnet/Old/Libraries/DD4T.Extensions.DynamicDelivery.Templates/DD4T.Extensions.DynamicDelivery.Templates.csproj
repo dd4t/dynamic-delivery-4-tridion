@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A6C14491-3C90-4BA4-BAA4-AFC7911FD874}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tridion.Extensions.DynamicDelivery.Templates</RootNamespace>
+    <AssemblyName>Tridion.Extensions.DynamicDelivery.Templates</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TridionDebug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\TridionDebug\</OutputPath>
+    <DefineConstants>CODE_ANALYSIS;DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisLogFile>bin\Debug\Tridion.Extensions.DynamicDelivery.Templates.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tridion.Common">
+      <HintPath>..\Tridion Dependencies\Tridion.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Tridion.ContentManager">
+      <HintPath>..\Tridion Dependencies\Tridion.ContentManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Tridion.ContentManager.Publishing">
+      <HintPath>..\Tridion Dependencies\Tridion.ContentManager.Publishing.dll</HintPath>
+    </Reference>
+    <Reference Include="Tridion.ContentManager.Templating">
+      <HintPath>..\Tridion Dependencies\Tridion.ContentManager.Templating.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseComponentTemplate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasePageTemplate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BaseTemplate.cs" />
+    <Compile Include="Builder\BuildManager.cs" />
+    <Compile Include="Builder\ComponentBuilder.cs" />
+    <Compile Include="Builder\ComponentPresentationBuilder.cs" />
+    <Compile Include="Builder\ComponentTemplateBuilder.cs" />
+    <Compile Include="Builder\CategoriesBuilder.cs" />
+    <Compile Include="Builder\KeywordBuilder.cs" />
+    <Compile Include="Builder\PublicationBuilder.cs" />
+    <Compile Include="Builder\OrganizationalItemBuilder.cs" />
+    <Compile Include="Builder\FieldBuilder.cs" />
+    <Compile Include="Builder\FieldsBuilder.cs" />
+    <Compile Include="Builder\PageBuilder.cs" />
+    <Compile Include="Builder\PageTemplateBuilder.cs" />
+    <Compile Include="Builder\SchemaBuilder.cs" />
+    <Compile Include="ConvertToLowerCase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DynamicComponent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DynamicPage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InheritMetadataComponent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InheritMetadataPage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PublishBinaries.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PublishBinariesComponent.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublishBinariesPage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StopChainException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utils\GeneralUtils.cs" />
+    <Compile Include="Utils\TridionUtils.cs" />
+    <Compile Include="Utils\IOUtils.cs" />
+    <Compile Include="XML\ConvertXmlToJava.cs" />
+    <Compile Include="XML\TridionXml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ConvertFirstCharToLowerCase.xslt" />
+    <EmbeddedResource Include="Resources\ConvertFullNameToLowerCase.xslt" />
+    <EmbeddedResource Include="Resources\ConvertToJava.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DD4T.Extensions.DynamicDelivery.ContentModel.Contracts\DD4T.Extensions.DynamicDelivery.ContentModel.Contracts.csproj">
+      <Project>{6F624D68-173F-4D5E-A70F-073663009100}</Project>
+      <Name>Tridion.Extensions.DynamicDelivery.ContentModel.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DD4T.Extensions.DynamicDelivery.ContentModel\DD4T.Extensions.DynamicDelivery.ContentModel.csproj">
+      <Project>{FDA7B072-C0B1-46E6-A3DB-B68CA1BCDBBD}</Project>
+      <Name>Tridion.Extensions.DynamicDelivery.ContentModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CWA Parameters Auto.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>REM "$(SolutionDir)Tridion Utilities\TcmUploadAssembly.exe" "$(SolutionDir)Tridion Utilities\config.xml"  "$(TargetPath)" /folder:tcm:71-52275-2</PostBuildEvent>
+  </PropertyGroup>
+</Project>

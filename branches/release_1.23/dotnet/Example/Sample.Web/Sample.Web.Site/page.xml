@@ -1,0 +1,242 @@
+﻿<Page>
+  <Id>tcm:10-89-64</Id>
+  <Title>Example News Article 2</Title>
+  <Publication>
+    <Id>tcm:0-10-1</Id>
+    <Title>05 Sample EN</Title>
+  </Publication>
+  <Filename>example</Filename>
+  <PageTemplate>
+    <Id>tcm:10-61-128</Id>
+    <Title>Standard</Title>
+    <Publication>
+      <Id>tcm:0-10-1</Id>
+      <Title>05 Sample EN</Title>
+    </Publication>
+    <FileExtension>html</FileExtension>
+    <MetadataFields>
+      <item>
+        <key>
+          <string>view</string>
+        </key>
+        <value>
+          <Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" FieldType="Text">
+            <Name>view</Name>
+            <Values>
+              <string>standard</string>
+            </Values>
+            <NumericValues/>
+            <DateTimeValues/>
+            <LinkedComponentValues/>
+          </Field>
+        </value>
+      </item>
+    </MetadataFields>
+    <Folder>
+      <Id>tcm:10-10-2</Id>
+      <Title>Page Templates</Title>
+      <PublicationId>tcm:0-10-1</PublicationId>
+    </Folder>
+  </PageTemplate>
+  <Metadata>
+    <item>
+      <key>
+        <string>StagingUrl</string>
+      </key>
+      <value>
+        <Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" FieldType="Text">
+          <Name>StagingUrl</Name>
+          <Values>
+            <string>http://dev.staging.com</string>
+          </Values>
+          <NumericValues/>
+          <DateTimeValues/>
+          <LinkedComponentValues/>
+        </Field>
+      </value>
+    </item>
+    <item>
+      <key>
+        <string>GoogleAnalyticsUAID</string>
+      </key>
+      <value>
+        <Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" FieldType="Text">
+          <Name>GoogleAnalyticsUAID</Name>
+          <Values>
+            <string>UA-156052-1</string>
+          </Values>
+          <NumericValues/>
+          <DateTimeValues/>
+          <LinkedComponentValues/>
+        </Field>
+      </value>
+    </item>
+  </Metadata>
+  <ComponentPresentations>
+    <ComponentPresentation>
+      <Component>
+        <Id>tcm:10-86</Id>
+        <Title>20110907 Sample Cloud Translation Solutions Bring the Power of the Crowd to the Enterprise</Title>
+        <Publication>
+          <Id>tcm:0-10-1</Id>
+          <Title>05 Sample EN</Title>
+        </Publication>
+        <Schema>
+          <Id>tcm:10-85-8</Id>
+          <Title>Article</Title>
+          <Publication>
+            <Id>tcm:0-10-1</Id>
+            <Title>05 Sample EN</Title>
+          </Publication>
+          <Folder>
+            <Id>tcm:10-6-2</Id>
+            <Title>Content Schemas</Title>
+            <PublicationId>tcm:0-10-1</PublicationId>
+          </Folder>
+        </Schema>
+        <Fields>
+          <item>
+            <key>
+              <string>heading</string>
+            </key>
+            <value>
+              <Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" FieldType="Text">
+                <Name>heading</Name>
+                <Values>
+                  <string>Sample Cloud Translation Solutions Bring the Power of the Crowd to the Enterprise</string>
+                </Values>
+                <NumericValues/>
+                <DateTimeValues/>
+                <LinkedComponentValues/>
+                <EmbeddedValues/>
+              </Field>
+            </value>
+          </item>
+          <item>
+            <key>
+              <string>summary</string>
+            </key>
+            <value>
+              <Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" FieldType="MultiLineText">
+                <Name>summary</Name>
+                <Values>
+                  <string>Latest version of Sample GreatProduct enables enterprises to leverage cloud computing to improve workflow</string>
+                </Values>
+                <NumericValues/>
+                <DateTimeValues/>
+                <LinkedComponentValues/>
+                <EmbeddedValues/>
+              </Field>
+            </value>
+          </item>
+          <item>
+            <key>
+              <string>location</string>
+            </key>
+            <value>
+              <Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" FieldType="Text">
+                <Name>location</Name>
+                <Values>
+                  <string>Oxford - U.K. , United Kingdom</string>
+                </Values>
+                <NumericValues/>
+                <DateTimeValues/>
+                <LinkedComponentValues/>
+                <EmbeddedValues/>
+              </Field>
+            </value>
+          </item>
+          <item>
+            <key>
+              <string>date</string>
+            </key>
+            <value>
+              <Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" FieldType="Date">
+                <Name>date</Name>
+                <Values>
+                  <string>9/7/2011 11:43:51 AM</string>
+                </Values>
+                <NumericValues/>
+                <DateTimeValues>
+                  <dateTime>2011-09-07T11:43:51</dateTime>
+                </DateTimeValues>
+                <LinkedComponentValues/>
+                <EmbeddedValues/>
+              </Field>
+            </value>
+          </item>
+          <item>
+            <key>
+              <string>body</string>
+            </key>
+            <value>
+              <Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" FieldType="Xhtml">
+                <Name>body</Name>
+                <Values>
+                  <string>
+                    &lt;p xmlns="http://www.w3.org/1999/xhtml"&gt;Sample (LSE: Sample), the leading provider of Global Workflow Management solutions, is pleased to announce the latest release of Sample GreatProduct®, the industry’s first cloud platform for real-time automated workflow. Sample GreatProduct 1.5 builds on the power of the platform to deliver new capabilities, including cloud computing, to the enterprise.
+                    &lt;br /&gt;&lt;/p&gt;&lt;p xmlns="http://www.w3.org/1999/xhtml"&gt;Sample GreatProduct was introduced to the market in October 2010 to bring trusted automated workflow to business users. The latest release includes the following advancements:&lt;/p&gt;&lt;ul xmlns="http://www.w3.org/1999/xhtml"&gt;&lt;li&gt;Enterprise cloud computing capabilities: This is the first enterprise class product that includes cloud computing for continuous workflow improvement. Employees and users can now suggest a better workflow of selected content. Enabling cloud computing in Sample GreatProduct can rapidly improve translated content, improve ongoing customer engagement and reduce workflow and editing costs&lt;/li&gt;&lt;li&gt;Flexible desktop workflow access: A new desktop workflow widget brings the power of the Sample GreatProduct platform to the desktop of enterprise users. Employees across an organization can drag and drop documents and URLs into the workflow widget to access the secure enterprise application. This capability reduces the risk of confidential company data being submitted to unsecure services for workflow&lt;/li&gt;&lt;li&gt;New opportunities to leverage Sample TrustScore™: Sample TrustScore is Sample’s award winning and patent pending algorithm that generates a quality score for each workflow.  In addition to the previously available document level Sample TrustScore, it is now available at the segment level for easier decision making and editing by translators&lt;/li&gt;&lt;li&gt;Advanced security option: A new security option in Sample GreatProduct guarantees physical separation of data throughout the workflow lifecycle in Sample GreatProduct. This separation enables compliance with company, IT and regulatory security procedures for companies with additional security requirements
+                    &lt;br /&gt;new capabilities in the Sample GreatProduct cloud platform enable companies to leverage the community to enhance customer engagement, protect company data by offering a secure desktop workflow option to employees and meet company and IT security requirements.&lt;/li&gt;&lt;/ul&gt;&lt;p xmlns="http://www.w3.org/1999/xhtml"&gt;“With Sample GreatProduct, we are continuing to deliver ongoing innovation in the cloud,” said Swamy Viswananthan, Senior Vice president of Products and Marketing for the Sample Language Technologies division. “This release brings the power of the community to Sample GreatProduct, empowers users to access secure workflow on their desktop to drive collaboration across languages and continues our commitment to improve accessibility and usability of language technologies for new and existing users.”&lt;/p&gt;&lt;ul xmlns="http://www.w3.org/1999/xhtml"&gt;&lt;li&gt;Sign up for an upcoming webinar: &lt;a href="http://www.sample.com/showcase-webinar"&gt;http://www.sample.com/showcase-webinar&lt;/a&gt;&lt;/li&gt;&lt;li&gt;Listen to a webinar with Forrester Research and Dell about automate workflow: &lt;a href="http://www.sample.com/customer-experience-webinar"&gt;http://www.sample.com/customer-experience-webinar&lt;/a&gt;&lt;/li&gt;&lt;li&gt;Read an independent product review: &lt;a href="http://www.sdl.com/beglobal-independent-product-review"&gt;http://www.sdl.com/beglobal-independent-product-review&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p xmlns="http://www.w3.org/1999/xhtml"&gt;For more information on Sample GreatProduct, please go to: &lt;a href="http://www.sdl.com/sdl-beglobal"&gt;http://www.sdl.com/sdl-beglobal&lt;/a&gt; and for more information about Sample’s cloud innovation, please go to: &lt;a href="http://www.sdl.com/cloud"&gt;http://www.sdl.com/cloud&lt;/a&gt;&lt;/p&gt;
+                  </string>
+                </Values>
+                <NumericValues/>
+                <DateTimeValues/>
+                <LinkedComponentValues/>
+                <EmbeddedValues/>
+              </Field>
+            </value>
+          </item>
+        </Fields>
+        <MetadataFields/>
+        <ComponentType>Normal</ComponentType>
+        <Folder>
+          <Id>tcm:10-27-2</Id>
+          <Title>News</Title>
+          <PublicationId>tcm:0-10-1</PublicationId>
+        </Folder>
+        <Categories/>
+        <Version>1</Version>
+      </Component>
+      <ComponentTemplate>
+        <Id>tcm:10-88-32</Id>
+        <Title>Article Full</Title>
+        <Publication>
+          <Id>tcm:0-10-1</Id>
+          <Title>05 Sample EN</Title>
+        </Publication>
+        <OutputFormat>HTML Fragment</OutputFormat>
+        <MetadataFields>
+          <item>
+            <key>
+              <string>view</string>
+            </key>
+            <value>
+              <Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" FieldType="Text">
+                <Name>view</Name>
+                <Values>
+                  <string>ArticleFull</string>
+                </Values>
+                <NumericValues/>
+                <DateTimeValues/>
+                <LinkedComponentValues/>
+              </Field>
+            </value>
+          </item>
+        </MetadataFields>
+        <Folder>
+          <Id>tcm:10-11-2</Id>
+          <Title>Component Templates</Title>
+          <PublicationId>tcm:0-10-1</PublicationId>
+        </Folder>
+      </ComponentTemplate>
+      <IsDynamic>false</IsDynamic>
+    </ComponentPresentation>
+  </ComponentPresentations>
+  <StructureGroup>
+    <Id>tcm:10-28-4</Id>
+    <Title>News</Title>
+    <PublicationId>tcm:0-10-1</PublicationId>
+  </StructureGroup>
+  <Categories/>
+  <Version>1</Version>
+</Page>
