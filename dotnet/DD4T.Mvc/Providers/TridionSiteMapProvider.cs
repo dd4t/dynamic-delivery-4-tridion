@@ -288,7 +288,7 @@
         {
             lock (this)
             {
-                HttpContext.Current.Cache.Remove("rootNode");
+                // CacheAgent.Remove("rootNode"); // currently, CacheAgents do not support 'Remove'
                 base.Clear();
             }
         }
