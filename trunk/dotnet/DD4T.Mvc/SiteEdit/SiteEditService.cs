@@ -61,8 +61,7 @@ namespace DD4T.Mvc.SiteEdit
                 "\"XPath\" : \"{2}\" " +       // xpath of the field
             "}} -->";
 
-
-
+        public static string SE2012BootStrap = "<script type=\"text/javascript\" language=\"javascript\" defer=\"defer\" src=\"{0}/WebUI/Editors/SiteEdit/Views/Bootstrap/Bootstrap.aspx?mode=js\" id=\"tridion.siteedit\"></script>";
 
 
 
@@ -105,7 +104,13 @@ namespace DD4T.Mvc.SiteEdit
                 TcmUri pageContextUri = new TcmUri(usePageContext);
                 if (setting.Enabled)
                 {
-                    return string.Format(PAGE_SE_Format, page.Id, Convert.ToString(page.Version), pageContextUri.ItemId, setting.ComponentPublication, setting.PublishPublication);
+                    string result = string.Format(PAGE_SE_Format, page.Id, Convert.ToString(page.Version), pageContextUri.ItemId, setting.ComponentPublication, setting.PublishPublication);
+
+                    if (SiteEditSettings.Style == SiteEditStyle.SiteEdit2012)
+                    {
+                        result += string.Format(SE2012BootStrap, SiteEditSettings.TridionHostUrl);
+                    }
+                    return result;
                 }
             }
             return string.Empty;

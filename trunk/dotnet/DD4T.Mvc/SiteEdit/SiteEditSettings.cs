@@ -7,6 +7,8 @@ using System.Web;
 
 namespace DD4T.Mvc.SiteEdit
 {
+
+    public enum SiteEditStyle { SiteEdit, SiteEdit2012 }
     public class SiteEditSettings : Dictionary<string, SiteEditSetting>
     {
         public static string SiteEditConfigurationPath = "~/SiteEdit_config.xml";
@@ -15,6 +17,8 @@ namespace DD4T.Mvc.SiteEdit
          * Boolean indicating whether or not SiteEdit is enabled for the entire web application
          */
         public bool Enabled { get; set; }
+        public SiteEditStyle Style { get; set; }
+        public string TridionHostUrl { get; set; }
 
         public SiteEditSettings() : this(HttpContext.Current.Server.MapPath(SiteEditConfigurationPath))
         {
@@ -24,6 +28,7 @@ namespace DD4T.Mvc.SiteEdit
         {
 
             Enabled = false;
+            
             XmlDocument seConfig = new XmlDocument();
             try
             {
@@ -38,6 +43,16 @@ namespace DD4T.Mvc.SiteEdit
                         base.Add(seSetting.ContextPublication, seSetting);
                     }
                 }
+                string style = seConfig.DocumentElement.GetAttribute("style");
+                if (string.IsNullOrEmpty(style))
+                {
+                    Style = SiteEditStyle.SiteEdit;
+                }
+                else
+                {
+                    Style = (SiteEditStyle)Enum.Parse(typeof(SiteEditStyle), style);
+                }
+                TridionHostUrl = seConfig.DocumentElement.GetAttribute("tridionHostUrl");
             }
             catch
             {
