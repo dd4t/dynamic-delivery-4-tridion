@@ -23,6 +23,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Utils", "DD4T.Utils\DD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.LogWrappers.Entlib", "DD4T.LogWrappers.Entlib\DD4T.LogWrappers.Entlib.csproj", "{9584E00B-03E2-4909-9384-09B4AAB01AC4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dynamic Delivery Presentation Solution Items", "Dynamic Delivery Presentation Solution Items", "{82B178B0-D5C8-42EB-9503-E1DF6258CA6C}"
+	ProjectSection(SolutionItems) = preProject
+		Dynamic Delivery Presentation Solution Items\AssemblyInfo.cs = Dynamic Delivery Presentation Solution Items\AssemblyInfo.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
