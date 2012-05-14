@@ -13,9 +13,9 @@ namespace DD4T.Templates.Base.Utils
 {
     /// <summary>
     /// Offers access to template configuration. The requested setting is searched in the following order:
-    /// 1. AppSettings section in DD4T.Templates.Base.dll.config
-    /// 2. Metadata field of the component
-    /// 3. Field in a configuration component.
+    /// 1. AppSettings section in DD4T.config
+    /// 2. Metadata field of the publication
+    /// 3. Configuration components
     /// 
     /// Configuration components are components that are linked from a metadata field on the current publication. 
     /// The name of field linking to the configuration component(s), defaults to "ConfigurationComponents",
@@ -24,24 +24,36 @@ namespace DD4T.Templates.Base.Utils
     /// </summary>
     public class TridionConfigurationManager
     {
-        #region public static
+        private static object lock1 = new object();
 
+        #region public static
+        /// <summary>
+        /// Gets an instance of the configuration for a given publication
+        /// </summary>
+        /// <param name="publication"></param>
+        /// <returns></returns>
         public static TridionConfigurationManager GetInstance(Publication publication)
         {
             log.Debug(">>GetInstance called for " + publication.Id);
-            if (!Instances.ContainsKey(publication.Id))
+
+              // locking to make threadsafe
+            // this prevents errors like 'given key was not present in the dictionary'
+            lock (lock1)
             {
-                log.Debug("no instance found, creating new one");
-                AddInstance(publication);
-            }
-            else
-            {
-                log.Debug(string.Format("found instance, publication revision date {0}, config file modification date {1}, cache date {2}", publication.RevisionDate, ConfigurationModificationDate, InstanceCacheDates[publication.Id]));
-                if (InstanceCacheDates[publication.Id].CompareTo(publication.RevisionDate) < 0 || InstanceCacheDatesFS[publication.Id].CompareTo(ConfigurationModificationDate) < 0)
+                if (!Instances.ContainsKey(publication.Id))
                 {
-                    log.Debug("creating new instance");
-                    RemoveInstance(publication);
+                    log.Debug("no instance found, creating new one");
                     AddInstance(publication);
+                }
+                else
+                {
+                    log.Debug(string.Format("found instance, publication revision date {0}, config file modification date {1}, cache date {2}", publication.RevisionDate, ConfigurationModificationDate, InstanceCacheDates[publication.Id]));
+                    if (InstanceCacheDates[publication.Id].CompareTo(publication.RevisionDate) < 0 || InstanceCacheDatesFS[publication.Id].CompareTo(ConfigurationModificationDate) < 0)
+                    {
+                        log.Debug("creating new instance");
+                        RemoveInstance(publication);
+                        AddInstance(publication);
+                    }
                 }
             }
             return Instances[publication.Id];
@@ -53,6 +65,12 @@ namespace DD4T.Templates.Base.Utils
             return GetInstance(publication);
         }
 
+        /// <summary>
+        /// Gets an instance of a configuration for the given engine / package (to be used from template code)
+        /// </summary>
+        /// <param name="engine">Tridion rendering engine (taken from a template)</param>
+        /// <param name="package">Tridion package (taken from a template)</param>
+        /// <returns></returns>
         public static TridionConfigurationManager GetInstance(Engine engine, Package package)
         {
             Publication publication = GetPublication(engine, package);
@@ -69,9 +87,9 @@ namespace DD4T.Templates.Base.Utils
         private static readonly Dictionary<TcmUri, DateTime> InstanceCacheDatesFS = new Dictionary<TcmUri, DateTime>();
         private static void AddInstance(Publication publication)
         {
-            Instances.Add(publication.Id, new TridionConfigurationManager(publication));
             InstanceCacheDates.Add(publication.Id, publication.RevisionDate);
             InstanceCacheDatesFS.Add(publication.Id, ConfigurationModificationDate);
+            Instances.Add(publication.Id, new TridionConfigurationManager(publication));
         }
         private static void RemoveInstance(Publication publication)
         {
@@ -171,9 +189,16 @@ namespace DD4T.Templates.Base.Utils
         #endregion
     }
 
+    /// <summary>
+    /// Collection of name / value pairs that represent a configuration in Tridion. The configuration is read from the publication metadata as well as the DD4T.config file.
+    /// </summary>
     public class TridionNameValueCollection : Hashtable
     {
         #region static
+        /// <summary>
+        /// Name of the publication metadata field that contains links to configuration components 
+        /// </summary>
+        /// <remarks>Can be overridden by putting a key 'ConfigurationComponentsFieldName' with the desired field name as a value in the DD4T.config file</remarks>
         public static string DefaultConfigurationComponentsFieldName = "ConfigurationComponents";
         #endregion
 
@@ -207,44 +232,6 @@ namespace DD4T.Templates.Base.Utils
             return false;
         }
 
-        //private bool TryGetValuesFromField(ItemField field, out NameValueCollection nvc)
-        //{
-        //    nvc = new NameValueCollection();
-        //    if (field is TextField)
-        //    {
-        //        foreach (string v in ((TextField)field).Values)
-        //        {
-        //            nvc.Add(field.Name, v);
-        //        }
-        //        return true;
-        //    }
-        //    if (field is NumberField)
-        //    {
-        //        foreach (int i in ((NumberField)field).Values)
-        //        {
-        //            nvc.Add(field.Name, Convert.ToString(i));
-        //        }
-        //        return true;
-        //    }
-        //    if (field is DateField)
-        //    {
-        //        foreach (DateTime dt in ((DateField)field).Values)
-        //        {
-        //            nvc.Add(field.Name, dt.ToString());
-        //        }
-        //        return true;
-        //    }
-        //    if (field is ComponentLinkField)
-        //    {
-        //        foreach (Component c in ((ComponentLinkField)field).Values)
-        //        {
-        //            nvc.Add(field.Name, c.Id.ToString());
-        //        }
-        //        return true;
-        //    }
-
-        //    return false;
-        //}
 
         private Configuration Configuration
         {
@@ -281,12 +268,20 @@ namespace DD4T.Templates.Base.Utils
         #endregion
 
         #region public
+        /// <summary>
+        /// Path to the folder that contains the DD4T.config file
+        /// </summary>
         public string ConfigurationPath
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gives access to the keys in the hash table
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public string this[string key]
         {
             get
