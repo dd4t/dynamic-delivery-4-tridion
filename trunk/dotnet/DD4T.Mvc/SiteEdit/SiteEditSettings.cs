@@ -7,8 +7,21 @@ using System.Web;
 
 namespace DD4T.Mvc.SiteEdit
 {
+    /// <summary>
+    /// SiteEdit version
+    /// </summary>
+    public enum SiteEditStyle
+    {
+        /// <summary>
+        /// SiteEdit 2009 SP3
+        /// </summary>
+        SiteEdit,
+        /// <summary>
+        /// UI 2012 (SDL Tridion – The New Experience)
+        /// </summary>
+        SiteEdit2012
+    }
 
-    public enum SiteEditStyle { SiteEdit, SiteEdit2012 }
     public class SiteEditSettings : Dictionary<string, SiteEditSetting>
     {
         public static string SiteEditConfigurationPath = "~/SiteEdit_config.xml";
