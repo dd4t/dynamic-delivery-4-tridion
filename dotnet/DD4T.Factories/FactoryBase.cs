@@ -2,17 +2,19 @@
 using DD4T.ContentModel.Contracts.Caching;
 using DD4T.Factories.Caching;
 using DD4T.Utils;
+using DD4T.ContentModel.Contracts.Resolvers;
+using DD4T.Factories.Resolvers;
 
 namespace DD4T.Factories
 {
     /// <summary>
     /// Base class for all factories
     /// </summary>
-    public abstract class FactoryBase 
+    public abstract class FactoryBase
     {
 
+        #region publication resolving
         private int? _publicationId = null;
-        private ICacheAgent _cacheAgent = null;
 
         /// <summary>
         /// Returns the current publicationId
@@ -22,8 +24,8 @@ namespace DD4T.Factories
             get
             {
                 if (_publicationId == null)
-                    _publicationId = TridionHelper.PublicationId;
-                return (int)_publicationId;
+                 _publicationId = PublicationResolver.ResolvePublicationId();
+                return _publicationId.Value;
             }
             set
             {
@@ -31,6 +33,27 @@ namespace DD4T.Factories
             }
         }
 
+        private static IPublicationResolver _publicationResolver = null;
+        public static IPublicationResolver PublicationResolver
+        {
+            get
+            {
+                if (_publicationResolver == null)
+                {
+                    _publicationResolver = new DefaultPublicationResolver();
+                }
+                return _publicationResolver;
+            }
+            set
+            {
+                _publicationResolver = value;
+            }
+        }
+
+        #endregion
+
+        #region caching
+        private ICacheAgent _cacheAgent = null;
         /// <summary>
         /// Abstract method to be overridden by each implementation. The method should return the DateTime when the object in the cache was last published.
         /// </summary>
@@ -57,6 +80,8 @@ namespace DD4T.Factories
                 _cacheAgent = value;
             }
         }
+
+        #endregion
 
         #region private properties
         protected bool IncludeLastPublishedDate

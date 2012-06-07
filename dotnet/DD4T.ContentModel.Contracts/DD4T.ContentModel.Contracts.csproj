@@ -91,7 +91,9 @@
     <Compile Include="Providers\ILinkProvider.cs" />
     <Compile Include="Providers\IPageProvider.cs" />
     <Compile Include="Providers\IProvider.cs" />
+    <Compile Include="Providers\ProviderVersion.cs" />
     <Compile Include="Querying\IQuery.cs" />
+    <Compile Include="Resolvers\IPublicationResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ContentModelContractsClassDiagram.cd" />

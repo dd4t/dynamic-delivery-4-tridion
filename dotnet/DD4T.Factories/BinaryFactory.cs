@@ -5,13 +5,29 @@ using DD4T.ContentModel;
 using DD4T.ContentModel.Contracts.Providers;
 using DD4T.ContentModel.Exceptions;
 using DD4T.ContentModel.Factories;
+using DD4T.Utils;
 
 namespace DD4T.Factories
 {
     public class BinaryFactory : FactoryBase, IBinaryFactory
     {
         private static IDictionary<string, DateTime> lastPublishedDates = new Dictionary<string, DateTime>();
-        public IBinaryProvider BinaryProvider { get; set; }
+        private IBinaryProvider _binaryProvider = null;
+        public IBinaryProvider BinaryProvider
+        {
+            get
+            {
+                if (_binaryProvider == null)
+                {
+                    _binaryProvider = (IBinaryProvider)ProviderLoader.LoadProvider<IBinaryProvider>();
+                }
+                return _binaryProvider;
+            }
+            set
+            {
+                _binaryProvider = value;
+            }
+        }
 
         #region IBinaryFactory members
         public bool TryFindBinary(string url, out IBinary binary)

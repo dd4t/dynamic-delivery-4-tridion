@@ -26,10 +26,47 @@ namespace DD4T.Factories
         private ICacheAgent _cacheAgent = null;
 
         public const string CacheRegion = "Page";
-
         
-        public IPageProvider PageProvider { get; set; }
-        public IComponentFactory ComponentFactory { get; set; }
+        private IPageProvider _pageProvider = null;
+        public IPageProvider PageProvider
+        {
+            get
+            {
+                if (_pageProvider == null)
+                {
+                    _pageProvider = (IPageProvider)ProviderLoader.LoadProvider<IPageProvider>();
+                }
+                return _pageProvider;
+            }
+            set
+            {
+                _pageProvider = value;
+            }
+        }
+
+        private IComponentFactory _componentFactory = null;
+        public IComponentFactory ComponentFactory
+        {
+            get
+            {
+                if (_componentFactory == null)
+                {
+                    // if there is no component factory set, check if there is one in the current assembly
+                    _componentFactory = (IComponentFactory) ClassLoader.Load<IComponentFactory>(this.GetType().Assembly);
+
+                    // the ComponentFactory must have a ComponentProvider
+                    // if there is a ProviderVersion configured, the ComponentFactory will figure this out by itself
+                    // otherwise, try to load a IComponentProvider from the same assembly as the current PageProvider
+                    if (ConfigurationHelper.ProviderVersion == ProviderVersion.Undefined && PageProvider != null)
+                        _componentFactory.ComponentProvider = (IComponentProvider) ClassLoader.Load<IComponentProvider>(PageProvider.GetType().Assembly);
+                }
+                return _componentFactory;
+            }
+            set
+            {
+                _componentFactory = value;
+            }
+        }
         public ILinkFactory LinkFactory { get; set; }
 
 
