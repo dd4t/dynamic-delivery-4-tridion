@@ -181,8 +181,7 @@ namespace DD4T.Providers.SDLTridion2011sp1
         public string GetUrlForUri(string uri)
         {
             var item = BinaryMetaFactory.GetMeta(uri);
-            return item.UrlPath ?? string.Empty;
-
+            return item == null ? string.Empty : item.UrlPath; // TODO: test this change (with urls that exist and urls that don't!)
         }
     }
     internal class SqlReaderStream : Stream

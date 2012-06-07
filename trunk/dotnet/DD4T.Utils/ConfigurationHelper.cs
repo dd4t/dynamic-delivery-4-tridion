@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using DD4T.ContentModel.Contracts.Providers;
 
 namespace DD4T.Utils
 {
@@ -11,6 +12,7 @@ namespace DD4T.Utils
 
         // the Alt1, Alt2 versions are there to make the system backwards compatible
         // note that the associated properties in the ConfigurationHelper must be changed as well
+        public const string ProviderVersion = "DD4T.ProviderVersion";
         public const string LoggerClass = "DD4T.LoggerClass";
         public const string IncludeLastPublishedDate = "DD4T.IncludeLastPublishedDate";
         public const string BinaryHandlerCacheExpiration = "DD4T.BinaryHandlerCacheExpiration";
@@ -34,6 +36,7 @@ namespace DD4T.Utils
         public const string ShowAnchors = "DD4T.ShowAnchors";
         public const string LinkToAnchor = "DD4T.LinkToAnchor";
         public const string UseUriAsAnchor = "DD4T.UseUriAsAnchor";
+        public const string PublicationId = "DD4T.PublicationId";
     }
 
     public static class ConfigurationHelper
@@ -104,11 +107,20 @@ namespace DD4T.Utils
                 return SafeGetConfigSettingAsString(ConfigurationKeys.SitemapPath, ConfigurationKeys.SitemapPathAlt1);
             }
         }
+
         public static int BinaryHandlerCacheExpiration
         {
             get
             {
                 return SafeGetConfigSettingAsInt(ConfigurationKeys.BinaryHandlerCacheExpiration, ConfigurationKeys.BinaryHandlerCacheExpirationAlt1);
+            }
+        }
+
+        public static int PublicationId
+        {
+            get
+            {
+                return SafeGetConfigSettingAsInt(ConfigurationKeys.PublicationId);
             }
         }
 
@@ -157,6 +169,25 @@ namespace DD4T.Utils
             get
             {
                 return SafeGetConfigSettingAsBoolean(ConfigurationKeys.UseUriAsAnchor);
+            }
+        }
+
+        public static ProviderVersion ProviderVersion
+        {
+            get
+            {
+                string version = SafeGetConfigSettingAsString(ConfigurationKeys.ProviderVersion);
+                if (string.IsNullOrEmpty(version))
+                    return ContentModel.Contracts.Providers.ProviderVersion.Undefined;
+                try
+                {
+                    return (ProviderVersion)Enum.Parse(typeof(ProviderVersion), version);
+                }
+                catch (Exception e)
+                {
+                    LoggerService.Warning("invalid provider version {0}", version);
+                    return ProviderVersion.Undefined;
+                }
             }
         }
         private static int SafeGetConfigSettingAsInt(params string[] keys)

@@ -90,6 +90,7 @@
     <Compile Include="FactoryBase.cs" />
     <Compile Include="LinkFactory.cs" />
     <Compile Include="PageFactory.cs" />
+    <Compile Include="Resolvers\DefaultPublicationResolver.cs" />
     <Compile Include="TaxonomyFactory.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@ using DD4T.ContentModel;
 using DD4T.ContentModel.Contracts.Providers;
 using DD4T.ContentModel.Exceptions;
 using DD4T.ContentModel.Factories;
+using DD4T.Utils;
 
 namespace DD4T.Factories
 {
@@ -12,9 +13,22 @@ namespace DD4T.Factories
     /// </summary>
     public class TaxonomyFactory : FactoryBase, ITaxonomyFactory
     {
-        private ITaxonomyProvider taxonomyProvider = null;
-        public ITaxonomyProvider TaxonomyProvider { get; set; }
-
+        private ITaxonomyProvider _taxonomyProvider = null;
+        public ITaxonomyProvider TaxonomyProvider
+        {
+            get
+            {
+                if (_taxonomyProvider == null)
+                {
+                    _taxonomyProvider = (ITaxonomyProvider)ProviderLoader.LoadProvider<ITaxonomyProvider>();
+                }
+                return _taxonomyProvider;
+            }
+            set
+            {
+                _taxonomyProvider = value;
+            }
+        }
         public bool TryGetKeyword(string categoryUriToLookIn, string keywordName, out IKeyword keyword)
         {
             keyword = null;

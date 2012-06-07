@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DD4T.ContentModel;
 using DD4T.ContentModel.Factories;
 using DD4T.ContentModel.Contracts.Providers;
+using DD4T.Utils;
 
 namespace DD4T.Factories
 {
@@ -19,8 +20,23 @@ namespace DD4T.Factories
         private static TcmUri emptyTcmUri = new TcmUri("tcm:0-0-0");
         private Dictionary<int,ILinkProvider> _linkProviders = new Dictionary<int,ILinkProvider>();
 
-        public ILinkProvider LinkProvider { get; set; }
- 
+        private ILinkProvider _linkProvider = null;
+        public ILinkProvider LinkProvider
+        {
+            get
+            {
+                if (_linkProvider == null)
+                {
+                    _linkProvider = (ILinkProvider)ProviderLoader.LoadProvider<ILinkProvider>();
+                }
+                return _linkProvider;
+            }
+            set
+            {
+                _linkProvider = value;
+            }
+        }
+
         public LinkFactory()
         {
         }

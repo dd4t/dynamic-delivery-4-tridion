@@ -21,10 +21,26 @@ namespace DD4T.Factories
     /// </summary>
     public class ComponentFactory : FactoryBase, IComponentFactory
     {
-        public IComponentProvider ComponentProvider { get; set; }
         public const string CacheKeyFormatByUri = "ComponentByUri_{0}";
         public const string CacheRegion = "Component";
         private ICacheAgent _cacheAgent = null;
+
+        private IComponentProvider _componentProvider = null;
+        public IComponentProvider ComponentProvider
+        {
+            get
+            {
+                if (_componentProvider == null)
+                {
+                    _componentProvider = (IComponentProvider)ProviderLoader.LoadProvider<IComponentProvider>();
+                }
+                return _componentProvider;
+            }
+            set
+            {
+                _componentProvider = value;
+            }
+        }
 
         #region IComponentFactory members
         public bool TryGetComponent(string componentUri, out IComponent component)
