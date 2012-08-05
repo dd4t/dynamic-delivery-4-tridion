@@ -6,7 +6,7 @@ This is a quickstart tutorial to get you up and running with a Sample ASP.NET MV
 
 = Prerequisites =
  * You installed the DD4T Templates. (If not: check out the download section)
- * Visual Studio 2010 with the !NuGet Package Manager installed [http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c Install NuGet Package Manager]
+ * Visual Studio 2010 with the !NuGet Package Manager installed ([http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c Install NuGet Package Manager])
 
 == 1. Download the Visual Studio Template ==
 Go to the 'download'  section and download the file 'Web.DD4T.vsix'.
