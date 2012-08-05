@@ -5,7 +5,8 @@
 This is a quickstart tutorial to get you up and running with a Sample ASP.NET MVC3 project. It provides you with a simple basic project you can use to boot up your first DD4T project. 
 
 = Prerequisites =
- - You installed the DD4T Templates. (If not: check out the download section)
+ * You installed the DD4T Templates. (If not: check out the download section)
+ * Visual Studio 2010 with the !NuGet Package Manager installed
 
 == 1. Download the Visual Studio Template ==
 Go to the 'download'  section and download the file 'Web.DD4T.vsix'.
@@ -16,8 +17,8 @@ You now have a new Project Template called 'DD4T.Web'.
 Open Visual Studio and choose 'New Project'.
 Locate the new 'DD4T.Web'  template and click 'Ok'.
 
-== 3. Install the newest version of the framework with NuGet ==
-Go to the NuGet package-manager-console and typ in the following command:
+== 3. Install the newest version of the framework with !NuGet ==
+Go to the !NuGet package-manager-console and typ in the following command:
 
 Install-Package DD4TFramework
 
@@ -31,7 +32,7 @@ There are 2 ways of doing this:
 
 Refer to the SDL Tridion documentation for detailed information on how to setup a Tridion Content Delivery Instance.
 
-Don't forget to add a reference to Tridion.ContentDelivery.dll, Tridion.ContentDelivery.Configuration.dll and Tridion.ContentDelivery.Interop.dll to Your Website.
+Don't forget to add a reference to Tridion.!ContentDelivery.dll, Tridion.!ContentDelivery.Configuration.dll and Tridion.!ContentDelivery.Interop.dll to Your Website.
 
 == 5. Adjust the Web.config ==
 Open the web.config and find this setting:
@@ -42,4 +43,3 @@ Change it's value to your publication id.
 == 6. RUN ==
 If you have published anything you can now run your website.
 Note: the first time there will be a warning on the screen that it cannot find certain views. This is expected behaviour since you have build your first view. Read the warning and act upon it.
-
