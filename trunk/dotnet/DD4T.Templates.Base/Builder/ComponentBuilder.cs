@@ -24,6 +24,7 @@ namespace DD4T.Templates.Base.Builder
           Dynamic.Component c = new Dynamic.Component();
           c.Title = tcmComponent.Title;
           c.Id = tcmComponent.Id.ToString();
+          c.RevisionDate = tcmComponent.RevisionDate;
           GeneralUtils.TimedLog("component title = " + c.Title);
 
           c.Version = tcmComponent.Version;

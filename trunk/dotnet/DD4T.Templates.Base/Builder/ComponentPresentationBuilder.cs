@@ -56,6 +56,7 @@ namespace DD4T.Templates.Base.Builder
                 catch (Exception e)
                 {
                     TemplatingLogger.GetLogger(typeof(ComponentPresentationBuilder)).Error("exception while deserializing into CP: " + e.Message);
+                    File.WriteAllText(@"c:\tridion\log\appie.txt", e.Message + Environment.NewLine + e.StackTrace);
                     // the component presentation could not be deserialized, this probably not a Dynamic Delivery template
                     // just store the output as 'RenderedContent' on the CP
                     cp.RenderedContent = renderedContent;

@@ -13,6 +13,7 @@ namespace DD4T.Templates.Base.Builder
 			ct.Title = tcmComponentTemplate.Title;
 			ct.Id = tcmComponentTemplate.Id.ToString();
 			ct.OutputFormat = tcmComponentTemplate.OutputFormat;
+            ct.RevisionDate = tcmComponentTemplate.RevisionDate;
          if (tcmComponentTemplate.Metadata != null && tcmComponentTemplate.MetadataSchema != null)
          {
              ct.MetadataFields = new Dynamic.FieldSet();
