@@ -37,17 +37,11 @@ namespace DD4T.Mvc.SiteEdit
         /// <summary>
         /// string format used to create UI 2012 page level tag.
         /// </summary>
-        // todo: add Page.RevisionDate and PageTemplate.RevisionDate to the DD4T model, for now we will use a string without modified dates and only include the page version
-        //public static string Ui2012PageSeFormat = "<!-- Page Settings: {{" + 
-        //        "\"PageID\":\"{0}\"," +              // page tcm uri
-        //        "\"PageModified\":\"{1}\"," +        // page modified date (2012-04-05T17:33:02)
-        //        "\"PageTemplateID\":\"{2}\"," +      // page template tcm uri
-        //        "\"PageTemplateModified\":\"{3}\"" + // page template modified date (2012-04-05T17:33:02)
-        //    "}} -->";
         public static string Ui2012PageSeFormat = "<!-- Page Settings: {{" +
-                "\"PageID\":\"{0}\"," +        // page tcm uri
-                "\"PageVersion\":{1}," +       // page version
-                "\"PageTemplateID\":\"{2}\"" + // page template tcm uri
+                "\"PageID\":\"{0}\"," +              // page tcm uri
+                "\"PageModified\":\"{1}\"," +        // page modified date (2012-04-05T17:33:02)
+                "\"PageTemplateID\":\"{2}\"," +      // page template tcm uri
+                "\"PageTemplateModified\":\"{3}\"" + // page template modified date (2012-04-05T17:33:02)
             "}} -->";
 
         /// <summary>
@@ -65,22 +59,15 @@ namespace DD4T.Mvc.SiteEdit
         /// <summary>
         /// string format representing UI 2012 component level tag.
         /// </summary>
-        // todo: add Component.RevisionDate and ComponentTemplate.RevisionDate to the DD4T model, for now we will use a string without modified dates and only include the component version
-        //public static string Ui2012ComponentSeFormat = "<!-- Start Component Presentation: {{" +
-        //        "\"ComponentID\" : \"{0}\", " +               // component tcm uri
-        //        "\"ComponentModified\" : \"{1}\", " +         // component modified date (2012-04-05T17:33:02)
-        //        "\"ComponentTemplateID\" : \"{2}\", " +       // component template id
-        //        "\"ComponentTemplateModified\" : \"{3}\", " + // component template modified date (2012-04-05T17:33:02)
-        //        "\"IsRepositoryPublished\" : {4}" +           // is repository published (true if dynamic component template, false otherwise)
-        //        "{5}" +                                       // is query based (true for a broker queried dcp, omit if component presentation is embedded on a page)
-        //    "}} -->";
         public static string Ui2012ComponentSeFormat = "<!-- Start Component Presentation: {{" +
-                "\"ComponentID\" : \"{0}\", " +         // component tcm uri
-                "\"ComponentVersion\" : {1}, " +        // component version
-                "\"ComponentTemplateID\" : \"{2}\", " + // component template id
-                "\"IsRepositoryPublished\" : {3}" +     // is repository published (true if dynamic component template, false otherwise)
-                "{4}" +                                 // is query based (true for a broker queried dcp, omit if component presentation is embedded on a page)
+                "\"ComponentID\" : \"{0}\", " +               // component tcm uri
+                "\"ComponentModified\" : \"{1}\", " +         // component modified date (2012-04-05T17:33:02)
+                "\"ComponentTemplateID\" : \"{2}\", " +       // component template id
+                "\"ComponentTemplateModified\" : \"{3}\", " + // component template modified date (2012-04-05T17:33:02)
+                "\"IsRepositoryPublished\" : {4}" +           // is repository published (true if dynamic component template, false otherwise)
+                "{5}" +                                       // is query based (true for a broker queried dcp, omit if component presentation is embedded on a page)
             "}} -->";
+        
 
         /// <summary>
         /// string Format representing a simple, non-multivalue SiteEdit field marking.
@@ -142,9 +129,7 @@ namespace DD4T.Mvc.SiteEdit
         {
             if (SiteEditSettings.Style == SiteEditStyle.SiteEdit2012)
             {
-                // todo: add Page.RevisionDate and PageTemplate.RevisionDate to the DD4T model and use those
-                //string result = string.Format(Ui2012PageSeFormat, page.Id, string.Format("{0:s}", page.RevisionDate), page.PageTemplate.Id, string.Format("{0:s}", page.PageTemplate.RevisionDate));
-                string result = string.Format(Ui2012PageSeFormat, page.Id, page.Version, page.PageTemplate.Id);
+                string result = string.Format(Ui2012PageSeFormat, page.Id, string.Format("{0:s}", page.RevisionDate), page.PageTemplate.Id, string.Format("{0:s}", page.PageTemplate.RevisionDate));
                 result += string.Format(Ui2012BootStrap, SiteEditSettings.TridionHostUrl);
                 return result;
             }
@@ -203,10 +188,7 @@ namespace DD4T.Mvc.SiteEdit
             {
                 // is query based tells us if the dcp was the result of a broker query and the component presentation is not embedded on the page
                 string isQueryBased = queryBased ? ", \"IsQueryBased\" : true" : string.Empty;
-
-                // todo: add Component.RevisionDate and ComponentTemplate.RevisionDate to the DD4T model and use those
-                //return string.Format(Ui2012ComponentSeFormat, cp.Component.Id, string.Format("{0:s}", cp.Component.RevisionDate), cp.ComponentTemplate.Id, string.Format("{0:s}", cp.ComponentTemplate.RevisionDate), cp.IsDynamic, isQueryBased);
-                return string.Format(Ui2012ComponentSeFormat, cp.Component.Id, cp.Component.Version, cp.ComponentTemplate.Id, cp.IsDynamic.ToString().ToLower(), isQueryBased);
+                return string.Format(Ui2012ComponentSeFormat, cp.Component.Id, string.Format("{0:s}", cp.Component.RevisionDate), cp.ComponentTemplate.Id, string.Format("{0:s}", cp.ComponentTemplate.RevisionDate), cp.IsDynamic.ToString().ToLower(), isQueryBased);
             }
 
             string pubIdWithoutTcm = Convert.ToString(new TcmUri(cp.Component.Id).PublicationId);
