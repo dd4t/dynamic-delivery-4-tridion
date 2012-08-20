@@ -25,6 +25,7 @@ namespace DD4T.Templates.Base.Builder
                                      PageTemplate = manager.BuildPageTemplate(tcmPage.PageTemplate),
                                      Schema = manager.BuildSchema(tcmPage.MetadataSchema),
                                      Version = tcmPage.Version,
+                                     RevisionDate = tcmPage.RevisionDate,
                                      MetadataFields = new Dynamic.FieldSet()
                                  };
             if (linkLevels > 0)

@@ -38,6 +38,7 @@ namespace DD4T.ContentModel
     public class Page : RepositoryLocalItem, IPage
     {
         public bool Test { get; set; } // TODO: remove (this is for testing only)
+        public DateTime RevisionDate { get; set; }
         public string Filename { get; set; }
         public DateTime LastPublishedDate { get; set; }
 
@@ -134,6 +135,7 @@ namespace DD4T.ContentModel
     public class PageTemplate : RepositoryLocalItem, IPageTemplate
     {
         public string FileExtension { get; set; }
+        public DateTime RevisionDate { get; set; }
         public FieldSet MetadataFields { get; set; }
         [XmlIgnore]
         IFieldSet IPageTemplate.MetadataFields
@@ -154,6 +156,7 @@ namespace DD4T.ContentModel
     public class ComponentTemplate : RepositoryLocalItem, IComponentTemplate
     {
         public string OutputFormat { get; set; }
+        public DateTime RevisionDate { get; set; }
         public FieldSet MetadataFields { get; set; }
         [XmlIgnore]
         IFieldSet IComponentTemplate.MetadataFields
@@ -176,7 +179,7 @@ namespace DD4T.ContentModel
 
         #region Properties
         public DateTime LastPublishedDate { get; set; }
-
+        public DateTime RevisionDate { get; set; }
         public Schema Schema { get; set; }
         [XmlIgnore]
         ISchema IComponent.Schema

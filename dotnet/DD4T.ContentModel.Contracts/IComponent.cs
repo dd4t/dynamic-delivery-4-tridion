@@ -17,5 +17,7 @@
         //string ResolvedUrl { get; set; }
         int Version { get; }
         DateTime LastPublishedDate { get; }
+        DateTime RevisionDate { get; }
+
     }
 }

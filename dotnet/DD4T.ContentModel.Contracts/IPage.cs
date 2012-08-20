@@ -7,6 +7,7 @@
     {
         IList<ICategory> Categories { get; }
         IList<IComponentPresentation> ComponentPresentations { get; }
+        DateTime RevisionDate { get; }
         string Filename { get; }
         IFieldSet MetadataFields { get; }
         IPageTemplate PageTemplate { get; }

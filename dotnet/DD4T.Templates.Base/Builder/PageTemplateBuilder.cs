@@ -14,6 +14,7 @@ namespace DD4T.Templates.Base.Builder
 			pt.Title = tcmPageTemplate.Title;
 			pt.Id = tcmPageTemplate.Id.ToString();
 			pt.FileExtension = tcmPageTemplate.FileExtension;
+            pt.RevisionDate = tcmPageTemplate.RevisionDate;
 
          if (tcmPageTemplate.Metadata != null && tcmPageTemplate.MetadataSchema != null)
          {
