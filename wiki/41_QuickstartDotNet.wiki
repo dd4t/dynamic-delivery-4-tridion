@@ -42,4 +42,4 @@ Change it's value to your publication id.
 
 == 6. RUN ==
 If you have published anything you can now run your website.
-Note: the first time there will be a warning on the screen that it cannot find certain views. This is expected behaviour since you have not yet build your first view. Read the warning and act upon it.
+Note: the first time there will be a warning on the screen that it cannot find certain views. This is expected behavior since you have not yet build your first view. Read the warning and act upon it.
