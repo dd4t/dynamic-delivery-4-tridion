@@ -90,6 +90,10 @@ namespace DD4T.ContentModel
     public class Keyword : RepositoryLocalItem, IKeyword
     {
         [XmlAttribute]
+        public string Description { get; set; }
+        [XmlAttribute]
+        public string Key { get; set; }
+        [XmlAttribute]
         public string TaxonomyId { get; set; }
         [XmlAttribute]
         public string Path { get; set; }
@@ -97,6 +101,18 @@ namespace DD4T.ContentModel
         [XmlIgnore]
         public IList<IKeyword> ParentKeywords { get { return parentKeywords; } }
 
+
+        public FieldSet MetadataFields { get; set; }
+        [XmlIgnore]
+        IFieldSet IKeyword.MetadataFields
+        {
+            get { return MetadataFields != null ? (MetadataFields as IFieldSet) : null; }
+        }
+
+        public Keyword()
+        {
+            this.MetadataFields = new FieldSet();
+        }
     }
 
     public class Category : RepositoryLocalItem, ICategory
@@ -104,7 +120,7 @@ namespace DD4T.ContentModel
         public List<Keyword> Keywords { get; set; }
         [XmlIgnore]
         IList<IKeyword> ICategory.Keywords
-        { get { return Keywords as IList<IKeyword>; } }
+        { get { return Keywords.ToList<IKeyword>(); } }
     }
 
     public class ComponentPresentation : IComponentPresentation
@@ -216,26 +232,17 @@ namespace DD4T.ContentModel
         [XmlIgnore]
         IList<ICategory> IComponent.Categories
         {
-            get { return Categories as IList<ICategory>; }
+            get { return Categories.ToList<ICategory>(); } //as IList<ICategory>; 
         }
-        //[XmlIgnore]
-        //public string ResolvedUrl
-        //{
-        //    get
-        //    {
-        //        //TODO: check if the LinkFactory has been set
-        //        return LinkFactory.ResolveLink(this.Id);
-        //    }
-        //}
-
-        //public ILinkFactory LinkFactory { get; set; }
 
         public int Version { get; set; }
+
         #endregion Properties
 
         #region constructors
         public Component()
         {
+            this.Categories = new List<Category>();
             this.Schema = new Schema();
             this.Fields = new FieldSet();
             this.MetadataFields = new FieldSet();
@@ -263,7 +270,7 @@ namespace DD4T.ContentModel
     public class FieldSet : SerializableDictionary<string, IField, Field>, IFieldSet, IXmlSerializable
     {
         public FieldSet()
-            : base()
+            : base() 
         {
         }
 
@@ -386,10 +393,22 @@ namespace DD4T.ContentModel
             set;
         }
 
+        public List<Keyword> Keywords
+        {
+            get;
+            set;
+        }
+        [XmlIgnore]
+        IList<IKeyword> IField.Keywords
+        {
+            get { return Keywords.ToList<IKeyword>(); }
+        }
+
         #endregion Properties
         #region Constructors
         public Field()
         {
+            this.Keywords = new List<Keyword>();
             this.Values = new List<string>();
             this.NumericValues = new List<double>();
             this.DateTimeValues = new List<DateTime>();

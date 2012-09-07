@@ -72,12 +72,16 @@ namespace DD4T.Templates.Base.Builder
                 GeneralUtils.TimedLog(string.Format("item field {0} has {1} values", tcmItemField.Name, sField.Values.Count));
                 if (sField.Values.Count == 0)
                     throw new FieldHasNoValueException();
+
+                // add keyword values
+                f.KeywordValues = new List<Keyword>();
                 // we will wrap each linked component in a ContentModel component
                 f.Values = new List<string>();
                 foreach (TCM.Keyword kw in sField.Values)
                 {
                     // todo: add binary to package, and add BinaryUrl property to the component
                     f.Values.Add(kw.Title);
+                    f.KeywordValues.Add(manager.BuildKeyword(kw));
                 }
                 f.FieldType = FieldType.Keyword;
                 KeywordFieldDefinition fieldDef = (KeywordFieldDefinition)sField.Definition;
