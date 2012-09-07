@@ -28,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dynamic Delivery Presentati
 		Dynamic Delivery Presentation Solution Items\AssemblyInfo.cs = Dynamic Delivery Presentation Solution Items\AssemblyInfo.cs
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.LogWrappers.Log4Net", "DD4T.LogWrappers.Log4Net\DD4T.LogWrappers.Log4Net.csproj", "{6A68857C-52A2-4DA7-AEC1-82FE5AB7535B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,14 @@ Global
 		{9584E00B-03E2-4909-9384-09B4AAB01AC4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9584E00B-03E2-4909-9384-09B4AAB01AC4}.TridionDebug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9584E00B-03E2-4909-9384-09B4AAB01AC4}.TridionDebug|Any CPU.Build.0 = Debug|Any CPU
+		{6A68857C-52A2-4DA7-AEC1-82FE5AB7535B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A68857C-52A2-4DA7-AEC1-82FE5AB7535B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A68857C-52A2-4DA7-AEC1-82FE5AB7535B}.DebugTridion2011|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A68857C-52A2-4DA7-AEC1-82FE5AB7535B}.DebugTridion2011|Any CPU.Build.0 = Debug|Any CPU
+		{6A68857C-52A2-4DA7-AEC1-82FE5AB7535B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A68857C-52A2-4DA7-AEC1-82FE5AB7535B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A68857C-52A2-4DA7-AEC1-82FE5AB7535B}.TridionDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A68857C-52A2-4DA7-AEC1-82FE5AB7535B}.TridionDebug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
