@@ -42,6 +42,17 @@ namespace DD4T.Factories
             }
         }
 
+        private static XmlSerializer _componentSerializer = null;
+        private static XmlSerializer ComponentSerializer
+        {
+            get
+            {
+                if (_componentSerializer == null)
+                    _componentSerializer = new XmlSerializer(typeof(Component));
+                return _componentSerializer;
+            }
+        }
+
         #region IComponentFactory members
         public bool TryGetComponent(string componentUri, out IComponent component)
         {
@@ -104,11 +115,11 @@ namespace DD4T.Factories
         {
             XmlDocument componentContent = new XmlDocument();
             componentContent.LoadXml(componentStringContent);
-            var serializer = new XmlSerializer(typeof(Component));
+            
             IComponent component = null;
             using (var reader = new XmlNodeReader(componentContent.DocumentElement))
             {
-                component = (IComponent)serializer.Deserialize(reader);
+                component = (IComponent)ComponentSerializer.Deserialize(reader);
             }
             return component;
         }
