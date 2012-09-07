@@ -5,6 +5,9 @@ namespace DD4T.ContentModel
     {
         string Path { get; }
         string TaxonomyId { get; }
-        IList<IKeyword> ParentKeywords { get;}        
+        string Description { get; }
+        string Key { get; }
+        IList<IKeyword> ParentKeywords { get;}
+        IFieldSet MetadataFields { get; }
     }
 }

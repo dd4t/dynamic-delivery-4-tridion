@@ -15,6 +15,8 @@ namespace DD4T.Templates.Base.Builder
          dk.Id = keyword.Id;
          dk.Title = keyword.Title;
          dk.Path = FindKeywordPath(keyword);
+         dk.Description = keyword.Description;
+         dk.Key = keyword.Key;
          dk.TaxonomyId = keyword.OrganizationalItem.Id;
          return dk;
       }

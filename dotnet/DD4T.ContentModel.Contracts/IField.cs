@@ -19,5 +19,6 @@
         IList<string> Values { get; }
         string Value { get; }
         string XPath { get; }
+        IList<IKeyword> Keywords { get; }
     }
 }
