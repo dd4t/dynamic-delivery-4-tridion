@@ -69,6 +69,16 @@ namespace DD4T.Factories
         }
         public ILinkFactory LinkFactory { get; set; }
 
+        private static XmlSerializer _pageSerializer = null;
+        private static XmlSerializer PageSerializer
+        {
+            get
+            {
+                if (_pageSerializer == null)
+                 _pageSerializer = new XmlSerializer(typeof(Page));
+                return _pageSerializer;
+            }
+        }
 
         #region IPageFactory Members
         public virtual bool TryFindPage(string url, out IPage page)
@@ -265,31 +275,18 @@ namespace DD4T.Factories
             using (var reader = new XmlNodeReader(pageContent.DocumentElement))
             {
 
-
-                LoggerService.Debug("GetIPageObject: about to create XmlSerializer", LoggingCategory.Performance);
-                var serializer = new XmlSerializer(typeof(Page));
-                LoggerService.Debug("GetIPageObject: finished creating XmlSerializer", LoggingCategory.Performance);
-
-                //try
-                //{
-
                 LoggerService.Debug("GetIPageObject: about to deserialize", LoggingCategory.Performance);
-                page = (IPage)serializer.Deserialize(reader);
+                page = (IPage)PageSerializer.Deserialize(reader);
                 LoggerService.Debug("GetIPageObject: finished deserializing", LoggingCategory.Performance);
                 // set order on page for each ComponentPresentation
-                    int orderOnPage = 0;
-                    foreach (IComponentPresentation cp in page.ComponentPresentations)
-                    {
-                        cp.OrderOnPage = orderOnPage++;
-                    }
-                    LoggerService.Debug("GetIPageObject: about to load DCPs", LoggingCategory.Performance);
-                    LoadComponentModelsFromComponentFactory(page);
-                    LoggerService.Debug("GetIPageObject: finished loading DCPs", LoggingCategory.Performance);
-                //}
-                //catch (Exception)
-                //{
-                //    throw new FieldHasNoValueException();
-                //}
+                int orderOnPage = 0;
+                foreach (IComponentPresentation cp in page.ComponentPresentations)
+                {
+                    cp.OrderOnPage = orderOnPage++;
+                }
+                LoggerService.Debug("GetIPageObject: about to load DCPs", LoggingCategory.Performance);
+                LoadComponentModelsFromComponentFactory(page);
+                LoggerService.Debug("GetIPageObject: finished loading DCPs", LoggingCategory.Performance);
             }
             LoggerService.Debug("<<GetIPageObject(string length {0})", LoggingCategory.Performance, Convert.ToString(pageStringContent.Length));
             return page;
