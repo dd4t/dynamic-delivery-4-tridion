@@ -1,1 +1,0 @@
-Please deploy this web site on a server which has Tridion content delivery installed. 
