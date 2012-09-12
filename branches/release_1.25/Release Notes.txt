@@ -1,0 +1,10 @@
+Version: 1.25
+Release Date: 12 September, 2012
+
+
+Changes in version 1.25 (from 1.24):
+
+- Added support for Tridion UI 2012
+- Added keyword fields to the content model
+- Improved performance on deserialization (in the factories)
+- Improved thread-safety of TridionConfiguration class
