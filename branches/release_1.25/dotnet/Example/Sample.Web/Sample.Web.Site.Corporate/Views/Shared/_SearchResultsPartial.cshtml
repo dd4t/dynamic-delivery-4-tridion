@@ -1,0 +1,15 @@
+﻿@using DD4T.Mvc.Html;
+@model DD4T.ContentModel.Page
+<h3 style="color:crimson;">Search Results</h3>
+
+<div id="searchresults">Your search for "@ViewBag.SearchQuery" returned @ViewBag.SearchResults.Count results.</div>
+
+@if (@ViewBag.SearchResults.Count > 0)
+{
+    <ul id="searchresults">
+        @foreach (var result in @ViewBag.SearchResults)
+        {
+            <li>@result</li>        
+        }
+    </ul>
+}
