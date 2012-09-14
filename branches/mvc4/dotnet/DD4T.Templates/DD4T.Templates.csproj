@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{83682E54-4314-4922-9D1A-62A69EFED674}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DD4T.Templates</RootNamespace>
+    <AssemblyName>DD4T.Templates</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RegisterForComInterop>false</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tridion.Common, Version=6.1.0.25, Culture=neutral, PublicKeyToken=349a39f202fa9b53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\Tridion Active\Tridion.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Tridion.ContentManager, Version=6.1.0.996, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\Tridion Active\Tridion.ContentManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Tridion.ContentManager.Common, Version=6.1.0.996, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\Tridion Active\Tridion.ContentManager.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Tridion.ContentManager.Publishing, Version=6.1.0.996, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\Tridion Active\Tridion.ContentManager.Publishing.dll</HintPath>
+    </Reference>
+    <Reference Include="Tridion.ContentManager.TemplateTypes, Version=6.1.0.996, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\Tridion Active\Tridion.ContentManager.TemplateTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="Tridion.ContentManager.Templating, Version=6.1.0.996, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\Tridion Active\Tridion.ContentManager.Templating.dll</HintPath>
+    </Reference>
+    <Reference Include="Tridion.Logging, Version=6.1.0.25, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\Tridion Active\Tridion.Logging.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Dynamic Delivery Publishing Solution Items\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="ConvertToLowerCase.cs" />
+    <Compile Include="ConvertXmlToJava.cs" />
+    <Compile Include="DynamicComponent.cs" />
+    <Compile Include="DynamicPage.cs" />
+    <Compile Include="InheritMetadataComponent.cs" />
+    <Compile Include="InheritMetadataPage.cs" />
+    <Compile Include="PreviewPage.cs" />
+    <Compile Include="PublishBinariesComponent.cs" />
+    <Compile Include="PublishBinariesPage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DD4T.ContentModel.Contracts\DD4T.ContentModel.Contracts.csproj">
+      <Project>{C21F66F0-01CE-4AF3-B76C-CD262B7EA1C0}</Project>
+      <Name>DD4T.ContentModel.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DD4T.ContentModel\DD4T.ContentModel.csproj">
+      <Project>{83F5CFC2-14D5-4190-B51D-7AF7A69B67E9}</Project>
+      <Name>DD4T.ContentModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DD4T.Templates.Base\DD4T.Templates.Base.csproj">
+      <Project>{B52EEF88-CDA2-41A8-84F9-7C5CDA4245BF}</Project>
+      <Name>DD4T.Templates.Base</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Schemas\Dynamic Delivery Parameters.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"$(SolutionDir)Dynamic Delivery Publishing Solution Items\ilmerge" /lib:"C:\Windows\Microsoft.NET\Framework\v4.0.30319" /t:dll /targetplatform:v4,C:\Windows\Microsoft.NET\Framework\v4.0.30319 /out:"$(TargetDir)$(ProjectName).merged.dll" "$(TargetDir)DD4T.ContentModel.Contracts.dll" "$(TargetDir)DD4T.ContentModel.dll" "$(TargetDir)DD4T.Templates.Base.dll" "$(TargetDir)DD4T.ContentModel.XmlSerializers.dll" "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
