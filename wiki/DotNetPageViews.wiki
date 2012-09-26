@@ -37,8 +37,8 @@ The first line (with the lower case 'm') tells the view that the model is of the
 = Layouts and Sections = 
 In Razor you can define layouts. A layout is comparable to a master page in ASP.Net web forms programming. 
 
-A layout always contains a body. The body is simply the output of the 'regular view' (not the layout), which is inserted into the layout in place of the !@RenderBody() call.
-Besides the body, the layout can contain one or more 'sections'. A section is a named block of 'view code' that is defined in the regular view using the @section{ } construction. The section is inserted on the position in the layout indicated by the !@RenderSection('..') call. 
+A layout always contains a body. The body is simply the output of the 'regular view' (not the layout), which is inserted into the layout in place of the @!RenderBody() call.
+Besides the body, the layout can contain one or more 'sections'. A section is a named block of 'view code' that is defined in the regular view using the @section{ } construction. The section is inserted on the position in the layout indicated by the @!RenderSection('..') call. 
 
 Example of a regular (page) view:
 
