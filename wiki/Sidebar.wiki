@@ -1,5 +1,5 @@
  * [Introducing What is DD4T]
-   * [HowToUse How is DD4T used in a web application]
+   * [HowToUse How to use DD4T in a web application]
  * [Installation Installing DD4T]
    * [TemplateInstallation Installing the templates]
    * [DotNetInstallation Setting up your .NET web application]
