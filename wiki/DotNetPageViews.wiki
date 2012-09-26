@@ -40,7 +40,8 @@ Besides the body, the layout can contain one or more 'sections'. A section is a 
 
 Example of a regular (page) view:
 
-		@{
+{{{
+@{
     Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }
 This is thebody  of the view.
@@ -48,7 +49,7 @@ This is thebody  of the view.
 {
   This is a section called 'Header'
 }
-		
+}}}		
 
 
 The corresponding layout (_CommonLayout.cshtml) could look like this:
