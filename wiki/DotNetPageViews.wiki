@@ -46,7 +46,7 @@ Example of a regular (page) view:
 @{
     Layout = "~/Views/Shared/_CommonLayout.cshtml";
 }
-This is thebody  of the view.
+This is the body of the view.
 @section Header
 {
   This is a section called 'Header'
