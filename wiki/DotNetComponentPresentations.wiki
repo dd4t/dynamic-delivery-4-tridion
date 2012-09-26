@@ -34,7 +34,7 @@ Example:
 @Html.RenderComponentPresentationsBySchema("Header")
 {code}
 
-==Reversing the logic==
+== Reversing the logic ==
 You can start the schema name with an exclamation mark, to show all CPs whose schema does NOT have a title starting with 'Header'. 
 
 Example: 
