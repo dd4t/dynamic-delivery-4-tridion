@@ -70,5 +70,8 @@ The corresponding layout (_CommonLayout.cshtml) could look like this:
 		
 Note that layouts can be bound to the IPage class using the @model directive. This allows you to write out information from the page in the layout, just like you would from the page view.
 
-
+One of the first things you would probably want to do in your page view, is show some content on the page. This is described in the next section, [DotNetComponentPresentations Rendering component presentations].
                     			    
+
+									
+									
