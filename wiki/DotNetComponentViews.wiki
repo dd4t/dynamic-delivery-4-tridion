@@ -64,8 +64,12 @@ For rich text fields we have provided an extension method for System.String, cal
 Images and binary documents (PDF, Word, etc) have a Multimedia property which gives access to the URL. Their use is demonstrated in this code:
 
 {{{
-<img src="@Model.Fields["image"].LinkedComponentValues[0].Multimedia.Url" width="100%" alt="@Model.Fields["image"].LinkedComponentValues[0].Title"/><br/>
-<a href="@Model.Fields["document"].LinkedComponentValues[0].Multimedia.Url" title="@Model.Fields["image"].LinkedComponentValues[0].Title"/>Click to download the document</a>
+<img src="@Model.Fields["image"].LinkedComponentValues[0].Multimedia.Url" 
+	alt="@Model.Fields["image"].LinkedComponentValues[0].Title"/><br/>
+<a href="@Model.Fields["document"].LinkedComponentValues[0].Multimedia.Url" 
+	title="@Model.Fields["image"].LinkedComponentValues[0].Title"/>
+	Click to download the document
+</a>
 }}}		
 
 Note that the multimedia components that contain these images / documents are not usually put on the page directly. Most of the times, you must follow a (multimedia) link first, as shown in the code example. 
