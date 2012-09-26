@@ -5,7 +5,9 @@
    * [DotNetInstallation Setting up your .NET web application]
    * [JavaInstallation Setting up your java web application]
  * [DotNet Getting started with DD4T and .NET]
-   * [DotNetViews Views]
+   * [DotNetPageViews Page Views]
+   * [DotNetComponentPresentations Rendering component presentations]
+   * [DotNetComponentViews Component Views]
    * [DotNetImages Images]
    * [DotNetSitemap Sitemap]
    * [DotNetResources Resources]
@@ -14,3 +16,4 @@
    * [JavaImages Images]
    * [JavaSitemap Sitemap]
    * [JavaResources Resources]
+ 
