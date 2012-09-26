@@ -30,4 +30,4 @@ To use the new TBBs, you need to create at least one page template and one compo
  * Save and close
  
 ----
-That's it. You are now ready to create and publish Tridion content. Next, find out how to install DD4T in your [JavaInstallation Java] or [DotNetInstallation .NET] web application.
+That's it. You are now ready to create and publish Tridion content. Next, find out how to configure DD4T for your [JavaInstallation Java] or [DotNetInstallation .NET] web application.
