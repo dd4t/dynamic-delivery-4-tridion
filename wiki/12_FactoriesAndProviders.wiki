@@ -1,3 +1,4 @@
+#labels Factories and providers
 #summary High-level design of the factories / providers pattern
 
 = Design =
