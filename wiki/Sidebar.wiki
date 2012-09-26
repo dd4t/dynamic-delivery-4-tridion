@@ -4,14 +4,14 @@
    * [TemplateInstallation Installing the templates]
    * [DotNetInstallation Setting up your .NET web application]
    * [JavaInstallation Setting up your java web application]
- * [DotNet Getting started with DD4T and .NET]
+ * Getting started with DD4T and .NET
    * [DotNetPageViews Page Views]
    * [DotNetComponentPresentations Rendering component presentations]
    * [DotNetComponentViews Component Views]
    * [DotNetImages Images]
    * [DotNetSitemap Sitemap]
    * [DotNetResources Resources]
- * [Java Getting started with DD4T and Java] 
+ * Getting started with DD4T and Java
    * [JavaViews Views]
    * [JavaImages Images]
    * [JavaSitemap Sitemap]
