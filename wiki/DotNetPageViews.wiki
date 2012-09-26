@@ -9,12 +9,12 @@ It's also possible to override this default behaviour by adding a metadata field
 = View locations =
 
 MVC looks for a view in multiple locations:
- * /Views/ControllerName/ViewName.aspx
- * /Views/ControllerName/ViewName.cshtml
- * /Views/Shared/ViewName.aspx
- * /Views/Shared/ViewName.cshtml
+ * /Views/!ControllerName/!ViewName.aspx
+ * /Views/!ControllerName/!ViewName.cshtml
+ * /Views/Shared/!ViewName.aspx
+ * /Views/Shared/!ViewName.cshtml
 
-If you are working with the 'quick start' solution as created by the DD4T Visual Studio template, the pages will be served by the PageController. In that case, the application will look for the views in the folder /Views/Page.
+If you are working with the 'quick start' solution as created by the DD4T Visual Studio template, the pages will be served by the !PageController. In that case, the application will look for the views in the folder /Views/Page.
 
 = Razor =
 
@@ -22,7 +22,7 @@ We recommend to use Razor views (.cshtml) rather than aspx. Razor is simple to u
 
 = Model = 
 
-Page views are strongly typed: they use the DD4T.ContentModel.IPage class for a model. A simple example demonstrates this:
+Page views are strongly typed: they use the DD4T.!ContentModel.IPage class for a model. A simple example demonstrates this:
 
 {{{
 {code}
@@ -31,7 +31,7 @@ Page views are strongly typed: they use the DD4T.ContentModel.IPage class for a 
 {code}		
 }}}
 
-The first line (with the lower case 'm') tells the view that the model is of the type 'DD4T.ContentModel.IPage'. The second line uses the page object to write out its 'Title' property. Note the upper case 'M' when reading from the model.
+The first line (with the lower case 'm') tells the view that the model is of the type 'DD4T.!ContentModel.IPage'. The second line uses the page object to write out its 'Title' property. Note the upper case 'M' when reading from the model.
 
 
 = Layouts and Sections = 
