@@ -36,6 +36,9 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>dynamicdelivery.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC4|AnyCPU'">
+    <OutputPath>bin\MVC4\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -85,6 +88,7 @@
     <Compile Include="ISchema.cs" />
     <Compile Include="IViewable.cs" />
     <Compile Include="Logging\ILogWrapper.cs" />
+    <Compile Include="Properties\SpecificAssemblyInfo.cs" />
     <Compile Include="Providers\ITaxonomyProvider.cs" />
     <Compile Include="Providers\IBinaryProvider.cs" />
     <Compile Include="Providers\IComponentProvider.cs" />

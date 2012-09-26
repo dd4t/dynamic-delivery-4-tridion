@@ -64,6 +64,10 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC4|AnyCPU'">
+    <OutputPath>..\..\build\mvc4\</OutputPath>
+    <DefineConstants>MVC4</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
       <HintPath>..\..\dependencies\Third party DLLs\EntityFramework.dll</HintPath>
@@ -85,7 +89,8 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" Condition="'$(Configuration)' != 'MVC4'" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" Condition="'$(Configuration)' == 'MVC4'" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -124,6 +129,7 @@
     <Compile Include="Html\IComponentPresentationRenderer.cs" />
     <Compile Include="Html\SiteEditHelper.cs" />
     <Compile Include="Html\TridionHelper.cs" />
+    <Compile Include="Properties\SpecificAssemblyInfo.cs" />
     <Compile Include="Providers\TridionSiteMapNode.cs" />
     <Compile Include="Providers\TridionSiteMapProvider.cs" />
     <Compile Include="ServiceLocator.cs" />

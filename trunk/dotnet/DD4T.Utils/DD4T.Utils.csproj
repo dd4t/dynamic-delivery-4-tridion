@@ -30,6 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC4|AnyCPU'">
+    <OutputPath>bin\MVC4\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -47,6 +50,7 @@
     <Compile Include="ClassLoader.cs" />
     <Compile Include="ConfigurationHelper.cs" />
     <Compile Include="LoggerService.cs" />
+    <Compile Include="Properties\SpecificAssemblyInfo.cs" />
     <Compile Include="ProviderLoader.cs" />
     <Compile Include="TcmUri.cs" />
     <Compile Include="TridionHelper.cs" />

@@ -64,6 +64,9 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC4|AnyCPU'">
+    <OutputPath>bin\MVC4\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -90,6 +93,7 @@
     <Compile Include="FactoryBase.cs" />
     <Compile Include="LinkFactory.cs" />
     <Compile Include="PageFactory.cs" />
+    <Compile Include="Properties\SpecificAssemblyInfo.cs" />
     <Compile Include="Resolvers\DefaultPublicationResolver.cs" />
     <Compile Include="TaxonomyFactory.cs" />
   </ItemGroup>

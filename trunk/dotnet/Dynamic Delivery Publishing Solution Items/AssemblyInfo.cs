@@ -5,11 +5,9 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DD4T.ContentModel")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Open Source")]
-[assembly: AssemblyProduct("DD4T.ContentModel")]
 [assembly: AssemblyCopyright("Open Source Apache 2.0")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
