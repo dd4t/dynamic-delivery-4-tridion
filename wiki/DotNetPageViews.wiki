@@ -27,7 +27,7 @@ Page views are strongly typed: they use the DD4T.ContentModel.IPage class for a 
 {{{
 {code}
 @model DD4T.ContentModel.IPage
-\<h1\>@Model.Title\</h1\>
+<h1>@Model.Title</h1>
 {code}		
 }}}
 
@@ -37,8 +37,8 @@ The first line (with the lower case 'm') tells the view that the model is of the
 = Layouts and Sections = 
 In Razor you can define layouts. A layout is comparable to a master page in ASP.Net web forms programming. 
 
-A layout always contains a body. The body is simply the output of the 'regular view' (not the layout), which is inserted into the layout in place of the @RenderBody() call.
-Besides the body, the layout can contain one or more 'sections'. A section is a named block of 'view code' that is defined in the regular view using the @section{ } construction. The section is inserted on the position in the layout indicated by the @RenderSection('..') call. 
+A layout always contains a body. The body is simply the output of the 'regular view' (not the layout), which is inserted into the layout in place of the !@RenderBody() call.
+Besides the body, the layout can contain one or more 'sections'. A section is a named block of 'view code' that is defined in the regular view using the @section{ } construction. The section is inserted on the position in the layout indicated by the !@RenderSection('..') call. 
 
 Example of a regular (page) view:
 
@@ -56,16 +56,17 @@ This is thebody  of the view.
 
 The corresponding layout (_CommonLayout.cshtml) could look like this:
 
-
-\<html\>
-\<body\>
-\<div\>this is some HTML defined by the layout\</div\>
-\<header\>
+{{{
+<html>
+<body>
+<div>this is some HTML defined by the layout</div>
+<header>
 @RenderSection('Header')
-\</header\>
+</header>
 @RenderBody
-\</body\>
-\</html\>
+</body>
+</html>
+}}}
 		
 Note that layouts can be bound to the IPage class using the @model directive. This allows you to write out information from the page in the layout, just like you would from the page view.
 
