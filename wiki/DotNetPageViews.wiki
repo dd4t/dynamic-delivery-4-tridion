@@ -1,6 +1,10 @@
-#summary Using page views
+#sidebar Sidebar
+#summary Creating page views
 
-Each page template in Tridion has a metadata field 'view', which contains the name of a view. Note that the name does NOT include the extension .cshtml (or .aspx). If the name is set to 'standard', the system looks for the view 'standard.cshtml'.
+When you request a page through DD4T, it will be rendered automatically with a view which corresponds with the page template used on the page. For example: if you use a page template called 'Standard', the application will look for a view with the same name.
+Note that the name does NOT include the extension .cshtml (or .aspx). So if the name is set to 'Standard', the system looks for the view 'Standard.cshtml'.
+
+It's also possible to override this default behaviour by adding a metadata field 'view' to the page template. In this field (which should be a plain text field), you can enter a different name for your view. 
 
 = View locations =
 
@@ -10,14 +14,7 @@ MVC looks for a view in multiple locations:
 * /Views/Shared/ViewName.aspx
 * /Views/Shared/ViewName.cshtml
 
-We recommend to create a PageController and a ComponentController in each web application. Both classes must subclass TridionControllerBase from the DD4T framework. That way, the views can be nicely organized as follows:
-
-* Views that are associated with pages are stored in /Views/Page
-* Views that are associated with component presentations are stored in /Views/Component
-* Views that are used by other views are stored in /Views/Shared
-
-It is always possible to write your own ViewEngine to organize the views differently.
-
+If you are working with the 'quick start' solution as created by the DD4T Visual Studio template, the pages will be served by the PageController. In that case, the application will look for the views in the folder /Views/Page.
 
 = Razor =
 
@@ -25,14 +22,14 @@ We recommend to use Razor views (.cshtml) rather than aspx. Razor is simple to u
 
 = Model = 
 
-Page views are strongly typed: they use the DD4T.ContentModel.Page class for a model. A simple example demonstrates this:
+Page views are strongly typed: they use the DD4T.ContentModel.IPage class for a model. A simple example demonstrates this:
 
 {code}
-@model DD4T.ContentModel.Page
+@model DD4T.ContentModel.IPage
 &lt;h1&gt;@Model.Title&lt;/h1&gt;
 {code}		
 
-The first line (with the lower case 'm') tells the view that the model is of the type 'DD4T.ContentModel.Page'. The second line uses the page object to write out its 'Title' property. Note the upper case 'M' when reading from the model.
+The first line (with the lower case 'm') tells the view that the model is of the type 'DD4T.ContentModel.IPage'. The second line uses the page object to write out its 'Title' property. Note the upper case 'M' when reading from the model.
 
 
 = Layouts and Sections = 
@@ -70,30 +67,4 @@ The corresponding layout (_CommonLayout.cshtml) could look like this:
 Note that layouts can be bound to the IPage class using the @model directive. This allows you to write out information from the page in the layout, just like you would from the page view.
 
 
-= Component presentations = 
-
-Somewhere on the page you will want to show the component presentations. This can be very straightforward, if you are showing all component presentations in the same location on the page. But you may want to have more subtle logic, e.g. showing some component presentations on the left hand side and some on the right hand side.
-
-The DD4T framework offers a number of helper functions to help you achieve this.
-
-RenderComponentPresentations
-Example: @Html.RenderComponentPresentations()
-Shows all the embedded component presentations on the page.
-
-RenderComponentPresentationsByView(string viewName)
-Example: @Html.RenderComponentPresentationsByView("Caroussel")
-Shows component presentations whose component template is associated with a view that starts with 'Caroussel'. Note: it is recommended to group component templates based on the first part of their view name, so similar component presentations can easily be shown in one location on the page.
-
-RenderComponentPresentationsBySchema(string schemaName)
-Example: @Html.RenderComponentPresentationsBySchema("Header")
-Shows component presentations whose component is based on a schema with a title starting with 'Header'. 
-
-Reversing the logic
-You can start the schema name with an exclamation mark, to show all CPs whose schema does NOT have a title starting with 'Header'. 
-
-
-There are more overloads, but they are self-explanatory.
-
-
-				    
                     			    
