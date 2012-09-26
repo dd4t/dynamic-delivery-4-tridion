@@ -28,7 +28,7 @@ This is how you write out the field 'heading'.  Or rather, the first value of th
 
 In the code example above, the word 'heading' is contained within quotes. The names of the fields that you are writing out are not modeled in DD4T. Intellisense does not help you here, you have to find out the names  of the fields in your component yourself. There are three ways to go about:
 
-  # Open the component in Tridion and click on the Source tab. The field name is the name of the XML element that contains the field value (e.g. \<heading>Some text\</heading>). However, you cannot use this approach for metadata fields, only for content fields.
+  # Open the component in Tridion and click on the Source tab. The field name is the name of the XML element that contains the field value (e.g. `<heading>`Some text`</heading>`). However, you cannot use this approach for metadata fields, only for content fields.
   # Open the schema in Tridion and look for the XML name of the field.
 
 = Field types =
