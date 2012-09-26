@@ -1,3 +1,4 @@
+#sidebar Sidebar
 #summary Explains how DD4T is used in a web application
 
 DD4T can be used to create a Tridion-driven MVC application. 
