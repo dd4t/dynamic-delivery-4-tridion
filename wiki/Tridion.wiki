@@ -1,0 +1,2 @@
+#sidebar Sidebar
+SDL Tridion is a web content management system by SDL. For more information, see http://www.sdl.com/products/tridion.
