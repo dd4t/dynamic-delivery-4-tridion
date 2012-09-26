@@ -11,6 +11,7 @@
    * [DotNetImages Images]
    * [DotNetSitemap Sitemap]
    * [DotNetResources Resources]
+   * [MVC4]
  * Getting started with DD4T and Java
    * [JavaViews Views]
    * [JavaImages Images]
