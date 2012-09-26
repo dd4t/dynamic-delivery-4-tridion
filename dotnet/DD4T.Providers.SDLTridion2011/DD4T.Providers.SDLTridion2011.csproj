@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC4|AnyCPU'">
+    <OutputPath>bin\MVC4\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="netrtsn">
       <HintPath>..\..\dependencies\Tridion 2011 DLLs\netrtsn.dll</HintPath>
@@ -61,6 +64,7 @@
     <Compile Include="BaseProvider.cs" />
     <Compile Include="ExtendedQueryParameters.cs" />
     <Compile Include="ITridionQueryWrapper.cs" />
+    <Compile Include="Properties\SpecificAssemblyInfo.cs" />
     <Compile Include="TridionBinaryProvider.cs" />
     <Compile Include="TridionComponentProvider.cs" />
     <Compile Include="TridionLinkProvider.cs" />
