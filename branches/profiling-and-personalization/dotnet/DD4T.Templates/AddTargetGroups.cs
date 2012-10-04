@@ -10,7 +10,7 @@ using Tcm = Tridion.ContentManager.AudienceManagement;
 namespace DD4T.Templates
 {
     ///<summary>
-    /// AddTargetGroups is responsible for adding the Target Group information to the DD4T Xml
+    /// AddTargetGroups is responsible for adding the Target Group information to the DD4T Page Xml
     /// Author: Robert Stevenson-Leggett
     /// Date: 2012-09-30
     ///</summary>
@@ -20,10 +20,9 @@ namespace DD4T.Templates
         protected override void TransformPage(Page page)
         {
             Tridion.ContentManager.CommunicationManagement.Page tcmPage = GetTcmPage();
-            var tridionComponentPresentations = tcmPage.ComponentPresentations;
 
             int count = 0;
-            foreach (var componentPresentation in tridionComponentPresentations)
+            foreach (var componentPresentation in tcmPage.ComponentPresentations)
             {
                 if(componentPresentation.Conditions != null && componentPresentation.Conditions.Count > 0)
                 {
