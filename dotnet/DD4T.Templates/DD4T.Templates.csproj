@@ -73,6 +73,7 @@
     <Compile Include="..\Dynamic Delivery Publishing Solution Items\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AddTargetGroups.cs" />
     <Compile Include="ConvertToLowerCase.cs" />
     <Compile Include="ConvertXmlToJava.cs" />
     <Compile Include="DynamicComponent.cs" />

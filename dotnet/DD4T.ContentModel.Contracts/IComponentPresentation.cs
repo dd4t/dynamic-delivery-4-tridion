@@ -1,4 +1,6 @@
-﻿namespace DD4T.ContentModel
+﻿using System.Collections.Generic;
+
+namespace DD4T.ContentModel
 {
     public interface IComponentPresentation 
     {
@@ -8,5 +10,6 @@
         bool IsDynamic { get; set; }
         string RenderedContent { get; }
         int OrderOnPage { get; set; }
+        IList<ICondition> Conditions { get; } 
     }
 }
