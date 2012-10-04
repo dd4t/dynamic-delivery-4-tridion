@@ -1,0 +1,31 @@
+﻿@using DD4T.Mvc.Html;
+@using Sample.Web.Mvc.HtmlHelpers;
+@model DD4T.ContentModel.Page
+
+@section Head 
+{
+    <!-- optional section to place stuff in html head --> 
+}
+
+<h1>Top menu</h1>
+    @*Html.SiteMapMenu(SiteMap.RootNode, Model, Sample.Web.Model.Contracts.MenuType.TopMenu)*@
+
+<h1>Left menu</h1>
+    @*Html.SiteMapMenu(SiteMap.RootNode, Model, Sample.Web.Model.Contracts.MenuType.LeftMenu)*@
+
+<h2>Standard</h2>
+
+Page title: @Model.Title<br />
+
+Page id: @Model.Id<br />
+
+View name: @Model.PageTemplate.MetadataFields["view"].Value
+
+<div class="article">
+    @Html.RenderComponentPresentations()
+</div>
+
+@if (@ViewBag.ShowSearchResults != null)
+{
+    @Html.Partial("_SearchResultsPartial")
+}
