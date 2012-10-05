@@ -11,9 +11,45 @@ using Tcm = Tridion.ContentManager.AudienceManagement;
 
 namespace DD4T.Templates.Base.Builder
 {
+    ///<summary>
+    /// TargetGroupBuilder is responsible for mapping a Tridion Target Group and associated conditions to a DD4T Content Model Target Group and conditions
+    /// 2012-10-05
+    /// Author: Robert Stevenson-Leggett
+    ///</summary>
     public class TargetGroupBuilder
     {
-        public static List<Condition> MapConditions(IList<Tridion.ContentManager.AudienceManagement.Condition> conditions)
+        /// <summary>
+        /// Build a DD4T Target group from a AM Target Group
+        /// </summary>
+        public static Dynamic.TargetGroup BuildTargetGroup(Tridion.ContentManager.AudienceManagement.TargetGroup targetGroup)
+        {
+            var tg = new Dynamic.TargetGroup
+            {
+                Conditions = MapConditions(targetGroup.Conditions),
+                Description = targetGroup.Description,
+                Id = targetGroup.Id,
+                OwningPublication = PublicationBuilder.BuildPublication(targetGroup.OwningRepository),
+                Publication = PublicationBuilder.BuildPublication(targetGroup.ContextRepository),
+                PublicationId = targetGroup.ContextRepository.Id,
+                Title = targetGroup.Title
+            };
+            return tg;
+        }
+
+        /// <summary>
+        /// Map the conditions from a Component Presentaton to DD4T conditions
+        /// </summary>
+        public static List<Dynamic.Condition> MapTargetGroupConditions(IList<Tcm.TargetGroupCondition> componentPresentationConditions)
+        {
+            var mappedConditions = new List<Dynamic.Condition>();
+            foreach (var componentPresentationCondition in componentPresentationConditions)
+            {
+                mappedConditions.AddRange(MapConditions(componentPresentationCondition.TargetGroup.Conditions));
+            }
+            return mappedConditions;
+        }
+
+        private static List<Condition> MapConditions(IList<Tridion.ContentManager.AudienceManagement.Condition> conditions)
         {
             var mappedConditions = new List<Dynamic.Condition>();
             foreach (var condition in conditions)
@@ -39,16 +75,6 @@ namespace DD4T.Templates.Base.Builder
             return mappedConditions;
         }
 
-        public static List<Dynamic.Condition> MapTargetGroupConditions(IList<Tcm.TargetGroupCondition> componentPresentationConditions)
-        {
-            var mappedConditions = new List<Dynamic.Condition>();
-            foreach(var componentPresentationCondition in componentPresentationConditions)
-            {
-                mappedConditions.AddRange(MapConditions(componentPresentationCondition.TargetGroup.Conditions));
-            }
-            return mappedConditions;
-        }
-
         private static Dynamic.CustomerCharacteristicCondition MapCustomerCharacteristicCondition(CustomerCharacteristicCondition condition)
         {
             var newCondition = new Dynamic.CustomerCharacteristicCondition()
@@ -65,20 +91,11 @@ namespace DD4T.Templates.Base.Builder
         {
             var newCondition = new Dynamic.TargetGroupCondition()
                                    {
-                                       TargetGroup = BuildTargetGroup(targetGroupCondition.TargetGroup)
-
+                                       TargetGroup = BuildTargetGroup(targetGroupCondition.TargetGroup),
+                                       Negate = targetGroupCondition.Negate
                                    };
             return newCondition;
         }
-
-        private static Dynamic.TargetGroup BuildTargetGroup(Tridion.ContentManager.AudienceManagement.TargetGroup targetGroup)
-        {
-            var tg = new Dynamic.TargetGroup
-                         {Conditions = MapConditions(targetGroup.Conditions), Description = targetGroup.Description};
-            return tg;
-        }
-
-
 
         private static KeywordCondition MapTrackingKeyCondition(TrackingKeyCondition trackingKeyCondition)
         {
