@@ -111,12 +111,13 @@ namespace DD4T.Web.Binaries
 
                     if(!Directory.Exists(dir))
                         Directory.CreateDirectory(dir);
-
-                    FileStream file = File.Create(realPath);
-                    StreamWriter sw = new StreamWriter(file);
-                    sw.Write("");
-                    sw.Close();
-                    file.Close();
+                    using (FileStream file = File.Create(realPath))
+                    {
+                        StreamWriter sw = new StreamWriter(file);
+                        sw.Write("");
+                        sw.Close();
+                        file.Close();
+                    }
                 }
                 catch (Exception exception)
                 {
