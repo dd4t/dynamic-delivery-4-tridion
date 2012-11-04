@@ -47,15 +47,8 @@ namespace DD4T.Web.Binaries
             return string.Format(CacheKeyFormatBinary, url);
         }
         #endregion
+
         #region IBinaryFileManager
-        //public TcmUri GetBinaryUri(HttpRequest request)
-        //{
-        //    var binaryMetas = BinaryMetaFactory.GetMetaByUrl(request.Url.AbsolutePath.Replace("/BinaryData", ""));
-        //    if (binaryMetas.Count == 0)
-        //        return null;
-        //    var binaryMeta = binaryMetas[0] as BinaryMeta;
-        //    return new TcmUri(binaryMeta.PublicationId, binaryMeta.Id, 16, 0);
-        //}
         /// <summary>
         /// Main worker method reads binary from Broker and stores it in file-system
         /// </summary>
@@ -140,8 +133,7 @@ namespace DD4T.Web.Binaries
             }
         }
 
-        object lock2 = new object();
-
+       
         /// <summary>
         /// Perform actual write of binary content to file
         /// </summary>
@@ -224,7 +216,15 @@ namespace DD4T.Web.Binaries
                 targetW = (int)(original.Width * ((float)targetH / (float)original.Height));
             }
 
-            Image imgPhoto = Image.FromStream(new MemoryStream(imageFile));
+            Image imgPhoto = null;
+            using (MemoryStream memoryStream = new MemoryStream(imageFile))
+            {
+                imgPhoto = Image.FromStream(memoryStream);
+            }
+            if (imgPhoto == null)
+            {
+                throw new Exception("cannot read image, binary data may not represent an image");
+            }
             // Create a new blank canvas.  The resized image will be drawn on this canvas.
             Bitmap bmPhoto = new Bitmap(targetW, targetH, PixelFormat.Format24bppRgb);
             Bitmap bmOriginal = new Bitmap(original);
@@ -236,13 +236,15 @@ namespace DD4T.Web.Binaries
             grPhoto.PixelOffsetMode = PixelOffsetMode.HighQuality;
             grPhoto.DrawImage(imgPhoto, new Rectangle(0, 0, targetW, targetH), 0, 0, original.Width, original.Height, GraphicsUnit.Pixel);
             // Save out to memory and then to a file.  We dispose of all objects to make sure the files don't stay locked.
-            MemoryStream mm = new MemoryStream();
-            bmPhoto.Save(mm, imageFormat);
-            original.Dispose();
-            imgPhoto.Dispose();
-            bmPhoto.Dispose();
-            grPhoto.Dispose();
-            return mm.GetBuffer();
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                bmPhoto.Save(memoryStream, imageFormat);
+                original.Dispose();
+                imgPhoto.Dispose();
+                bmPhoto.Dispose();
+                grPhoto.Dispose();
+                return memoryStream.GetBuffer();
+            }
         }
         private ImageFormat GetImageFormat(string path)
         {
