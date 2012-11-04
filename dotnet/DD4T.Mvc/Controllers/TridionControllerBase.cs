@@ -41,7 +41,18 @@ namespace DD4T.Mvc.Controllers
 
         protected virtual ViewResult GetView(IPage page)
         {
-            string viewName = page.PageTemplate.MetadataFields["view"].Value; //TODO: Errod handling if no meta-data schema is selected on the page template
+            string viewName;
+            if (page.PageTemplate.MetadataFields == null || !page.PageTemplate.MetadataFields.ContainsKey("view"))
+                viewName = page.PageTemplate.Title.Replace(" ", "");
+            else
+                viewName = page.PageTemplate.MetadataFields["view"].Value;
+
+            if (string.IsNullOrEmpty(viewName))
+            {
+                throw new ConfigurationException("no view configured for page template " + page.PageTemplate.Id);
+            }
+
+            
             return base.View(viewName, page);
         }
 
@@ -53,13 +64,15 @@ namespace DD4T.Mvc.Controllers
         protected virtual ViewResult GetView(IComponentPresentation componentPresentation)
         {
             string viewName = null;
+            if (componentPresentation.ComponentTemplate.MetadataFields == null || !componentPresentation.ComponentTemplate.MetadataFields.ContainsKey("view"))
+                viewName = componentPresentation.ComponentTemplate.Title.Replace(" ", "");
+            else
+                viewName = componentPresentation.ComponentTemplate.MetadataFields["view"].Value; 
 
-            // TODO: define field names in Web.config
-            if (!componentPresentation.ComponentTemplate.MetadataFields.ContainsKey("view"))
+            if (string.IsNullOrEmpty(viewName))
             {
                 throw new ConfigurationException("no view configured for component template " + componentPresentation.ComponentTemplate.Id);
             }
-            viewName = componentPresentation.ComponentTemplate.MetadataFields["view"].Values[0];
             return View(viewName, componentPresentation);
 
         }

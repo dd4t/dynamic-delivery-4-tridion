@@ -24,7 +24,7 @@ namespace DD4T.Factories
             get
             {
                 if (_publicationId == null)
-                 _publicationId = PublicationResolver.ResolvePublicationId();
+                    return PublicationResolver.ResolvePublicationId();
                 return _publicationId.Value;
             }
             set
@@ -33,8 +33,8 @@ namespace DD4T.Factories
             }
         }
 
-        private static IPublicationResolver _publicationResolver = null;
-        public static IPublicationResolver PublicationResolver
+        private IPublicationResolver _publicationResolver = null;
+        public IPublicationResolver PublicationResolver
         {
             get
             {

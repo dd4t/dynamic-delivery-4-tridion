@@ -37,6 +37,7 @@ namespace DD4T.Utils
         public const string LinkToAnchor = "DD4T.LinkToAnchor";
         public const string UseUriAsAnchor = "DD4T.UseUriAsAnchor";
         public const string PublicationId = "DD4T.PublicationId";
+        public const string BinaryUrlPattern = "DD4T.BinaryUrlPattern";
     }
 
     public static class ConfigurationHelper
@@ -129,6 +130,14 @@ namespace DD4T.Utils
             get
             {
                 return SafeGetConfigSettingAsString(ConfigurationKeys.BinaryFileExtensions, ConfigurationKeys.BinaryFileExtensionsAlt1);
+            }
+        }
+
+        public static string BinaryUrlPattern
+        {
+            get
+            {
+                return SafeGetConfigSettingAsString(ConfigurationKeys.BinaryUrlPattern);
             }
         }
 
