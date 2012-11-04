@@ -37,7 +37,6 @@ namespace DD4T.ContentModel
 
     public class Page : RepositoryLocalItem, IPage
     {
-        public bool Test { get; set; } // TODO: remove (this is for testing only)
         public DateTime RevisionDate { get; set; }
         public string Filename { get; set; }
         public DateTime LastPublishedDate { get; set; }
