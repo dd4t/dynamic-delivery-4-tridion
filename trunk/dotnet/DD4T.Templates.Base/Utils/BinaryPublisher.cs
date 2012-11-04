@@ -94,7 +94,20 @@ namespace DD4T.Templates.Base.Utils
             {
                 log.Debug(string.Format("Image {0} ({1}) already present in package, not adding again", itemName, tcmuri));
             }
-            return mmItem.Properties[Item.ItemPropertyPublishedPath];
+            return GetReferencePath(mmItem, uri);
+        }
+
+        /// <summary>
+        /// Return the reference path for the binary which has just been published. This path is stored in the XML which is published to the broker, and may be used in 
+        /// the presentation engine to retrieve the binary. In this implementation, the reference path is the same as the publish path, but the method can be overridden 
+        /// to implement other logic. It could (for example) return the path to the binary through a CDN.
+        /// </summary>
+        /// <param name="item">The templating Item containing the multimedia component (including the publish path)</param>
+        /// <param name="uri">The uri of the multimedia component</param>
+        /// <returns>The reference path that will be stored in the XML</returns>
+        protected virtual string GetReferencePath(Item item, string uri)
+        {
+            return item.Properties[Item.ItemPropertyPublishedPath];
         }
 
         protected virtual void PublishItem(Item item, TcmUri itemUri)
