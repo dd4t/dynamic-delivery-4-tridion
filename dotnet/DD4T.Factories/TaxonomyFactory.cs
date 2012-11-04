@@ -11,6 +11,7 @@ namespace DD4T.Factories
     /// <summary>
     /// Provides access to taxonomies. Note: this class is not tested in any implementation yet! It also is completely uncached. More testing is needed!
     /// </summary>
+    [Obsolete("Please use the Tridion.ContentDelivery.Taxonomies.TaxonomyFactory instead")]
     public class TaxonomyFactory : FactoryBase, ITaxonomyFactory
     {
         private ITaxonomyProvider _taxonomyProvider = null;
