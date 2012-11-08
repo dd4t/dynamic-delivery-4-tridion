@@ -82,6 +82,7 @@
     <Compile Include="PreviewPage.cs" />
     <Compile Include="PublishBinariesComponent.cs" />
     <Compile Include="PublishBinariesPage.cs" />
+    <Compile Include="Resources.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DD4T.ContentModel.Contracts\DD4T.ContentModel.Contracts.csproj">
