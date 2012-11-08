@@ -103,6 +103,7 @@
     <Compile Include="Builder\PageTemplateBuilder.cs" />
     <Compile Include="Builder\PublicationBuilder.cs" />
     <Compile Include="Builder\SchemaBuilder.cs" />
+    <Compile Include="DefaultTemplate.cs" />
     <Compile Include="StopChainException.cs" />
     <Compile Include="Utils\LowerCaseConverter.cs" />
     <Compile Include="Utils\GeneralUtils.cs" />
