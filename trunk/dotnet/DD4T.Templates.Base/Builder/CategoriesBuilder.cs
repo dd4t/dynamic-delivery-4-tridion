@@ -115,6 +115,60 @@ namespace DD4T.Templates.Base.Builder
                         }
                     }
                 }
+
+                if (f is EmbeddedSchemaField)
+                {
+                    try
+                    {
+                        IList<ItemFields> embeddedFieldsCollection = ((EmbeddedSchemaField)f).Values;
+                        foreach (ItemFields embeddedFields in embeddedFieldsCollection)
+                        {
+                            foreach (ItemField embeddedField in embeddedFields)
+                            {
+                                if (embeddedField is KeywordField)
+                                {
+                                    GeneralUtils.TimedLog("FOUND EMBEDDED KEYWORD FIELD");
+                                    string categoryId = ((KeywordFieldDefinition)embeddedField.Definition).Category.Id;
+
+                                    Dynamic.Category dc;
+                                    if (!categories.ContainsKey(categoryId))
+                                    {
+                                        // create category since it doesn't exist yet
+                                        dc = new Dynamic.Category();
+                                        dc.Id = ((KeywordFieldDefinition)embeddedField.Definition).Category.Id;
+                                        dc.Title = ((KeywordFieldDefinition)embeddedField.Definition).Category.Title;
+                                        dc.Keywords = new List<Dynamic.Keyword>();
+                                        categories.Add(dc.Id, dc);
+                                    }
+                                    else
+                                    {
+                                        dc = categories[categoryId];
+                                    }
+                                    foreach (Keyword keyword in ((KeywordField)embeddedField).Values)
+                                    {
+                                        bool alreadyThere = false;
+                                        foreach (Dynamic.Keyword dk in dc.Keywords)
+                                        {
+                                            if (dk.Id.Equals(keyword.Id))
+                                            {
+                                                alreadyThere = true;
+                                                break;
+                                            }
+                                        }
+                                        if (!alreadyThere)
+                                        {
+                                            dc.Keywords.Add(manager.BuildKeyword(keyword));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        GeneralUtils.TimedLog("ERROR: " + ex.Message);
+                    }
+                }
             }
 
         }
