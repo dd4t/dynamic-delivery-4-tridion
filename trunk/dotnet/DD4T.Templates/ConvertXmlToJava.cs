@@ -50,6 +50,7 @@ namespace DD4T.Templates.XML
          // In that case, the first letter of each element will be converted into lower case twice, which doesn't do any harm.
          string outputValue = LowerCaseConverter.Convert(inputValue);
          outputValue = XmlToJavaConverter.Convert(outputValue);
+        // outputValue = XmlMinimizer.Convert(outputValue);
 
          // replace the Output item in the package
          package.Remove(outputItem);
