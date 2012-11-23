@@ -50,37 +50,33 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tridion.Common">
+    <Reference Include="Tridion.Common, Version=6.1.0.25, Culture=neutral, PublicKeyToken=349a39f202fa9b53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dependencies\Tridion Active\Tridion.Common.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="Tridion.ContentManager">
+    <Reference Include="Tridion.ContentManager, Version=6.1.0.996, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dependencies\Tridion Active\Tridion.ContentManager.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="Tridion.ContentManager.Common">
+    <Reference Include="Tridion.ContentManager.Common, Version=6.1.0.996, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dependencies\Tridion Active\Tridion.ContentManager.Common.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="Tridion.ContentManager.Publishing">
+    <Reference Include="Tridion.ContentManager.Publishing, Version=6.1.0.996, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dependencies\Tridion Active\Tridion.ContentManager.Publishing.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="Tridion.ContentManager.TemplateTypes">
+    <Reference Include="Tridion.ContentManager.TemplateTypes, Version=6.1.0.996, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dependencies\Tridion Active\Tridion.ContentManager.TemplateTypes.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="Tridion.ContentManager.Templating">
+    <Reference Include="Tridion.ContentManager.Templating, Version=6.1.0.996, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dependencies\Tridion Active\Tridion.ContentManager.Templating.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="Tridion.ContentManager.Templating.SiteEdit">
-      <HintPath>..\..\dependencies\Tridion Active\Tridion.ContentManager.Templating.SiteEdit.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Tridion.Logging">
+    <Reference Include="Tridion.Logging, Version=6.1.0.25, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dependencies\Tridion Active\Tridion.Logging.dll</HintPath>
-      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +107,7 @@
     <Compile Include="Utils\BinaryPublisher.cs" />
     <Compile Include="Utils\TridionConfigurationManager.cs" />
     <Compile Include="Utils\TridionUtils.cs" />
+    <Compile Include="Utils\XmlMinimizer.cs" />
     <Compile Include="Utils\XmlToJavaConverter.cs" />
     <Compile Include="Xml\TridionXml.cs" />
   </ItemGroup>
@@ -140,6 +137,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Minimize.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
