@@ -22,7 +22,7 @@ namespace DD4T.Factories
     {
 
 		private static IDictionary<string, DateTime> lastPublishedDates = new Dictionary<string, DateTime>();
-        private static Regex rePageContentByUri = new Regex("PageContent_([0-9]+)_(.*)");
+        private static Regex rePageContentByUrl = new Regex("PageContent_([0-9\\-]+)_(.*)");
         private ICacheAgent _cacheAgent = null;
 
         public const string CacheRegion = "Page";
@@ -314,10 +314,12 @@ namespace DD4T.Factories
                 return dt;
             }
 
-            Match m = rePageContentByUri.Match(key);
+            Match m = rePageContentByUrl.Match(key);
             if (m.Success)
             {
                 int publicationId = Convert.ToInt32(m.Groups[1].Value);
+                if (publicationId == Int32.MinValue)
+                    publicationId = 0;
                 string url = m.Groups[2].Value;
                 DateTime dt = GetLastPublishedDateByUrl(url);
                 LoggerService.Debug("<<GetLastPublishedDateCallBack {0} -- regex", LoggingCategory.Performance, key);
