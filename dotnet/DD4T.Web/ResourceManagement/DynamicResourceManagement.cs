@@ -10,71 +10,91 @@ using DD4T.Factories;
 using DD4T.ContentModel.Factories;
 using DD4T.ContentModel.Contracts.Caching;
 using DD4T.Utils;
+using DD4T.Factories.Caching;
 
-namespace DD4T.Web.ResourceManagement.DynamicResourceProviderFactory
+namespace DD4T.Web.ResourceManagement
 {
     public class DynamicResourceProviderFactory : ResourceProviderFactory
     {
-        public override IResourceProvider CreateGlobalResourceProvider (string classKey)
+        protected virtual IResourceProvider GetResourceProvider(string resourceName)
         {
-            LoggerService.Debug(">>CreateGlobalResourceProvider({0})", classKey);
-            DynamicResourceProvider resourceProvider = new DynamicResourceProvider(classKey);
-            LoggerService.Debug("<<CreateGlobalResourceProvider({0})", classKey);
-            return resourceProvider;
+            return new DynamicResourceProvider(resourceName);
+
+        }
+
+        public override IResourceProvider CreateGlobalResourceProvider(string resourceName)
+        {
+            LoggerService.Debug(">>CreateGlobalResourceProvider({0})", resourceName);
+            return GetResourceProvider(resourceName);
         }
 
         public override IResourceProvider CreateLocalResourceProvider (string virtualPath)
         {
-            string classKey = virtualPath;
+            LoggerService.Debug(">>CreateLocalResourceProvider({0})", virtualPath);
+            string resourceName = virtualPath;
             if (!string.IsNullOrEmpty(virtualPath))
             {
                 virtualPath = virtualPath.Remove(0, 1);
-                classKey = virtualPath.Remove(0, virtualPath.IndexOf('/') + 1);
+                resourceName = virtualPath.Remove(0, virtualPath.IndexOf('/') + 1);
             }
-            return new DynamicResourceProvider(classKey);
+            return GetResourceProvider(resourceName);
         }
     }
     public class DynamicResourceProvider : IResourceProvider
     {
-        #region configuration settings
-        public readonly static string ResourcePath = ConfigurationManager.AppSettings["ResourcesPath"];
-        #endregion
+        public DynamicResourceProvider(string resourceName)
+        {
+            _resourceName = resourceName;
+        }
+        public readonly static string ResourcePath = ConfigurationManager.AppSettings["DD4T.ResourcePath"];
 
-        public ICacheAgent CacheAgent { get; set; }
+        private IPageFactory _pageFactory = null;
+        protected virtual IPageFactory PageFactory
+        {
+            get
+            {
+                if (_pageFactory == null)
+                    _pageFactory = new PageFactory();
+                return _pageFactory;
+            }
+        }
+        private ICacheAgent _cacheAgent = null;
+        protected virtual ICacheAgent CacheAgent
+        {
+            get
+            {
+                if (_cacheAgent == null)
+                    _cacheAgent = new DefaultCacheAgent();
+                return _cacheAgent;
+            }
+        }
+        protected virtual string GetPathToResource(string resourceName)
+        {
+            return string.Format(ResourcePath, resourceName);
+        }
 
-        #region private
-        private Dictionary<string, XmlDocument> _resourceDocuments = new Dictionary<string, XmlDocument>();
-        private string _classKey;
-        private IPageFactory PageFactory { get; set; }
- 
+        private string _resourceName; 
         private object lock1 = new object();
         private XmlDocument ResourceDocument
         {
             get
             {
-                string cacheKey = string.Format("Resource_{0}", this._classKey);
+                string resourcePath = GetPathToResource(_resourceName);
+                string cacheKey = string.Format("Resource_{0}", resourcePath);
                 XmlDocument xmlDoc = CacheAgent.Load(cacheKey) as XmlDocument;
                 if (xmlDoc != null)
                     return xmlDoc;
 
-                string currentResourcePath = string.Format(ResourcePath, _classKey);
-                xmlDoc = new XmlDocument();
-                xmlDoc.LoadXml(PageFactory.FindPageContent(currentResourcePath));
-                CacheAgent.Store(cacheKey, "System", xmlDoc);
-                return xmlDoc;
+                lock (lock1)
+                {
+                    xmlDoc = new XmlDocument();
+                    xmlDoc.LoadXml(PageFactory.FindPageContent(resourcePath));
+                    CacheAgent.Store(cacheKey, "System", xmlDoc);
+                    return xmlDoc;
+                }
             }
         }
 
-        private object lock2 = new object();
-
-        #endregion
-
-        #region constructor
-        public DynamicResourceProvider(string classKey) 
-        {
-            _classKey = classKey;
-        }
-        #endregion
 
 
         public object GetObject(string resourceKey, System.Globalization.CultureInfo culture)
@@ -83,7 +103,7 @@ namespace DD4T.Web.ResourceManagement.DynamicResourceProviderFactory
 
             XmlElement v = ResourceDocument.SelectSingleNode(string.Format("/root/data[@name='{0}']/value", resourceKey)) as XmlElement;
             if (v == null)
-                throw new ArgumentException(string.Format("Resource {0} does not exist in bundle {1}", resourceKey, _classKey));
+                throw new ArgumentException(string.Format("Resource {0} does not exist in bundle {1}", resourceKey, _resourceName));
             LoggerService.Debug("<<DynamicResourceProvider({0})", resourceKey);
             return v.InnerText;
         }
