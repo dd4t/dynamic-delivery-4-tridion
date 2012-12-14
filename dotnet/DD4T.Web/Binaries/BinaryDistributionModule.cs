@@ -39,9 +39,7 @@ namespace DD4T.Web.Binaries
             HttpRequest request = context.Request;
             HttpResponse response = context.Response;
             string urlPath = request.Url.AbsolutePath;
-
-            Regex binaryRegex = new Regex(ConfigurationHelper.BinaryUrlPattern);
-            if (!binaryRegex.IsMatch(urlPath))
+            if (! IsBinaryUrl.IsMatch(urlPath))
             {
                 LoggerService.Debug("url {0} does not match binary url pattern, ignoring it", urlPath);
                 return;
@@ -90,9 +88,8 @@ namespace DD4T.Web.Binaries
 
             string urlPath = request.Url.AbsolutePath;
             LoggerService.Information(">>DistributionModule_OnBeginRequest ({0})", urlPath);
-
-            Regex binaryRegex = new Regex(ConfigurationHelper.BinaryUrlPattern);
-            if (!binaryRegex.IsMatch(urlPath))
+            
+            if (!IsBinaryUrl.IsMatch(urlPath))
             {
                 LoggerService.Debug("url {0} does not match binary url pattern, ignoring it", urlPath);
                 LoggerService.Information("<<DistributionModule_OnBeginRequest ({0})", urlPath);
@@ -151,6 +148,17 @@ namespace DD4T.Web.Binaries
                 _binaryFileManager = value;
             }
         }
+        private static Regex _isBinaryUrl = null;
+        private static Regex IsBinaryUrl
+        {
+            get
+            {
+                if (_isBinaryUrl == null)
+                    _isBinaryUrl = new Regex(ConfigurationHelper.BinaryUrlPattern);
+                return _isBinaryUrl;
+            }
+        }
+
         #endregion
     }
 }
