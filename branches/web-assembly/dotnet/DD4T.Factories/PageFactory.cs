@@ -75,7 +75,11 @@ namespace DD4T.Factories
             get
             {
                 if (_pageSerializer == null)
-                 _pageSerializer = new XmlSerializer(typeof(Page));
+                {
+                    LoggerService.Debug("about to create page serializer", LoggingCategory.Performance);
+                    _pageSerializer = new XmlSerializer(typeof(Page));
+                    LoggerService.Debug("finished creating page serializer", LoggingCategory.Performance);
+                }
                 return _pageSerializer;
             }
         }
@@ -294,7 +298,10 @@ namespace DD4T.Factories
 
         public DateTime GetLastPublishedDateByUrl(string url)
         {
-            return PageProvider.GetLastPublishedDateByUrl(url);
+            LoggerService.Debug("about to retrieve last published date from provider for url {0}", LoggingCategory.Performance, url);
+            DateTime dt = PageProvider.GetLastPublishedDateByUrl(url);
+            LoggerService.Debug("finished retrieving last published date from provider for url {0}", LoggingCategory.Performance, url);
+            return dt;
         }
 
         public DateTime GetLastPublishedDateByUri(string uri)
@@ -304,6 +311,7 @@ namespace DD4T.Factories
 
         public override DateTime GetLastPublishedDateCallBack(string key, object cachedItem)
         {
+            
             LoggerService.Debug(">>GetLastPublishedDateCallBack {0}", LoggingCategory.Performance, key);
             if (cachedItem == null)
                 return DateTime.Now; // this will force the item to be removed from the cache
