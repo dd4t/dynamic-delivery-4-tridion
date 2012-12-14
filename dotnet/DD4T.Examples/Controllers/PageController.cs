@@ -17,11 +17,29 @@ using DD4T.Mvc;
 using DD4T.Mvc.Html;
 using DD4T.Examples.Unity;
 using DD4T.Utils;
+using DD4T.ContentModel.Factories;
+using Trivident.DD4T.Examples.PublicationResolvers;
 
 namespace DD4T.Examples.Controllers
 {
     public class PageController : TridionControllerBase
     {
+
+
+
+        private IPageFactory _pageFactory = null;
+        public override ContentModel.Factories.IPageFactory PageFactory
+        {
+            get
+            {
+                if (_pageFactory == null)
+                {
+                    _pageFactory = base.PageFactory;
+                    _pageFactory.PublicationResolver = new HostNamePublicationResolver();
+                }
+                return _pageFactory;
+            }
+        }
 
         #region private members
         //private Regex reDefaultPage = new Regex(@".*/[^/\.]*$");
