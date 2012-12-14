@@ -3,6 +3,9 @@ using System.Web.Mvc;
 using DD4T.ContentModel;
 using DD4T.Utils;
 using DD4T.ContentModel.Logging;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Configuration;
 
 namespace DD4T.Mvc.Html
 {
@@ -58,14 +61,23 @@ namespace DD4T.Mvc.Html
         {
             LoggerService.Information(">>RenderComponentPresentations", LoggingCategory.Performance);
             IComponentPresentationRenderer cpr = renderer;
-            if (!(helper.ViewData.Model is IPage))
+            IPage page = null;
+            if (helper.ViewData.Model is IPage)
             {
-                return new MvcHtmlString("<!-- RenderComponentPresentations can only be used if the model is an instance of IPage -->");
+                page = helper.ViewData.Model as IPage;
+            }
+            else 
+            {
+                try
+                {
+                    page = helper.ViewContext.Controller.ViewBag.Page;
+                }
+                catch
+                {
+                    return new MvcHtmlString("<!-- RenderComponentPresentations can only be used if the model is an instance of IPage or if there is a Page property in the viewbag with type IPage -->");
+                }
             }
 
-            LoggerService.Debug("about to cast object as IPage", LoggingCategory.Performance);
-            IPage tridionPage = helper.ViewData.Model as IPage;
-            LoggerService.Debug("finished casting object as IPage", LoggingCategory.Performance);
             if (renderer == null)
             {
                 LoggerService.Debug("about to create DefaultComponentPresentationRenderer", LoggingCategory.Performance);
@@ -74,11 +86,37 @@ namespace DD4T.Mvc.Html
             }
 
             LoggerService.Debug("about to call renderer.ComponentPresentations", LoggingCategory.Performance);
-            MvcHtmlString output = renderer.ComponentPresentations(tridionPage, helper, byComponentTemplate, bySchema);
+            MvcHtmlString output = renderer.ComponentPresentations(page, helper, byComponentTemplate, bySchema);
             LoggerService.Debug("finished calling renderer.ComponentPresentations", LoggingCategory.Performance);
             LoggerService.Information("<<RenderComponentPresentations", LoggingCategory.Performance);
 
             return output;
         }
+
+        #region welcome file functionality
+        public static string AddWelcomeFile(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+                return DefaultPageFileName;
+            if (!reDefaultPage.IsMatch("/" + url))
+                return url;
+            if (url.EndsWith("/"))
+                return url + DefaultPageFileName;
+            return url + "/" + DefaultPageFileName;
+        }
+
+        private static string _defaultPageFileName = null;
+        private static Regex reDefaultPage = new Regex(@".*/[^/\.]*(/?)$");
+        public static string DefaultPageFileName
+        {
+            get
+            {
+                if (_defaultPageFileName == null)
+                    _defaultPageFileName = ConfigurationHelper.WelcomeFile;
+
+                return _defaultPageFileName;
+            }
+        }
+        #endregion
     }
 }

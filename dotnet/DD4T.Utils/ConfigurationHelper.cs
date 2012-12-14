@@ -38,6 +38,9 @@ namespace DD4T.Utils
         public const string UseUriAsAnchor = "DD4T.UseUriAsAnchor";
         public const string PublicationId = "DD4T.PublicationId";
         public const string BinaryUrlPattern = "DD4T.BinaryUrlPattern";
+        public const string WelcomeFile = "DD4T.WelcomeFile";
+        public const string WelcomeFileAlt1 = "DefaultPage";
+
     }
 
     public static class ConfigurationHelper
@@ -229,6 +232,15 @@ namespace DD4T.Utils
             }
             return string.Empty;
         }
+
+        public static string WelcomeFile
+        {
+            get
+            {
+                return SafeGetConfigSettingAsString(ConfigurationKeys.WelcomeFile, ConfigurationKeys.WelcomeFileAlt1);
+            }
+        }
+
     }
 
 }
