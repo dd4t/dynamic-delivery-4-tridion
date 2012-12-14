@@ -101,6 +101,7 @@
     <Compile Include="..\Dynamic Delivery Presentation Solution Items\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Attributes\UsesTridionPage.cs" />
     <Compile Include="Caching\SchemaComponentsCacheDependency.cs" />
     <Compile Include="Caching\SitemapCacheDependency.cs" />
     <Compile Include="Caching\WebCacheAgent.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Handlers\BinaryHandler.cs" />
     <Compile Include="Html\DefaultComponentPresentationRenderer.cs" />
     <Compile Include="Html\IComponentPresentationRenderer.cs" />
+    <Compile Include="Html\ImageHelper.cs" />
     <Compile Include="Html\SiteEditHelper.cs" />
     <Compile Include="Html\TridionHelper.cs" />
     <Compile Include="Properties\SpecificAssemblyInfo.cs" />
