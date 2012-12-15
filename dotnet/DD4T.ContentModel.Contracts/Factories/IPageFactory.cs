@@ -1,12 +1,14 @@
 ﻿using System;
 using DD4T.ContentModel.Contracts.Providers;
 using DD4T.ContentModel.Contracts.Caching;
+using DD4T.ContentModel.Contracts.Resolvers;
 namespace DD4T.ContentModel.Factories
 {
     public interface IPageFactory
     {
         IPageProvider PageProvider { get; set; }
         ICacheAgent CacheAgent { get; set; }
+        IPublicationResolver PublicationResolver { get; set; }
         bool TryFindPage(string url, out IPage page);
         IPage FindPage(string url);
         bool TryGetPage(string tcmUri, out IPage page);

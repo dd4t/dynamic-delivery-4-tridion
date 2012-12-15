@@ -11,7 +11,6 @@ using DD4T.ContentModel.Logging;
 
 namespace DD4T.Mvc.Html
 {
-    [Export(typeof(IComponentPresentationRenderer))]
     public class DefaultComponentPresentationRenderer : IComponentPresentationRenderer
     {
         public static IComponentPresentationRenderer Create()

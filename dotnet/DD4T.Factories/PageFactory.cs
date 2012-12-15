@@ -22,7 +22,7 @@ namespace DD4T.Factories
     {
 
 		private static IDictionary<string, DateTime> lastPublishedDates = new Dictionary<string, DateTime>();
-        private static Regex rePageContentByUri = new Regex("PageContent_([0-9]+)_(.*)");
+        private static Regex rePageContentByUrl = new Regex("PageContent_([0-9\\-]+)_(.*)");
         private ICacheAgent _cacheAgent = null;
 
         public const string CacheRegion = "Page";
@@ -75,7 +75,11 @@ namespace DD4T.Factories
             get
             {
                 if (_pageSerializer == null)
-                 _pageSerializer = new XmlSerializer(typeof(Page));
+                {
+                    LoggerService.Debug("about to create page serializer", LoggingCategory.Performance);
+                    _pageSerializer = new XmlSerializer(typeof(Page));
+                    LoggerService.Debug("finished creating page serializer", LoggingCategory.Performance);
+                }
                 return _pageSerializer;
             }
         }
@@ -294,7 +298,10 @@ namespace DD4T.Factories
 
         public DateTime GetLastPublishedDateByUrl(string url)
         {
-            return PageProvider.GetLastPublishedDateByUrl(url);
+            LoggerService.Debug("about to retrieve last published date from provider for url {0}", LoggingCategory.Performance, url);
+            DateTime dt = PageProvider.GetLastPublishedDateByUrl(url);
+            LoggerService.Debug("finished retrieving last published date from provider for url {0}", LoggingCategory.Performance, url);
+            return dt;
         }
 
         public DateTime GetLastPublishedDateByUri(string uri)
@@ -304,6 +311,7 @@ namespace DD4T.Factories
 
         public override DateTime GetLastPublishedDateCallBack(string key, object cachedItem)
         {
+            
             LoggerService.Debug(">>GetLastPublishedDateCallBack {0}", LoggingCategory.Performance, key);
             if (cachedItem == null)
                 return DateTime.Now; // this will force the item to be removed from the cache
@@ -314,10 +322,12 @@ namespace DD4T.Factories
                 return dt;
             }
 
-            Match m = rePageContentByUri.Match(key);
+            Match m = rePageContentByUrl.Match(key);
             if (m.Success)
             {
                 int publicationId = Convert.ToInt32(m.Groups[1].Value);
+                if (publicationId == Int32.MinValue)
+                    publicationId = 0;
                 string url = m.Groups[2].Value;
                 DateTime dt = GetLastPublishedDateByUrl(url);
                 LoggerService.Debug("<<GetLastPublishedDateCallBack {0} -- regex", LoggingCategory.Performance, key);

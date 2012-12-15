@@ -127,10 +127,7 @@ namespace DD4T.Providers.SDLTridion2011sp1
 
             if (resultUris.Length > 0)
             {
-                PageContentAssembler loadPage = new PageContentAssembler();
-                LoggerService.Debug("GetContentByUrl: created PageContentAssembler", LoggingCategory.Performance);
-
-                retVal = loadPage.GetContent(resultUris[0]);
+                retVal = PageContentAssembler.GetContent(resultUris[0]);
                 LoggerService.Debug("GetContentByUrl: executed PageContentAssembler", LoggingCategory.Performance);
             }
             LoggerService.Debug("<<GetContentByUrl({0})", LoggingCategory.Performance, Url);
@@ -145,10 +142,7 @@ namespace DD4T.Providers.SDLTridion2011sp1
         public string GetContentByUri(string TcmUri)
         {
             string retVal = string.Empty;
-
-            PageContentAssembler loadPage = new PageContentAssembler();
-            retVal = loadPage.GetContent(TcmUri);
-
+            retVal = PageContentAssembler.GetContent(TcmUri);
             return retVal;
         }
 
@@ -201,5 +195,16 @@ namespace DD4T.Providers.SDLTridion2011sp1
         }
 
         #endregion
+
+        private PageContentAssembler _pageContentAssember = null;
+        private PageContentAssembler PageContentAssembler
+        {
+            get
+            {
+                if (_pageContentAssember == null)
+                    _pageContentAssember = new PageContentAssembler();
+                return _pageContentAssember;
+            }
+        }
     }
 }
