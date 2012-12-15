@@ -109,7 +109,24 @@ namespace DD4T.Providers.SDLTridion2011sp1
         {
             string encodedUrl = HttpUtility.UrlPathEncode(url); // ?? why here? why now?
 
-            BinaryMeta binaryMeta = this.PublicationId == 0 ? (BinaryMetaFactory.GetMetaByUrl(encodedUrl)[0] as BinaryMeta) : BinaryMetaFactory.GetMetaByUrl(this.PublicationId, encodedUrl);
+
+            IList metas = null;
+            BinaryMeta binaryMeta = null;
+            if (this.PublicationId == 0)
+            {
+                metas = BinaryMetaFactory.GetMetaByUrl(encodedUrl);
+                if (metas.Count == 0)
+                {
+                    throw new BinaryNotFoundException();
+                }
+                binaryMeta = metas[0] as BinaryMeta;
+            }
+            else
+            {
+                binaryMeta = BinaryMetaFactory.GetMetaByUrl(this.PublicationId, encodedUrl);
+                if (binaryMeta == null)
+                    throw new BinaryNotFoundException();
+            }
             TcmUri uri = new TcmUri(binaryMeta.PublicationId,binaryMeta.Id,16,0);
 
             Tridion.ContentDelivery.DynamicContent.BinaryFactory factory = new BinaryFactory();
@@ -128,7 +145,7 @@ namespace DD4T.Providers.SDLTridion2011sp1
             {
                 IList metas = BinaryMetaFactory.GetMetaByUrl(encodedUrl);
                 if (metas.Count == 0)
-                    return DateTime.MinValue; // TODO: use nullable type
+                    return DateTime.MinValue.AddSeconds(1); // TODO: use nullable type
 
                 binaryMeta = metas[0] as BinaryMeta;
             }
