@@ -33,8 +33,8 @@ namespace DD4T.Factories
             }
         }
 
-        private static IPublicationResolver _publicationResolver = null;
-        public static IPublicationResolver PublicationResolver
+        private IPublicationResolver _publicationResolver = null;
+        public IPublicationResolver PublicationResolver
         {
             get
             {
