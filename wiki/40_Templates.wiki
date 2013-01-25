@@ -2,6 +2,8 @@
 
 = Introduction - Creating the DD4T XML Templates for Publishing =
 
+* Can use the installer from the downloads section instead
+
 To develop templates using DD4T, you need to perform some steps manually. This is done for two reasons:
 
   * We are not allowed to include Tridion DLLs and other artefacts in our open source repository
