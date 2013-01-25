@@ -1,6 +1,6 @@
 #summary Connecting DD4T to .NET
 
-DD4T can be used to create a Tridion-driven ASP.Net MVC 3.0 application. 
+DD4T can be used to create a Tridion-driven ASP.Net MVC 3.0 or 4.0 application. 
 
 = Let's look at Tridion =
 
