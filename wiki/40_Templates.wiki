@@ -1,6 +1,6 @@
 #summary How to develop templates using DD4T, Visual Studio and Tridion.
 
-= Introduction =
+= Introduction - Creating the DD4T XML Templates for Publishing =
 
 To develop templates using DD4T, you need to perform some steps manually. This is done for two reasons:
 
