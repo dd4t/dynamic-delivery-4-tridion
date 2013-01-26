@@ -35,6 +35,7 @@ namespace DD4T.Factories
                 if (_pageProvider == null)
                 {
                     _pageProvider = (IPageProvider)ProviderLoader.LoadProvider<IPageProvider>();
+                    _pageProvider.PublicationId = this.PublicationId;
                 }
                 return _pageProvider;
             }
