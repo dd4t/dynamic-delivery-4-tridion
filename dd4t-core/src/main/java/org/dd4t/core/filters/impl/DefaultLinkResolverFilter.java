@@ -147,8 +147,11 @@ public class DefaultLinkResolverFilter extends BaseFilter implements
             resolveMap(component.getContent());
             // resolve metadata
             resolveMap(component.getMetadata());
-            // resolve Component itself
-            getLinkResolver().resolve(component, page);
+            /* don't resolve Component itself; 
+             * this may very likely lead to performance issues when using
+             * the experience manager.
+             */
+            // getLinkResolver().resolve(component, page);
 
         }
 
