@@ -18,7 +18,7 @@ namespace DD4T.Templates.Base.Builder
             // for that purpose we use a dictionary
 
 
-            if (page.Metadata == null)
+            if (page.Metadata == null || page.MetadataSchema == null)
             {
                 return new List<Dynamic.Category>();
             }
