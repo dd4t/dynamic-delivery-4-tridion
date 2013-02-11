@@ -16,7 +16,7 @@
 	
 	LinkResolver resolver = (LinkResolver) ApplicationContextProvider.getBean("LinkResolver");
 %>
-<h1><%=title %></h1>
+<h3><%=title %></h3>
 
 <ul>
 <%

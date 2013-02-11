@@ -12,7 +12,7 @@
 	GenericComponent comp = (GenericComponent) request.getAttribute("Component");
 
 %>
-	<h2><%=comp.getContent().get("title").getValues().get(0) %></h2>
+	<h3><%=comp.getContent().get("title").getValues().get(0) %></h3>
 		
 	<%
 		LinkResolver resolver = (LinkResolver) ApplicationContextProvider.getBean("LinkResolver");
