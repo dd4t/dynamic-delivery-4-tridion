@@ -58,7 +58,22 @@
 	    <property name="pageFactory"><ref bean="genericPageFactory" /></property>		    	    
 	</bean>
 
+	
 	<!-- viewmanagers -->	 
+	<bean id="pageViewManager" class="com.capgemini.tridion.cde.view.impl.SimplePageViewManager">
+		<property name="handlers">
+			<list>
+				<ref bean="JSPPageViewHandler" />
+			</list>
+		</property>
+		
+	</bean>
+
+	<bean id="JSPPageViewHandler" class="com.capgemini.tridion.cde.view.impl.JSPPageViewHandler">
+	    <property name="filePattern"><value>/pages/jsp/%1$s.jsp</value></property>	
+	</bean>	
+	
+	
 	<bean id="componentViewManager" class="com.capgemini.tridion.cde.view.impl.SimpleComponentViewManager">
 		<property name="handlers">
 			<list>
@@ -82,7 +97,7 @@
 
 	<!-- Page-level JSP views are managed through spring internal viewResolver -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	    <property name="prefix"><value>/pages/jsp/</value></property>
+	    <property name="prefix"><value>/applications/jsp/</value></property>
 	    <property name="suffix"><value>.jsp</value></property>
 	</bean>	
 </beans>
