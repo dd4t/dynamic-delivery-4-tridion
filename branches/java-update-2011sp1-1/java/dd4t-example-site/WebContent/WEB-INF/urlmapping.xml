@@ -21,6 +21,7 @@
     <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <value>
+            	/app/newslist.html=newslist
                 /dd4t/**/*=dd4t
             </value>
         </property>
@@ -31,11 +32,16 @@
 		    <property name="simplePageFactory"><ref bean="simplePageFactory" /></property>			
 		    <property name="contentController"><ref bean="ContentController" /></property>			
 		    <property name="genericPageFactory"><ref bean="genericPageFactory" /></property>    
+		    <property name="pageViewHandler"><ref bean="pageViewManager" /></property>
     </bean>
 	
 	<!-- Controller for the example publication -->
 	<bean id="dd4t" class="com.capgemini.tridion.cde.controller.DynamicPageController" parent="parent_controller">
 			<property name="publication" value="200" />		
 			<property name="subcontext" value="/dd4t" />    				
+	</bean>
+	
+	<bean id="newslist" class="com.capgemini.tridion.apps.listings.NewsList">
+		<property name="genericComponentFactory"><ref bean="genericComponentFactory" /></property>
 	</bean>
 </beans>

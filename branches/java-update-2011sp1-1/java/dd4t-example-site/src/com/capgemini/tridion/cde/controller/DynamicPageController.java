@@ -29,6 +29,7 @@ import org.dd4t.core.request.impl.BasicRequestContext;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.capgemini.tridion.cde.constants.Constants;
+import com.capgemini.tridion.cde.view.IViewHandler;
 import com.capgemini.tridion.cde.view.model.ComponentViews;
 
 public class DynamicPageController extends BaseCWAController {
@@ -43,7 +44,17 @@ public class DynamicPageController extends BaseCWAController {
     
     private ContentController contentController;
     
-    private int publication;
+    private IViewHandler<Page> pageViewHandler;
+    
+    public IViewHandler<Page> getPageViewHandler() {
+		return pageViewHandler;
+	}
+
+	public void setPageViewHandler(IViewHandler<Page> pageViewHandler) {
+		this.pageViewHandler = pageViewHandler;
+	}
+
+	private int publication;
     
     private String subcontext;
 
@@ -130,12 +141,9 @@ public class DynamicPageController extends BaseCWAController {
         GenericPage pageModel =
                 (GenericPage) genericPageFactory.findPageByUrl(URL, publication,
                 new BasicRequestContext(request));
+      
+        request.setAttribute(Constants.PAGE_MODEL_KEY, pageModel);      
 
-        String view = getViewFromTemplate(pageModel.getPageTemplate());
-
-        ModelAndView mav = new ModelAndView(view);      
-        mav.addObject(Constants.PAGE_MODEL_KEY, pageModel); 
-        
         long pagemodeldone = System.currentTimeMillis();
         
         if(logger.isDebugEnabled())
@@ -147,7 +155,7 @@ public class DynamicPageController extends BaseCWAController {
 
         long contentmodeldone = System.currentTimeMillis();
         
-        mav.addObject(Constants.CONTENT_MODEL_KEY, contentModel);
+        request.setAttribute(Constants.CONTENT_MODEL_KEY, contentModel);        
         
         if(logger.isDebugEnabled())
             logger.debug("Built contentModel: " + contentModel+" in "+(contentmodeldone-pagemodeldone)+" milliseconds.");
@@ -162,13 +170,21 @@ public class DynamicPageController extends BaseCWAController {
         mav.addObject(Constants.NAVIGATION_MODEL_KEY, navigationModel);  
           */
           
-
+        // attain view
+        String view = getViewFromTemplate(pageModel.getPageTemplate());
+        
+        // render page through the viewhandler
+        String rendered_page = pageViewHandler.handleView(pageModel, pageModel, view, request, response);
+        
+        // and write to the response (!)
+        response.getWriter().write(rendered_page);
+        
         if(logger.isInfoEnabled()){
             long end = System.currentTimeMillis();        
             logger.info("Built pageresponse in " + (end - start) + " milliseconds.");
         }
         
-        return mav;        
+        return null;        
     }
     
     public Page getNavigationModel(Page page){

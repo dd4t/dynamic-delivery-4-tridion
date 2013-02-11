@@ -100,6 +100,12 @@ public abstract class BaseJSPViewHandler<T> implements IViewHandler<T>{
      * @return A dispatchable URL
      */
     protected String getResourceURLForView(String view){
+    	
+    	// if the view starts with a slash, it's an application
+    	if(view.startsWith("/")){
+    		return view;
+    	}
+    	
         return String.format(filePattern, view);
     }
 
