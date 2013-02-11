@@ -30,7 +30,7 @@ import com.capgemini.tridion.cde.view.IViewHandler;
 import com.capgemini.tridion.cde.view.model.ComponentViews;
 import com.capgemini.tridion.cde.view.model.ViewRegion;
 
-public class DynamicPageContentController extends BaseCWAController implements
+public class DynamicPageContentController extends BaseDD4TController implements
         ContentController {
     private static Logger logger = Logger
             .getLogger(DynamicPageContentController.class);
