@@ -32,7 +32,7 @@ import com.capgemini.tridion.cde.constants.Constants;
 import com.capgemini.tridion.cde.view.IViewHandler;
 import com.capgemini.tridion.cde.view.model.ComponentViews;
 
-public class DynamicPageController extends BaseCWAController {
+public class DynamicPageController extends BaseDD4TController {
     private static Logger logger = Logger
             .getLogger(DynamicPageController.class);
 
