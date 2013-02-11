@@ -60,11 +60,8 @@ public class DefaultLinkResolver implements LinkResolver {
 		        GenericComponent comp = (GenericComponent) component;
 		        if(comp.getMultimedia() != null){
 		            resolvedUrl = comp.getMultimedia().getUrl();
-		        }
-		        
-		    }
-		    
-			
+		        }		        
+		    }	    			
 			
 		    Schema schema = component.getSchema();
 		    
@@ -113,11 +110,12 @@ public class DefaultLinkResolver implements LinkResolver {
 						schema.getTitle());
 			}
 			if (contextPath != null && contextPath.length() > 0) {
-				component.setResolvedUrl(contextPath + resolvedUrl);				
-			} else {
-				component.setResolvedUrl(resolvedUrl);
-			}
+				resolvedUrl = contextPath + resolvedUrl;			
+			} 
+
+			component.setResolvedUrl(resolvedUrl);			
 		}
+		
 		return resolvedUrl;
 	}
 	

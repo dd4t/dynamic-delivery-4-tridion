@@ -41,7 +41,7 @@
 	</xsl:template>
 	<xsl:template match="*[@xlink:href]">
 	    <xsl:variable name="linkresolver"       
-	        select="java:com.tridion.extensions.dynamicdelivery.foundation.resolvers.impl.DefaultLinkResolver.new()"/>	
+	        select="java:org.dd4t.core.resolvers.impl.DefaultLinkResolver.new()"/>	
 	    <xsl:variable name="resolved-link" 
 	        select="java:resolve($linkresolver, string(@xlink:href))"/>
 	    <xsl:choose>
