@@ -32,8 +32,7 @@ namespace DD4T.Factories
             {
                 if (_componentProvider == null)
                 {
-                    _componentProvider = (IComponentProvider)ProviderLoader.LoadProvider<IComponentProvider>();
-                    _componentProvider.PublicationId = this.PublicationId;
+                    _componentProvider = (IComponentProvider)ProviderLoader.LoadProvider<IComponentProvider>(this.PublicationId);
                 }
                 return _componentProvider;
             }
