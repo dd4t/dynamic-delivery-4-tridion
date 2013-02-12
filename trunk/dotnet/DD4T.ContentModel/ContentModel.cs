@@ -564,7 +564,7 @@ namespace DD4T.ContentModel
         {
             get
             {
-                if (this.binaryData == null)
+                if (this.binaryData == null && this.Factory != null) 
                 {
                     this.binaryData = this.Factory.FindBinaryContent(Url);
                 }
