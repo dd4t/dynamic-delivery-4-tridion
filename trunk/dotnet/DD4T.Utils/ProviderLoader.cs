@@ -10,34 +10,13 @@ namespace DD4T.Utils
 {
     public static class ProviderLoader
     {
-        //IPageFactory forPageFactory = null;
-        //IComponentFactory forComponentFactory = null;
-        //IBinaryFactory forBinaryFactory = null;
-        //ITaxonomyFactory forTaxonomyFactory = null;
-        //ILinkFactory forLinkFactory = null;
 
-        //public ProviderLoader(IPageFactory factory)
-        //{
-        //    forPageFactory = factory;
-        //}
-        //public ProviderLoader(IComponentFactory factory)
-        //{
-        //    forComponentFactory = factory;
-        //}
-        //public ProviderLoader(IBinaryFactory factory)
-        //{
-        //    forBinaryFactory = factory;
-        //}
-        //public ProviderLoader(ITaxonomyFactory factory)
-        //{
-        //    forTaxonomyFactory = factory;
-        //}
-        //public ProviderLoader(ILinkFactory factory)
-        //{
-        //    forLinkFactory = factory;
-        //}
-
-
+        /// <summary>
+        /// Load the best matching provider for the specified type param
+        /// By default, the most recent Tridion version is used
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static IProvider LoadProvider<T>() where T : class
         {
             ProviderVersion version = ConfigurationHelper.ProviderVersion;
@@ -47,6 +26,26 @@ namespace DD4T.Utils
             }
             string classIdentifier = ProviderAssemblyNames.GetProviderClassName(version);
             return (IProvider)ClassLoader.Load<T>(classIdentifier);
+        }
+
+        /// <summary>
+        /// Load the best matching provider for the specified type param
+        /// By default, the most recent Tridion version is used
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="publicationId">Publication ID to set on the provider</param>
+        /// <returns></returns>
+        public static IProvider LoadProvider<T>(int publicationId) where T : class
+        {
+            ProviderVersion version = ConfigurationHelper.ProviderVersion;
+            if (version == ProviderVersion.Undefined)
+            {
+                version = ProviderAssemblyNames.DefaultProviderVersion;
+            }
+            string classIdentifier = ProviderAssemblyNames.GetProviderClassName(version);
+            IProvider p = (IProvider)ClassLoader.Load<T>(classIdentifier);
+            p.PublicationId = publicationId;
+            return p;
         }
 
         //private Assembly GetCurrentProviderAssembly()
