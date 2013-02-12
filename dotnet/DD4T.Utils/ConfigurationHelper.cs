@@ -124,7 +124,12 @@ namespace DD4T.Utils
         {
             get
             {
-                return SafeGetConfigSettingAsInt(ConfigurationKeys.PublicationId);
+                int r = SafeGetConfigSettingAsInt(ConfigurationKeys.PublicationId);
+                if (r == int.MinValue)
+                {
+                    return 0;
+                }
+                return r;
             }
         }
 
