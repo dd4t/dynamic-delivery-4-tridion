@@ -19,8 +19,7 @@ namespace DD4T.Factories
             {
                 if (_binaryProvider == null)
                 {
-                    _binaryProvider = (IBinaryProvider)ProviderLoader.LoadProvider<IBinaryProvider>();
-                    _binaryProvider.PublicationId = this.PublicationId;
+                    _binaryProvider = (IBinaryProvider)ProviderLoader.LoadProvider<IBinaryProvider>(this.PublicationId);
                 }
                 return _binaryProvider;
             }

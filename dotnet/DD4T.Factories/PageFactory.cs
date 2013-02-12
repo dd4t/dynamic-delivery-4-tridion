@@ -24,18 +24,24 @@ namespace DD4T.Factories
 		private static IDictionary<string, DateTime> lastPublishedDates = new Dictionary<string, DateTime>();
         private static Regex rePageContentByUrl = new Regex("PageContent_([0-9\\-]+)_(.*)");
         private ICacheAgent _cacheAgent = null;
-
-        public const string CacheRegion = "Page";
-        
+        public const string CacheRegion = "Page";        
         private IPageProvider _pageProvider = null;
+        private static object lock1 = new object();
+        private static object lock2 = new object();
+        private static object lock3 = new object();
         public IPageProvider PageProvider
         {
             get
             {
                 if (_pageProvider == null)
                 {
-                    _pageProvider = (IPageProvider)ProviderLoader.LoadProvider<IPageProvider>();
-                    _pageProvider.PublicationId = this.PublicationId;
+                    lock (lock1)
+                    {
+                        if (_pageProvider == null) // we must test again, because in the mean time another thread might have created the object!
+                        {
+                            _pageProvider = (IPageProvider)ProviderLoader.LoadProvider<IPageProvider>(this.PublicationId);
+                        }
+                    }
                 }
                 return _pageProvider;
             }
@@ -52,14 +58,20 @@ namespace DD4T.Factories
             {
                 if (_componentFactory == null)
                 {
-                    // if there is no component factory set, check if there is one in the current assembly
-                    _componentFactory = (IComponentFactory) ClassLoader.Load<IComponentFactory>(this.GetType().Assembly);
+                    lock (lock2)
+                    {
+                        if (_componentFactory == null)  // we must test again, because in the mean time another thread might have created the object!
+                        {
+                            // if there is no component factory set, check if there is one in the current assembly
+                            _componentFactory = (IComponentFactory)ClassLoader.Load<IComponentFactory>(this.GetType().Assembly);
 
-                    // the ComponentFactory must have a ComponentProvider
-                    // if there is a ProviderVersion configured, the ComponentFactory will figure this out by itself
-                    // otherwise, try to load a IComponentProvider from the same assembly as the current PageProvider
-                    if (ConfigurationHelper.ProviderVersion == ProviderVersion.Undefined && PageProvider != null)
-                        _componentFactory.ComponentProvider = (IComponentProvider) ClassLoader.Load<IComponentProvider>(PageProvider.GetType().Assembly);
+                            // the ComponentFactory must have a ComponentProvider
+                            // if there is a ProviderVersion configured, the ComponentFactory will figure this out by itself
+                            // otherwise, try to load a IComponentProvider from the same assembly as the current PageProvider
+                            if (ConfigurationHelper.ProviderVersion == ProviderVersion.Undefined && PageProvider != null)
+                                _componentFactory.ComponentProvider = (IComponentProvider)ClassLoader.Load<IComponentProvider>(PageProvider.GetType().Assembly);
+                        }
+                    }
                 }
                 return _componentFactory;
             }
@@ -77,9 +89,15 @@ namespace DD4T.Factories
             {
                 if (_pageSerializer == null)
                 {
-                    LoggerService.Debug("about to create page serializer", LoggingCategory.Performance);
-                    _pageSerializer = new XmlSerializer(typeof(Page));
-                    LoggerService.Debug("finished creating page serializer", LoggingCategory.Performance);
+                    lock (lock3)
+                    {
+                        if (_pageSerializer == null) // we must test again, because in the mean time another thread might have created the object!
+                        {
+                            LoggerService.Debug("about to create page serializer", LoggingCategory.Performance);
+                            _pageSerializer = new XmlSerializer(typeof(Page));
+                            LoggerService.Debug("finished creating page serializer", LoggingCategory.Performance);
+                        }
+                    }
                 }
                 return _pageSerializer;
             }

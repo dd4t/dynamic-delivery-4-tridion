@@ -21,8 +21,7 @@ namespace DD4T.Factories
             {
                 if (_taxonomyProvider == null)
                 {
-                    _taxonomyProvider = (ITaxonomyProvider)ProviderLoader.LoadProvider<ITaxonomyProvider>();
-                    _taxonomyProvider.PublicationId = this.PublicationId;
+                    _taxonomyProvider = (ITaxonomyProvider)ProviderLoader.LoadProvider<ITaxonomyProvider>(this.PublicationId);
                 }
                 return _taxonomyProvider;
             }
