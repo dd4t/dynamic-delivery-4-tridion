@@ -24,7 +24,7 @@ namespace DD4T.Factories
             get
             {
                 if (_publicationId == null)
-                 _publicationId = PublicationResolver.ResolvePublicationId();
+                    return PublicationResolver.ResolvePublicationId();
                 return _publicationId.Value;
             }
             set
