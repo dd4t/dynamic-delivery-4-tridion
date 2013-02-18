@@ -86,10 +86,10 @@ public class DynamicPageContentController extends BaseDD4TController implements
                 String view = getViewFromTemplate(cp.getComponentTemplate());	
                 if (logger.isDebugEnabled()){
                     logger.debug("using view " + view);
-	        }
+                }
                 
                 // add the site edit String to the generated HTML
-                String se = SiteEditService.generateSiteEditComponentTag(cp, order, region);
+                String se = SiteEditService.generateSiteEditComponentTag(cp, order, region, req);
                 
                 viewresult = "<div>"+se +
                     componentViewManager.handleView(model, cp.getComponent(), view,
@@ -111,7 +111,6 @@ public class DynamicPageContentController extends BaseDD4TController implements
     protected ModelAndView handleRequestInternal(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        // TODO Auto-generated method stub
-        return null;
+    	return null;
     }
 }
