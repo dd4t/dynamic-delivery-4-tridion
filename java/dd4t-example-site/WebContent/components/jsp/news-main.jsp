@@ -1,3 +1,4 @@
+<%@page import="com.capgemini.tridion.cde.siteedit.SiteEditService"%>
 <%@ page 
     language="java" contentType="text/html; charset=UTF-8"
 	import="com.capgemini.tridion.cde.view.model.*,
@@ -9,12 +10,21 @@
 <%
 	GenericComponent comp = (GenericComponent) request.getAttribute("Component");	 
 %>
-	<h2><%=comp.getContent().get("title").getValues().get(0) %></h2>
+	<h2>
+		<%=SiteEditService.generateSiteEditFieldMarking(comp.getContent().get("title")) %>		
+		<%=comp.getContent().get("title").getValues().get(0) %>
+	</h2>
 	
-	<%=comp.getContent().get("paragraph").getValues().get(0) %>
+	<div>
+		<%=SiteEditService.generateSiteEditFieldMarking(comp.getContent().get("paragraph")) %>
+	
+		<%=comp.getContent().get("paragraph").getValues().get(0) %>
+	</div>
 	
 	<h3>Related links</h3>
 	<ul>
+			<%=SiteEditService.generateSiteEditFieldMarking(comp.getContent().get("related")) %>
+	
 	<%
 	for(Object ob : comp.getContent().get("related").getValues()){	    
 	    GenericComponent linkedComp = (GenericComponent) ob;		

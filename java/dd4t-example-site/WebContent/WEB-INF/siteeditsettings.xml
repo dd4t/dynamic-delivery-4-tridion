@@ -16,17 +16,17 @@
                             http://www.springframework.org/schema/util/spring-util-3.0.xsd
                             http://www.springframework.org/schema/aop
            					http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-           					
+           				
+    	
 	<bean id="SiteEditSettings" class="com.capgemini.tridion.cde.siteedit.SiteEditSettings">
-		<property name="innerSettings">
-			<!-- having an entry in the high-level map means siteedit is enabled for the given publication -->
-			<map>
-		        <!-- possible entries are comp, page and publish (they default to the key). -->
-		        
-		        <!-- dd publication has local content, pages and publishing -->				
-		        <entry key="200"> <map /> </entry>								        		       
-			</map>
-		</property>
-	
+		<!-- full-blown enable everwyereh -->
+		<property name="enabled">
+			<value>true</value>
+		</property>	
+		
+		<!-- location of the javascript file -->
+		<property name="contentmanager">
+			<value>http://192.168.30.48/WebUI/Editors/SiteEdit/Views/Bootstrap/Bootstrap.aspx?mode=js</value>
+		</property>		
 	</bean>
 </beans>
