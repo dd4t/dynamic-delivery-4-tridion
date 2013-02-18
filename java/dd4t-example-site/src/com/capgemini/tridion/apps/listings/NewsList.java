@@ -41,7 +41,6 @@ public class NewsList extends AbstractController {
 		this.genericComponentFactory = genericComponentFactory;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected ModelAndView handleRequestInternal(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -81,7 +80,7 @@ public class NewsList extends AbstractController {
             // Limit the results to max 5, and sort them ascending on
             // publication date. all available sorting options are constants on
             // the SortParameter class
-            query.addLimitFilter(new LimitFilter(5));
+          //  query.addLimitFilter(new LimitFilter(5));
             SortParameter sortParameter =
                     new SortParameter(
                             SortParameter.ITEMS_INITIAL_PUBLICATION_DATE,
@@ -109,7 +108,7 @@ public class NewsList extends AbstractController {
                     	comps.add(comp);
                     }                    	
                 }
-
+                
                 mav.addObject(NEWSLIST_COMPS_KEY, comps);
 
             } catch (StorageException se) {
