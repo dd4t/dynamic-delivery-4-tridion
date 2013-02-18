@@ -21,7 +21,6 @@ import com.tridion.broker.querying.criteria.Criteria;
 import com.tridion.broker.querying.criteria.content.ItemSchemaCriteria;
 import com.tridion.broker.querying.criteria.content.ItemTypeCriteria;
 import com.tridion.broker.querying.criteria.content.PublicationCriteria;
-import com.tridion.broker.querying.filter.LimitFilter;
 import com.tridion.broker.querying.sorting.SortParameter;
 import com.tridion.util.TCMURI;
 
@@ -30,7 +29,17 @@ public class NewsList extends AbstractController {
 
     public static String NEWSLIST_COMPS_KEY = "news_list_comps_key";
     
-    private GenericComponentFactory genericComponentFactory;
+    private int newsSchema;
+    
+    public int getNewsSchema() {
+		return newsSchema;
+	}
+
+	public void setNewsSchema(int newsSchema) {
+		this.newsSchema = newsSchema;
+	}
+
+	private GenericComponentFactory genericComponentFactory;
     
 	public GenericComponentFactory getGenericComponentFactory() {
 		return genericComponentFactory;
@@ -54,7 +63,7 @@ public class NewsList extends AbstractController {
 		
         try {
             // define a criteria on schema number 254 (newsitem)
-            ItemSchemaCriteria isNewsItem = new ItemSchemaCriteria(116120);
+            ItemSchemaCriteria isNewsItem = new ItemSchemaCriteria(newsSchema);
 
             // Only return items of type 16 (components)
             ItemTypeCriteria isComponent = new ItemTypeCriteria(16);
