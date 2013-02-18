@@ -13,17 +13,17 @@
 
 %>
 	<h2>
-		<%=SiteEditService.generateSiteEditFieldMarking("title") %>
+		<%=SiteEditService.generateSiteEditFieldMarking(comp.getContent().get("title")) %>
 		<%=comp.getContent().get("title").getValues().get(0) %>
 	</h2>
 	
 	<p><strong>
-		<%=SiteEditService.generateSiteEditFieldMarking("introduction") %>
+		<%=SiteEditService.generateSiteEditFieldMarking(comp.getContent().get("introduction")) %>
 		<%=comp.getContent().get("introduction").getValues().get(0) %>
 	</strong></p>
 	
 	<div>
-		<%=SiteEditService.generateSiteEditFieldMarking("paragraph") %>
+		<%=SiteEditService.generateSiteEditFieldMarking(comp.getContent().get("paragraph")) %>
 		<%=comp.getContent().get("paragraph").getValues().get(0) %>
 	</div>
 	

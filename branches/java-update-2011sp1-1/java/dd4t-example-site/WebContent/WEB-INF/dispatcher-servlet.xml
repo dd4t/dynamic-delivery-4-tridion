@@ -35,7 +35,7 @@
 	</bean>
 
 	<!-- DD4T providers -->
- 	<bean id="cacheProvider" class="org.dd4t.providers.impl.BrokerCacheProvider" />
+ 	<bean id="cacheProvider" class="org.dd4t.providers.impl.BrokerSiteEditProofCacheProvider" />
 	<bean id="pageProvider" class="org.dd4t.providers.impl.BrokerPageProvider" />	
 	<bean id="componentProvider" class="org.dd4t.providers.impl.BrokerComponentProvider" />
 

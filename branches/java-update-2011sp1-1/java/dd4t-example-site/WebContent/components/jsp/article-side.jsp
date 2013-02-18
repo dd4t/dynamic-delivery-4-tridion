@@ -1,3 +1,4 @@
+<%@page import="com.capgemini.tridion.cde.siteedit.SiteEditService"%>
 <%@page import="com.capgemini.util.spring.ApplicationContextProvider"%>
 <%@page import="org.dd4t.core.resolvers.LinkResolver"%>
 <%@ page 
@@ -11,9 +12,15 @@
 <%
 	GenericComponent comp = (GenericComponent) request.getAttribute("Component");
 %>
-	<h3><%=comp.getContent().get("title").getValues().get(0) %></h3>
+	<h3>
+		<%=SiteEditService.generateSiteEditFieldMarking(comp.getContent().get("title")) %>		
+		<%=comp.getContent().get("title").getValues().get(0) %>
+	</h3>
 	
-	<p><strong><%=comp.getContent().get("introduction").getValues().get(0) %></strong></p>
+	<p><strong>
+		<%=SiteEditService.generateSiteEditFieldMarking(comp.getContent().get("title")) %>
+		<%=comp.getContent().get("introduction").getValues().get(0) %>
+	</strong></p>
 	
 		<%
 		LinkResolver resolver = (LinkResolver) ApplicationContextProvider.getBean("LinkResolver");
