@@ -17,6 +17,11 @@
                             http://www.springframework.org/schema/aop
            					http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
            					
+    <!-- Sets context path for link resolving -->       					
+	<bean id="LinkResolver" class="org.dd4t.core.resolvers.impl.DefaultLinkResolver">
+		<property name="contextPath"><value>/dd4t-example-site</value></property>
+	</bean>
+	           					
 	<!-- URL Mappings onto the controllers -->
     <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
@@ -37,11 +42,12 @@
 	
 	<!-- Controller for the example publication -->
 	<bean id="dd4t" class="com.capgemini.tridion.cde.controller.DynamicPageController" parent="parent_controller">
-			<property name="publication" value="200" />		
+			<property name="publication" value="201" />		
 			<property name="subcontext" value="/dd4t" />    				
 	</bean>
 	
 	<bean id="newslist" class="com.capgemini.tridion.apps.listings.NewsList">
+		<property name="newsSchema" value="116203" />
 		<property name="genericComponentFactory"><ref bean="genericComponentFactory" /></property>
 	</bean>
 </beans>

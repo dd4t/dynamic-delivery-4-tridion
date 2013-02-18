@@ -30,12 +30,10 @@
   	<bean id="springApplicationContext" class="com.capgemini.util.spring.ApplicationContextProvider"/>         		
 
 
-	<bean id="LinkResolver" class="org.dd4t.core.resolvers.impl.DefaultLinkResolver">
-		<property name="contextPath"><value>/dd4t-example-site</value></property>
-	</bean>
 
-	<!-- DD4T providers -->
- 	<bean id="cacheProvider" class="org.dd4t.providers.impl.BrokerSiteEditProofCacheProvider" />
+
+	<!-- DD4T providers, note cache is NOT wired for SiteEdit use -->
+ 	<bean id="cacheProvider" class="org.dd4t.providers.impl.BrokerCacheProvider" />
 	<bean id="pageProvider" class="org.dd4t.providers.impl.BrokerPageProvider" />	
 	<bean id="componentProvider" class="org.dd4t.providers.impl.BrokerComponentProvider" />
 

@@ -19,14 +19,14 @@
            				
     	
 	<bean id="SiteEditSettings" class="com.capgemini.tridion.cde.siteedit.SiteEditSettings">
-		<!-- full-blown enable everwyereh -->
+		<!-- set this to true to enable SiteEdit across this application -->
 		<property name="enabled">
-			<value>true</value>
+			<value>false</value>
 		</property>	
 		
 		<!-- location of the javascript file -->
 		<property name="contentmanager">
-			<value>http://192.168.30.48/WebUI/Editors/SiteEdit/Views/Bootstrap/Bootstrap.aspx?mode=js</value>
+			<value>http://hostname/WebUI/Editors/SiteEdit/Views/Bootstrap/Bootstrap.aspx?mode=js</value>
 		</property>		
 	</bean>
 </beans>
