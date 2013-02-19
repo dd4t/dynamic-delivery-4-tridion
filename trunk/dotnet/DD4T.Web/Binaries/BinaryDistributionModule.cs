@@ -135,7 +135,7 @@ namespace DD4T.Web.Binaries
 
         #region private
         private IBinaryFileManager _binaryFileManager = null;
-        public IBinaryFileManager BinaryFileManager 
+        public virtual IBinaryFileManager BinaryFileManager 
         {
             get
             {
