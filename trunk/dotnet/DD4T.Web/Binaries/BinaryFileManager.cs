@@ -7,7 +7,6 @@ using System.Web;
 using DD4T.ContentModel;
 using DD4T.Utils;
 using System.IO;
-using DD4T.Factories;
 using System.Collections;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -15,6 +14,8 @@ using System.Drawing.Drawing2D;
 using System.Text.RegularExpressions;
 using DD4T.Factories.Caching;
 using DD4T.ContentModel.Exceptions;
+using DD4T.ContentModel.Factories;
+using DD4T.Factories;
 
 namespace DD4T.Web.Binaries
 {
@@ -124,12 +125,20 @@ namespace DD4T.Web.Binaries
         #endregion
 
         #region private
-        private static BinaryFactory _binaryFactory = new BinaryFactory();
-        private static BinaryFactory BinaryFactory
+
+
+        private IBinaryFactory _binaryFactory = null;
+        public virtual IBinaryFactory BinaryFactory
         {
             get
             {
+                if (_binaryFactory == null)
+                    _binaryFactory = new BinaryFactory();
                 return _binaryFactory;
+            }
+            set
+            {
+                _binaryFactory = value;
             }
         }
 
