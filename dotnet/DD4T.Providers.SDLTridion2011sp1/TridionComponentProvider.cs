@@ -31,7 +31,6 @@ namespace DD4T.Providers.SDLTridion2011sp1
     public class TridionComponentProvider : BaseProvider, IComponentProvider
     {
 
-
         Dictionary<int,T.ComponentPresentationFactory> _cpFactoryList = null;
         Dictionary<int,TMeta.ComponentMetaFactory> _cmFactoryList = null;
 
@@ -47,16 +46,24 @@ namespace DD4T.Providers.SDLTridion2011sp1
         }
 
         #region IComponentProvider
-        public string GetContent(string uri)
+        public string GetContent(string uri, string templateUri = "")
         {
             LoggerService.Debug(">>GetContent({0})", LoggingCategory.Performance, uri);
 
             TcmUri tcmUri = new TcmUri(uri);
 
+            TcmUri templateTcmUri = new TcmUri(templateUri);
+
             T.ComponentPresentationFactory cpFactory = GetComponentPresentationFactory(tcmUri.PublicationId);
 
             T.ComponentPresentation cp = null;
 
+            if (!String.IsNullOrEmpty(templateUri))
+            {
+                cp = cpFactory.GetComponentPresentation(tcmUri.ItemId, templateTcmUri.ItemId);
+                if (cp != null)
+                    return cp.Content;
+            }
 
             if (!string.IsNullOrEmpty(selectByComponentTemplateId))
             {

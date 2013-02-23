@@ -47,42 +47,6 @@ namespace DD4T.Providers.SDLTridion2011
             _cmFactoryList = new Dictionary<int, TMeta.ComponentMetaFactory>();
         }
 
-        public string GetContent(string uri)
-        {
-            
-            TcmUri tcmUri = new TcmUri(uri);
-
-            Tridion.ContentDelivery.DynamicContent.ComponentPresentationFactory cpFactory = new ComponentPresentationFactory(tcmUri.PublicationId);
-            Tridion.ContentDelivery.DynamicContent.ComponentPresentation cp = null;
-
-
-            if (!string.IsNullOrEmpty(selectByComponentTemplateId))
-            {
-                cp = cpFactory.GetComponentPresentation(tcmUri.ItemId, Convert.ToInt32(selectByComponentTemplateId));
-                if (cp != null)
-                    return cp.Content;
-            }
-            if (!string.IsNullOrEmpty(selectByOutputFormat))
-            {
-                cp = cpFactory.GetComponentPresentationWithOutputFormat(tcmUri.ItemId, selectByOutputFormat);
-                if (cp != null)
-                    return cp.Content;
-            }
-            IList cps = cpFactory.FindAllComponentPresentations(tcmUri.ItemId);
-
-            foreach (Tridion.ContentDelivery.DynamicContent.ComponentPresentation _cp in cps)
-            {
-                if (_cp != null)
-                {
-                    if (_cp.Content.Contains("<Component"))
-                    {
-                        return _cp.Content;
-                    }
-                }
-            }
-            return string.Empty;
-        }
-
         /// <summary>
         /// Returns the Component contents which could be found. Components that couldn't be found don't appear in the list. 
         /// </summary>
@@ -133,6 +97,49 @@ namespace DD4T.Providers.SDLTridion2011
                 }
             }
             return _cmFactoryList[publicationId];
+        }
+
+
+        public string GetContent(string uri, string templateUri = "")
+        {
+            TcmUri tcmUri = new TcmUri(uri);
+
+            TcmUri templateTcmUri = new TcmUri(templateUri);
+
+            Tridion.ContentDelivery.DynamicContent.ComponentPresentationFactory cpFactory = new ComponentPresentationFactory(tcmUri.PublicationId);
+            Tridion.ContentDelivery.DynamicContent.ComponentPresentation cp = null;
+
+            if (!String.IsNullOrEmpty(templateUri))
+            {
+                cp = cpFactory.GetComponentPresentation(tcmUri.ItemId, templateTcmUri.ItemId);
+                if (cp != null)
+                    return cp.Content;
+            }
+            if (!string.IsNullOrEmpty(selectByComponentTemplateId))
+            {
+                cp = cpFactory.GetComponentPresentation(tcmUri.ItemId, Convert.ToInt32(selectByComponentTemplateId));
+                if (cp != null)
+                    return cp.Content;
+            }
+            if (!string.IsNullOrEmpty(selectByOutputFormat))
+            {
+                cp = cpFactory.GetComponentPresentationWithOutputFormat(tcmUri.ItemId, selectByOutputFormat);
+                if (cp != null)
+                    return cp.Content;
+            }
+            IList cps = cpFactory.FindAllComponentPresentations(tcmUri.ItemId);
+
+            foreach (Tridion.ContentDelivery.DynamicContent.ComponentPresentation _cp in cps)
+            {
+                if (_cp != null)
+                {
+                    if (_cp.Content.Contains("<Component"))
+                    {
+                        return _cp.Content;
+                    }
+                }
+            }
+            return string.Empty;
         }
     }
 }
