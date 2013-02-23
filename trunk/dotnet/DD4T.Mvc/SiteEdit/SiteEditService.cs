@@ -127,6 +127,11 @@ namespace DD4T.Mvc.SiteEdit
         /// <returns>string representing the JSON SiteEdit tag.</returns>
         public static string GenerateSiteEditPageTag(IPage page)
         {
+            if (!SiteEditSettings.Enabled)
+            {
+                return string.Empty;
+            }
+
             if (SiteEditSettings.Style == SiteEditStyle.SiteEdit2012)
             {
                 string result = string.Format(Ui2012PageSeFormat, page.Id, string.Format("{0:s}", page.RevisionDate), page.PageTemplate.Id, string.Format("{0:s}", page.PageTemplate.RevisionDate));
@@ -184,6 +189,11 @@ namespace DD4T.Mvc.SiteEdit
         /// <returns>string representing the JSON SiteEdit tag.</returns>
         public static string GenerateSiteEditComponentTag(IComponentPresentation cp, bool queryBased, string region)
         {
+            if (!SiteEditSettings.Enabled)
+            {
+                return string.Empty;
+            }
+
             if (SiteEditSettings.Style == SiteEditStyle.SiteEdit2012)
             {
                 // is query based tells us if the dcp was the result of a broker query and the component presentation is not embedded on the page
