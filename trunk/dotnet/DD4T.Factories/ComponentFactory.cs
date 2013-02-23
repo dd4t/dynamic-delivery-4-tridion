@@ -21,7 +21,7 @@ namespace DD4T.Factories
     /// </summary>
     public class ComponentFactory : FactoryBase, IComponentFactory
     {
-        public const string CacheKeyFormatByUri = "ComponentByUri_{0}";
+        public const string CacheKeyFormatByUri = "ComponentByUri_{0}_{1}";
         public const string CacheRegion = "Component";
         private ICacheAgent _cacheAgent = null;
 
@@ -54,57 +54,6 @@ namespace DD4T.Factories
         }
 
         #region IComponentFactory members
-        public bool TryGetComponent(string componentUri, out IComponent component)
-        {
-            LoggerService.Debug(">>TryGetComponent ({0})", LoggingCategory.Performance, componentUri);
-
-            component = null;
-
-            string cacheKey = String.Format(CacheKeyFormatByUri, componentUri);
-            component = (IComponent)CacheAgent.Load(cacheKey);
-
-            if (component != null)
-            {
-                LoggerService.Debug("<<TryGetComponent ({0}) - from cache", LoggingCategory.Performance, componentUri);
-                return true;
-            }
-
-            string content = ComponentProvider.GetContent(componentUri);
-
-            if (string.IsNullOrEmpty(content))
-            {
-                LoggerService.Debug("<<TryGetComponent ({0}) - from provider", LoggingCategory.Performance, componentUri);
-                return false;
-            }
-
-            LoggerService.Debug("about to create IComponent from content ({0})", LoggingCategory.Performance, componentUri);
-            component = GetIComponentObject(content);
-            LoggerService.Debug("finished creating IComponent from content ({0})", LoggingCategory.Performance, componentUri);
-
-            if (IncludeLastPublishedDate)
-                ((Component)component).LastPublishedDate = ComponentProvider.GetLastPublishedDate(componentUri);
-            LoggerService.Debug("about to store IComponent in cache ({0})", LoggingCategory.Performance, componentUri);
-            CacheAgent.Store(cacheKey, CacheRegion, component);
-            LoggerService.Debug("finished storing IComponent in cache ({0})", LoggingCategory.Performance, componentUri);
-            LoggerService.Debug("<<TryGetComponent ({0})", LoggingCategory.Performance, componentUri);
-            return true;
-        }
-
-
-        public IComponent GetComponent(string componentUri)
-        {
-            LoggerService.Debug(">>GetComponent ({0})", LoggingCategory.Performance, componentUri);
-            IComponent component;
-            if (!TryGetComponent(componentUri, out component))
-            {
-                LoggerService.Debug("<<GetComponent ({0}) -- not found", LoggingCategory.Performance, componentUri);
-                throw new ComponentNotFoundException();
-            }
-
-            LoggerService.Debug("<<GetComponent ({0})", LoggingCategory.Performance, componentUri);
-            return component;
-        }
-
 
         /// <summary>
         /// Create IComponent from a string representing that IComponent (XML)
@@ -208,6 +157,56 @@ namespace DD4T.Factories
             }
         }
 
-		#endregion
-	}
+        public bool TryGetComponent(string componentUri, out IComponent component, string templateUri = "")
+        {
+            LoggerService.Debug(">>TryGetComponent ({0})", LoggingCategory.Performance, componentUri);
+
+            component = null;
+
+            string cacheKey = String.Format(CacheKeyFormatByUri, componentUri, templateUri);
+            component = (IComponent)CacheAgent.Load(cacheKey);
+
+            if (component != null)
+            {
+                LoggerService.Debug("<<TryGetComponent ({0}) - from cache", LoggingCategory.Performance, componentUri);
+                return true;
+            }
+
+            string content = !String.IsNullOrEmpty(templateUri) ? ComponentProvider.GetContent(componentUri, templateUri) : ComponentProvider.GetContent(componentUri);
+
+            if (string.IsNullOrEmpty(content))
+            {
+                LoggerService.Debug("<<TryGetComponent ({0}) - from provider", LoggingCategory.Performance, componentUri);
+                return false;
+            }
+
+            LoggerService.Debug("about to create IComponent from content ({0})", LoggingCategory.Performance, componentUri);
+            component = GetIComponentObject(content);
+            LoggerService.Debug("finished creating IComponent from content ({0})", LoggingCategory.Performance, componentUri);
+
+            if (IncludeLastPublishedDate)
+                ((Component)component).LastPublishedDate = ComponentProvider.GetLastPublishedDate(componentUri);
+            LoggerService.Debug("about to store IComponent in cache ({0})", LoggingCategory.Performance, componentUri);
+            CacheAgent.Store(cacheKey, CacheRegion, component);
+            LoggerService.Debug("finished storing IComponent in cache ({0})", LoggingCategory.Performance, componentUri);
+            LoggerService.Debug("<<TryGetComponent ({0})", LoggingCategory.Performance, componentUri);
+            return true;
+        }
+
+        public IComponent GetComponent(string componentUri, string templateUri = "")
+        {
+            LoggerService.Debug(">>GetComponent ({0})", LoggingCategory.Performance, componentUri);
+            IComponent component;
+            if (!TryGetComponent(componentUri, out component, templateUri))
+            {
+                LoggerService.Debug("<<GetComponent ({0}) -- not found", LoggingCategory.Performance, componentUri);
+                throw new ComponentNotFoundException();
+            }
+
+            LoggerService.Debug("<<GetComponent ({0})", LoggingCategory.Performance, componentUri);
+            return component;
+        }
+
+        #endregion
+    }
 }

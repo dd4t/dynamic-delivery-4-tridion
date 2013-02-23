@@ -38,13 +38,21 @@ namespace DD4T.Providers.SDLTridion2009
             selectByOutputFormat = ConfigurationHelper.SelectComponentByOutputFormat;
         }
 
-        public string GetContent(string uri)
+        public string GetContent(string uri, string templateUri = "")
         {
             
             TcmUri tcmUri = new TcmUri(uri);
+            TcmUri templateTcmUri = new TcmUri(templateUri);
             Tridion.ContentDelivery.DynamicContent.ComponentPresentationFactory cpFactory = new ComponentPresentationFactory(PublicationId);
             Tridion.ContentDelivery.DynamicContent.ComponentPresentation cp = null;
 
+
+            if (!String.IsNullOrEmpty(templateUri))
+            {
+                cp = cpFactory.GetComponentPresentation(tcmUri.ItemId, templateTcmUri.ItemId);
+                if (cp != null)
+                    return cp.Content;
+            }
 
             if (!string.IsNullOrEmpty(selectByComponentTemplateId))
             {

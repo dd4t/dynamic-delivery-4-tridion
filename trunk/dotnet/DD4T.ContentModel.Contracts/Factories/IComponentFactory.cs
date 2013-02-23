@@ -12,8 +12,8 @@ namespace DD4T.ContentModel.Factories
     {
         IComponentProvider ComponentProvider { get; set; }
         ICacheAgent CacheAgent { get; set; }
-        bool TryGetComponent(string componentUri, out IComponent component);
-        IComponent GetComponent(string componentUri);
+        bool TryGetComponent(string componentUri, out IComponent component, string templateUri = "");
+        IComponent GetComponent(string componentUri, string templateUri = "");
         IList<IComponent> GetComponents(string[] componentUris);
 		IList<IComponent> FindComponents(IQuery queryParameters);
         IList<IComponent> FindComponents(IQuery queryParameters, int pageIndex, int pageSize, out int totalCount);

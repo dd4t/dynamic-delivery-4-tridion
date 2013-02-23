@@ -14,7 +14,7 @@ namespace DD4T.Providers.Test
     public class TridionComponentProvider : BaseProvider, IComponentProvider
     {
 
-        public string GetContent(string uri)
+        public string GetContent(string uri, string templateUri = "")
         {            
             return string.Empty;
         }
