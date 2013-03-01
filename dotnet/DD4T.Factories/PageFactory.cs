@@ -43,6 +43,12 @@ namespace DD4T.Factories
                         }
                     }
                 }
+				
+                // If using your own DI you can pass the provider PublicationID yourself
+				// However by not doing so, the below will leverage the configuted PublicationResolver - which could still return 0 if you needed.
+                if (_pageProvider.PublicationId == 0)
+                    _pageProvider.PublicationId = this.PublicationId;
+					
                 return _pageProvider;
             }
             set

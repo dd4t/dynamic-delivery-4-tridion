@@ -29,6 +29,12 @@ namespace DD4T.Factories
                 {
                     _linkProvider = (ILinkProvider)ProviderLoader.LoadProvider<ILinkProvider>();
                 }
+				
+				// If using your own DI you can pass the provider PublicationID yourself
+				// However by not doing so, the below will leverage the configuted PublicationResolver - which could still return 0 if you needed.					
+                if (_linkProvider.PublicationId == 0)
+                    _linkProvider.PublicationId = this.PublicationId;
+					
                 return _linkProvider;
             }
             set

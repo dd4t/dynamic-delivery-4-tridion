@@ -34,6 +34,12 @@ namespace DD4T.Factories
                 {
                     _componentProvider = (IComponentProvider)ProviderLoader.LoadProvider<IComponentProvider>(this.PublicationId);
                 }
+				
+				// If using your own DI you can pass the provider PublicationID yourself
+				// However by not doing so, the below will leverage the configuted PublicationResolver - which could still return 0 if you needed.					
+                if (_componentProvider.PublicationId == 0)
+                    _componentProvider.PublicationId = this.PublicationId;
+					
                 return _componentProvider;
             }
             set
