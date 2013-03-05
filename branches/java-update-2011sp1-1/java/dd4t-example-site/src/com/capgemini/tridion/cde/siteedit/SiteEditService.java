@@ -126,7 +126,7 @@ public final class SiteEditService {
             }
         } catch (Exception ex) {
             logger.error("Unable to get pubID from URI", ex);
-            return ex.getMessage();
+            return "";
         }
     }
     
