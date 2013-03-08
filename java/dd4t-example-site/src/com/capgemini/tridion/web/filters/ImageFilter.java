@@ -76,7 +76,11 @@ public class ImageFilter implements Filter {
 	        	ItemDAO itemDao = (ItemDAO) StorageManagerFactory.getDAO(200, StorageTypeMapping.ITEM_META);
 	        	ItemMeta item = itemDao.findByPrimaryKey(meta.getPublicationId(), meta.getItemId());	        
 	        	
-				// if so, check if item is on filesystem
+	        	
+	        	// first, replace url spaces with normal ones
+				url = url.replace("%20", " ");
+				
+				// check if item is on filesystem
 		        File file = new File(context.getRealPath(url));
 	
 		        if(logger.isDebugEnabled())
