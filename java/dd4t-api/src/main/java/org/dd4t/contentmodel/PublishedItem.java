@@ -17,13 +17,15 @@ package org.dd4t.contentmodel;
 
 import java.util.Date;
 
+import org.dd4t.core.caching.Cachable;
+
 /**
  * Interface for a published item
  * 
  * @author bjornl
  * 
  */
-public interface PublishedItem extends RepositoryLocalItem {
+public interface PublishedItem extends RepositoryLocalItem, Cachable {
 	/**
 	 * The published source
 	 * 
