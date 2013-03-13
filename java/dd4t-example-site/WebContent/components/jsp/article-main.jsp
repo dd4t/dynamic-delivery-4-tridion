@@ -1,3 +1,4 @@
+<%@page import="com.capgemini.tridion.cde.constants.Constants"%>
 <%@page import="com.capgemini.tridion.cde.siteedit.SiteEditService"%>
 <%@ page 
     language="java" contentType="text/html; charset=UTF-8"
@@ -6,11 +7,9 @@
 			org.dd4t.contentmodel.*,
 			org.dd4t.contentmodel.impl.*"
 	pageEncoding="UTF-8"%>
-	
-	
+		
 <%
-	GenericComponent comp = (GenericComponent) request.getAttribute("Component");
-
+	GenericComponent comp = (GenericComponent) request.getAttribute(Constants.COMPONENT_KEY);
 %>
 	<h2>
 		<%=SiteEditService.generateSiteEditFieldMarking(comp.getContent().get("title")) %>

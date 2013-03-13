@@ -18,7 +18,7 @@
 	</h3>
 	
 	<p><strong>
-		<%=SiteEditService.generateSiteEditFieldMarking(comp.getContent().get("title")) %>
+		<%=SiteEditService.generateSiteEditFieldMarking(comp.getContent().get("introduction")) %>
 		<%=comp.getContent().get("introduction").getValues().get(0) %>
 	</strong></p>
 	
