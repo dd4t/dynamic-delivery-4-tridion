@@ -93,7 +93,7 @@
 	    <property name="componentViewManager"><ref bean="componentViewManager" /></property>				
 	</bean>
 
-	<!-- Page-level JSP views are managed through spring internal viewResolver -->
+	<!-- Application-level JSP views are managed through spring internal viewResolver -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	    <property name="prefix"><value>/applications/jsp/</value></property>
 	    <property name="suffix"><value>.jsp</value></property>
