@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.LogWrappers.Log4Net", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Web", "DD4T.Web\DD4T.Web.csproj", "{24ABAC91-284E-45F6-A700-8685510C9EB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Providers.SDLTridion2013", "DD4T.Providers.SDLTridion2013\DD4T.Providers.SDLTridion2013.csproj", "{E35BF700-6A67-4B29-B0FD-242FCC470E50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -161,6 +163,16 @@ Global
 		{24ABAC91-284E-45F6-A700-8685510C9EB0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{24ABAC91-284E-45F6-A700-8685510C9EB0}.TridionDebug|Any CPU.ActiveCfg = Debug|Any CPU
 		{24ABAC91-284E-45F6-A700-8685510C9EB0}.TridionDebug|Any CPU.Build.0 = Debug|Any CPU
+		{E35BF700-6A67-4B29-B0FD-242FCC470E50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E35BF700-6A67-4B29-B0FD-242FCC470E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E35BF700-6A67-4B29-B0FD-242FCC470E50}.DebugTridion2011|Any CPU.ActiveCfg = Debug|Any CPU
+		{E35BF700-6A67-4B29-B0FD-242FCC470E50}.DebugTridion2011|Any CPU.Build.0 = Debug|Any CPU
+		{E35BF700-6A67-4B29-B0FD-242FCC470E50}.MVC4|Any CPU.ActiveCfg = Release|Any CPU
+		{E35BF700-6A67-4B29-B0FD-242FCC470E50}.MVC4|Any CPU.Build.0 = Release|Any CPU
+		{E35BF700-6A67-4B29-B0FD-242FCC470E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E35BF700-6A67-4B29-B0FD-242FCC470E50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E35BF700-6A67-4B29-B0FD-242FCC470E50}.TridionDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E35BF700-6A67-4B29-B0FD-242FCC470E50}.TridionDebug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
