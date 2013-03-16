@@ -10,6 +10,7 @@ namespace DD4T.ContentModel.Contracts.Providers
         Tridion2009,
         Tridion2011,
         Tridion2011sp1,
+        Tridion2013,
         Undefined
     }
 
@@ -36,7 +37,7 @@ namespace DD4T.ContentModel.Contracts.Providers
                     _dictionary[ProviderVersion.Tridion2009] = "DD4T.Providers.SDLTridion2009";
                     _dictionary[ProviderVersion.Tridion2011] = "DD4T.Providers.SDLTridion2011";
                     _dictionary[ProviderVersion.Tridion2011sp1] = "DD4T.Providers.SDLTridion2011sp1";
-                    _dictionary[ProviderVersion.Tridion2011sp1] = "DD4T.Providers.SDLTridion2013";
+                    _dictionary[ProviderVersion.Tridion2013] = "DD4T.Providers.SDLTridion2013";
                 }
                 return _dictionary;
             }
