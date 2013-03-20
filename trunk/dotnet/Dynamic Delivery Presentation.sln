@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Mvc", "DD4T.Mvc\DD4T.Mvc.csproj", "{3AC37BE3-9832-4317-A5E2-2C24C61DECBD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.ContentModel.Contracts", "DD4T.ContentModel.Contracts\DD4T.ContentModel.Contracts.csproj", "{C21F66F0-01CE-4AF3-B76C-CD262B7EA1C0}"
