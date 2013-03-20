@@ -69,7 +69,7 @@
     <DefineConstants>MVC4</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release2011SP1|AnyCPU'">
-    <OutputPath>bin\Release2011SP1\</OutputPath>
+    <OutputPath>..\..\build\</OutputPath>
     <DefineConstants>CODE_ANALYSIS;TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
