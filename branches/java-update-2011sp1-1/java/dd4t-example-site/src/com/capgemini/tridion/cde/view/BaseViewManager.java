@@ -23,8 +23,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.dd4t.contentmodel.GenericPage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Abstract class, wiring different viewhandlers together to act as a single
@@ -36,7 +37,7 @@ import org.dd4t.contentmodel.GenericPage;
  * @param <T>
  */
 public abstract class BaseViewManager<T> implements IViewManager<T> {
-    private static Logger logger = Logger.getLogger(BaseViewManager.class);
+    private static Logger logger = LoggerFactory.getLogger(BaseViewManager.class);
 
     private List<IViewHandler<T>> handlers;
 

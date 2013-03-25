@@ -28,7 +28,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Standard XSLT util class to provide compiled XSLT transformations.
@@ -48,7 +49,7 @@ public class XSLTransformer {
     /**
      * Logger object.
      */
-    private static Logger logger = Logger.getLogger(XSLTransformer.class);
+    private static Logger logger = LoggerFactory.getLogger(XSLTransformer.class);
     /**
      * The Constructor.
      */

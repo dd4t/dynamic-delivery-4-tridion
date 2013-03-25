@@ -22,13 +22,14 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.dd4t.contentmodel.Component;
 import org.dd4t.contentmodel.GenericComponent;
 import org.dd4t.contentmodel.GenericPage;
 import org.dd4t.contentmodel.exceptions.ItemNotFoundException;
 import org.dd4t.contentmodel.impl.NumericField;
 import org.dd4t.core.factories.ComponentFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.capgemini.tridion.cde.view.BaseViewHandler;
@@ -41,7 +42,7 @@ import com.tridion.broker.querying.filter.LimitFilter;
 
 public class JSPQueryViewHandler extends BaseViewHandler implements
         IViewHandler<Component> {
-    private static Logger logger = Logger
+    private static Logger logger = LoggerFactory
             .getLogger(JSPQueryViewHandler.class);
 
     
@@ -103,7 +104,7 @@ public class JSPQueryViewHandler extends BaseViewHandler implements
             // run the include
             dispatcher.include(req, wrapper);
         } catch (Exception ex) {
-            logger.error(ex);
+            logger.error("error including",ex);
             return ex.getMessage();
         }
 

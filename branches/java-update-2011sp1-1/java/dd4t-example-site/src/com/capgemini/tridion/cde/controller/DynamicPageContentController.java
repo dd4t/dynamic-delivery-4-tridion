@@ -18,10 +18,11 @@ package com.capgemini.tridion.cde.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.dd4t.contentmodel.Component;
 import org.dd4t.contentmodel.ComponentPresentation;
 import org.dd4t.contentmodel.GenericPage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,7 +33,7 @@ import com.capgemini.tridion.cde.view.model.ViewRegion;
 
 public class DynamicPageContentController extends BaseDD4TController implements
         ContentController {
-    private static Logger logger = Logger
+    private static Logger logger = LoggerFactory
             .getLogger(DynamicPageContentController.class);
 
     @Autowired
