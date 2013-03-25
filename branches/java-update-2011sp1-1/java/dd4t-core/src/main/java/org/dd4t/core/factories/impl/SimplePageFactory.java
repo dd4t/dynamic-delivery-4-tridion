@@ -17,7 +17,6 @@ package org.dd4t.core.factories.impl;
 
 import java.text.ParseException;
 
-import org.apache.log4j.Logger;
 import org.dd4t.contentmodel.Page;
 import org.dd4t.contentmodel.SimplePage;
 import org.dd4t.contentmodel.exceptions.ItemNotFoundException;
@@ -31,6 +30,8 @@ import org.dd4t.core.request.RequestContext;
 import org.dd4t.core.util.TridionUtils;
 import org.dd4t.providers.PageProvider;
 import org.dd4t.providers.impl.BrokerPageProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
 
 import com.tridion.broker.StorageException;
@@ -46,7 +47,7 @@ import com.tridion.util.TCMURI;
  */
 public class SimplePageFactory extends BaseFactory implements PageFactory {
 
-	private static Logger logger = Logger.getLogger(SimplePageFactory.class);
+	private static Logger logger = LoggerFactory.getLogger(SimplePageFactory.class);
 	
 	private PageProvider brokerPageProvider;
 	

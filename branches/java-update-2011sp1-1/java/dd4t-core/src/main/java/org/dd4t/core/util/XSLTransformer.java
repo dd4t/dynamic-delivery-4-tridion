@@ -28,7 +28,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -37,7 +38,7 @@ import org.apache.log4j.Logger;
 public class XSLTransformer {
     private HashMap<String , Templates> cache = null;
     private boolean cacheTemplates = true;
-    private static Logger logger = Logger.getLogger(XSLTransformer.class);
+    private static Logger logger = LoggerFactory.getLogger(XSLTransformer.class);
     
     public XSLTransformer(){
             this.cache = new HashMap<String, Templates>();

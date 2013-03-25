@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
 import org.dd4t.contentmodel.ComponentPresentation;
 import org.dd4t.contentmodel.Field;
 import org.dd4t.contentmodel.FieldSet;
@@ -40,6 +39,8 @@ import org.dd4t.core.resolvers.LinkResolver;
 import org.dd4t.core.resolvers.impl.DefaultLinkResolver;
 import org.dd4t.core.util.TridionUtils;
 import org.dd4t.core.util.XSLTransformer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
 
 
@@ -58,8 +59,7 @@ public class DefaultLinkResolverFilter extends BaseFilter implements
 
     private LinkResolver linkResolver;
 
-    private static Logger logger = Logger
-            .getLogger(DefaultLinkResolverFilter.class);
+    private static Logger logger = LoggerFactory.getLogger(DefaultLinkResolverFilter.class);
 
     private XSLTransformer xslTransformer = new XSLTransformer();
 

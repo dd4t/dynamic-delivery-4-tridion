@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
 import org.dd4t.contentmodel.Component;
 import org.dd4t.contentmodel.ComponentPresentation;
 import org.dd4t.contentmodel.Field;
@@ -44,6 +43,8 @@ import org.dd4t.core.filters.FilterException;
 import org.dd4t.core.filters.SecurityFilter;
 import org.dd4t.core.request.RequestContext;
 import org.dd4t.core.util.TridionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tridion.meta.Category;
 import com.tridion.meta.ComponentMeta;
@@ -61,8 +62,7 @@ public class DefaultScdSecurityFilter extends BaseFilter implements
 	private String roleCategory;
 	private SimpleComponentFactory simpleComponentFactory = new SimpleComponentFactory();
 
-	private static Logger logger = Logger
-			.getLogger(DefaultScdSecurityFilter.class);
+	private static Logger logger = LoggerFactory.getLogger(DefaultScdSecurityFilter.class);
 
 	public DefaultScdSecurityFilter() {
 		// set the caching to false to make sure that the security filter is run
