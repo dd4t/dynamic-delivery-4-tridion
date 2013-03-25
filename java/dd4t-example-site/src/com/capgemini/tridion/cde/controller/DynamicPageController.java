@@ -15,10 +15,11 @@
  */
 package com.capgemini.tridion.cde.controller;
 
+import java.net.URL;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.dd4t.contentmodel.GenericPage;
 import org.dd4t.contentmodel.Page;
 import org.dd4t.core.factories.impl.GenericPageFactory;
@@ -26,6 +27,8 @@ import org.dd4t.core.factories.impl.SimplePageFactory;
 import org.dd4t.core.filters.Filter;
 import org.dd4t.core.filters.LinkResolverFilter;
 import org.dd4t.core.request.impl.BasicRequestContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.capgemini.tridion.cde.constants.Constants;
@@ -33,8 +36,7 @@ import com.capgemini.tridion.cde.view.IViewHandler;
 import com.capgemini.tridion.cde.view.model.ComponentViews;
 
 public class DynamicPageController extends BaseDD4TController {
-    private static Logger logger = Logger
-            .getLogger(DynamicPageController.class);
+    private static Logger logger = LoggerFactory.getLogger(DynamicPageController.class);
 
     private boolean isInitialized;
     
@@ -165,9 +167,10 @@ public class DynamicPageController extends BaseDD4TController {
         
         long navmodeldone = System.currentTimeMillis();
         
-        if(logger.isDebugEnabled())
-            logger.debug("Built navigationmodel: " + navigationModel+" in "+(navmodeldone-contentmodeldone)+" milliseconds.");  
-        mav.addObject(Constants.NAVIGATION_MODEL_KEY, navigationModel);  
+        if(logger.isDebugEnabled()){
+            logger.debug("Built navigationmodel: " + navigationModel+" in "+(navmodeldone-contentmodeldone)+" milliseconds.");
+        }  
+        request.setAttribute(Constants.NAVIGATION_MODEL_KEY, navigationModel);  
           */
           
         // attain view
