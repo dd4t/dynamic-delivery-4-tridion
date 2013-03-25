@@ -18,7 +18,6 @@ package org.dd4t.core.serializers.impl;
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 
-import org.apache.log4j.Logger;
 import org.dd4t.contentmodel.Component;
 import org.dd4t.contentmodel.ComponentPresentation;
 import org.dd4t.contentmodel.ComponentTemplate;
@@ -39,6 +38,8 @@ import org.simpleframework.xml.convert.RegistryStrategy;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.strategy.Strategy;
 import org.simpleframework.xml.stream.InputNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -50,7 +51,7 @@ import org.simpleframework.xml.stream.InputNode;
 public class DefaultSerializer implements
 		org.dd4t.core.serializers.Serializer {
 
-	private static Logger logger = Logger.getLogger(DefaultSerializer.class);
+	private static Logger logger = LoggerFactory.getLogger(DefaultSerializer.class);
 	private Serializer serializer;
 
 	public DefaultSerializer() {

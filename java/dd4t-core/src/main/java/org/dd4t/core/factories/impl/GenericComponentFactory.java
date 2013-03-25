@@ -17,7 +17,6 @@ package org.dd4t.core.factories.impl;
 
 import java.text.ParseException;
 
-import org.apache.log4j.Logger;
 import org.dd4t.contentmodel.Component;
 import org.dd4t.contentmodel.ComponentPresentation;
 import org.dd4t.contentmodel.GenericComponent;
@@ -39,6 +38,8 @@ import org.dd4t.core.request.RequestContext;
 import org.dd4t.core.util.TridionUtils;
 import org.dd4t.providers.ComponentProvider;
 import org.dd4t.providers.impl.BrokerComponentProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
 
 import com.tridion.broker.StorageException;
@@ -50,7 +51,7 @@ import com.tridion.util.TCMURI;
 public class GenericComponentFactory extends BaseFactory implements
 		ComponentFactory {
 
-	private static Logger logger = Logger
+	private static Logger logger = LoggerFactory
 			.getLogger(GenericComponentFactory.class);
 
 

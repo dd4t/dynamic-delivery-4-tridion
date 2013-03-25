@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
 import org.dd4t.contentmodel.Component;
 import org.dd4t.contentmodel.GenericComponent;
 import org.dd4t.contentmodel.Page;
@@ -31,6 +30,8 @@ import org.dd4t.contentmodel.Schema;
 import org.dd4t.contentmodel.impl.PublicationImpl;
 import org.dd4t.core.resolvers.LinkResolver;
 import org.dd4t.core.util.TridionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tridion.linking.ComponentLink;
 import com.tridion.linking.Link;
@@ -43,7 +44,7 @@ public class DefaultLinkResolver implements LinkResolver {
 	private boolean encodeUrl = true;
 	private String contextPath;
 
-	private static Logger logger = Logger.getLogger(DefaultLinkResolver.class);
+	private static Logger logger = LoggerFactory.getLogger(DefaultLinkResolver.class);
 
 	@Override
 	public String resolve(Component component) {

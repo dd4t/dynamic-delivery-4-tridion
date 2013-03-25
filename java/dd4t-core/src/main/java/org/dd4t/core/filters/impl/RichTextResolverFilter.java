@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
 import org.dd4t.contentmodel.ComponentPresentation;
 import org.dd4t.contentmodel.Field;
 import org.dd4t.contentmodel.FieldSet;
@@ -34,6 +33,8 @@ import org.dd4t.core.filters.Filter;
 import org.dd4t.core.filters.FilterException;
 import org.dd4t.core.request.RequestContext;
 import org.dd4t.core.util.XSLTransformer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
 
 
@@ -47,8 +48,7 @@ public class RichTextResolverFilter extends BaseFilter implements
 		Filter {
 
 	
-	private static Logger logger = Logger
-			.getLogger(RichTextResolverFilter.class);
+	private static Logger logger = LoggerFactory.getLogger(RichTextResolverFilter.class);
 
 	private XSLTransformer xslTransformer = new XSLTransformer();
 	

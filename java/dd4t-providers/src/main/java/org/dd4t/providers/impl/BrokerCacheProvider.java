@@ -19,10 +19,11 @@ package org.dd4t.providers.impl;
 import java.text.ParseException;
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
 import org.dd4t.core.caching.Cachable;
 import org.dd4t.core.caching.CacheAgent;
 import org.dd4t.providers.CacheProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tridion.cache.Cache;
 import com.tridion.cache.CacheFactory;
@@ -50,8 +51,7 @@ import com.tridion.util.TCMURI;
 public class BrokerCacheProvider implements CacheAgent, CacheProvider {
 
 
-	private static Logger logger = Logger
-			.getLogger(BrokerCacheProvider.class);
+	private static Logger logger = LoggerFactory.getLogger(BrokerCacheProvider.class);
 
 	// Tridion's own cache region for component presentation
 	@Deprecated

@@ -2,9 +2,10 @@ package org.dd4t.providers.impl;
 
 import java.text.ParseException;
 
-import org.apache.log4j.Logger;
 import org.dd4t.contentmodel.exceptions.ItemNotFoundException;
 import org.dd4t.providers.ComponentProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tridion.broker.StorageException;
 import com.tridion.dcp.ComponentPresentation;
@@ -16,7 +17,7 @@ import com.tridion.storage.dao.ItemDAO;
 import com.tridion.util.TCMURI;
 
 public class BrokerComponentProvider implements ComponentProvider {
-	protected static Logger logger = Logger.getLogger(BrokerComponentProvider.class);
+	protected static Logger logger = LoggerFactory.getLogger(BrokerComponentProvider.class);
 
 	// default CT to use when finding CP
 	private String defaultComponentTemplateUri;

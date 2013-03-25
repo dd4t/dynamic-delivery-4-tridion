@@ -44,7 +44,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tridion.ItemTypes;
 import com.tridion.broker.StorageException;
@@ -59,7 +60,7 @@ import com.tridion.util.TCMURI;
 
 public class BrokerUtils {
 
-	private static Logger logger = Logger.getLogger(BrokerUtils.class);
+	private static Logger logger = LoggerFactory.getLogger(BrokerUtils.class);
 
 	private static final String SQL_GETROLES = "select distinct KEYWORD from ITEM_CATEGORIES_AND_KEYWORDS where CATEGORY = ?";
 

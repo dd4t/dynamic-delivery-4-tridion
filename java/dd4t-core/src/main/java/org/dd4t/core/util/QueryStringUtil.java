@@ -40,7 +40,8 @@ package org.dd4t.core.util;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class containing utility methods for handling query strings.
@@ -49,7 +50,7 @@ import org.apache.log4j.Logger;
  */
 public class QueryStringUtil {
 
-	private static Logger logger = Logger.getLogger(QueryStringUtil.class);
+	private static Logger logger = LoggerFactory.getLogger(QueryStringUtil.class);
 
 	/**
 	 * Unique sequence used internally in URL encoding

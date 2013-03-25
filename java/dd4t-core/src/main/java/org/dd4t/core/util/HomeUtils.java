@@ -42,7 +42,8 @@ import java.util.HashMap;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tridion.broker.StorageException;
 import com.tridion.broker.binaries.BinaryHome;
@@ -71,7 +72,7 @@ import com.tridion.util.TCMURI;
  */
 public class HomeUtils {
 
-	private static Logger logger = Logger.getLogger(HomeUtils.class);
+	private static Logger logger = LoggerFactory.getLogger(HomeUtils.class);
 
 	private HashMap<Integer, ComponentPresentationFactory> cpFactoryStore = new HashMap<Integer, ComponentPresentationFactory>();
 	
