@@ -15,13 +15,14 @@
  */
 package com.capgemini.tridion.cde.controller;
 
-import org.apache.log4j.Logger;
 import org.dd4t.contentmodel.Field;
 import org.dd4t.contentmodel.HasMetadata;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.mvc.AbstractController;
 
 public abstract class BaseDD4TController extends AbstractController {
-    private static Logger logger = Logger.getLogger(BaseDD4TController.class);
+    private static Logger logger = LoggerFactory.getLogger(BaseDD4TController.class);
     protected String defaultRegion = "default";
     protected boolean defaultIsStatic = false;
     

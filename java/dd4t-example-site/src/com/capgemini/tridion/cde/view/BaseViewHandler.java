@@ -20,7 +20,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class manages a directory full of files. Both directory and fileending are
@@ -32,7 +33,7 @@ import org.apache.log4j.Logger;
  * 
  */
 public abstract class BaseViewHandler {
-    private static Logger logger = Logger.getLogger(BaseViewHandler.class);
+    private static Logger logger = LoggerFactory.getLogger(BaseViewHandler.class);
 
     private String filePath;
 
@@ -67,7 +68,7 @@ public abstract class BaseViewHandler {
         // debug results of given linking to files
         if (logger.isDebugEnabled()) {
             logger.debug("Opening directory '" + filePath + "'");
-            logger.debug(dir);
+            logger.debug(""+dir);
 
             if (files == null) {
                 logger.debug("Unable to load files in directory.");

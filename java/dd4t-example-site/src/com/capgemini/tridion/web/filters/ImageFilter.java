@@ -14,7 +14,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tridion.storage.BinaryContent;
 import com.tridion.storage.BinaryMeta;
@@ -35,7 +36,7 @@ import com.tridion.storage.dao.ItemDAO;
  *
  */
 public class ImageFilter implements Filter {
-	public static Logger logger = Logger.getLogger(ImageFilter.class);
+	public static Logger logger = LoggerFactory.getLogger(ImageFilter.class);
 	
 	private ServletContext context;
 

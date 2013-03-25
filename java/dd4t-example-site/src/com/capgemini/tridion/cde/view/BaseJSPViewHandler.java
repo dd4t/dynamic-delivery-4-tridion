@@ -24,8 +24,9 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.dd4t.contentmodel.GenericPage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.capgemini.tridion.cde.constants.Constants;
 import com.capgemini.tridion.cde.view.model.CharResponseWrapper;
@@ -40,7 +41,7 @@ import com.capgemini.tridion.cde.view.model.CharResponseWrapper;
  * 
  */
 public abstract class BaseJSPViewHandler<T> implements IViewHandler<T>{
-    private static Logger logger = Logger.getLogger(BaseJSPViewHandler.class);
+    private static Logger logger = LoggerFactory.getLogger(BaseJSPViewHandler.class);
 
     /**
      * Local set of cachedviews, enabling speedy lookup of views.

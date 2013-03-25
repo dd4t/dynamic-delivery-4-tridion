@@ -6,10 +6,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.dd4t.contentmodel.GenericComponent;
 import org.dd4t.contentmodel.GenericPage;
 import org.dd4t.core.factories.impl.GenericComponentFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
@@ -25,7 +26,7 @@ import com.tridion.broker.querying.sorting.SortParameter;
 import com.tridion.util.TCMURI;
 
 public class NewsList extends AbstractController {
-    private static Logger logger = Logger.getLogger(NewsList.class);
+    private static Logger logger = LoggerFactory.getLogger(NewsList.class);
 
     public static String NEWSLIST_COMPS_KEY = "news_list_comps_key";
     
