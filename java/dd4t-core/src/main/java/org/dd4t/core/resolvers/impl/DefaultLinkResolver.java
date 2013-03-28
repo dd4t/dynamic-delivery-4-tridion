@@ -30,11 +30,11 @@ import org.dd4t.contentmodel.Schema;
 import org.dd4t.contentmodel.impl.PublicationImpl;
 import org.dd4t.core.resolvers.LinkResolver;
 import org.dd4t.core.util.TridionUtils;
+import org.dd4t.providers.LinkProvider;
+import org.dd4t.providers.impl.BrokerLinkProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.tridion.linking.ComponentLink;
-import com.tridion.linking.Link;
 import com.tridion.util.TCMURI;
 
 public class DefaultLinkResolver implements LinkResolver {
@@ -43,6 +43,8 @@ public class DefaultLinkResolver implements LinkResolver {
 	private String schemaKey;
 	private boolean encodeUrl = true;
 	private String contextPath;
+	
+	private LinkProvider linkProvider;
 
 	private static Logger logger = LoggerFactory.getLogger(DefaultLinkResolver.class);
 
@@ -118,42 +120,16 @@ public class DefaultLinkResolver implements LinkResolver {
 		}
 		
 		return resolvedUrl;
-	}
-	
+	}	
 
 	@Override
 	public String resolve(String componentId) {
-		try {
-			TCMURI tcmUri = new TCMURI(componentId);
-			ComponentLink clink = new ComponentLink(tcmUri.getPublicationId());
-			Link link = clink.getLink(tcmUri.getItemId()); 
-
-			if (link.isResolved()) {
-				return link.getURL();
-			}
-		}
-		catch(ParseException e){
-			logger.warn("Not possible to parse id: " + componentId);
-		}
-		return null;
+		return getLinkProvider().resolveComponent(componentId);
 	}
 
 	@Override
 	public String resolve(String componentId, String pageId) {
-		try {
-			TCMURI tcmUri = new TCMURI(componentId);
-			ComponentLink clink = new ComponentLink(tcmUri.getPublicationId());
-			
-			Link link = clink.getLink(pageId, componentId, "tcm:0-0-0", "", "", true, false); 
-
-			if (link.isResolved()) {
-				return link.getURL();
-			}
-		}
-		catch(ParseException e){
-			logger.warn("Not possible to parse id: " + componentId);
-		}
-		return null;
+		return getLinkProvider().resolveComponentFromPage(componentId, pageId);			
 	}
 
 	private String replacePlaceholders(String resolvedUrl, String placeholder,
@@ -238,6 +214,17 @@ public class DefaultLinkResolver implements LinkResolver {
 	@Override
 	public String getContextPath() {
 		return contextPath;
+	}
+
+	public LinkProvider getLinkProvider() {
+		if(linkProvider == null){
+			linkProvider = new BrokerLinkProvider();
+		}
+		return linkProvider;
+	}
+
+	public void setLinkProvider(LinkProvider linkProvider) {
+		this.linkProvider = linkProvider;
 	}
 
 }
