@@ -15,9 +15,6 @@
  */
 package org.dd4t.core.util;
 
-import com.tridion.meta.ComponentMeta;
-import com.tridion.meta.Item;
-import com.tridion.meta.PageMeta;
 import com.tridion.storage.ItemMeta;
 import com.tridion.util.TCMURI;
 
@@ -27,24 +24,6 @@ public class TridionUtils {
 	
 	public static TCMURI createUri(ItemMeta item) {
 		return new TCMURI(item.getPublicationId(), item.getItemId(), item.getItemType(), 0);		
-	}
-	
-	/**
-	 * 
-	 * @param item
-	 * @return
-	 * @deprecated
-	 */
-	
-	public static int getItemTypeFromItem(Item item) {
-		if (item instanceof PageMeta) {
-			return 64;
-		}
-		if (item instanceof ComponentMeta) {
-			return 16;
-		}
-		// there are only two item types, so we should never get here!
-		return 0;
 	}
 	
 	public static String getPublicationUri(int id){
