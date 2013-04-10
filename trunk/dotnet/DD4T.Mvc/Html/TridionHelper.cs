@@ -6,11 +6,26 @@ using DD4T.ContentModel.Logging;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Configuration;
+using DD4T.ContentModel.Factories;
+using DD4T.Factories;
 
 namespace DD4T.Mvc.Html
 {
     public static class TridionHelper
     {
+        private static ILinkFactory _linkFactory = null;
+        private static ILinkFactory LinkFactory
+        {
+            get
+            {
+                if (_linkFactory == null)
+                {
+                    _linkFactory = new LinkFactory();
+                }
+                return _linkFactory;
+            }
+        }
+
         public static MvcHtmlString RenderComponentPresentations(this HtmlHelper helper)
         {
             return RenderComponentPresentations(helper, null, null, null);
@@ -92,6 +107,27 @@ namespace DD4T.Mvc.Html
 
             return output;
         }
+
+
+        #region linking functionality
+        public static string GetResolvedUrl(this IComponent component)
+        {
+            return LinkFactory.ResolveLink(component.Id);            
+        }
+        public static MvcHtmlString GetResolvedLink(this IComponent component)
+        {
+            return component.GetResolvedLink(component.Title, "");
+        }
+
+        public static MvcHtmlString GetResolvedLink(this IComponent component, string linkText, string showOnFail)
+        {
+            string url = component.GetResolvedUrl();
+            if (string.IsNullOrEmpty(url))
+                return new MvcHtmlString(showOnFail);
+            return new MvcHtmlString(string.Format("<a href=\"{0}\">{1}</a>", url, linkText));
+        }
+
+        #endregion
 
         #region welcome file functionality
         public static string AddWelcomeFile(string url)
