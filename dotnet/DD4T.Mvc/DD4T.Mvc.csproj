@@ -139,6 +139,7 @@
     <Compile Include="Html\DefaultComponentPresentationRenderer.cs" />
     <Compile Include="Html\IComponentPresentationRenderer.cs" />
     <Compile Include="Html\ImageHelper.cs" />
+    <Compile Include="Html\RichTextHelper.cs" />
     <Compile Include="Html\SiteEditHelper.cs" />
     <Compile Include="Html\TridionHelper.cs" />
     <Compile Include="Properties\SpecificAssemblyInfo.cs" />
