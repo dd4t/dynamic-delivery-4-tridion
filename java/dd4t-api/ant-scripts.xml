@@ -27,7 +27,8 @@
 		</copy>
 		
 		<!-- build jarfile once into the shared build dir -->
-		<jar destfile="${build.dir}/dd4t-api.jar" basedir="${temp.dir}" />		
+		<jar destfile="${build.dir}/dd4t-api.jar" basedir="${temp.dir}" />
+		<jar destfile="${build.dir}/dd4t-api-src.jar" basedir="${dd4t-api.src.dir}" />		
 		<delete dir="${temp.dir}" />		
 	</target>
 </project>
