@@ -32,6 +32,7 @@ Tridion.ContentManager.Templating.dll
 Tridion.ContentManager.Templating.SiteEdit.dll
 Tridion.Logging.dll
 }}}
+  * Also copy the above DLLs to the DD4T\dependencies\Tridion Active
   * Copy the file TcmUploadAssembly.exe to the folder DD4T\dependencies\Tridion Tools
   * Create a config.xml using the TcmUploadAssembly.exe and place it in the same Tridion Tools folder (see Tridion documentation). Make sure it contains values for targetURL, userName, password and uploadPDB (true).
   * Create a file called TcmUploadAssembly.bat in the Tridion Tools folder, with the following contents:
