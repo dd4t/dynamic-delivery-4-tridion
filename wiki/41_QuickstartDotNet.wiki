@@ -35,8 +35,8 @@ Refer to the SDL Tridion documentation for detailed information on how to setup 
 Don't forget to add a reference to Tridion.!ContentDelivery.dll, Tridion.!ContentDelivery.Configuration.dll and Tridion.!ContentDelivery.Interop.dll to Your Website.
 
 == 5. Adjust the Web.config ==
-Open the web.config and find this setting:
-<add key="WebSite.Your.Website.PublicationId" value="7"/>
+Open the web.config and add this setting:
+<add key="DD4T.PublicationId" value="7"/>
 
 Change it's value to your publication id.
 
