@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>DD4T-2011SP1-Nightly</id>
+    <version>1.26.0</version>
+    <authors>DD4T</authors>
+    <owners>DD4T</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>http://code.google.com/p/dynamic-delivery-4-tridion/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>DD4T 2011SP1 Nightly Builds</description>
+    <tags>dd4t Tridion</tags>
+  </metadata>
+</package>

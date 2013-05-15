@@ -1,0 +1,25 @@
+- Copy the following DLLs from the Tridion installation if you plan to use the presentation solution:
+Note: use the 64-bits versions!
+
+netrtsn.dll
+Tridion.ContentDelivery.Configuration.dll
+Tridion.ContentDelivery.dll
+Tridion.ContentDelivery.Interop.dll
+xmogrt.dll
+
+
+
+
+- Copy the following DLLs from the Tridion installation if you plan to use the publishing solution:
+Tridion.Common.dll
+Tridion.Common.dll
+Tridion.ContentManager.Common.dll
+Tridion.ContentManager.CoreService.Client.dll
+Tridion.ContentManager.dll
+Tridion.ContentManager.Publishing.dll
+Tridion.ContentManager.Queuing.dll
+Tridion.ContentManager.TemplateTypes.dll
+Tridion.ContentManager.Templating.dll
+Tridion.ContentManager.TypeRegistration.dll
+Tridion.Logging.dll
+
