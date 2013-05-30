@@ -46,6 +46,10 @@ public class SiteEditSettings {
      * @return true or false
      */
     public boolean hasPubSE(int pubid) {
+    	if(publications == null) {
+    		return enabled;
+    	}
+    	
         return publications.contains(pubid);
     }
 }
