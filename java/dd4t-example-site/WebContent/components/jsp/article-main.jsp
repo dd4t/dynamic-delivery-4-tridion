@@ -1,9 +1,8 @@
-<%@page import="com.capgemini.tridion.cde.constants.Constants"%>
-<%@page import="com.capgemini.tridion.cde.siteedit.SiteEditService"%>
+<%@page import="org.dd4t.springmvc.constants.Constants"%>
+<%@page import="org.dd4t.springmvc.siteedit.SiteEditService"%>
 <%@ page 
     language="java" contentType="text/html; charset=UTF-8"
-	import="com.capgemini.tridion.cde.view.model.*,
-		    com.capgemini.tridion.cde.*,
+	import="org.dd4t.springmvc.view.model.*,
 			org.dd4t.contentmodel.*,
 			org.dd4t.contentmodel.impl.*"
 	pageEncoding="UTF-8"%>

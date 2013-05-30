@@ -1,9 +1,9 @@
-<%@page import="com.capgemini.util.spring.ApplicationContextProvider"%>
+<%@page import="org.dd4t.springmvc.util.ApplicationContextProvider"%>
 <%@page import="org.dd4t.core.resolvers.LinkResolver"%>
 <%@page import="java.util.List"%>
-<%@page import="com.capgemini.tridion.apps.listings.NewsList"%>
+<%@page import="org.dd4t.springmvc.apps.listings.NewsList"%>
 <%@page import="org.dd4t.contentmodel.GenericComponent"%>
-<%@page import="com.capgemini.tridion.cde.constants.Constants"%>
+<%@page import="org.dd4t.springmvc.constants.Constants"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 

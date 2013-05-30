@@ -18,7 +18,7 @@
            					http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
            				
     	
-	<bean id="SiteEditSettings" class="com.capgemini.tridion.cde.siteedit.SiteEditSettings">
+	<bean id="SiteEditSettings" class="org.dd4t.springmvc.siteedit.SiteEditSettings">
 		<!-- set this to true to enable SiteEdit across this application -->
 		<property name="enabled">
 			<value>false</value>

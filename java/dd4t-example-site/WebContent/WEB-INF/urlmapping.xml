@@ -33,7 +33,7 @@
     </bean>
     
     <!-- Basic provider of generic spring dependencies for all controllers -->
-    <bean id="parent_controller" class="com.capgemini.tridion.cde.controller.DynamicPageController" >
+    <bean id="parent_controller" class="org.dd4t.springmvc.controller.DynamicPageController" >
 		    <property name="simplePageFactory"><ref bean="simplePageFactory" /></property>			
 		    <property name="contentController"><ref bean="ContentController" /></property>			
 		    <property name="genericPageFactory"><ref bean="genericPageFactory" /></property>    
@@ -41,12 +41,12 @@
     </bean>
 	
 	<!-- Controller for the example publication -->
-	<bean id="dd4t" class="com.capgemini.tridion.cde.controller.DynamicPageController" parent="parent_controller">
-			<property name="publication" value="1" />		
+	<bean id="dd4t" class="org.dd4t.springmvc.controller.DynamicPageController" parent="parent_controller">
+			<property name="publication" value="201" />		
 			<property name="subcontext" value="/dd4t" />    				
 	</bean>
 	
-	<bean id="newslist" class="com.capgemini.tridion.apps.listings.NewsList">
+	<bean id="newslist" class="org.dd4t.springmvc.apps.listings.NewsList">
 		<property name="newsSchema" value="116203" />
 		<property name="genericComponentFactory"><ref bean="genericComponentFactory" /></property>
 	</bean>

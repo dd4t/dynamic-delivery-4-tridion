@@ -25,11 +25,7 @@
   <!-- ImageFilter downloads broker images onto Tomcat filesystem -->
   <filter>
     <filter-name>ImageFilter</filter-name>
-    <filter-class>com.capgemini.tridion.web.filters.ImageFilter</filter-class>
-    <init-param>
-      <param-name>title</param-name>
-      <param-value>Hello, World</param-value>
-    </init-param>
+    <filter-class>org.dd4t.servlet.filters.ImageFilter</filter-class>
   </filter>
 
   <filter-mapping>

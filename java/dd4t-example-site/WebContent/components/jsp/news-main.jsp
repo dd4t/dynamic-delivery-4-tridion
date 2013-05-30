@@ -1,8 +1,9 @@
-<%@page import="com.capgemini.tridion.cde.siteedit.SiteEditService"%>
+<%@page import="org.dd4t.springmvc.util.ApplicationContextProvider"%>
+<%@page import="org.dd4t.core.resolvers.LinkResolver"%>
+<%@page import="org.dd4t.springmvc.siteedit.SiteEditService"%>
 <%@ page 
     language="java" contentType="text/html; charset=UTF-8"
-	import="com.capgemini.tridion.cde.view.model.*,
-		    com.capgemini.tridion.cde.*,
+	import="org.dd4t.springmvc.view.model.*,
 			org.dd4t.contentmodel.*,
 			org.dd4t.contentmodel.impl.*"
 	pageEncoding="UTF-8"%>
@@ -32,7 +33,8 @@
 		// since the news main template is setup with linklevels == 2, the linked component content is loaded inside
 				
 		String title = (String) linkedComp.getContent().get("title").getValues().get(0);		
-		String href = linkedComp.getResolvedUrl();
+		LinkResolver linkResolver = (LinkResolver) ApplicationContextProvider.getBean("LinkResolver");
+		String href = linkResolver.resolve(linkedComp);
 		
 		%>
 		<li><a href="<%=href %>"><%=title %></a></li>	
