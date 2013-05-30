@@ -3,7 +3,7 @@
     <!-- Properties -->
     <property name="log.pattern" value="%date %-5level %logger{0} - %message%n"/>
     <property name="log.history" value="7"/>
-    <property name="log.folder" value="log"/>
+    <property name="log.folder" value="c:/log/dd4t-example-site/"/>
     <property name="log.level" value="WARN"/>
 
     <!-- Appenders -->
@@ -50,6 +50,8 @@
 
     <!-- Loggers -->
     <logger name="com.tridion" level="${log.level}"/>
+    <logger name="org.dd4t" level="${log.level}"/>
+    
     <logger name="com.tridion.transport">
         <appender-ref ref="rollingTransportLog"/>
     </logger>
