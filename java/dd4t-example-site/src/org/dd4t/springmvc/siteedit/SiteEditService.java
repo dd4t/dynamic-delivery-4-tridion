@@ -192,4 +192,17 @@ public final class SiteEditService {
     	}
     	return "";
     }
+    
+    
+    /**
+     * Function generates a fieldmarking for SiteEditable MV fields.
+     */
+    public static String generateSiteEditFieldMarking(Field field, int number) {
+    	if(field != null){
+	        return String.format(fieldseformat, 
+	        		field.getXPath() + "["+number+"]"
+	        );
+    	}
+    	return "";
+    }    
 }
