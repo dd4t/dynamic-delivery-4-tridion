@@ -205,6 +205,10 @@ public class GenericComponentFactory extends BaseFactory implements
 			throw new RuntimeException(
 					"use of getComponent without a context is not allowed when a SecurityFilter is set");
 		}
+		
+		if(!componentUri.endsWith("-16")){
+			componentUri += "-16";
+		}
 
 		StopWatch stopWatch = null;
 		if (logger.isDebugEnabled()) {
@@ -221,9 +225,7 @@ public class GenericComponentFactory extends BaseFactory implements
 	        SimpleComponent simple  = new SimpleComponentImpl();
 	        
 			try {
-				if(!componentUri.endsWith("-16")){
-					componentUri += "-16";
-				}
+				
 				tcmUri = new TCMURI(componentUri);
 				componentMeta = getComponentProvider().getComponentMeta(tcmUri.getItemId(), tcmUri.getPublicationId());
 				
