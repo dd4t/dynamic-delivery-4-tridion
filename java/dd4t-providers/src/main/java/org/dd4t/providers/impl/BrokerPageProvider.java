@@ -60,7 +60,7 @@ public class BrokerPageProvider implements PageProvider {
 			throws StorageException, ItemNotFoundException {
 		 ItemDAO itemDAO = (ItemDAO) StorageManagerFactory.getDAO(publication, StorageTypeMapping.PAGE_META);
 		 
-		 PageMeta meta = (PageMeta) itemDAO.findByPrimaryKey(id, publication);
+		 PageMeta meta = (PageMeta) itemDAO.findByPrimaryKey(publication, id);
 		 
 		 if(meta == null)
 			throw new ItemNotFoundException("Unable to find page by id '"+id+"' and publication '"+publication+"'.");
