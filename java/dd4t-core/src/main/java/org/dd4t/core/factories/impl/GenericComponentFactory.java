@@ -229,8 +229,11 @@ public class GenericComponentFactory extends BaseFactory implements
 				tcmUri = new TCMURI(componentUri);
 				componentMeta = getComponentProvider().getComponentMeta(tcmUri.getItemId(), tcmUri.getPublicationId());
 				
+				if(componentMeta == null){
+					throw new ItemNotFoundException("Unable to find item with id "+componentUri+" in the broker. Is the item published?");
+				}				
 	            
-	            simple.setId(TridionUtils.createUri(componentMeta).toString());
+	            simple.setId(componentUri);
 	            simple.setTitle(componentMeta.getTitle());
 	            simple.setNativeMetadata(componentMeta);
 
