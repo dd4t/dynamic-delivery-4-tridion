@@ -19,23 +19,18 @@ import java.text.ParseException;
 
 import org.dd4t.contentmodel.Component;
 import org.dd4t.contentmodel.ComponentPresentation;
+import org.dd4t.contentmodel.DynamicComponent;
 import org.dd4t.contentmodel.GenericComponent;
 import org.dd4t.contentmodel.GenericPage;
-import org.dd4t.contentmodel.Schema;
-import org.dd4t.contentmodel.SimpleComponent;
 import org.dd4t.contentmodel.exceptions.ItemNotFoundException;
 import org.dd4t.contentmodel.exceptions.NotAuthenticatedException;
 import org.dd4t.contentmodel.exceptions.NotAuthorizedException;
 import org.dd4t.contentmodel.impl.BasePublishedItem;
-import org.dd4t.contentmodel.impl.GenericComponentImpl;
-import org.dd4t.contentmodel.impl.PublicationImpl;
-import org.dd4t.contentmodel.impl.SchemaImpl;
-import org.dd4t.contentmodel.impl.SimpleComponentImpl;
+import org.dd4t.contentmodel.impl.DynamicComponentImpl;
 import org.dd4t.core.factories.ComponentFactory;
 import org.dd4t.core.filters.FilterException;
 import org.dd4t.core.filters.impl.BaseFilter;
 import org.dd4t.core.request.RequestContext;
-import org.dd4t.core.util.TridionUtils;
 import org.dd4t.providers.ComponentProvider;
 import org.dd4t.providers.impl.BrokerComponentProvider;
 import org.slf4j.Logger;
@@ -48,8 +43,7 @@ import com.tridion.linking.Link;
 import com.tridion.storage.ComponentMeta;
 import com.tridion.util.TCMURI;
 
-public class GenericComponentFactory extends BaseFactory implements
-		ComponentFactory {
+public class GenericComponentFactory extends BaseFactory implements ComponentFactory {
 
 	private static Logger logger = LoggerFactory
 			.getLogger(GenericComponentFactory.class);
@@ -91,8 +85,7 @@ public class GenericComponentFactory extends BaseFactory implements
 	 *             if the user is not authorized to get the component
 	 * @throws NotAuthenticatedException 
 	 */
-	@Override
-	public Component getComponent(String componentUri, RequestContext context)
+	public DynamicComponent getComponent(String componentUri, RequestContext context)
 			throws ItemNotFoundException, NotAuthorizedException, NotAuthenticatedException {
 		return getComponent(componentUri, null, context);
 	}
@@ -108,11 +101,28 @@ public class GenericComponentFactory extends BaseFactory implements
 	 *             if the user is not authorized to get the component
 	 * @throws NotAuthenticatedException 
 	 */
-	@Override
-	public Component getComponent(String uri) throws ItemNotFoundException,
+	public DynamicComponent getComponent(String uri) throws ItemNotFoundException,
 			NotAuthorizedException, NotAuthenticatedException {
 
 		return getComponent(uri, null, null);
+	}
+	
+	/**
+	 * Get the component by the component uri and template uri. No security
+	 * available; the method will fail if a SecurityFilter is configured on the
+	 * factory.
+	 * 
+	 * @return the component
+	 * @throws ItemNotFoundException
+	 *             if no item found NotAuthorizedException if the user is not
+	 *             authorized to get the component
+	 * @throws NotAuthenticatedException 
+	 */
+	public DynamicComponent getComponent(String componentUri,
+			String componentTemplateUri) throws ItemNotFoundException,
+			NotAuthorizedException, NotAuthenticatedException {
+
+		return getComponent(componentUri, componentTemplateUri, null);
 	}
 	
 	/**
@@ -122,7 +132,6 @@ public class GenericComponentFactory extends BaseFactory implements
 	 * @return
 	 * @throws ItemNotFoundException
 	 */
-	@Override
 	public Component getEmbeddedComponent(String uri) throws ItemNotFoundException{
 		Component comp = null;
 		
@@ -149,9 +158,7 @@ public class GenericComponentFactory extends BaseFactory implements
             String[] token = matchid.split("-");
             if(token.length>=2){
                matchid = token[0].concat("-").concat(token[1]);
-            }              
-              
-              
+            }                                         
                 // get the page through URL to use right cachekeys (faster!)
                 GenericPage page = (GenericPage) getPageFactory().findPageByUrl(link.getURL(), tcmUri.getPublicationId());
                 
@@ -185,7 +192,7 @@ public class GenericComponentFactory extends BaseFactory implements
         }
           
         return comp;
-	}
+	}	
 	
 	/**
 	 * Get the component by the component uri and template uri.
@@ -196,8 +203,7 @@ public class GenericComponentFactory extends BaseFactory implements
 	 *             authorized to get the component
 	 * @throws NotAuthenticatedException 
 	 */
-	@Override
-	public Component getComponent(String componentUri,
+	public DynamicComponent getComponent(String componentUri,
 			String componentTemplateUri, RequestContext context)
 			throws ItemNotFoundException, NotAuthorizedException, NotAuthenticatedException {
 
@@ -217,41 +223,30 @@ public class GenericComponentFactory extends BaseFactory implements
 			stopWatch.start();
 		}
 
-		GenericComponent component = (GenericComponent) getCacheProvider()
+		DynamicComponent component = (DynamicComponent) getCacheProvider()
 				.loadFromLocalCache(componentUri);
 		if (component == null) {
 	        TCMURI tcmUri;
 	        ComponentMeta componentMeta;
-	        SimpleComponent simple  = new SimpleComponentImpl();
+	        com.tridion.dcp.ComponentPresentation dcp;
 	        
 			try {
 				
 				tcmUri = new TCMURI(componentUri);
+								
 				componentMeta = getComponentProvider().getComponentMeta(tcmUri.getItemId(), tcmUri.getPublicationId());
 				
 				if(componentMeta == null){
 					throw new ItemNotFoundException("Unable to find item with id "+componentUri+" in the broker. Is the item published?");
 				}				
-	            
-	            simple.setId(componentUri);
-	            simple.setTitle(componentMeta.getTitle());
-	            simple.setNativeMetadata(componentMeta);
-
-	    		PublicationImpl pub = new PublicationImpl();
-	    		pub.setId(String.valueOf(componentMeta.getPublicationId()));
-	    		simple.setPublication(pub);
-
-	    		Schema schema = new SchemaImpl();
-	    		schema.setId(String.valueOf(componentMeta.getSchemaId()));
-	    		simple.setSchema(schema);
-	    		
+	            	            
 	            if(componentTemplateUri != null){
 	            	TCMURI ctUri = new TCMURI(componentTemplateUri);
 	            	
-	            	simple.setSource(getComponentProvider().getComponentXMLByTemplate(tcmUri.getItemId(), ctUri.getItemId(), tcmUri.getPublicationId()));
+	            	dcp = getComponentProvider().getDynamicComponentPresentation(tcmUri.getItemId(), ctUri.getItemId(), tcmUri.getPublicationId());	            	
 	            }
 	            else{
-	            	simple.setSource(getComponentProvider().getComponentXML(tcmUri.getItemId(), tcmUri.getPublicationId()));
+	            	dcp = getComponentProvider().getDynamicComponentPresentation(tcmUri.getItemId(), 0, tcmUri.getPublicationId());	            	
 	            }
 			} catch (ParseException e1) {
 				logger.error("No item found with uri: "
@@ -264,8 +259,8 @@ public class GenericComponentFactory extends BaseFactory implements
 				throw new ItemNotFoundException("No item found with uri: "
 						+ componentUri + "; broker is down.");
 			}
-            
-			if (simple.getSource() == null) {
+			            
+			if (dcp.getContent() == null) {
 				logger.error("Source is null for item: " + componentUri
 						+ " and templateUri: " + componentTemplateUri);
 				throw new ItemNotFoundException("No item found with uri: "
@@ -274,28 +269,14 @@ public class GenericComponentFactory extends BaseFactory implements
 			}
 
 			try {
-				if (logger.isDebugEnabled()) {
-					stopWatch.stop();
-					stopWatch.start();
-				}
+				component = getDCPFromSource(dcp);
 
-				component = (GenericComponent) this
-						.getSerializer()
-						.deserialize(simple.getSource(), GenericComponentImpl.class);
-
-				if (logger.isDebugEnabled()) {
-					stopWatch.stop();
-					logger.debug("Deserialization of component took: "
-							+ stopWatch.getLastTaskTimeMillis() + " ms");
-					stopWatch.start();
-				}
-
-				component.setNativeMetadata(simple.getNativeMetadata());
+				component.setNativeMetadata(componentMeta);
 				
 				// Rogier Oudshoorn, 7/2/2012
 				// object size is roughly half the xml string size; 
 				
-				((BasePublishedItem) component).setSourceSize(simple.getSource().length());
+				((BasePublishedItem) component).setSourceSize(dcp.getContent().length());
 
 				try {
 					doFilters(component, context,
@@ -327,8 +308,10 @@ public class GenericComponentFactory extends BaseFactory implements
 
 		return component;
 	}
-	public GenericComponent getComponentFromSource(String source) {
+
+	public DynamicComponent getDCPFromSource(com.tridion.dcp.ComponentPresentation dcp){
 		StopWatch stopWatch = null;
+		DynamicComponentImpl dynComp = null;
 		if (logger.isDebugEnabled()) {
 			stopWatch = new StopWatch("getComponentFromSource");
 			stopWatch.start();
@@ -339,9 +322,8 @@ public class GenericComponentFactory extends BaseFactory implements
 				stopWatch.start();
 			}
 
-			return (GenericComponent) this.getSerializer().deserialize(source, GenericComponent.class);
-
-			
+			dynComp = (DynamicComponentImpl) this.getSerializer().deserialize(dcp.getContent(), DynamicComponentImpl.class);
+			dynComp.setNativeDCP(dcp);
 		} catch (Exception e) {
 			logger.error("error when deserializing component", e);
 			throw new RuntimeException(e);
@@ -352,24 +334,6 @@ public class GenericComponentFactory extends BaseFactory implements
 						+ stopWatch.getLastTaskTimeMillis() + " ms");
 			}
 		}
-	}
-
-	/**
-	 * Get the component by the component uri and template uri. No security
-	 * available; the method will fail if a SecurityFilter is configured on the
-	 * factory.
-	 * 
-	 * @return the component
-	 * @throws ItemNotFoundException
-	 *             if no item found NotAuthorizedException if the user is not
-	 *             authorized to get the component
-	 * @throws NotAuthenticatedException 
-	 */
-	@Override
-	public Component getComponent(String componentUri,
-			String componentTemplateUri) throws ItemNotFoundException,
-			NotAuthorizedException, NotAuthenticatedException {
-
-		return getComponent(componentUri, componentTemplateUri, null);
+		return dynComp;
 	}
 }
