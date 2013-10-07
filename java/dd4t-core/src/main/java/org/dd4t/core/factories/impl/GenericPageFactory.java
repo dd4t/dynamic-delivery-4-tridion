@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.text.ParseException;
 
 import org.dd4t.contentmodel.GenericPage;
-import org.dd4t.contentmodel.Page;
 import org.dd4t.contentmodel.exceptions.ItemNotFoundException;
 import org.dd4t.contentmodel.exceptions.NotAuthenticatedException;
 import org.dd4t.contentmodel.exceptions.NotAuthorizedException;
@@ -67,9 +66,9 @@ public class GenericPageFactory extends BaseFactory implements PageFactory {
 	 * @throws ItemNotFoundException
 	 * @throws  
 	 */
-	public Page getPage(String uri) throws ItemNotFoundException {
+	public GenericPage getPage(String uri) throws ItemNotFoundException {
 
-		Page page = null;
+		GenericPage page = null;
 		try {
 			page = this.getGenericPage(uri, null);
 		} catch (NotAuthorizedException e) {
@@ -92,13 +91,13 @@ public class GenericPageFactory extends BaseFactory implements PageFactory {
 	 * @throws NotAuthenticatedException 
 	 */
 	@Override
-	public Page getPage(String uri, RequestContext context)
+	public GenericPage getPage(String uri, RequestContext context)
 			throws ItemNotFoundException, NotAuthorizedException, NotAuthenticatedException {
 
 		return this.getGenericPage(uri, context);
 	}
 
-	private Page getGenericPage(String uri, RequestContext context)
+	private GenericPage getGenericPage(String uri, RequestContext context)
 			throws ItemNotFoundException, NotAuthorizedException, NotAuthenticatedException {
 
 		if (context == null && securityFilterPresent()) {
@@ -177,10 +176,10 @@ public class GenericPageFactory extends BaseFactory implements PageFactory {
 	 * @return
 	 * @throws ItemNotFoundException
 	 */
-	public Page findPageByUrl(String url, int publicationId)
+	public GenericPage findPageByUrl(String url, int publicationId)
 			throws ItemNotFoundException {
 
-		Page page = null;
+		GenericPage page = null;
 		try {
 			page = this.findGenericPageByUrl(url, publicationId, null);
 		} catch (NotAuthorizedException e) {
@@ -204,7 +203,7 @@ public class GenericPageFactory extends BaseFactory implements PageFactory {
 	 * @throws NotAuthenticatedException 
 	 */
 	@Override
-	public Page findPageByUrl(String url, int publicationId,
+	public GenericPage findPageByUrl(String url, int publicationId,
 			RequestContext context) throws ItemNotFoundException,
 			NotAuthorizedException, NotAuthenticatedException {
 		return this.findGenericPageByUrl(url, publicationId, context);
@@ -215,7 +214,7 @@ public class GenericPageFactory extends BaseFactory implements PageFactory {
 	 * simpleFactory.
 	 * @throws NotAuthenticatedException 
 	 */
-	private Page findGenericPageByUrl(String url, int publicationId,
+	private GenericPage findGenericPageByUrl(String url, int publicationId,
 			RequestContext context) throws ItemNotFoundException,
 			NotAuthorizedException, NotAuthenticatedException {
 

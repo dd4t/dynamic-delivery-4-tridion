@@ -15,9 +15,9 @@
  */
 package org.dd4t.contentmodel.impl;
 
-import org.dd4t.contentmodel.Component;
 import org.dd4t.contentmodel.ComponentPresentation;
 import org.dd4t.contentmodel.ComponentTemplate;
+import org.dd4t.contentmodel.GenericComponent;
 import org.simpleframework.xml.Element;
 
 
@@ -29,7 +29,7 @@ import org.simpleframework.xml.Element;
  */
 public class ComponentPresentationImpl implements ComponentPresentation {
 	@Element(name = "component", required = false)
-	private Component component;
+	private GenericComponent component;
 	@Element(name = "componentTemplate", required = false)
 	private ComponentTemplate componentTemplate;
 	@Element(name = "isDynamic", required = false)
@@ -43,7 +43,7 @@ public class ComponentPresentationImpl implements ComponentPresentation {
 	 * 
 	 * @return the component
 	 */
-	public Component getComponent() {
+	public GenericComponent getComponent() {
 		return component;
 	}
 
@@ -52,7 +52,7 @@ public class ComponentPresentationImpl implements ComponentPresentation {
 	 * 
 	 * @param component
 	 */
-	public void setComponent(Component component) {
+	public void setComponent(GenericComponent component) {
 		this.component = component;
 	}
 

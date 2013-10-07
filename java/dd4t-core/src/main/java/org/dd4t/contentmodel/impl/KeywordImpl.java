@@ -41,6 +41,7 @@ public class KeywordImpl extends BaseItem implements Keyword, HasMetadata {
 	@ElementMap(name = "metadata", keyType = String.class, valueType = Field.class, entry = "item", required = false)
 	private Map<String, Field> metadata;
 
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -70,7 +71,7 @@ public class KeywordImpl extends BaseItem implements Keyword, HasMetadata {
 		this.path = path;
 	}
 
-	
+	@Override	
 	public String getKey() {
 		return key;
 	}
