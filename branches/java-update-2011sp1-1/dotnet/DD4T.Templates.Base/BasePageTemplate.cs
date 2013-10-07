@@ -21,6 +21,7 @@ namespace DD4T.Templates.Base
 
         public int DefaultLinkLevels = 1;
         public bool DefaultResolveWidthAndHeight = false;
+        public bool DefaultPublishEmptyFields = false;
         public static string VariableNameCalledFromDynamicDelivery = "CalledFromDynamicDelivery";
         public static string VariableValueCalledFromDynamicDelivery = "true";
 
@@ -136,9 +137,21 @@ namespace DD4T.Templates.Base
                 GeneralUtils.TimedLog("no ResolveWidthAndHeight configured, using default value " + this.DefaultResolveWidthAndHeight);
                 resolveWidthAndHeight = this.DefaultResolveWidthAndHeight;
             }
+            bool publishEmptyFields;
+            if (HasPackageValue(Package, "PublishEmptyFields"))
+            {
+                publishEmptyFields = Package.GetValue("PublishEmptyFields").ToLower().Equals("yes");
+
+            }
+            else
+            {
+                GeneralUtils.TimedLog("no PublishEmptyFields configured, using default value " + this.DefaultResolveWidthAndHeight);
+                publishEmptyFields = this.DefaultPublishEmptyFields;
+            }
+
             Log.Debug("found page with title " + tcmPage.Title + " and id " + tcmPage.Id);
             Log.Debug("constructing dynamic page, links are followed to level " + linkLevels + ", width and height are " + (resolveWidthAndHeight ? "" : "not ") + "resolved");
-            Dynamic.Page page = manager.BuildPage(tcmPage, Engine, linkLevels, resolveWidthAndHeight);
+            Dynamic.Page page = manager.BuildPage(tcmPage, Engine, linkLevels, resolveWidthAndHeight,publishEmptyFields);
             return page;
         }
 
