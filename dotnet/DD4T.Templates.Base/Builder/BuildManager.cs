@@ -25,9 +25,9 @@ namespace DD4T.Templates.Base.Builder
             return PageBuilder.BuildPage(tcmPage, engine, this);
         }
 
-        public virtual Dynamic.Page BuildPage(TComm.Page tcmPage, Engine engine, int linkLevels, bool resolveWidthAndHeight)
+        public virtual Dynamic.Page BuildPage(TComm.Page tcmPage, Engine engine, int linkLevels, bool resolveWidthAndHeight, bool publishEmptyFields)
         {
-            return PageBuilder.BuildPage(tcmPage, engine, this, linkLevels, resolveWidthAndHeight);
+            return PageBuilder.BuildPage(tcmPage, engine, this, linkLevels, resolveWidthAndHeight, publishEmptyFields);
         }
 
         public virtual List<Dynamic.Category> BuildCategories(TComm.Page page)
@@ -45,9 +45,9 @@ namespace DD4T.Templates.Base.Builder
             return ComponentBuilder.BuildComponent(tcmComponent, this);
 		}
 
-        public virtual Dynamic.Component BuildComponent(TCM.Component tcmComponent, int linkLevels, bool resolveWidthAndHeight)
+        public virtual Dynamic.Component BuildComponent(TCM.Component tcmComponent, int linkLevels, bool resolveWidthAndHeight,bool publishEmptyFields)
         {
-            return ComponentBuilder.BuildComponent(tcmComponent, linkLevels, resolveWidthAndHeight, this);
+            return ComponentBuilder.BuildComponent(tcmComponent, linkLevels, resolveWidthAndHeight,publishEmptyFields, this);
         }
 
         public virtual Dynamic.ComponentPresentation BuildComponentPresentation(TComm.ComponentPresentation tcmComponentPresentation, Engine engine, int linkLevels, bool resolveWidthAndHeight)
@@ -60,14 +60,14 @@ namespace DD4T.Templates.Base.Builder
             return ComponentTemplateBuilder.BuildComponentTemplate(tcmComponentTemplate, this);
         }
 
-        public virtual Dynamic.Field BuildField(TCM.Fields.ItemField tcmItemField, int linkLevels, bool resolveWidthAndHeight)
+        public virtual Dynamic.Field BuildField(TCM.Fields.ItemField tcmItemField, int linkLevels, bool resolveWidthAndHeight, bool publishEmptyFields)
         {
-            return FieldBuilder.BuildField(tcmItemField, linkLevels, resolveWidthAndHeight, this);
+            return FieldBuilder.BuildField(tcmItemField, linkLevels, resolveWidthAndHeight,publishEmptyFields, this);
         }
 
-        public virtual Dynamic.FieldSet BuildFields(TCM.Fields.ItemFields tcmItemFields, int linkLevels, bool resolveWidthAndHeight)
+        public virtual Dynamic.FieldSet BuildFields(TCM.Fields.ItemFields tcmItemFields, int linkLevels, bool resolveWidthAndHeight,bool publishEmptyFields)
         {
-            return FieldsBuilder.BuildFields(tcmItemFields, linkLevels, resolveWidthAndHeight, this);
+            return FieldsBuilder.BuildFields(tcmItemFields, linkLevels, resolveWidthAndHeight,publishEmptyFields, this);
         }
 
         public Dynamic.Keyword BuildKeyword(TCM.Keyword keyword)

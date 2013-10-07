@@ -19,29 +19,32 @@ namespace DD4T.Templates.Base.Builder
         {
             Dynamic.ComponentPresentation cp = new Dynamic.ComponentPresentation();
 
-
-            // render the component presentation using its own CT
-            // but first, set a parameter in the context so that the CT will know it is beng called
-            // from a DynamicDelivery page template
-            if (engine.PublishingContext.RenderContext != null && !engine.PublishingContext.RenderContext.ContextVariables.Contains(BasePageTemplate.VariableNameCalledFromDynamicDelivery))
-            {
-                engine.PublishingContext.RenderContext.ContextVariables.Add(BasePageTemplate.VariableNameCalledFromDynamicDelivery, BasePageTemplate.VariableValueCalledFromDynamicDelivery);
-            }
-
-            string renderedContent = engine.RenderComponentPresentation(tcmComponentPresentation.Component.Id, tcmComponentPresentation.ComponentTemplate.Id);
-            engine.PublishingContext.RenderContext.ContextVariables.Remove(BasePageTemplate.VariableNameCalledFromDynamicDelivery);
-
-            renderedContent = TridionUtils.StripTcdlTags(renderedContent);
-
             if (tcmComponentPresentation.ComponentTemplate.IsRepositoryPublishable)
             {
+                // call render but ignore the output - render ensures componentlinking will be setup as normal.
+                // don't bother with page flags because the end result is dynamically published so it needs to run with DCP settings
+                engine.RenderComponentPresentation(tcmComponentPresentation.Component.Id, tcmComponentPresentation.ComponentTemplate.Id);
+
                 // ignore the rendered CP, because it is already available in the broker
                 // instead, we will render a very simple version without any links
-                cp.Component = manager.BuildComponent(tcmComponentPresentation.Component, 0, false); // linkLevels = 0 means: only summarize the component
+                cp.Component = manager.BuildComponent(tcmComponentPresentation.Component, 0, false,false); // linkLevels = 0 means: only summarize the component
                 cp.IsDynamic = true;
             }
             else
             {
+                // render the component presentation using its own CT
+                // but first, set a parameter in the context so that the CT will know it is beng called
+                // from a DynamicDelivery page template
+                if (engine.PublishingContext.RenderContext != null && !engine.PublishingContext.RenderContext.ContextVariables.Contains(BasePageTemplate.VariableNameCalledFromDynamicDelivery))
+                {
+                    engine.PublishingContext.RenderContext.ContextVariables.Add(BasePageTemplate.VariableNameCalledFromDynamicDelivery, BasePageTemplate.VariableValueCalledFromDynamicDelivery);
+                }
+
+                string renderedContent = engine.RenderComponentPresentation(tcmComponentPresentation.Component.Id, tcmComponentPresentation.ComponentTemplate.Id);
+                engine.PublishingContext.RenderContext.ContextVariables.Remove(BasePageTemplate.VariableNameCalledFromDynamicDelivery);
+
+                renderedContent = TridionUtils.StripTcdlTags(renderedContent);
+
                 cp.IsDynamic = false;
                 TextReader tr = new StringReader(renderedContent);
                 if (serializer == null)

@@ -5,7 +5,7 @@ using Dynamic = DD4T.ContentModel;
 using TCM = Tridion.ContentManager.CommunicationManagement;
 using Tridion.ContentManager.Templating;
 using DD4T.ContentModel.Exceptions;
-
+using DD4T.Templates.Base.Utils;
 
 namespace DD4T.Templates.Base.Builder
 {
@@ -13,9 +13,9 @@ namespace DD4T.Templates.Base.Builder
     {
         public static Dynamic.Page BuildPage(TCM.Page tcmPage, Engine engine, BuildManager manager)
         {
-            return BuildPage(tcmPage, engine, manager, 1, false);
+            return BuildPage(tcmPage, engine, manager, 1, false,false);
         }
-        public static Dynamic.Page BuildPage(TCM.Page tcmPage, Engine engine, BuildManager manager, int linkLevels, bool resolveWidthAndHeight)
+        public static Dynamic.Page BuildPage(TCM.Page tcmPage, Engine engine, BuildManager manager, int linkLevels, bool resolveWidthAndHeight,bool publishEmptyFields)
         {
             Dynamic.Page p = new Dynamic.Page
                                  {
@@ -32,13 +32,15 @@ namespace DD4T.Templates.Base.Builder
             {
                 try
                 {
-                    if (tcmPage.Metadata != null)
+                    if (tcmPage.Metadata != null && tcmPage.MetadataSchema != null)
                     {
+                        GeneralUtils.TimedLog("doing metadata stuff");
+
                         var tcmMetadataFields = new Tridion.ContentManager.ContentManagement.Fields.ItemFields(tcmPage.Metadata, tcmPage.MetadataSchema);
-                        p.MetadataFields = manager.BuildFields(tcmMetadataFields, linkLevels, resolveWidthAndHeight);
+                        p.MetadataFields = manager.BuildFields(tcmMetadataFields, linkLevels, resolveWidthAndHeight,publishEmptyFields);
                     }
                 }
-                catch (ItemDoesNotExistException)
+                catch (Exception)
                 {
                     // fail silently if there is no metadata schema
                 }

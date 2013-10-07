@@ -17,6 +17,7 @@ namespace DD4T.Templates.Base
     {
         public int DefaultLinkLevels = 1;
         public bool DefaultResolveWidthAndHeight = false;
+        public bool DefaultPublishEmptyFields = false;
         DateTime startTime = DateTime.Now;
 
         public BaseComponentTemplate() : base(TemplatingLogger.GetLogger(typeof(BaseComponentTemplate))) { }
@@ -138,12 +139,23 @@ namespace DD4T.Templates.Base
                 GeneralUtils.TimedLog("no ResolveWidthAndHeight configured, using default value " + this.DefaultResolveWidthAndHeight);
                 resolveWidthAndHeight = this.DefaultResolveWidthAndHeight;
             }
+            bool publishEmptyFields;
+            if (HasPackageValue(Package, "PublishEmptyFields"))
+            {
+                publishEmptyFields = Package.GetValue("PublishEmptyFields").ToLower().Equals("yes");
+
+            }
+            else
+            {
+                GeneralUtils.TimedLog("no PublishEmptyFields configured, using default value " + this.DefaultResolveWidthAndHeight);
+                publishEmptyFields = this.DefaultPublishEmptyFields;
+            }
 
             GeneralUtils.TimedLog("found component with title " + tcmComponent.Title + " and id " + tcmComponent.Id);
             GeneralUtils.TimedLog("constructing dynamic component, links are followed to level " + linkLevels + ", width and height are " + (resolveWidthAndHeight ? "" : "not ") + "resolved");
 
             GeneralUtils.TimedLog("start building dynamic component");
-            Dynamic.Component component = manager.BuildComponent(tcmComponent, linkLevels, resolveWidthAndHeight);
+            Dynamic.Component component = manager.BuildComponent(tcmComponent, linkLevels, resolveWidthAndHeight,publishEmptyFields);
             GeneralUtils.TimedLog("finished building dynamic component");
             return component;
         }

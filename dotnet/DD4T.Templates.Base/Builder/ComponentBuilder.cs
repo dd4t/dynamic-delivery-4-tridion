@@ -16,9 +16,9 @@ namespace DD4T.Templates.Base.Builder
       protected static TemplatingLogger log = TemplatingLogger.GetLogger(typeof(ComponentBuilder));
       public static Dynamic.Component BuildComponent(TCM.Component tcmComponent, BuildManager manager)
       {
-          return BuildComponent(tcmComponent, 1, false, manager);
+          return BuildComponent(tcmComponent, 1, false,false, manager);
 		}
-      public static Dynamic.Component BuildComponent(TCM.Component tcmComponent, int linkLevels, bool resolveWidthAndHeight, BuildManager manager)
+      public static Dynamic.Component BuildComponent(TCM.Component tcmComponent, int linkLevels, bool resolveWidthAndHeight, bool publishEmptyFields, BuildManager manager)
       {
           GeneralUtils.TimedLog("start BuildComponent");
           Dynamic.Component c = new Dynamic.Component();
@@ -31,6 +31,7 @@ namespace DD4T.Templates.Base.Builder
           GeneralUtils.TimedLog("start building schema");
           c.Schema = manager.BuildSchema(tcmComponent.Schema);
           GeneralUtils.TimedLog("finished building schema");
+          
           c.ComponentType = (ComponentType)Enum.Parse(typeof(ComponentType), tcmComponent.ComponentType.ToString());
 
           if (tcmComponent.ComponentType.Equals(TCM.ComponentType.Multimedia))
@@ -82,18 +83,20 @@ namespace DD4T.Templates.Base.Builder
               {
                   GeneralUtils.TimedLog("start retrieving tcm fields");
                   TCM.Fields.ItemFields tcmFields = new TCM.Fields.ItemFields(tcmComponent.Content, tcmComponent.Schema);
+                  log.Debug("TCM fields" +tcmFields.ToXml());
                   GeneralUtils.TimedLog("finished retrieving tcm fields");
                   GeneralUtils.TimedLog("start building fields");
-                  c.Fields = manager.BuildFields(tcmFields, linkLevels, resolveWidthAndHeight);
+                  c.Fields = manager.BuildFields(tcmFields, linkLevels, resolveWidthAndHeight,publishEmptyFields);
                   GeneralUtils.TimedLog("finished building fields");
               }
+              
               if (tcmComponent.Metadata != null)
               {
                   GeneralUtils.TimedLog("start retrieving tcm metadata fields");
                   TCM.Fields.ItemFields tcmMetadataFields = new TCM.Fields.ItemFields(tcmComponent.Metadata, tcmComponent.MetadataSchema);
                   GeneralUtils.TimedLog("finished retrieving tcm metadata fields");
                   GeneralUtils.TimedLog("start building metadata fields");
-                  c.MetadataFields = manager.BuildFields(tcmMetadataFields, linkLevels, resolveWidthAndHeight);
+                  c.MetadataFields = manager.BuildFields(tcmMetadataFields, linkLevels, resolveWidthAndHeight,publishEmptyFields);
                   GeneralUtils.TimedLog("finished building metadata fields");
               }
           }

@@ -18,7 +18,7 @@ namespace DD4T.Templates.Base.Builder
             // for that purpose we use a dictionary
 
 
-            if (page.Metadata == null)
+            if (page.Metadata == null || page.MetadataSchema == null)
             {
                 return new List<Dynamic.Category>();
             }
@@ -61,7 +61,7 @@ namespace DD4T.Templates.Base.Builder
             if (component.Metadata != null)
             {
                 GeneralUtils.TimedLog("start creating tcm ItemFields from Metadata");
-                ItemFields tcmMetadataFields = new TCM.Fields.ItemFields(component.Metadata, component.Schema);
+                ItemFields tcmMetadataFields = new TCM.Fields.ItemFields(component.Metadata, component.MetadataSchema);
                 GeneralUtils.TimedLog("finished creating tcm ItemFields from Metadata");
                 GeneralUtils.TimedLog("start converting metadata ItemFields to dynamic fields");
                 addFromItemFields(tcmMetadataFields, categories, manager);
