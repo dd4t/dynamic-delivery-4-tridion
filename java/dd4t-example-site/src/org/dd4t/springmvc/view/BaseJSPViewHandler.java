@@ -164,7 +164,7 @@ public abstract class BaseJSPViewHandler<T> implements IViewHandler<T>{
     private String dispatch(GenericPage page, T model,String URL,   HttpServletRequest req, HttpServletResponse res) throws Exception {
         if(logger.isDebugEnabled())
             logger.debug("Attempting to dispatch view to "+URL);
-        
+                        
         // retrieve dispatcher to component JSP view
         RequestDispatcher dispatcher =
                 req.getSession()
@@ -189,7 +189,7 @@ public abstract class BaseJSPViewHandler<T> implements IViewHandler<T>{
     @Override
     public String handleView(GenericPage page, T model, String ViewID, HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-        if(!cachedViews.containsKey(ViewID))
+        if(!canHandleView(ViewID, req, res))
             throw new Exception("Can not include unknown view with ID "+ViewID);
  
         try {

@@ -81,6 +81,10 @@ public class ImageFilter implements Filter {
 	        	// first, replace url spaces with normal ones
 				url = url.replace("%20", " ");
 				
+				if(logger.isDebugEnabled()){
+					logger.debug("Trying to check file on url "+url+" with context "+context);
+				}
+				
 				// check if item is on filesystem
 		        File file = new File(context.getRealPath(url));
 	

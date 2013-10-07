@@ -16,9 +16,11 @@
 package org.dd4t.springmvc.view.model;
 
 import java.io.ByteArrayOutputStream;
-import java.io.UnsupportedEncodingException;
 
 import javax.servlet.ServletOutputStream;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Little wrapper class wraps around a servletOutputStream to catch what's written to it to place it
@@ -28,21 +30,28 @@ import javax.servlet.ServletOutputStream;
  *
  */
 public class ServletOutputStreamWrapper extends ServletOutputStream {
-    private ByteArrayOutputStream fBuffer;
+    private static Logger logger = LoggerFactory.getLogger(ServletOutputStreamWrapper.class);
+
+	private ByteArrayOutputStream fBuffer;
     private boolean writtenTo;
 
     public ServletOutputStreamWrapper(){
         fBuffer = new ByteArrayOutputStream();
         writtenTo = false; 	    	
-    }
+    }	
 	
     /**
      * Override func, catching the data written to it.
      * 
      */
 	@Override
-	public void write(int aByte) {
-	     fBuffer.write(aByte);
+	public void write(int aByte) {		
+		
+		if(aByte > 127){
+			logger.warn("Writing suspicious byte "+aByte);
+		}		
+		 
+		 fBuffer.write(aByte);
 	     
 	     if(!writtenTo) writtenTo = true;
 	}
@@ -52,15 +61,7 @@ public class ServletOutputStreamWrapper extends ServletOutputStream {
 	 * 
 	 */
 	public String toString(){
-		String out = super.toString();
-		
-	    try {
-			out = new String(fBuffer.toByteArray(), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-	    
-	    return out;
+		return new String(fBuffer.toByteArray());
 	}
 	
 	/**
