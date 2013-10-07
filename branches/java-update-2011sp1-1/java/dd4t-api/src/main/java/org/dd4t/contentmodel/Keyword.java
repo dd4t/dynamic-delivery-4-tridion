@@ -26,5 +26,6 @@ public interface Keyword extends Item {
 	public void setPath(String path);
 	public String getTaxonomyId();
 	public void setTaxonomyId(String taxonomyId);
-	
+	public String getDescription();
+	public String getKey();
 }

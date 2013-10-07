@@ -15,7 +15,6 @@
  */
 package org.dd4t.contentmodel;
 
-import java.util.Date;
 
 public interface ComponentPresentation {
 
@@ -24,14 +23,14 @@ public interface ComponentPresentation {
 	 * 
 	 * @return
 	 */
-	public Component getComponent();
+	public GenericComponent getComponent();
 
 	/**
 	 * Set the component
 	 * 
 	 * @param component
 	 */
-	public void setComponent(Component component);
+	public void setComponent(GenericComponent component);
 
 	/**
 	 * Get the component template
