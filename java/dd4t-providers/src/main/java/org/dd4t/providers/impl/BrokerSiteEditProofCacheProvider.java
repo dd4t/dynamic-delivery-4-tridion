@@ -19,6 +19,7 @@ package org.dd4t.providers.impl;
 import java.text.ParseException;
 import java.util.Collection;
 
+import org.dd4t.contentmodel.GenericComponent;
 import org.dd4t.contentmodel.GenericPage;
 import org.dd4t.core.caching.Cachable;
 import org.dd4t.core.caching.CacheAgent;
@@ -36,12 +37,13 @@ import com.tridion.util.TCMURI;
 
 /**
  * Caching agent which denies caching for genericpages, very usefull
- * when using the experience manager.
+ * when using the experience manager in 2011. For 2013 and later, please
+ * detect preview and use the NoCacheProvider
  * 
  * @author Rogier Oudshoorn (Capgemini), Quirijn Slings (SDL)
  * 
  */
-@SuppressWarnings("deprecation")
+@Deprecated
 public class BrokerSiteEditProofCacheProvider implements CacheAgent, CacheProvider {
 
 
@@ -149,8 +151,8 @@ public class BrokerSiteEditProofCacheProvider implements CacheAgent, CacheProvid
 	public void storeInItemCache(String key, Object ob, int dependingPublicationId,
 			int dependingItemId) {
 		
-		// don't cache pages
-		if(ob instanceof GenericPage)
+		// don't cache pages or DCPs
+		if(ob instanceof GenericPage || ob instanceof GenericComponent)
 			return;
 		
         // get reference to cache singleton

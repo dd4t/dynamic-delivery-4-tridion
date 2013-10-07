@@ -49,10 +49,32 @@ public class BrokerComponentProvider implements ComponentProvider {
 
 	@Override
 	public String getComponentXMLByTemplate(int componentId, int templateId,
-			int publicationId) throws StorageException, ItemNotFoundException{
-	
-		ComponentPresentationFactory factory = new ComponentPresentationFactory(publicationId);
+			int publicationId) throws StorageException, ItemNotFoundException{			
 		
+		ComponentPresentation cp = getDynamicComponentPresentation(componentId, templateId, publicationId);
+		return cp.getContent();
+	}
+
+	@Override
+	public ComponentMeta getComponentMeta(int componentId, int publicationId)
+			throws StorageException {
+		   ItemDAO itemDAO = (ItemDAO) StorageManagerFactory.getDAO(publicationId, StorageTypeMapping.COMPONENT_META);
+           return (ComponentMeta) itemDAO.findByPrimaryKey(publicationId, componentId);
+	}
+
+	@Override
+	public ComponentPresentation getDynamicComponentPresentation(
+			int componentId, int publicationId) throws StorageException, ItemNotFoundException{
+		
+		return getDynamicComponentPresentation(componentId, 0, publicationId);		
+	}	
+	
+	@Override
+	public ComponentPresentation getDynamicComponentPresentation(
+			int componentId, int templateId, int publicationId)
+			throws StorageException, ItemNotFoundException {
+		
+		ComponentPresentationFactory factory = new ComponentPresentationFactory(publicationId);
 		ComponentPresentation cp = null;
 
 		if (templateId != 0) {
@@ -61,11 +83,15 @@ public class BrokerComponentProvider implements ComponentProvider {
 						componentId, templateId);
 		
 			if (cp == null) {
+				logger.debug("component presentation NOT found by template");
+
 				// no cp found, and they asked for a template, means we return null
 				return null;
 			}
+			
+			logger.debug("component presentation found by template. ");
 				
-			return cp.getContent();
+			return cp;
 		}
 
 		// option 1: use defaultComponentTemplateUri (if given)
@@ -107,18 +133,9 @@ public class BrokerComponentProvider implements ComponentProvider {
 
 		if (cp != null) {
 			logger.debug("component presentation found");
-			return cp.getContent();
+			return cp;
 		}		
 
-		throw new ItemNotFoundException("Unable to find DCP for pub "+publicationId+", item "+componentId+" and template "+templateId);
-	}
-
-
-
-	@Override
-	public ComponentMeta getComponentMeta(int componentId, int publicationId)
-			throws StorageException {
-		   ItemDAO itemDAO = (ItemDAO) StorageManagerFactory.getDAO(publicationId, StorageTypeMapping.COMPONENT_META);
-           return (ComponentMeta) itemDAO.findByPrimaryKey(publicationId, componentId);
+		throw new ItemNotFoundException("Unable to find DCP for pub "+publicationId+", item "+componentId+" and template "+templateId);	
 	}
 }
