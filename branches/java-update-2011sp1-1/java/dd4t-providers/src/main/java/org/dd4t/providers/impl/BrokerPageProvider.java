@@ -48,7 +48,7 @@ public class BrokerPageProvider implements PageProvider {
 		 ItemDAO itemDAO = (ItemDAO) StorageManagerFactory.getDAO(publication, StorageTypeMapping.PAGE_META);
 
 		 PageMeta meta = (PageMeta) itemDAO.findByPageURL(publication, url);
-		 
+			
 		 if(meta == null)
 			throw new ItemNotFoundException("Unable to find page by url '"+url+"' and publication '"+publication+"'.");
 		
