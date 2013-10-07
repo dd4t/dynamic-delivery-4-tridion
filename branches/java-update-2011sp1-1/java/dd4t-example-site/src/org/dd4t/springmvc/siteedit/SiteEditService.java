@@ -136,13 +136,12 @@ public final class SiteEditService {
      */
     private static String componentseformat =    
     "<!-- Start Component Presentation: {" +
-    "\"ID\" : \"%1$s\", " +               // component tcm uri
     "\"ComponentID\" : \"%1$s\", " +               // component tcm uri
     "\"ComponentModified\" : \"%2$tFT%2$tH:%2$tM:%2$tS\", " +         // component modified date (2012-04-05T17:33:02)
     "\"ComponentTemplateID\" : \"%3$s\", " +       // component template id
     "\"ComponentTemplateModified\" : \"%4$tFT%4$tH:%4$tM:%4$tS\", " + // component template modified date (2012-04-05T17:33:02)
-    "\"IsRepositoryPublished\" : %5$b ," +           // is repository published (true if dynamic component template, false otherwise)
-    "\"IsQueryBased\" : %6$b" +                                       // is query based (true for a broker queried dcp, omit if component presentation is embedded on a page)
+    "\"IsRepositoryPublished\" : %5$b" +           // is repository published (true if dynamic component template, false otherwise)
+//    "%6$b" +                                       // is query based (true for a broker queried dcp, omit if component presentation is embedded on a page)
     "} -->";    
     
     /**
@@ -173,19 +172,19 @@ public final class SiteEditService {
         		 comp.getRevisionDate(),
         		cp.getComponentTemplate().getId(),
         		cp.getComponentTemplate().getRevisionDate(),
-        		cp.isDynamic(),
-        		false
+        		cp.isDynamic()
         );
     }
     
+    
     private static String linkedcomponentseformat =    
     "<!-- Start Component Presentation: {" +
-    "\"ID\" : \"%1$s\", " +               // component tcm uri    
-    "\"ComponentID\" : \"tcm:%1$d-%2$d\", " +               // component tcm uri
-    "\"ComponentModified\" : \"%3$tFT%3$tH:%3$tM:%3$tS\", " +         // component modified date (2012-04-05T17:33:02)
-    "\"ComponentTemplateID\" : \"tcm:%1$d-%4$d-32\", " +       // component template id
-    "\"IsRepositoryPublished\" : %5$b, " +           // is repository published (true if dynamic component template, false otherwise)
-    "\"IsQueryBased\" : %6$b" +                                       // is query based (true for a broker queried dcp, omit if component presentation is embedded on a page)
+    "\"ID\" :  \"tcm:%1$d-%2$d\", " +              		 		// pub uri + component tcm uri    
+    "\"ComponentID\" : \"tcm:%1$d-%2$d\", " +               	// pub uri + component tcm uri
+    "\"ComponentModified\" : \"%3$tFT%3$tH:%3$tM:%3$tS\", " +   // component modified date (2012-04-05T17:33:02)
+    "\"ComponentTemplateID\" : \"tcm:%1$d-%4$d-32\", " +       	// pub uri + component template id
+    "\"IsRepositoryPublished\" : %5$b, " +           			// is repository published (true if dynamic component template, false otherwise)
+    "\"IsQueryBased\" : %6$b" +                                 // is query based (true for a broker queried dcp, omit if component presentation is embedded on a page)
     "} -->";  
     
     /**

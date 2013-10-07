@@ -24,6 +24,7 @@ import org.dd4t.contentmodel.GenericPage;
 import org.dd4t.springmvc.siteedit.SiteEditService;
 import org.dd4t.springmvc.view.IViewHandler;
 import org.dd4t.springmvc.view.model.ComponentViews;
+import org.dd4t.springmvc.view.model.RenderedComponent;
 import org.dd4t.springmvc.view.model.ViewRegion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,7 +64,7 @@ public class DynamicPageContentController extends BaseDD4TController implements
             if (logger.isDebugEnabled()){
                 logger.debug("found cp with ct " + cp.getComponentTemplate().getId());
             }
-
+            logger.debug("DynamicPageContentController: componentPresentation " +cp.toString());      //CPL
             String region = getRegionFromTemplate(cp.getComponentTemplate());
             if (!viewmodel.getRegions().containsKey(region)) {
                 viewmodel.getRegions().put(region, new ViewRegion());
@@ -89,14 +90,11 @@ public class DynamicPageContentController extends BaseDD4TController implements
                     logger.debug("using view " + view);
                 }
                 
-                // add the site edit String to the generated HTML
-                String se = SiteEditService.generateSiteEditComponentTag(cp, order, region, req);
-                
-                viewresult = "<div>"+se +
-                    componentViewManager.handleView(model, cp.getComponent(), view,
-                            req, res) +"</div>";
-            }
+                viewresult = buildComponentView(model, req, res, order, cp, region, view);
+            }            
 
+            // TODO - Would really like to build the regions from the rendered components, but is this in conflict with the origin source?
+            viewmodel.addRenderedComponent(region, new RenderedComponent(viewresult, region, cp, order));
             viewmodel.getRegions().get(region).getComponentViews()
                     .add(viewresult);
             
@@ -105,6 +103,15 @@ public class DynamicPageContentController extends BaseDD4TController implements
 
         return viewmodel;
     }
+
+	protected String buildComponentView(GenericPage model, HttpServletRequest req, HttpServletResponse res, int order, ComponentPresentation cp, String region, String view) throws Exception {
+		// add the site edit String to the generated HTML
+		String se = SiteEditService.generateSiteEditComponentTag(cp, order, region, req);
+          
+		return "<div>" + se
+				+ componentViewManager.handleView(model, cp.getComponent(), view, req, res)
+				+ "</div>";
+	}
 
 
     
