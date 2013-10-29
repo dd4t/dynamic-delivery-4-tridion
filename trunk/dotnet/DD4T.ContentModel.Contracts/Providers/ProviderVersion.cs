@@ -25,7 +25,7 @@ namespace DD4T.ContentModel.Contracts.Providers
     /// </remarks>
     public static class ProviderAssemblyNames
     {
-        public static ProviderVersion DefaultProviderVersion = ProviderVersion.Tridion2011sp1;
+        public static ProviderVersion DefaultProviderVersion = ProviderVersion.Tridion2013;
         private static Dictionary<ProviderVersion, string> _dictionary = null;
         private static Dictionary<ProviderVersion, string> Dictionary
         {
