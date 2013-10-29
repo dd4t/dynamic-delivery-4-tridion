@@ -37,7 +37,7 @@
     <AssemblyOriginatorKeyFile>dynamicdelivery.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC4|AnyCPU'">
-    <OutputPath>bin\MVC4\</OutputPath>
+    <OutputPath>..\..\build\mvc4\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release2011SP1|AnyCPU'">
     <OutputPath>..\..\build\</OutputPath>
@@ -60,6 +60,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +72,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Caching\ICacheAgent.cs" />
+    <Compile Include="ICondition.cs" />
     <Compile Include="IItem.cs" />
     <Compile Include="IFieldSet.cs" />
     <Compile Include="Enums.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="IField.cs" />
     <Compile Include="IKeyword.cs" />
     <Compile Include="IMultimedia.cs" />
+    <Compile Include="ITargetGroup.cs" />
     <Compile Include="IOrganizationalItem.cs" />
     <Compile Include="IPage.cs" />
     <Compile Include="IPageTemplate.cs" />

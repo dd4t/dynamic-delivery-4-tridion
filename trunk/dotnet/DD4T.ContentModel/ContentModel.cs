@@ -144,7 +144,13 @@ namespace DD4T.ContentModel
         [XmlIgnore]
         public int OrderOnPage { get; set; }
 
+        public List<Condition> Conditions { get; set; }
 
+        [XmlIgnore]
+        IList<ICondition> IComponentPresentation.Conditions
+        {
+            get { return Conditions.ToList<ICondition>(); }
+        }
     }
 
     public class PageTemplate : RepositoryLocalItem, IPageTemplate
@@ -584,5 +590,39 @@ namespace DD4T.ContentModel
         private IBinaryFactory Factory { get; set; }
 
         public System.IO.Stream BinaryStream { get; set; }
+    }
+
+    public class TargetGroup : RepositoryLocalItem, ITargetGroup
+    {
+        public string Description { get; set; }
+
+        public List<Condition> Conditions { get; set; }
+        
+        [XmlIgnore]
+        IList<ICondition> ITargetGroup.Conditions { get { return Conditions.ToList<ICondition>(); } }
+    }
+    
+    public class Condition : ICondition
+    {
+        public bool Negate { get; set; }
+    }
+
+    public class KeywordCondition : Condition
+    {
+        public Keyword Keyword { get; set; }
+        public NumericalConditionOperator Operator { get; set; }
+        public object Value { get; set; }
+    }
+
+    public class CustomerCharacteristicCondition : Condition
+    {
+        public string Name { get; set; }
+        public ConditionOperator Operator { get; set; }
+        public object Value { get; set; }
+    }
+
+    public class TargetGroupCondition : Condition
+    {
+        public TargetGroup TargetGroup { get; set; }
     }
 }
