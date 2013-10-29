@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\build\</OutputPath>
+    <OutputPath>..\..\build\mvc4\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -29,6 +29,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC4|AnyCPU'">
+    <OutputPath>bin\MVC4\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release2011SP1|AnyCPU'">
     <OutputPath>bin\Release2011SP1\</OutputPath>
@@ -61,10 +64,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Dynamic Delivery Presentation Solution Items\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Binaries\BinaryDistributionModule.cs" />
     <Compile Include="Binaries\BinaryFileManager.cs" />
     <Compile Include="Binaries\IBinaryFileManager.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\SpecificAssemblyInfo.cs" />
     <Compile Include="ResourceManagement\DynamicResourceManagement.cs" />
   </ItemGroup>
   <ItemGroup>

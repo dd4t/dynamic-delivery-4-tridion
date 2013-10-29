@@ -99,6 +99,8 @@
     <Compile Include="Builder\PageTemplateBuilder.cs" />
     <Compile Include="Builder\PublicationBuilder.cs" />
     <Compile Include="Builder\SchemaBuilder.cs" />
+
+    <Compile Include="Builder\TargetGroupBuilder.cs" />
     <Compile Include="DefaultTemplate.cs" />
     <Compile Include="StopChainException.cs" />
     <Compile Include="Utils\LowerCaseConverter.cs" />
