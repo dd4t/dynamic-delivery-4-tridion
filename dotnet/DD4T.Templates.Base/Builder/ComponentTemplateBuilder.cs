@@ -18,7 +18,7 @@ namespace DD4T.Templates.Base.Builder
          {
              ct.MetadataFields = new Dynamic.FieldSet();
             TCM.Fields.ItemFields tcmMetadataFields = new TCM.Fields.ItemFields(tcmComponentTemplate.Metadata, tcmComponentTemplate.MetadataSchema);
-            ct.MetadataFields = manager.BuildFields(tcmMetadataFields, 0, false); // never follow links to components from component templates, never resolve binary widht/height
+            ct.MetadataFields = manager.BuildFields(tcmMetadataFields, 0, false,false); // never follow links to components from component templates, never resolve binary widht/height
          }
          else
          {

@@ -27,7 +27,7 @@ namespace DD4T.Templates.Base.Builder
 
                 // ignore the rendered CP, because it is already available in the broker
                 // instead, we will render a very simple version without any links
-                cp.Component = manager.BuildComponent(tcmComponentPresentation.Component, 0, false); // linkLevels = 0 means: only summarize the component
+                cp.Component = manager.BuildComponent(tcmComponentPresentation.Component, 0, false,false); // linkLevels = 0 means: only summarize the component
                 cp.IsDynamic = true;
             }
             else

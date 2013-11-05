@@ -82,6 +82,7 @@
     <Compile Include="InheritMetadataPage.cs" />
     <Compile Include="MinimizeXML.cs" />
     <Compile Include="PreviewPage.cs" />
+    <Compile Include="Properties\SpecificAssemblyInfo.cs" />
     <Compile Include="PublishBinariesComponent.cs" />
     <Compile Include="PublishBinariesPage.cs" />
     <Compile Include="Resources.cs" />

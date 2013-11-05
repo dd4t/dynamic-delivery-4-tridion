@@ -20,7 +20,7 @@ namespace DD4T.Templates.Base.Builder
          {
              pt.MetadataFields = new Dynamic.FieldSet();
             TCM.Fields.ItemFields tcmMetadataFields = new TCM.Fields.ItemFields(tcmPageTemplate.Metadata, tcmPageTemplate.MetadataSchema);
-            pt.MetadataFields = manager.BuildFields(tcmMetadataFields, 0, false); // never follow links to components from page templates, never resolve binary widht/height
+            pt.MetadataFields = manager.BuildFields(tcmMetadataFields, 0, false,false); // never follow links to components from page templates, never resolve binary widht/height
          }
          else
          {
