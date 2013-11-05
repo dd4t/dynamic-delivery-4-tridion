@@ -81,7 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Dynamic Delivery Publishing Solution Items\AssemblyInfo.cs">
-      <Link>AssemblyInfo.cs</Link>
+      <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BaseComponentTemplate.cs" />
     <Compile Include="BasePageTemplate.cs" />
@@ -99,9 +99,9 @@
     <Compile Include="Builder\PageTemplateBuilder.cs" />
     <Compile Include="Builder\PublicationBuilder.cs" />
     <Compile Include="Builder\SchemaBuilder.cs" />
-
     <Compile Include="Builder\TargetGroupBuilder.cs" />
     <Compile Include="DefaultTemplate.cs" />
+    <Compile Include="Properties\SpecificAssemblyInfo.cs" />
     <Compile Include="StopChainException.cs" />
     <Compile Include="Utils\LowerCaseConverter.cs" />
     <Compile Include="Utils\GeneralUtils.cs" />
@@ -137,9 +137,7 @@
       <Name>DD4T.ContentModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resources\Minimize.xslt" />
   </ItemGroup>

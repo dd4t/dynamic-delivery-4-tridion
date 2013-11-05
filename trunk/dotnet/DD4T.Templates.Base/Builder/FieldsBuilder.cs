@@ -9,13 +9,13 @@ namespace DD4T.Templates.Base.Builder
 {
    public class FieldsBuilder
    {
-       public static Dynamic.FieldSet BuildFields(TCM.Fields.ItemFields tcmItemFields, int linkLevels, bool resolveWidthAndHeight, BuildManager manager)
+       public static Dynamic.FieldSet BuildFields(TCM.Fields.ItemFields tcmItemFields, int linkLevels, bool resolveWidthAndHeight, bool publishEmptyFields, BuildManager manager)
       {
          Dynamic.FieldSet fields = new FieldSet();
-         AddFields(fields, tcmItemFields, linkLevels, resolveWidthAndHeight, Dynamic.MergeAction.Replace, manager);
+         AddFields(fields, tcmItemFields, linkLevels, resolveWidthAndHeight,publishEmptyFields, Dynamic.MergeAction.Replace, manager);
          return fields;
       }
-       public static void AddFields(Dynamic.FieldSet fields, TCM.Fields.ItemFields tcmItemFields, int linkLevels, bool resolveWidthAndHeight, Dynamic.MergeAction mergeAction, BuildManager manager)
+       public static void AddFields(Dynamic.FieldSet fields, TCM.Fields.ItemFields tcmItemFields, int linkLevels, bool resolveWidthAndHeight, bool publishEmptyFields, Dynamic.MergeAction mergeAction, BuildManager manager)
        {
            GeneralUtils.TimedLog(string.Format("add fields: found {0} fields",tcmItemFields.Count));
            
@@ -33,7 +33,7 @@ namespace DD4T.Templates.Base.Builder
                            GeneralUtils.TimedLog(string.Format("skipping field (merge action {0}, maxoccurs {1}", mergeAction.ToString(), tcmItemField.Definition.MaxOccurs));
                            continue;
                        }
-                       Dynamic.Field f = manager.BuildField(tcmItemField, linkLevels, resolveWidthAndHeight);
+                       Dynamic.Field f = manager.BuildField(tcmItemField, linkLevels, resolveWidthAndHeight,publishEmptyFields);
                        if (mergeAction.Equals(Dynamic.MergeAction.Replace) || (mergeAction.Equals(Dynamic.MergeAction.MergeMultiValueReplaceSingleValue) && tcmItemField.Definition.MaxOccurs == 1))
                        {
                            GeneralUtils.TimedLog(string.Format("replacing field (merge action {0}, maxoccurs {1}", mergeAction.ToString(), tcmItemField.Definition.MaxOccurs));
@@ -129,7 +129,7 @@ namespace DD4T.Templates.Base.Builder
                    }
                    else
                    {
-                       Dynamic.Field f = manager.BuildField(tcmItemField, linkLevels, resolveWidthAndHeight);
+                       Dynamic.Field f = manager.BuildField(tcmItemField, linkLevels, resolveWidthAndHeight,publishEmptyFields);
                        fields.Add(f.Name, f);
                    }
                }

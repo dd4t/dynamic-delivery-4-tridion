@@ -13,9 +13,9 @@ namespace DD4T.Templates.Base.Builder
     {
         public static Dynamic.Page BuildPage(TCM.Page tcmPage, Engine engine, BuildManager manager)
         {
-            return BuildPage(tcmPage, engine, manager, 1, false);
+            return BuildPage(tcmPage, engine, manager, 1, false,false);
         }
-        public static Dynamic.Page BuildPage(TCM.Page tcmPage, Engine engine, BuildManager manager, int linkLevels, bool resolveWidthAndHeight)
+        public static Dynamic.Page BuildPage(TCM.Page tcmPage, Engine engine, BuildManager manager, int linkLevels, bool resolveWidthAndHeight,bool publishEmptyFields)
         {
             Dynamic.Page p = new Dynamic.Page
                                  {
@@ -37,7 +37,7 @@ namespace DD4T.Templates.Base.Builder
                         GeneralUtils.TimedLog("doing metadata stuff");
 
                         var tcmMetadataFields = new Tridion.ContentManager.ContentManagement.Fields.ItemFields(tcmPage.Metadata, tcmPage.MetadataSchema);
-                        p.MetadataFields = manager.BuildFields(tcmMetadataFields, linkLevels, resolveWidthAndHeight);
+                        p.MetadataFields = manager.BuildFields(tcmMetadataFields, linkLevels, resolveWidthAndHeight,publishEmptyFields);
                     }
                 }
                 catch (Exception)
