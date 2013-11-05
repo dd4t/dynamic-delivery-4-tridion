@@ -1,0 +1,6 @@
+netrtsn.dll
+Tridion.ContentDelivery.Configuration.dll
+Tridion.ContentDelivery.dll
+xmogrt.dll
+
+Note: use the 64-bits versions!

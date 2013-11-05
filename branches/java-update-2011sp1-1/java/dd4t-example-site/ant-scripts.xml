@@ -1,0 +1,50 @@
+<project name="dd4t-example-site" default="load-jarfiles">
+	<!-- 
+	   @author rooudsho <rogier.oudshoorn@>
+	-->
+	
+	<!-- Setting location properties -->
+
+	<property name="dd-framework.lib.dir" location="..\..\dependencies\" />
+	<property name="dd-example.src.dir" location="src" />
+	<property name="temp.dir" location="temp" />
+	<property name="target.web.dir" location="WebContent\WEB-INF\lib" />
+	<property name="build.dir" location="..\..\build" />	
+	
+	
+	<import file="..\dd4t-api\ant-scripts.xml"/>
+	<import file="..\dd4t-providers\ant-scripts.xml"/>
+	<import file="..\dd4t-core\ant-scripts.xml"/>
+	
+	<!-- Java  Classpath -->
+	<path id="classpath">	    
+	    <fileset dir="${dd-framework.lib.dir}" includes="**/*.jar" />
+		<fileset dir="${build.dir}" includes="**/*.jar" />				
+	</path>
+
+	<target name="build-all" depends="load-jarfiles,compile-dd4t-api, compile-dd4t-providers, compile-dd4t-core, load-jarfiles" />
+	
+	<!-- initializes the dd-framework 
+	<target name="build-jar">
+		<delete dir="${temp.dir}" />
+		<mkdir dir="${temp.dir}" />
+		
+		<javac srcdir="${dd-example.src.dir}" destdir="${temp.dir}" classpathref="classpath" />
+		<copy todir="${temp.dir}">
+			<fileset dir="${dd-example.src.dir}" includes="**/*.xslt" />
+		</copy>			
+		
+		<jar destfile="${target.web.dir}/dd4t-example-site.jar" basedir="${temp.dir}" />
+		<delete dir="${temp.dir}" />		
+	</target>-->
+	
+	<!-- initializes the dd-framework -->
+	<target name="load-jarfiles">
+		
+		<!-- copy all resource jarfiles into our /lib folder -->
+		<copy todir="${target.web.dir}" flatten="true">
+			<fileset dir="${dd-framework.lib.dir}" includes="**/*.jar" />
+			<fileset dir="${build.dir}" includes="**/*.jar" />
+		</copy>
+	</target>	
+</project>

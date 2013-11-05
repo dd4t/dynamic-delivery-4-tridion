@@ -1,0 +1,20 @@
+netrtsn.dll
+Tridion.Common.dll
+Tridion.Common.xml
+Tridion.ContentDelivery.AmbientData.dll
+Tridion.ContentDelivery.Configuration.dll
+Tridion.ContentDelivery.dll
+Tridion.ContentManager.Common.dll
+Tridion.ContentManager.Common.XML
+Tridion.ContentManager.dll
+Tridion.ContentManager.Publishing.dll
+Tridion.ContentManager.Publishing.xml
+Tridion.ContentManager.TemplateTypes.dll
+Tridion.ContentManager.TemplateTypes.XML
+Tridion.ContentManager.Templating.dll
+Tridion.ContentManager.Templating.XML
+Tridion.ContentManager.XML
+Tridion.Logging.dll
+Tridion.Logging.XML
+
+Note: use the 64-bits versions!

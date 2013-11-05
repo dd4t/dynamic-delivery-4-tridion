@@ -1,0 +1,50 @@
+﻿@using DD4T.Mvc.Html;
+@model DD4T.ContentModel.Page
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    @RenderSection("Head", required : false)
+    @if (@Model.MetadataFields.ContainsKey("GoogleAnalyticsUAID")) 
+    {
+        @Html.Partial("_GATrackingCodePartial")
+    } 
+</head>
+<body>
+    <div class="page">
+
+        <div id="header">
+            <div id="title">
+                <h1>My MVC Application</h1>
+            </div>
+
+            <div id="logindisplay">
+                @Html.Partial("_LogOnPartial")
+            </div>
+
+            <div id="searchdisplay">
+                @Html.Partial("_SearchPartial")
+            </div>
+
+            <div id="menucontainer">
+
+                <ul id="menu">
+                    <li><a href="@Url.Content("~/index.html")">Home</a></li>
+                    <li><a href="@Url.Content("~/news/example.html")">News</a></li>
+                    <li><a href="@Url.Content("~/products")">Products</a></li>
+                    <li>@Html.ActionLink("About", "about.html", "Page")</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div id="main">
+            @RenderBody()
+            <div id="footer">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

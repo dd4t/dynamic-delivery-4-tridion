@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B52EEF88-CDA2-41A8-84F9-7C5CDA4245BF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DD4T.Templates.Base</RootNamespace>
+    <AssemblyName>DD4T.Templates.Base</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>dynamicdelivery.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tridion.Common">
+      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Tridion.ContentManager">
+      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Tridion.ContentManager.Common">
+      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Tridion.ContentManager.Publishing">
+      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.Publishing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Tridion.ContentManager.TemplateTypes">
+      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.TemplateTypes.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Tridion.ContentManager.Templating">
+      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.Templating.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Tridion.ContentManager.Templating.SiteEdit">
+      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.ContentManager.Templating.SiteEdit.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Tridion.Logging">
+      <HintPath>..\..\dependencies\Tridion 2011 DLLs\Tridion.Logging.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseComponentTemplate.cs" />
+    <Compile Include="BasePageTemplate.cs" />
+    <Compile Include="BaseTemplate.cs" />
+    <Compile Include="Builder\BuildManager.cs" />
+    <Compile Include="Builder\CategoriesBuilder.cs" />
+    <Compile Include="Builder\ComponentBuilder.cs" />
+    <Compile Include="Builder\ComponentPresentationBuilder.cs" />
+    <Compile Include="Builder\ComponentTemplateBuilder.cs" />
+    <Compile Include="Builder\FieldBuilder.cs" />
+    <Compile Include="Builder\FieldsBuilder.cs" />
+    <Compile Include="Builder\KeywordBuilder.cs" />
+    <Compile Include="Builder\OrganizationalItemBuilder.cs" />
+    <Compile Include="Builder\PageBuilder.cs" />
+    <Compile Include="Builder\PageTemplateBuilder.cs" />
+    <Compile Include="Builder\PublicationBuilder.cs" />
+    <Compile Include="Builder\SchemaBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StopChainException.cs" />
+    <Compile Include="Utils\LowerCaseConverter.cs" />
+    <Compile Include="Utils\GeneralUtils.cs" />
+    <Compile Include="Utils\IOUtils.cs" />
+    <Compile Include="Utils\BinaryPublisher.cs" />
+    <Compile Include="Utils\TridionConfigurationManager.cs" />
+    <Compile Include="Utils\TridionUtils.cs" />
+    <Compile Include="Utils\XmlToJavaConverter.cs" />
+    <Compile Include="Xml\TridionXml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="dynamicdelivery.snk" />
+    <None Include="Resources\CWA Parameters Auto.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ConvertFirstCharToLowerCase.xslt" />
+    <EmbeddedResource Include="Resources\ConvertFullNameToLowerCase.xslt" />
+    <EmbeddedResource Include="Resources\ConvertToJava.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DD4T.ContentModel.Contracts\DD4T.ContentModel.Contracts.csproj">
+      <Project>{C21F66F0-01CE-4AF3-B76C-CD262B7EA1C0}</Project>
+      <Name>DD4T.ContentModel.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DD4T.ContentModel\DD4T.ContentModel.csproj">
+      <Project>{83F5CFC2-14D5-4190-B51D-7AF7A69B67E9}</Project>
+      <Name>DD4T.ContentModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
