@@ -1,0 +1,4 @@
+Please copy all DLL files from the active Tridion version here.
+Notes: 
+- the contents of this folder can be modified by the Tridion Version Switcher.
+- use the 64-bits versions!
