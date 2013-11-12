@@ -1,5 +1,0 @@
-#summary Explains the use of DD4T in a java environment
-
-* [http://code.google.com/p/dynamic-delivery-4-tridion/wiki/31_Quickstart Quickstart]
-
-* [http://code.google.com/p/dynamic-delivery-4-tridion/wiki/32_BuildingWithMaven Building with Maven]

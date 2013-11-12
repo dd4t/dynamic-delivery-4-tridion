@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<templateAssemblyUploadConfig>
-  <targetURL>http://dev.cms.sdl.com</targetURL>
-  <userName>.\administrator</userName>
-  <password>8+0l37x6QDQbWru4Es64xg==</password>
-  <uploadPDB>true</uploadPDB>
-</templateAssemblyUploadConfig>
