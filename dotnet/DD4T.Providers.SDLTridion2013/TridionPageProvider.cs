@@ -152,16 +152,15 @@ namespace DD4T.Providers.SDLTridion2013
             int pubId = PublicationId;
             LoggerService.Debug("GetLastPublishedDateByUrl found publication id {0}, url = {1}", pubId, url);
             PageMetaFactory pMetaFactory = new PageMetaFactory(pubId);
-			var pageInfo = pMetaFactory.GetMetaByUrl(url);
-		    
-            if (pageInfo == null || pageInfo.Count <=0)
+            IPageMeta pageInfo = pMetaFactory.GetMetaByUrl(pubId, url);
+
+            if (pageInfo == null)
             {
                 return DateTime.Now;
             }
             else
-            {				
-					IPageMeta pInfo = pageInfo[0] as IPageMeta;
-					return pInfo.LastPublicationDate;
+            {
+                return pageInfo.LastPublicationDate;
             }
         }
 
