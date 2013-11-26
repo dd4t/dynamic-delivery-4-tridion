@@ -1,0 +1,13 @@
+﻿@model DD4T.ContentModel.IComponentPresentation
+@*
+    This is a very basic sample Component View you can delete this
+*@
+<h2>Component: @Model.Component.Title</h2>
+<h3>Component Template: @Model.ComponentTemplate.Title</h3>
+<h4>Fields</h4>
+<ol>
+    @foreach (var field in Model.Component.Fields)
+    {
+        <li>Name: @field.Key, FieldType: @field.Value.FieldType, Value: @field.Value.Value</li>
+    }
+</ol>
