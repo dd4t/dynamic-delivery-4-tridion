@@ -42,24 +42,28 @@
 			<groupId>com.tridion.contentdelivery</groupId>
 			<artifactId>cd_model</artifactId>
 			<version>${tridion.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<!-- cache agent -->
 		<dependency>
 			<groupId>com.tridion.contentdelivery</groupId>
 			<artifactId>cd_cache</artifactId>
 			<version>${tridion.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<!-- link resolving -->
 		<dependency>
 			<groupId>com.tridion.contentdelivery</groupId>
 			<artifactId>cd_linking</artifactId>
 			<version>${tridion.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<!-- dcp resolving -->
 		<dependency>
 			<groupId>com.tridion.contentdelivery</groupId>
 			<artifactId>cd_broker</artifactId>
 			<version>${tridion.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- dd4t api contains interfaces we implement -->

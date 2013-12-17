@@ -47,6 +47,22 @@
 			<version>${tridion.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- link resolving in componentFactory; should be refactored to use link provider -->
+		<dependency>
+			<groupId>com.tridion.contentdelivery</groupId>
+			<artifactId>cd_linking</artifactId>
+			<version>${tridion.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- metafactories (security filter) & DCP (homeUtils) -->
+		<dependency>
+			<groupId>com.tridion.contentdelivery</groupId>
+			<artifactId>cd_broker</artifactId>
+			<version>${tridion.version}</version>
+			<scope>provided</scope>
+		</dependency>		
 
 		<dependency>
 			<groupId>org.springframework</groupId>
