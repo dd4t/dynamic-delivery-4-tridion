@@ -36,15 +36,23 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>dynamicdelivery.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'JSON|AnyCPU'">
+    <OutputPath>bin\JSON\</OutputPath>
+    <DefineConstants>JSON</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DD4T.ContentModel.XmlSerializers, Version=1.22.0.18186, Culture=neutral, PublicKeyToken=4450e3c7f68bf872, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\DD4T.ContentModel.XmlSerializers.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -87,6 +95,7 @@
     <Compile Include="BasePageTemplate.cs" />
     <Compile Include="BaseTemplate.cs" />
     <Compile Include="Builder\BuildManager.cs" />
+    <Compile Include="Builder\BuildProperties.cs" />
     <Compile Include="Builder\CategoriesBuilder.cs" />
     <Compile Include="Builder\ComponentBuilder.cs" />
     <Compile Include="Builder\ComponentPresentationBuilder.cs" />
@@ -102,6 +111,9 @@
     <Compile Include="Builder\TargetGroupBuilder.cs" />
     <Compile Include="DefaultTemplate.cs" />
     <Compile Include="Properties\SpecificAssemblyInfo.cs" />
+    <Compile Include="Serializing\ISerializerService.cs" />
+    <Compile Include="Serializing\JSONSerializerService.cs" />
+    <Compile Include="Serializing\XmlSerializerService.cs" />
     <Compile Include="StopChainException.cs" />
     <Compile Include="Utils\LowerCaseConverter.cs" />
     <Compile Include="Utils\GeneralUtils.cs" />
@@ -116,6 +128,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="dynamicdelivery.snk" />
+    <None Include="packages.config" />
     <None Include="Resources\CWA Parameters Auto.xsd">
       <SubType>Designer</SubType>
     </None>

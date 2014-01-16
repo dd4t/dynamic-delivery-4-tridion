@@ -9,7 +9,7 @@ using Tridion.ContentManager.Templating;
 using DD4T.Templates.Base.Builder;
 using DD4T.Templates.Base.Utils;
 using Dynamic = DD4T.ContentModel;
-using Microsoft.Xml.Serialization.GeneratedAssembly;
+using DD4T.Templates.Base.Serializing;
 
 namespace DD4T.Templates.Base
 {
@@ -34,64 +34,31 @@ namespace DD4T.Templates.Base
         {
             this.Package = package;
             this.Engine = engine;
-            XmlSerializer serializer;
+            ISerializerService serializerService = new JSONSerializerService();
 
             Dynamic.Component component;
             bool hasOutput = HasPackageValue(package, "Output");
             if (hasOutput)
             {
-                GeneralUtils.TimedLog("start retrieving previous Output from package");
                 String inputValue = package.GetValue("Output");
-                GeneralUtils.TimedLog("start deserializing");
-                TextReader tr = new StringReader(inputValue);
-                GeneralUtils.TimedLog("start creating serializer");
-                // serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Component));
-                serializer = new ComponentSerializer();
-                GeneralUtils.TimedLog("finished creating serializer");
-                component = (Dynamic.Component)serializer.Deserialize(tr);
-                GeneralUtils.TimedLog("finished deserializing from package");
+                component = (Dynamic.Component)serializerService.Deserialize<Dynamic.Component>(inputValue);
             }
             else
             {
-                GeneralUtils.ResetLogTimer();
-                GeneralUtils.TimedLog("Could not find 'Output' in the package");
-                GeneralUtils.TimedLog("Start creating dynamic component from current component in the package");
-                GeneralUtils.TimedLog("start creating serializer");
-                serializer = new ComponentSerializer();
-                // serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Component));
-                GeneralUtils.TimedLog("finished creating serializer");
                 component = GetDynamicComponent(Manager);
-                GeneralUtils.TimedLog("Finished creating dynamic component with title " + component.Title);
             }
 
             try
             {
-                GeneralUtils.TimedLog("starting transformComponent");
                 TransformComponent(component);
-                GeneralUtils.TimedLog("finished transformComponent");
             }
             catch (StopChainException)
             {
                 GeneralUtils.TimedLog("caught stopchainexception, will not write current component back to the package");
                 return;
             }
-            var sw = new StringWriter();
-            var ms = new MemoryStream();
-            XmlWriter writer = new XmlTextWriterFormattedNoDeclaration(ms, Encoding.UTF8);
-            string outputValue;
-            //Create our own namespaces for the output
-            var ns = new XmlSerializerNamespaces();
 
-            //Add an empty namespace and empty value
-            ns.Add("", "");
-
-            serializer.Serialize(writer, component, ns);
-            outputValue = Encoding.UTF8.GetString(ms.ToArray());
-
-            // for some reason, the .NET serializer leaves an invalid character at the start of the string
-            // we will remove everything up to the first < so that the XML can be deserialized later!
-            Regex re = new Regex("^[^<]+");
-            outputValue = re.Replace(outputValue, "");
+            string outputValue = serializerService.Serialize<Dynamic.Component>(component);
 
             if (hasOutput)
             {

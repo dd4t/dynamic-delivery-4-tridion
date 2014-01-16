@@ -19,6 +19,12 @@ namespace DD4T.Templates.Base.Builder
         {
 
 		}
+        public BuildManager (Package package)
+        {
+            BuildProperties = new BuildProperties(package);
+        }
+
+        public BuildProperties BuildProperties { get; set; }
 
         public virtual Dynamic.Page BuildPage(TComm.Page tcmPage, Engine engine)
         {

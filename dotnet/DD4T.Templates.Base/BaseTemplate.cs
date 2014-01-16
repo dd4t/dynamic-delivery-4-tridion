@@ -28,12 +28,21 @@ namespace DD4T.Templates.Base
         }
         protected Package Package { get; set; }
         protected Engine Engine { get; set; }
-        private BuildManager _buildManager = new BuildManager();
+        private BuildManager _buildManager = null;
 
         public BuildManager Manager
         {
-            get { return _buildManager; }
-            set { _buildManager = value; }
+            get 
+            {
+                if (_buildManager == null)
+                {
+                    _buildManager = new BuildManager(Package);
+                }
+                return _buildManager; }
+            set 
+            { 
+                _buildManager = value; 
+            }
         }
 
         public abstract void Transform(Engine engine, Package package);

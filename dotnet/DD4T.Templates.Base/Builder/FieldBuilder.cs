@@ -9,6 +9,7 @@ using DD4T.ContentModel;
 using Tridion.Logging;
 using Tridion.ContentManager.Templating;
 using DD4T.Templates.Base.Utils;
+using System.Xml;
 
 namespace DD4T.Templates.Base.Builder
 {
@@ -214,11 +215,21 @@ namespace DD4T.Templates.Base.Builder
 
                     // we will wrap each linked component in a ContentModel component
                     f.LinkedComponentValues = new List<Dynamic.Component>();
+                    int nextLinkLevel = linkLevels - 1;
+                    if (MustFollowField(sField, manager))
+                    {
+                        GeneralUtils.TimedLog(string.Format("found component link field named {0} with global followLinksPerField property set to false OR followLink set to true for this field", sField.Name));
+                    }
+                    else
+                    {
+                        GeneralUtils.TimedLog(string.Format("found component link field named {0} with followLink set to false for this field", sField.Name));
+                        nextLinkLevel = 0;
+                    }
                     foreach (TCM.Component comp in sField.Values)
                     {
-                        // todo: add binary to package, and add BinaryUrl property to the component
-                        f.LinkedComponentValues.Add(manager.BuildComponent(comp, linkLevels - 1, resolveWidthAndHeight, publishEmptyFields));
+                        f.LinkedComponentValues.Add(manager.BuildComponent(comp, nextLinkLevel, resolveWidthAndHeight, publishEmptyFields));
                     }
+
                     f.Values = new List<string>();
                     foreach (Dynamic.Component c in f.LinkedComponentValues)
                     {
@@ -233,7 +244,7 @@ namespace DD4T.Templates.Base.Builder
                 TCM.Fields.ComponentLinkField sField = (TCM.Fields.ComponentLinkField)tcmItemField;
                 GeneralUtils.TimedLog(string.Format("item field {0} has {1} values", tcmItemField.Name, sField.Values.Count));
                 //if (sField.Values.Count == 0)
-                  //  throw new FieldHasNoValueException();
+                //  throw new FieldHasNoValueException();
                 if (sField.Values.Count == 0 && publishEmptyFields)
                 {
                     f.Values.Add(tcmItemField.Name);
@@ -246,10 +257,23 @@ namespace DD4T.Templates.Base.Builder
                 {
                     // we will wrap each linked component in a ContentModel component
                     f.LinkedComponentValues = new List<Dynamic.Component>();
+                    int nextLinkLevel = linkLevels - 1;
+                    if (MustFollowField(sField, manager))
+                    {
+                        GeneralUtils.TimedLog(string.Format("found component link field named {0} with global followLinksPerField property set to false OR followLink set to true for this field", sField.Name));
+                    }
+                    else
+                    {
+                        GeneralUtils.TimedLog(string.Format("found component link field named {0} with followLink set to false for this field", sField.Name));
+                        nextLinkLevel = 0;
+                    }
+
                     foreach (TCM.Component comp in sField.Values)
                     {
-                        f.LinkedComponentValues.Add(manager.BuildComponent(comp, linkLevels - 1, resolveWidthAndHeight, publishEmptyFields));
+                        f.LinkedComponentValues.Add(manager.BuildComponent(comp, nextLinkLevel, resolveWidthAndHeight, publishEmptyFields));
                     }
+
+
                     f.Values = new List<string>();
                     foreach (Dynamic.Component c in f.LinkedComponentValues)
                     {
@@ -337,6 +361,16 @@ namespace DD4T.Templates.Base.Builder
 
             throw new FieldTypeNotDefinedException();
         }
-        
+
+        private static bool MustFollowField(TCM.Fields.ComponentLinkField field, BuildManager manager)
+        {
+            // TODO: check for setting 'followLinksPerField'
+            if (!manager.BuildProperties.FollowLinksPerField)
+                return true;
+            XmlNamespaceManager nsMan = new XmlNamespaceManager(new NameTable());
+            nsMan.AddNamespace("dd4t", "http://www.sdltridion.com/2011/DD4TField");
+            XmlElement followLink = (XmlElement)field.Definition.ExtensionXml.SelectSingleNode("//dd4t:configuration/dd4t:followlink", nsMan);
+            return (followLink != null && followLink.InnerText == "true");
+        }        
     }
 }

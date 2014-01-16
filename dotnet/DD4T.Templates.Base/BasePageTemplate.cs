@@ -10,7 +10,7 @@ using DD4T.Templates.Base.Builder;
 using DD4T.Templates.Base.Utils;
 using Dynamic = DD4T.ContentModel;
 using System.Configuration;
-using Microsoft.Xml.Serialization.GeneratedAssembly;
+using DD4T.Templates.Base.Serializing;
 
 namespace DD4T.Templates.Base
 {
@@ -36,62 +36,31 @@ namespace DD4T.Templates.Base
             GeneralUtils.TimedLog("start Transform");
             Package = package;
             Engine = engine;
-            XmlSerializer serializer;
+            ISerializerService serializerService = new JSONSerializerService();
 
             Dynamic.Page page;
             bool hasOutput = HasPackageValue(package, "Output");
             if (hasOutput)
             {
-                GeneralUtils.TimedLog("start retrieving previous Output from package");
                 String inputValue = package.GetValue("Output");
-                GeneralUtils.TimedLog("start creating serializer");
-                serializer = new PageSerializer();
-                GeneralUtils.TimedLog("finished creating serializer");
-                TextReader tr = new StringReader(inputValue);
-                GeneralUtils.TimedLog("start deserializing from package");
-                page = (Dynamic.Page)serializer.Deserialize(tr);
-                GeneralUtils.TimedLog("finished deserializing from package");
+                page = (Dynamic.Page)serializerService.Deserialize<Dynamic.Page>(inputValue);
             }
             else
             {
-                GeneralUtils.ResetLogTimer();
-                GeneralUtils.TimedLog("Could not find 'Output' in the package");
-                GeneralUtils.TimedLog("Start creating dynamic page from current page in the package");
                 page = GetDynamicPage(Manager);
-                GeneralUtils.TimedLog("Finished creating dynamic page with title " + page.Title);
-                GeneralUtils.TimedLog("start creating serializer");
-                serializer = new PageSerializer();
-                GeneralUtils.TimedLog("finished creating serializer");
             }
 
             try
             {
-                GeneralUtils.TimedLog("starting transformPage");
                 TransformPage(page);
-                GeneralUtils.TimedLog("finished transformPage");
             }
             catch (StopChainException)
             {
                 GeneralUtils.TimedLog("caught stopchainexception, will not write current page back to the package");
                 return;
             }
-            StringWriter sw = new StringWriter();
-            MemoryStream ms = new MemoryStream();
-            XmlWriter writer = new XmlTextWriterFormattedNoDeclaration(ms, Encoding.UTF8);
-            string outputValue;
-            //Create our own namespaces for the output
-            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
 
-            //Add an empty namespace and empty value
-            ns.Add("", "");
-
-            serializer.Serialize(writer, page, ns);
-            outputValue = Encoding.UTF8.GetString(ms.ToArray());
-
-            // for some reason, the .NET serializer leaves an invalid character at the start of the string
-            // we will remove everything up to the first < so that the XML can be deserialized later!
-            Regex re = new Regex("^[^<]+");
-            outputValue = re.Replace(outputValue, "");
+            string outputValue = serializerService.Serialize<Dynamic.Page>(page);
 
             if (hasOutput)
             {

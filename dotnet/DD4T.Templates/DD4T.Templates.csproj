@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'JSON|AnyCPU'">
+    <OutputPath>bin\JSON\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -109,7 +112,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)Dynamic Delivery Publishing Solution Items\ilmerge" /lib:"C:\Windows\Microsoft.NET\Framework\v4.0.30319" /t:dll /targetplatform:v4,C:\Windows\Microsoft.NET\Framework\v4.0.30319 /out:"$(TargetDir)$(ProjectName).merged.dll" "$(TargetDir)DD4T.ContentModel.Contracts.dll" "$(TargetDir)DD4T.ContentModel.dll" "$(TargetDir)DD4T.Templates.Base.dll" "$(TargetDir)DD4T.ContentModel.XmlSerializers.dll" "$(TargetPath)"</PostBuildEvent>
+    <PostBuildEvent Condition="'$(Configuration)' != 'JSON'">"$(SolutionDir)Dynamic Delivery Publishing Solution Items\ilmerge" /lib:"C:\Windows\Microsoft.NET\Framework\v4.0.30319" /t:dll /targetplatform:v4,C:\Windows\Microsoft.NET\Framework\v4.0.30319 /out:"$(TargetDir)$(ProjectName).merged.dll" "$(TargetDir)DD4T.ContentModel.Contracts.dll" "$(TargetDir)DD4T.ContentModel.dll" "$(TargetDir)DD4T.Templates.Base.dll" "$(TargetDir)DD4T.ContentModel.XmlSerializers.dll" "$(TargetPath)"</PostBuildEvent>
+    <PostBuildEvent Condition="'$(Configuration)' == 'JSON'">"$(SolutionDir)Dynamic Delivery Publishing Solution Items\ilmerge" /lib:"C:\Windows\Microsoft.NET\Framework\v4.0.30319" /t:dll /targetplatform:v4,C:\Windows\Microsoft.NET\Framework\v4.0.30319 /out:"$(TargetDir)$(ProjectName).merged.dll" "$(TargetDir)DD4T.ContentModel.Contracts.dll" "$(TargetDir)DD4T.ContentModel.dll" "$(TargetDir)DD4T.Templates.Base.dll" "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>"$(SolutionDir)Dynamic Delivery Publishing Solution Items\ilmerge" /lib:"C:\Windows\Microsoft.NET\Framework\v4.0.30319" /t:dll /targetplatform:v4,C:\Windows\Microsoft.NET\Framework\v4.0.30319 /out:"$(TargetDir)$(ProjectName).merged.dll" "$(TargetDir)DD4T.ContentModel.Contracts.dll" "$(TargetDir)DD4T.ContentModel.dll" "$(TargetDir)DD4T.Templates.Base.dll" "$(TargetDir)NewtonSoft.JSON.dll" "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

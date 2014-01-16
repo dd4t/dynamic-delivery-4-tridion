@@ -7,13 +7,12 @@ using Tridion.ContentManager.Templating;
 using System.Xml.Serialization;
 using System.IO;
 using DD4T.Templates.Base.Utils;
-using Microsoft.Xml.Serialization.GeneratedAssembly;
+using DD4T.Templates.Base.Serializing;
 
 namespace DD4T.Templates.Base.Builder
 {
     public class ComponentPresentationBuilder
     {
-        static XmlSerializer serializer = null;
 
         public static Dynamic.ComponentPresentation BuildComponentPresentation(TCM.ComponentPresentation tcmComponentPresentation, Engine engine, int linkLevels, bool resolveWidthAndHeight, BuildManager manager)
         {
@@ -46,20 +45,13 @@ namespace DD4T.Templates.Base.Builder
                 renderedContent = TridionUtils.StripTcdlTags(renderedContent);
 
                 cp.IsDynamic = false;
-                TextReader tr = new StringReader(renderedContent);
-                if (serializer == null)
-                {
-                    serializer = new ComponentSerializer();
-                    //serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Component));
-                }
                 try
                 {
-                    cp.Component = (Dynamic.Component)serializer.Deserialize(tr);
+                    cp.Component = (Dynamic.Component) new JSONSerializerService().Deserialize<Dynamic.Component>(renderedContent);
                 }
                 catch (Exception e)
                 {
                     TemplatingLogger.GetLogger(typeof(ComponentPresentationBuilder)).Error("exception while deserializing into CP: " + e.Message);
-                    File.WriteAllText(@"c:\tridion\log\appie.txt", e.Message + Environment.NewLine + e.StackTrace);
                     // the component presentation could not be deserialized, this probably not a Dynamic Delivery template
                     // just store the output as 'RenderedContent' on the CP
                     cp.RenderedContent = renderedContent;
