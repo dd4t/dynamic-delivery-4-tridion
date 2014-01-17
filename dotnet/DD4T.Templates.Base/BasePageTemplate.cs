@@ -36,7 +36,7 @@ namespace DD4T.Templates.Base
             GeneralUtils.TimedLog("start Transform");
             Package = package;
             Engine = engine;
-            ISerializerService serializerService = new JSONSerializerService();
+            ISerializerService serializerService = new XmlSerializerService();
 
             Dynamic.Page page;
             bool hasOutput = HasPackageValue(package, "Output");

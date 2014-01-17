@@ -34,7 +34,7 @@ namespace DD4T.Templates.Base
         {
             this.Package = package;
             this.Engine = engine;
-            ISerializerService serializerService = new JSONSerializerService();
+            ISerializerService serializerService = new XmlSerializerService();
 
             Dynamic.Component component;
             bool hasOutput = HasPackageValue(package, "Output");

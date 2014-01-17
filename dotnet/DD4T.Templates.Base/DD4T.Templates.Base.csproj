@@ -112,7 +112,6 @@
     <Compile Include="DefaultTemplate.cs" />
     <Compile Include="Properties\SpecificAssemblyInfo.cs" />
     <Compile Include="Serializing\ISerializerService.cs" />
-    <Compile Include="Serializing\JSONSerializerService.cs" />
     <Compile Include="Serializing\XmlSerializerService.cs" />
     <Compile Include="StopChainException.cs" />
     <Compile Include="Utils\LowerCaseConverter.cs" />

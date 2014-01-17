@@ -47,7 +47,7 @@ namespace DD4T.Templates.Base.Builder
                 cp.IsDynamic = false;
                 try
                 {
-                    cp.Component = (Dynamic.Component) new JSONSerializerService().Deserialize<Dynamic.Component>(renderedContent);
+                    cp.Component = (Dynamic.Component) new XmlSerializerService().Deserialize<Dynamic.Component>(renderedContent);
                 }
                 catch (Exception e)
                 {
