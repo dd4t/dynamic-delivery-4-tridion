@@ -42,7 +42,11 @@ namespace DD4T.Templates.Base.Builder
               multimedia.Size = tcmComponent.BinaryContent.FileSize;
               multimedia.FileName = tcmComponent.BinaryContent.Filename;
               // remove leading dot from extension because microsoft returns this as ".gif"
-              multimedia.FileExtension = System.IO.Path.GetExtension(multimedia.FileName).Substring(1);
+              string extension = System.IO.Path.GetExtension(multimedia.FileName);
+              if (string.IsNullOrEmpty(extension))
+                  multimedia.FileExtension = "";
+              else
+                  multimedia.FileExtension = extension.Substring(1);
 
               if (resolveWidthAndHeight)
               {
