@@ -11,6 +11,7 @@ using Tridion.ContentManager.Templating;
 using Tridion.ContentManager.Templating.Assembly;
 using DD4T.Templates.Base;
 using DD4T.Templates.Base.Utils;
+using DD4T.ContentModel;
 
 namespace DD4T.Templates.XML
 {
@@ -46,10 +47,10 @@ namespace DD4T.Templates.XML
                 return;
             }
 
-            // Combine the 'to lower' and 'to java' functions, since there is no reason to have one without the other.
-            // Note: it is still possible (for backwards compatibility) to have a separate ToLower TBB in your templates.
-            // In that case, the first letter of each element will be converted into lower case twice, which doesn't do any harm.
-            string outputValue = XmlMinimizer.Convert(inputValue);            
+            String minimizeSettings = package.GetValue("MinimizeSettings");
+
+
+            string outputValue = XmlMinimizer.Convert(inputValue, minimizeSettings);
 
             // replace the Output item in the package
             package.Remove(outputItem);
