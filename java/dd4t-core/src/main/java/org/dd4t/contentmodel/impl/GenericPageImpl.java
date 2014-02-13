@@ -15,6 +15,7 @@
  */
 package org.dd4t.contentmodel.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -125,6 +126,9 @@ public class GenericPageImpl extends BasePage implements GenericPage, HasMetadat
 	}
 
 	public List<ComponentPresentation> getComponentPresentations() {
+		if(componentPresentations == null){
+			componentPresentations = new ArrayList<ComponentPresentation>();
+		}
 		return componentPresentations;
 	}
 
