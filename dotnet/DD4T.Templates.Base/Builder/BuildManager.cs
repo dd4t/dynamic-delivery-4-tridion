@@ -17,7 +17,7 @@ namespace DD4T.Templates.Base.Builder
     {
         public BuildManager()
         {
-
+            BuildProperties = new BuildProperties();
 		}
         public BuildManager (Package package)
         {
