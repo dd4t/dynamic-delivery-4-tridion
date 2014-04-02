@@ -21,12 +21,7 @@ namespace DD4T.Providers.SDLTridion2013
             Descending
         }
 
-        public enum MetaSortFieldType
-        {
-            DATETIME,
-            FLOAT,
-            STRING
-        }
+       
 
         public string[] QuerySchemas { get; set; }
         public IList<MetaQueryItem> MetaQueryValues { get; set; }
@@ -40,7 +35,7 @@ namespace DD4T.Providers.SDLTridion2013
         public MetaQueryOrder QuerySortOrder { get; set; }
         public int MaximumComponents { get; set; }
         public int PublicationId { get; set; }
-        public MetaSortFieldType SortType { get; set; }
+        public MetadataType SortType { get; set; }
 
         public ExtendedQueryParameters()
         {
@@ -55,7 +50,7 @@ namespace DD4T.Providers.SDLTridion2013
             LastPublishedDate = DateTime.MinValue;
 
             QuerySortField = "ItemTitle";
-            SortType = MetaSortFieldType.STRING;
+            SortType = MetadataType.STRING;
             QuerySortOrder = MetaQueryOrder.Ascending;
             MaximumComponents = int.MaxValue;
         }
