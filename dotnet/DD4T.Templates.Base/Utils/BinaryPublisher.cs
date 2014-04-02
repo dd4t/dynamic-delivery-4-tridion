@@ -71,6 +71,26 @@ namespace DD4T.Templates.Base.Utils
                 img.SetAttribute("src", path);
 
             }
+
+
+            foreach (XmlElement img in xml.SelectNodes("//xhtml:a[@xlink:href[starts-with(string(.),'tcm:')]]", xml.NamespaceManager))
+            {
+                log.Debug("found link node " + img.OuterXml);
+                XmlAttribute link = (XmlAttribute)img.SelectSingleNode("@xlink:href", xml.NamespaceManager);
+                Component component = (Component)engine.GetObject(link.Value);
+                if (component.ComponentType == ComponentType.Multimedia)
+                {
+                    log.Debug("about to publish binary with uri " + link.Value);
+                    string path = PublishMultimediaComponent(link.Value);
+                    log.Debug("binary will be published to path " + path);
+                    img.SetAttribute("src", path);
+                }
+                else
+                {
+                    log.Debug("Component is not a multimedia component.");
+                }
+
+            }
             return xml.DocumentElement.InnerXml;
         }
 
