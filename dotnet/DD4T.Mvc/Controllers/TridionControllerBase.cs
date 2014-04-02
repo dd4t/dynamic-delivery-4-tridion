@@ -103,6 +103,7 @@ namespace DD4T.Mvc.Controllers
         /// <returns></returns>
         [HandleError]
         [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateInput(false)]
         public System.Web.Mvc.ActionResult PreviewPage()
         {
 
