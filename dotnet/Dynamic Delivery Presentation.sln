@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Mvc", "DD4T.Mvc\DD4T.Mvc.csproj", "{3AC37BE3-9832-4317-A5E2-2C24C61DECBD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.ContentModel.Contracts", "DD4T.ContentModel.Contracts\DD4T.ContentModel.Contracts.csproj", "{C21F66F0-01CE-4AF3-B76C-CD262B7EA1C0}"
@@ -31,6 +33,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Providers.SDLTridion2013", "DD4T.Providers.SDLTridion2013\DD4T.Providers.SDLTridion2013.csproj", "{E35BF700-6A67-4B29-B0FD-242FCC470E50}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Providers.SDLTridion2011", "DD4T.Providers.SDLTridion2011\DD4T.Providers.SDLTridion2011.csproj", "{87720B0B-E333-4937-ABEC-76B07B1BCAB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Providers.SDLTridion2013sp1", "DD4T.Providers.SDLTridion2013sp1\DD4T.Providers.SDLTridion2013sp1.csproj", "{425402D5-E8AD-427A-8A0C-3CFD4391D533}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -196,6 +200,22 @@ Global
 		{87720B0B-E333-4937-ABEC-76B07B1BCAB9}.Release2013|Any CPU.ActiveCfg = Release2013|Any CPU
 		{87720B0B-E333-4937-ABEC-76B07B1BCAB9}.TridionDebug|Any CPU.ActiveCfg = Debug|Any CPU
 		{87720B0B-E333-4937-ABEC-76B07B1BCAB9}.TridionDebug|Any CPU.Build.0 = Debug|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.DebugTridion2011|Any CPU.ActiveCfg = Debug|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.DebugTridion2011|Any CPU.Build.0 = Debug|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.MVC3|Any CPU.ActiveCfg = MVC3|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.MVC3|Any CPU.Build.0 = MVC3|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.MVC4|Any CPU.ActiveCfg = MVC3|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.MVC4|Any CPU.Build.0 = MVC3|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.Release2011SP1|Any CPU.ActiveCfg = Release2011SP1|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.Release2011SP1|Any CPU.Build.0 = Release2011SP1|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.Release2013|Any CPU.ActiveCfg = Release2013|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.Release2013|Any CPU.Build.0 = Release2013|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.TridionDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425402D5-E8AD-427A-8A0C-3CFD4391D533}.TridionDebug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
