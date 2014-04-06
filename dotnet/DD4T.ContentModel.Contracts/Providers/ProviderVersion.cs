@@ -11,6 +11,7 @@ namespace DD4T.ContentModel.Contracts.Providers
         Tridion2011,
         Tridion2011sp1,
         Tridion2013,
+        Tridion2013sp1,
         Undefined
     }
 
@@ -25,7 +26,7 @@ namespace DD4T.ContentModel.Contracts.Providers
     /// </remarks>
     public static class ProviderAssemblyNames
     {
-        public static ProviderVersion DefaultProviderVersion = ProviderVersion.Tridion2013;
+        public static ProviderVersion DefaultProviderVersion = ProviderVersion.Tridion2013sp1;
         private static Dictionary<ProviderVersion, string> _dictionary = null;
         private static Dictionary<ProviderVersion, string> Dictionary
         {
@@ -38,6 +39,7 @@ namespace DD4T.ContentModel.Contracts.Providers
                     _dictionary[ProviderVersion.Tridion2011] = "DD4T.Providers.SDLTridion2011";
                     _dictionary[ProviderVersion.Tridion2011sp1] = "DD4T.Providers.SDLTridion2011sp1";
                     _dictionary[ProviderVersion.Tridion2013] = "DD4T.Providers.SDLTridion2013";
+                    _dictionary[ProviderVersion.Tridion2013sp1] = "DD4T.Providers.SDLTridion2013sp1";
                 }
                 return _dictionary;
             }
