@@ -7,8 +7,8 @@ using System.Diagnostics;
 using System.Xml;
 using System.Configuration;
 using DD4T.Factories;
-using DD4T.ContentModel.Factories;
 using DD4T.ContentModel.Contracts.Caching;
+using DD4T.ContentModel.Contracts.Factories;
 using DD4T.Utils;
 using DD4T.Factories.Caching;
 

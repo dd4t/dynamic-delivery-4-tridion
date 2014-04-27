@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using DD4T.ContentModel.Factories;
+using DD4T.ContentModel.Contracts.Factories;
 
 namespace DD4T.Mvc.Controllers
 {

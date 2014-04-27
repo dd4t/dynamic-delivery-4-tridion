@@ -32,7 +32,7 @@ namespace DD4T.Providers.SDLTridion2011
     /// </summary>
     public class TridionComponentProvider : BaseProvider, IComponentProvider
     {
-        Dictionary<int, T.ComponentPresentationFactory> _cpFactoryList = null;
+        //Dictionary<int, T.ComponentPresentationFactory> _cpFactoryList = null;
         Dictionary<int, TMeta.ComponentMetaFactory> _cmFactoryList = null;
 
         private object lock1 = new object();

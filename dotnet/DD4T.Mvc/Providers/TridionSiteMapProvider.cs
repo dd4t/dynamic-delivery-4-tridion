@@ -7,7 +7,6 @@
     using System.Text;
     using System.Web;
     using System.Xml.Linq;
-    using DD4T.ContentModel.Factories;
     using System.Collections;
     using DD4T.Mvc.Caching;
     using DD4T.Factories;
@@ -15,6 +14,7 @@
     using System.Configuration;
     using DD4T.Utils;
     using DD4T.ContentModel.Contracts.Caching;
+    using DD4T.ContentModel.Contracts.Factories;
     using DD4T.Factories.Caching;
     using DD4T.ContentModel.Logging;
 

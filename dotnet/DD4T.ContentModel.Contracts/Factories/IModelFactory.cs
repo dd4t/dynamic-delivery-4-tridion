@@ -1,4 +1,4 @@
-﻿namespace DD4T.ContentModel.Factories
+﻿namespace DD4T.ContentModel.Contracts.Factories
 {
     public interface IModelFactory
     {

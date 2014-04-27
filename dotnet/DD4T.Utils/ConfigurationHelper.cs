@@ -200,7 +200,7 @@ namespace DD4T.Utils
                 {
                     return (ProviderVersion)Enum.Parse(typeof(ProviderVersion), version);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     LoggerService.Warning("invalid provider version {0}", version);
                     return ProviderVersion.Undefined;

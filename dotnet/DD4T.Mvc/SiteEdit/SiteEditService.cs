@@ -113,7 +113,7 @@ namespace DD4T.Mvc.SiteEdit
             {
                 return SiteEditSettings.ContainsKey(pubIdWithoutTcm);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // todo: add logging (log.Error("Unable to get pubID from URI", ex))
                 return false;

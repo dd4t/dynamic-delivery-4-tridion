@@ -13,7 +13,7 @@ using Tridion.ContentDelivery.Web.Linking;
 using DD4T.ContentModel;
 using DD4T.ContentModel.Exceptions;
 using DD4T.ContentModel.Factories;
-//using DD4T.Utils;
+using DD4T.Utils;
 using System.Collections.Generic;
 
 using System.Web.Caching;

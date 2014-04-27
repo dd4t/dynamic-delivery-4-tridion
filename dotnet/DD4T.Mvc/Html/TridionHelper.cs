@@ -6,7 +6,7 @@ using DD4T.ContentModel.Logging;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Configuration;
-using DD4T.ContentModel.Factories;
+using DD4T.ContentModel.Contracts.Factories;
 using DD4T.Factories;
 
 namespace DD4T.Mvc.Html

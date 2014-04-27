@@ -81,6 +81,12 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ContentModel.cs" />
+    <Compile Include="Factories\IBinaryFactory.cs" />
+    <Compile Include="Factories\IComponentFactory.cs" />
+    <Compile Include="Factories\ILinkFactory.cs" />
+    <Compile Include="Factories\IModelFactory.cs" />
+    <Compile Include="Factories\IPageFactory.cs" />
+    <Compile Include="Factories\ITaxonomyFactory.cs" />
     <Compile Include="SerializableDictionary.cs" />
     <Compile Include="Properties\SpecificAssemblyInfo.cs" />
   </ItemGroup>

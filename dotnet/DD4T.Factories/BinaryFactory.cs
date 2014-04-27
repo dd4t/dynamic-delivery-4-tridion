@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using DD4T.ContentModel;
+using DD4T.ContentModel.Contracts.Factories;
 using DD4T.ContentModel.Contracts.Providers;
 using DD4T.ContentModel.Exceptions;
-using DD4T.ContentModel.Factories;
 using DD4T.Utils;
 
 namespace DD4T.Factories

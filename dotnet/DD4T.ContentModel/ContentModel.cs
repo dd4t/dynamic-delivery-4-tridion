@@ -6,8 +6,8 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 using System.Xml;
 using System.Diagnostics;
-using DD4T.ContentModel.Factories;
 using DD4T.ContentModel.Contracts;
+using DD4T.ContentModel.Contracts.Factories;
 
 
 namespace DD4T.ContentModel

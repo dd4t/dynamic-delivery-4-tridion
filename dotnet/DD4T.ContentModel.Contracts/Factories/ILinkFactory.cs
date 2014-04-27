@@ -1,7 +1,7 @@
 ﻿using System;
 using DD4T.ContentModel.Contracts.Providers;
 using DD4T.ContentModel.Contracts.Caching;
-namespace DD4T.ContentModel.Factories
+namespace DD4T.ContentModel.Contracts.Factories
 {
     public interface ILinkFactory
     {
