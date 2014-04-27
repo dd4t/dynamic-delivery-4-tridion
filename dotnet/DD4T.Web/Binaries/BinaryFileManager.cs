@@ -209,20 +209,25 @@ namespace DD4T.Web.Binaries
 
             int targetH, targetW;
             Image original = Image.FromStream(new MemoryStream(imageFile));
-            if (dimensions.Width > 0 && dimensions.Height > 0)
+            if (dimensions.Width > 0 && dimensions.Height > 0 && !(dimensions.Width == original.Width && dimensions.Height == original.Height))
             {
                 targetW = dimensions.Width;
                 targetH = dimensions.Height;
             }
-            else if (dimensions.Width > 0)
+            else if (dimensions.Width > 0 && dimensions.Width != original.Width)
             {
                 targetW = dimensions.Width;
                 targetH = (int)(original.Height * ((float)targetW / (float)original.Width));
             }
-            else
+            else if (dimensions.Height > 0 && dimensions.Height != original.Height)
             {
                 targetH = dimensions.Height;
                 targetW = (int)(original.Width * ((float)targetH / (float)original.Height));
+            }
+            else
+            {
+                //No need to resize the image, return the original bytes.
+                return imageFile;
             }
 
             Image imgPhoto = null;
