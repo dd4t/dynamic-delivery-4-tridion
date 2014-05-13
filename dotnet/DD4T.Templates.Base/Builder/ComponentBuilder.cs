@@ -9,8 +9,6 @@ using Dynamic = DD4T.ContentModel;
 
 namespace DD4T.Templates.Base.Builder
 {
-   // TODO: add Publication element inside component (+ page, etc)
-   // TODO: add OrganizationalItem element inside component (+ page, etc)
    public class ComponentBuilder
    {
       protected static TemplatingLogger log = TemplatingLogger.GetLogger(typeof(ComponentBuilder));
@@ -105,13 +103,20 @@ namespace DD4T.Templates.Base.Builder
                   GeneralUtils.TimedLog("finished building metadata fields");
               }
           }
+          if (! manager.BuildProperties.OmitContextPublications)
           c.Publication = manager.BuildPublication(tcmComponent.ContextRepository);
-          c.OwningPublication = manager.BuildPublication(tcmComponent.OwningRepository);
-          TCM.Folder folder = (TCM.Folder)tcmComponent.OrganizationalItem;
-          c.Folder = manager.BuildOrganizationalItem(folder);
+
+          if (!manager.BuildProperties.OmitOwningPublications)
+              c.OwningPublication = manager.BuildPublication(tcmComponent.OwningRepository);
+
+          if (!manager.BuildProperties.OmitFolders)
+          {
+              TCM.Folder folder = (TCM.Folder)tcmComponent.OrganizationalItem;
+              c.Folder = manager.BuildOrganizationalItem(folder);
+          }
           c.Categories = manager.BuildCategories(tcmComponent);
 
-          manager.AddXpathToFields(c.Fields, "tcm:Content/custom:" + tcmComponent.Schema.RootElementName); // TODO: check if the first part of the XPath is really the root element name, or simply always 'Content'
+          manager.AddXpathToFields(c.Fields, "tcm:Content/custom:" + tcmComponent.Schema.RootElementName); 
           manager.AddXpathToFields(c.MetadataFields, "tcm:Metadata/custom:Metadata");
           return c;
       }

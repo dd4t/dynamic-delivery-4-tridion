@@ -2,15 +2,14 @@
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Xml;
-using System.Xml.Serialization;
 using Tridion.ContentManager.CommunicationManagement;
 using Tridion.ContentManager.Templating;
 using DD4T.Templates.Base.Builder;
 using DD4T.Templates.Base.Utils;
 using Dynamic = DD4T.ContentModel;
 using System.Configuration;
-using DD4T.Templates.Base.Serializing;
+using System.Collections.Generic;
+using DD4T.Serialization;
 
 namespace DD4T.Templates.Base
 {
@@ -24,6 +23,7 @@ namespace DD4T.Templates.Base
         public bool DefaultPublishEmptyFields = false;
         public static string VariableNameCalledFromDynamicDelivery = "CalledFromDynamicDelivery";
         public static string VariableValueCalledFromDynamicDelivery = "true";
+        
 
         /// <summary>
         /// Abstract method to be implemented by a subclass. The method takes a DynamicDelivery page and can add information to it (e.g. by searching in folders / structure groups / linked components, etc
@@ -36,18 +36,16 @@ namespace DD4T.Templates.Base
             GeneralUtils.TimedLog("start Transform");
             Package = package;
             Engine = engine;
-            ISerializerService serializerService = new XmlSerializerService();
-
             Dynamic.Page page;
             bool hasOutput = HasPackageValue(package, "Output");
             if (hasOutput)
             {
                 String inputValue = package.GetValue("Output");
-                page = (Dynamic.Page)serializerService.Deserialize<Dynamic.Page>(inputValue);
+                page = (Dynamic.Page)SerializerService.Deserialize<Dynamic.Page>(inputValue);
             }
             else
             {
-                page = GetDynamicPage(Manager);
+                page = GetDynamicPage();
             }
 
             try
@@ -60,24 +58,24 @@ namespace DD4T.Templates.Base
                 return;
             }
 
-            string outputValue = serializerService.Serialize<Dynamic.Page>(page);
+            string outputValue = SerializerService.Serialize<Dynamic.Page>(page);
 
             if (hasOutput)
             {
                 Item outputItem = package.GetByName("Output");
                 package.Remove(outputItem);
-                package.PushItem(Package.OutputName, package.CreateStringItem(ContentType.Xml, outputValue));
+                package.PushItem(Package.OutputName, package.CreateStringItem(SerializerService is XmlSerializerService ? ContentType.Xml : ContentType.Text, outputValue));
             }
             else
             {
-                package.PushItem(Package.OutputName, package.CreateStringItem(ContentType.Xml, outputValue));
+                package.PushItem(Package.OutputName, package.CreateStringItem(SerializerService is XmlSerializerService ? ContentType.Xml : ContentType.Text, outputValue));
             }
 
             GeneralUtils.TimedLog("finished Transform");
 
         }
 
-        public Dynamic.Page GetDynamicPage(BuildManager manager)
+        public Dynamic.Page GetDynamicPage()
         {
             Item item = Package.GetByName(Package.PageName);
             if (item == null)
@@ -120,7 +118,7 @@ namespace DD4T.Templates.Base
 
             Log.Debug("found page with title " + tcmPage.Title + " and id " + tcmPage.Id);
             Log.Debug("constructing dynamic page, links are followed to level " + linkLevels + ", width and height are " + (resolveWidthAndHeight ? "" : "not ") + "resolved");
-            Dynamic.Page page = manager.BuildPage(tcmPage, Engine, linkLevels, resolveWidthAndHeight,publishEmptyFields);
+            Dynamic.Page page = Manager.BuildPage(tcmPage, Engine, linkLevels, resolveWidthAndHeight,publishEmptyFields);
             return page;
         }
 

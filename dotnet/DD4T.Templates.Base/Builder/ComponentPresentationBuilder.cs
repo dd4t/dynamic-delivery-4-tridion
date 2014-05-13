@@ -7,7 +7,6 @@ using Tridion.ContentManager.Templating;
 using System.Xml.Serialization;
 using System.IO;
 using DD4T.Templates.Base.Utils;
-using DD4T.Templates.Base.Serializing;
 
 namespace DD4T.Templates.Base.Builder
 {
@@ -16,8 +15,10 @@ namespace DD4T.Templates.Base.Builder
 
         public static Dynamic.ComponentPresentation BuildComponentPresentation(TCM.ComponentPresentation tcmComponentPresentation, Engine engine, int linkLevels, bool resolveWidthAndHeight, BuildManager manager)
         {
+            TemplatingLogger logger = TemplatingLogger.GetLogger(typeof(ComponentPresentationBuilder));
             Dynamic.ComponentPresentation cp = new Dynamic.ComponentPresentation();
 
+            logger.Debug(string.Format(">BuildCP {0} ({1})", tcmComponentPresentation.ComponentTemplate.Title, tcmComponentPresentation.ComponentTemplate.IsRepositoryPublishable));
             if (tcmComponentPresentation.ComponentTemplate.IsRepositoryPublishable)
             {
                 // call render but ignore the output - render ensures componentlinking will be setup as normal.
@@ -40,14 +41,12 @@ namespace DD4T.Templates.Base.Builder
                 }
 
                 string renderedContent = engine.RenderComponentPresentation(tcmComponentPresentation.Component.Id, tcmComponentPresentation.ComponentTemplate.Id);
-                engine.PublishingContext.RenderContext.ContextVariables.Remove(BasePageTemplate.VariableNameCalledFromDynamicDelivery);
-
                 renderedContent = TridionUtils.StripTcdlTags(renderedContent);
 
                 cp.IsDynamic = false;
                 try
                 {
-                    cp.Component = (Dynamic.Component) new XmlSerializerService().Deserialize<Dynamic.Component>(renderedContent);
+                    cp.Component = (Dynamic.Component)manager.SerializerService.Deserialize<Dynamic.Component>(renderedContent);
                 }
                 catch (Exception e)
                 {
@@ -58,6 +57,7 @@ namespace DD4T.Templates.Base.Builder
                     // because the CT was not a DD4T CT, we will generate the DD4T XML code here
                     cp.Component = manager.BuildComponent(tcmComponentPresentation.Component);
                 }
+
             }
             cp.ComponentTemplate = manager.BuildComponentTemplate(tcmComponentPresentation.ComponentTemplate);
             return cp;

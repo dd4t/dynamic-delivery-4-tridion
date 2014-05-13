@@ -4,6 +4,8 @@ using DD4T.Factories.Caching;
 using DD4T.Utils;
 using DD4T.ContentModel.Contracts.Resolvers;
 using DD4T.Factories.Resolvers;
+using DD4T.ContentModel.Contracts.Serializing;
+using DD4T.Serialization;
 
 namespace DD4T.Factories
 {
@@ -12,6 +14,58 @@ namespace DD4T.Factories
     /// </summary>
     public abstract class FactoryBase
     {
+
+        #region serialization
+        private ISerializerService _serializerService = null;
+        private object lock1 = new object();
+        public ISerializerService SerializerService
+        {
+            get
+            {
+
+                if (_serializerService == null)
+                {
+                    lock (lock1)
+                    {
+                        if (_serializerService == null)
+                            _serializerService = FindBestService();
+                    }
+                }
+                return _serializerService;
+            }
+            set
+            {
+                _serializerService = value;
+            }
+        }
+
+        private ISerializerService FindBestService()
+        {
+            ISerializerService s;
+            if (ConfigurationHelper.SerializationFormat == SerializationFormats.JSON)
+            {
+                s = new JSONSerializerService();
+                if (s.IsAvailable())
+                    return s;
+            }
+            if (ConfigurationHelper.SerializationFormat == SerializationFormats.XML)
+            {
+                s = new XmlSerializerService();
+                if (s.IsAvailable())
+                    return s;
+            }
+            // service for the configured serialization format is unavailable, pick one of the available services
+            s = new JSONSerializerService();
+            if (s.IsAvailable())
+                return s;
+            s = new XmlSerializerService();
+            if (s.IsAvailable())
+                return s;
+
+            throw new Exception("Unsupported serialization format: " + ConfigurationHelper.SerializationFormat);
+
+        }
+        #endregion
 
         #region publication resolving
         private int? _publicationId = null;

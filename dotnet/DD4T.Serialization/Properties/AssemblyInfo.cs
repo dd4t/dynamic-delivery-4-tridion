@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TemplateUploader")]
+[assembly: AssemblyTitle("DD4T.Serialization")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Hewlett-Packard")]
-[assembly: AssemblyProduct("TemplateUploader")]
+[assembly: AssemblyProduct("DD4T.Serialization")]
 [assembly: AssemblyCopyright("Copyright © Hewlett-Packard 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("9e28c62f-6a27-4045-8956-f867f7e6c344")]
+[assembly: Guid("807737b9-0afc-4ad8-a78e-7fd2ea06becf")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -131,10 +131,12 @@
     <Compile Include="Providers\ProviderVersion.cs" />
     <Compile Include="Querying\IQuery.cs" />
     <Compile Include="Resolvers\IPublicationResolver.cs" />
+    <Compile Include="Serialization\ISerializerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ContentModelContractsClassDiagram.cd" />
     <None Include="dynamicdelivery.snk" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

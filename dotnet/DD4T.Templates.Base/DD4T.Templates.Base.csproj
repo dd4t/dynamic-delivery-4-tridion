@@ -45,6 +45,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\DD4T.ContentModel.XmlSerializers.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -108,8 +112,6 @@
     <Compile Include="Builder\TargetGroupBuilder.cs" />
     <Compile Include="DefaultTemplate.cs" />
     <Compile Include="Properties\SpecificAssemblyInfo.cs" />
-    <Compile Include="Serializing\ISerializerService.cs" />
-    <Compile Include="Serializing\XmlSerializerService.cs" />
     <Compile Include="StopChainException.cs" />
     <Compile Include="Utils\LowerCaseConverter.cs" />
     <Compile Include="Utils\GeneralUtils.cs" />
@@ -145,8 +147,14 @@
       <Project>{83F5CFC2-14D5-4190-B51D-7AF7A69B67E9}</Project>
       <Name>DD4T.ContentModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DD4T.Serialization\DD4T.Serialization.csproj">
+      <Project>{849A21D3-5863-4C43-98D3-6B8B83B9300F}</Project>
+      <Name>DD4T.Serialization</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Serializing\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Minimize.xslt">
       <SubType>Designer</SubType>

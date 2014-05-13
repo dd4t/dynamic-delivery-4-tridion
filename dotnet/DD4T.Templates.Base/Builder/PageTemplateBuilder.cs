@@ -26,8 +26,16 @@ namespace DD4T.Templates.Base.Builder
          {
             pt.MetadataFields = null;
          }
-         pt.Publication = manager.BuildPublication(tcmPageTemplate.ContextRepository);
-         pt.Folder = manager.BuildOrganizationalItem((TCM.Folder)tcmPageTemplate.OrganizationalItem);
+
+         if (!manager.BuildProperties.OmitContextPublications)
+             pt.Publication = manager.BuildPublication(tcmPageTemplate.ContextRepository);
+
+         if (!manager.BuildProperties.OmitOwningPublications)
+             pt.OwningPublication = manager.BuildPublication(tcmPageTemplate.OwningRepository);
+
+         if (!manager.BuildProperties.OmitFolders)
+             pt.Folder = manager.BuildOrganizationalItem((TCM.Folder)tcmPageTemplate.OrganizationalItem);
+         
          return pt;
 		}
 	}

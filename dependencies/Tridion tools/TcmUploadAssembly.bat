@@ -1,1 +1,1 @@
-%1 %2 %3 /folder:tcm:4-31-2 /verbose
+TcmUploadAssembly.exe config.xml ..\..\Build\JSON\DD4T.Templates.merged.dll /folder:tcm:4-16-2 /verbose

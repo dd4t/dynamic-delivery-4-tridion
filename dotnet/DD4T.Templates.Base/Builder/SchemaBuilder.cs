@@ -15,8 +15,11 @@ namespace DD4T.Templates.Base.Builder
 			Dynamic.Schema s = new Dynamic.Schema();
 			s.Title = tcmSchema.Title;
 			s.Id = tcmSchema.Id.ToString();
-            s.Folder = manager.BuildOrganizationalItem((TCM.Folder)tcmSchema.OrganizationalItem);
-            s.Publication = manager.BuildPublication(tcmSchema.ContextRepository);
+
+            if (!manager.BuildProperties.OmitContextPublications)
+                s.Publication = manager.BuildPublication(tcmSchema.ContextRepository);
+            if (!manager.BuildProperties.OmitFolders)
+                s.Folder = manager.BuildOrganizationalItem((TCM.Folder)tcmSchema.OrganizationalItem);
 
             if (!String.IsNullOrEmpty(tcmSchema.RootElementName))
             {

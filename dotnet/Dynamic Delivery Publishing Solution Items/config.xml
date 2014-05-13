@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<templateAssemblyUploadConfig>
+  <targetURL>http://ec2-54-247-78-21.eu-west-1.compute.amazonaws.com</targetURL>
+  <userName>Administrator</userName>
+  <password>e3FkPdi42HWmwNl2psiPyA==</password>
+  <uploadPDB>true</uploadPDB>
+</templateAssemblyUploadConfig>

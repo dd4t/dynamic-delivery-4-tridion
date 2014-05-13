@@ -7,7 +7,11 @@
         <tcm:Label ElementName="LinkLevels" Metadata="false">Maximum number of levels to follow links</tcm:Label>
         <tcm:Label ElementName="ResolveWidthAndHeight" Metadata="false">Resolve width and height of images</tcm:Label>
         <tcm:Label ElementName="sg_PublishBinariesTargetStructureGroup" Metadata="false">StructureGroup to which binaries must be published</tcm:Label>
-        <tcm:Label ElementName="PublishEmptyFields" Metadata="false">Publish empty fields of an item</tcm:Label>      
+        <tcm:Label ElementName="PublishEmptyFields" Metadata="false">Publish empty fields of an item</tcm:Label>
+        <tcm:Label ElementName="SerializationFormat" Metadata="false">Serialization format</tcm:Label>
+        <tcm:Label ElementName="OmitContextPublications" Metadata="false">Omit context publications in output</tcm:Label>
+        <tcm:Label ElementName="OmitOwningPublications" Metadata="false">Omit owning publications in output</tcm:Label>
+        <tcm:Label ElementName="OmitFolders" Metadata="false">Omit folders in output</tcm:Label>
       </tcm:Labels>
     </xsd:appinfo>
   </xsd:annotation>
@@ -98,6 +102,59 @@
               <xsd:enumeration value="Basic+publications"></xsd:enumeration>
               <xsd:enumeration value="Basic+folders"></xsd:enumeration>
               <xsd:enumeration value="Basic+publications+folders"></xsd:enumeration>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="SerializationFormat" minOccurs="0" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">select</tcm:listtype>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:enumeration value="JSON"></xsd:enumeration>
+              <xsd:enumeration value="XML"></xsd:enumeration>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="OmitContextPublications" minOccurs="0" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:enumeration value="yes"></xsd:enumeration>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="OmitOwningPublications" minOccurs="0" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:enumeration value="yes"></xsd:enumeration>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="OmitFolders" minOccurs="0" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:enumeration value="yes"></xsd:enumeration>
             </xsd:restriction>
           </xsd:simpleType>
         </xsd:element>

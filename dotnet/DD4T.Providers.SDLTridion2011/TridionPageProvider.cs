@@ -140,7 +140,6 @@ namespace DD4T.Providers.SDLTridion2011
         public DateTime GetLastPublishedDateByUrl(string url)
         {
             int pubId = PublicationId;
-            LoggerService.Debug("GetLastPublishedDateByUrl found publication id {0}, url = {1}", pubId, url);
             PageMetaFactory pMetaFactory = new PageMetaFactory(pubId);
             IPageMeta pageInfo = pMetaFactory.GetMetaByUrl(pubId, url);
 

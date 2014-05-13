@@ -9,7 +9,8 @@ using Tridion.ContentManager.Templating;
 using DD4T.Templates.Base.Builder;
 using DD4T.Templates.Base.Utils;
 using Dynamic = DD4T.ContentModel;
-using DD4T.Templates.Base.Serializing;
+using System.Collections.Generic;
+using DD4T.Serialization;
 
 namespace DD4T.Templates.Base
 {
@@ -34,14 +35,13 @@ namespace DD4T.Templates.Base
         {
             this.Package = package;
             this.Engine = engine;
-            ISerializerService serializerService = new XmlSerializerService();
 
             Dynamic.Component component;
             bool hasOutput = HasPackageValue(package, "Output");
             if (hasOutput)
             {
                 String inputValue = package.GetValue("Output");
-                component = (Dynamic.Component)serializerService.Deserialize<Dynamic.Component>(inputValue);
+                component = (Dynamic.Component)SerializerService.Deserialize<Dynamic.Component>(inputValue);
             }
             else
             {
@@ -58,17 +58,17 @@ namespace DD4T.Templates.Base
                 return;
             }
 
-            string outputValue = serializerService.Serialize<Dynamic.Component>(component);
+            string outputValue = SerializerService.Serialize<Dynamic.Component>(component);
 
             if (hasOutput)
             {
                 Item outputItem = package.GetByName("Output");
                 package.Remove(outputItem);
-                package.PushItem(Package.OutputName, package.CreateStringItem(ContentType.Xml, outputValue));
+                package.PushItem(Package.OutputName, package.CreateStringItem(SerializerService is XmlSerializerService ? ContentType.Xml : ContentType.Text, outputValue));
             }
             else
             {
-                package.PushItem(Package.OutputName, package.CreateStringItem(ContentType.Xml, outputValue));
+                package.PushItem(Package.OutputName, package.CreateStringItem(SerializerService is XmlSerializerService ? ContentType.Xml : ContentType.Text, outputValue));
             }
 
             GeneralUtils.TimedLog("finished Transform");

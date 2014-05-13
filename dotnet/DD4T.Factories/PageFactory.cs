@@ -88,26 +88,6 @@ namespace DD4T.Factories
         }
         public ILinkFactory LinkFactory { get; set; }
 
-        private static XmlSerializer _pageSerializer = null;
-        private static XmlSerializer PageSerializer
-        {
-            get
-            {
-                if (_pageSerializer == null)
-                {
-                    lock (lock3)
-                    {
-                        if (_pageSerializer == null) // we must test again, because in the mean time another thread might have created the object!
-                        {
-                            LoggerService.Debug("about to create page serializer", LoggingCategory.Performance);
-                            _pageSerializer = new XmlSerializer(typeof(Page));
-                            LoggerService.Debug("finished creating page serializer", LoggingCategory.Performance);
-                        }
-                    }
-                }
-                return _pageSerializer;
-            }
-        }
 
         #region IPageFactory Members
         public virtual bool TryFindPage(string url, out IPage page)
@@ -293,30 +273,17 @@ namespace DD4T.Factories
         {
             LoggerService.Debug(">>GetIPageObject(string length {0})", LoggingCategory.Performance, Convert.ToString(pageStringContent.Length));
 
-            IPage page;
-            //Create XML Document to hold Xml returned from WCF Client
-            LoggerService.Debug("GetIPageObject: about to load XML into XmlDocument", LoggingCategory.Performance);
-            XmlDocument pageContent = new XmlDocument();
-            pageContent.LoadXml(pageStringContent);
-            LoggerService.Debug("GetIPageObject: finished loading XML into XmlDocument", LoggingCategory.Performance);
-
-            //Load XML into Reader for deserialization
-            using (var reader = new XmlNodeReader(pageContent.DocumentElement))
+            IPage page = (IPage)SerializerService.Deserialize<Page>(pageStringContent);
+            // set order on page for each ComponentPresentation
+            int orderOnPage = 0;
+            foreach (IComponentPresentation cp in page.ComponentPresentations)
             {
-
-                LoggerService.Debug("GetIPageObject: about to deserialize", LoggingCategory.Performance);
-                page = (IPage)PageSerializer.Deserialize(reader);
-                LoggerService.Debug("GetIPageObject: finished deserializing", LoggingCategory.Performance);
-                // set order on page for each ComponentPresentation
-                int orderOnPage = 0;
-                foreach (IComponentPresentation cp in page.ComponentPresentations)
-                {
-                    cp.OrderOnPage = orderOnPage++;
-                }
-                LoggerService.Debug("GetIPageObject: about to load DCPs", LoggingCategory.Performance);
-                LoadComponentModelsFromComponentFactory(page);
-                LoggerService.Debug("GetIPageObject: finished loading DCPs", LoggingCategory.Performance);
+                cp.OrderOnPage = orderOnPage++;
             }
+            LoggerService.Debug("GetIPageObject: about to load DCPs", LoggingCategory.Performance);
+            LoadComponentModelsFromComponentFactory(page);
+            LoggerService.Debug("GetIPageObject: finished loading DCPs", LoggingCategory.Performance);
+
             LoggerService.Debug("<<GetIPageObject(string length {0})", LoggingCategory.Performance, Convert.ToString(pageStringContent.Length));
             return page;
         }
