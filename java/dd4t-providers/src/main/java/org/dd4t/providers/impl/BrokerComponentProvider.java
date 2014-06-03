@@ -85,8 +85,8 @@ public class BrokerComponentProvider implements ComponentProvider {
 			if (cp == null) {
 				logger.debug("component presentation NOT found by template");
 
-				// no cp found, and they asked for a template, means we return null
-				return null;
+				// no cp found, and they asked for a template, means we have to throw an exception
+				throw new ItemNotFoundException("Unable to find DCP by template for pub "+publicationId+", item "+componentId+" and template "+templateId);	
 			}
 			
 			logger.debug("component presentation found by template. ");
