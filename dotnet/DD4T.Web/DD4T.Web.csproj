@@ -66,10 +66,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -86,10 +82,6 @@
     <ProjectReference Include="..\DD4T.ContentModel.Contracts\DD4T.ContentModel.Contracts.csproj">
       <Project>{C21F66F0-01CE-4AF3-B76C-CD262B7EA1C0}</Project>
       <Name>DD4T.ContentModel.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DD4T.ContentModel\DD4T.ContentModel.csproj">
-      <Project>{83F5CFC2-14D5-4190-B51D-7AF7A69B67E9}</Project>
-      <Name>DD4T.ContentModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\DD4T.Factories\DD4T.Factories.csproj">
       <Project>{9E96EFE0-7478-4551-A47A-1F04B9F01DF7}</Project>

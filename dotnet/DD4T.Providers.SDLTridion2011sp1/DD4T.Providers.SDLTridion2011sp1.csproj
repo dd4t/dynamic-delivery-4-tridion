@@ -65,16 +65,9 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="Tridion.ContentDelivery">
       <HintPath>..\..\dependencies\Tridion 2011 SP1 DLLs\Tridion.ContentDelivery.dll</HintPath>
-    </Reference>
-    <Reference Include="Tridion.ContentDelivery.Configuration">
-      <HintPath>..\..\dependencies\Tridion 2011 SP1 DLLs\Tridion.ContentDelivery.Configuration.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
