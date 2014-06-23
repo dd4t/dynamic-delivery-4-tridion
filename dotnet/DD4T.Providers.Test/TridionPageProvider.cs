@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Xml;
 using System.Xml.Serialization;
 using DD4T.ContentModel.Contracts.Providers;
 using System.IO;

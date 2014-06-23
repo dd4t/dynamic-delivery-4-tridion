@@ -1,13 +1,9 @@
-﻿using System.Net;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using DD4T.ContentModel;
 using DD4T.ContentModel.Exceptions;
 using DD4T.ContentModel.Contracts.Factories;
 using DD4T.Mvc.Html;
-using System;
 using System.Web;
-using DD4T.Factories;
-using System.Web.Configuration;
 using System.IO;
 using System.Security;
 using DD4T.Utils;

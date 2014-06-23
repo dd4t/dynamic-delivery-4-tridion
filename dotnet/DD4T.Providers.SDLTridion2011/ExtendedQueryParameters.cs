@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DD4T.Providers.SDLTridion2011;
 using Tridion.ContentDelivery.DynamicContent.Query;
 

@@ -1,5 +1,4 @@
-﻿using System;
-namespace DD4T.ContentModel
+﻿namespace DD4T.ContentModel
 {
     public interface IMultimedia
     {

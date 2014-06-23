@@ -1,11 +1,8 @@
-﻿using System.ComponentModel.Composition;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using DD4T.ContentModel;
 using DD4T.Utils;
 using DD4T.ContentModel.Logging;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Configuration;
 using DD4T.ContentModel.Contracts.Factories;
 using DD4T.Factories;
 

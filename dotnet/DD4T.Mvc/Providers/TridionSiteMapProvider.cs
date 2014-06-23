@@ -3,15 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
-    using System.Linq;
     using System.Text;
     using System.Web;
     using System.Xml.Linq;
     using System.Collections;
-    using DD4T.Mvc.Caching;
     using DD4T.Factories;
-    using System.Diagnostics;
-    using System.Configuration;
     using DD4T.Utils;
     using DD4T.ContentModel.Contracts.Caching;
     using DD4T.ContentModel.Contracts.Factories;

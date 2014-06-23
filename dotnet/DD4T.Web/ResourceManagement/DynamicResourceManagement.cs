@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web.Compilation;
-using System.Diagnostics;
 using System.Xml;
 using System.Configuration;
 using DD4T.Factories;

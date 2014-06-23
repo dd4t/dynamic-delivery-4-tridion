@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DD4T.ContentModel;
 
 namespace DD4T.Providers.Test

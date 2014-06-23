@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web;
 using System.Collections;
 using System.Collections.Specialized;
-using DD4T.ContentModel.Factories;
-using DD4T.Factories;
 using DD4T.ContentModel;
-using System.Text.RegularExpressions;
 
 namespace DD4T.Mvc.Providers
 {

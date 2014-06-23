@@ -1,5 +1,4 @@
 ﻿using System;
-using DD4T.ContentModel.Contracts.Providers;
 
 namespace DD4T.ContentModel.Factories
 {

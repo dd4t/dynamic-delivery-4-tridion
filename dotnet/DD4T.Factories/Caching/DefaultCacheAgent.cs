@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DD4T.ContentModel.Contracts.Caching;
 using System.Runtime.Caching;
-using DD4T.ContentModel;
-using DD4T.ContentModel.Factories;
-using System.Configuration;
 using DD4T.Utils;
 
 

@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using DD4T.ContentModel.Logging;
-using System.Configuration;
+﻿using DD4T.ContentModel.Logging;
 using System;
 
 namespace DD4T.Utils

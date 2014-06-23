@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Xml.Serialization;
-using System.Collections;
-using System.Configuration;
 using System.Collections.Generic;
 using DD4T.ContentModel.Querying;
 using DD4T.ContentModel.Contracts.Providers;

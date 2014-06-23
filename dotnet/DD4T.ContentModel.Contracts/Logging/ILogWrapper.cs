@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace DD4T.ContentModel.Logging
+﻿namespace DD4T.ContentModel.Logging
 {
     public enum LoggingCategory { General, Controller, View, Model, System, Integration, Performance }
     public interface ILogWrapper

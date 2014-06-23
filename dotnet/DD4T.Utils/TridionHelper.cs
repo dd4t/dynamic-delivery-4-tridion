@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using DD4T.ContentModel;
+﻿using DD4T.ContentModel;
 using System;
 
 namespace DD4T.Utils

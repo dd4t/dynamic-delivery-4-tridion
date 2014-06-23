@@ -1,25 +1,12 @@
 ﻿using System;
-using System.Linq;
-using System.Xml;
-using System.Xml.Serialization;
-
 using Tridion.ContentDelivery.DynamicContent;
-using Tridion.ContentDelivery.DynamicContent.Filters;
 using Tridion.ContentDelivery.DynamicContent.Query;
 using Query = Tridion.ContentDelivery.DynamicContent.Query.Query;
 using Tridion.ContentDelivery.Meta;
-using Tridion.ContentDelivery.Web.Linking;
-
 using DD4T.ContentModel;
-using DD4T.ContentModel.Exceptions;
-using DD4T.ContentModel.Factories;
 using System.Collections.Generic;
-
-using System.Web.Caching;
-using System.Web;
 using DD4T.ContentModel.Contracts.Providers;
 using DD4T.Utils;
-using System.Collections;
 using DD4T.ContentModel.Logging;
 
 namespace DD4T.Providers.SDLTridion2011sp1

@@ -1,7 +1,6 @@
 ﻿namespace DD4T.ContentModel
 {
-    using System.Collections.Generic;
-    using System;
+	using System;
 
     public interface IComponentTemplate : IRepositoryLocal
     {

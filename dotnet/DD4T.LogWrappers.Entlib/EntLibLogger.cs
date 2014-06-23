@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EntLib = Microsoft.Practices.EnterpriseLibrary.Logging;
+﻿using EntLib = Microsoft.Practices.EnterpriseLibrary.Logging;
 using DD4T.ContentModel.Logging;
 using System.Diagnostics;
 

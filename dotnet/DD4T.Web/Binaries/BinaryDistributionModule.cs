@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Configuration;
 using DD4T.Utils;
 
 namespace DD4T.Web.Binaries

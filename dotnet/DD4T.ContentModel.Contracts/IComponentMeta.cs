@@ -1,9 +1,8 @@
 ﻿namespace DD4T.ContentModel
 {
     using System;
-    using System.Collections.Generic;
 
-    public interface IComponentMeta
+	public interface IComponentMeta
     {
         DateTime ModificationDate { get; }
         DateTime CreationDate { get; }

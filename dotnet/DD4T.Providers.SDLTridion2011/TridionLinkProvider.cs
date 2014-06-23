@@ -1,17 +1,11 @@
 ﻿using DD4T.ContentModel;
-using DD4T.ContentModel.Factories;
 
 namespace DD4T.Providers.SDLTridion2011
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Tridion.ContentDelivery.Web.Linking;
-    using System.Web.Caching;
-    using System.Web;
     using DD4T.ContentModel.Contracts.Providers;
-    using System.Diagnostics;
     using DD4T.Utils;
 
     
