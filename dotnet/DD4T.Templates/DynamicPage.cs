@@ -1,16 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Text.RegularExpressions;
-using Tridion.ContentManager;
-using TCM = Tridion.ContentManager.ContentManagement;
-using Tridion.ContentManager.Templating;
+﻿using TCM = Tridion.ContentManager.ContentManagement;
 using Tridion.ContentManager.Templating.Assembly;
 using Dynamic = DD4T.ContentModel;
-using DD4T.Templates.Base.Builder;
 using DD4T.Templates.Base;
-using System.Xml.Serialization;
-using System.Text;
-using System.Xml;
 
 namespace DD4T.Templates {
 

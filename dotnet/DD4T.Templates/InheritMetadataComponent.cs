@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Tridion.ContentManager.Templating.Assembly;
-using Tridion.ContentManager.CommunicationManagement;
 using TCM = Tridion.ContentManager.ContentManagement;
 using Dynamic = DD4T.ContentModel;
 using DD4T.Templates.Base;

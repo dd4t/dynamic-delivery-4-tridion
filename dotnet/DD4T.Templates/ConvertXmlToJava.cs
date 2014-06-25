@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.XPath;
-using System.Xml.Xsl;
-using System.Xml;
-using System.IO;
-using System.Reflection;
 using Tridion.ContentManager.Templating;
 using Tridion.ContentManager.Templating.Assembly;
 using DD4T.Templates.Base;

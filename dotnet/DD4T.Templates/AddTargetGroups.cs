@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using DD4T.ContentModel;
+﻿using DD4T.ContentModel;
 using DD4T.Templates.Base;
 using DD4T.Templates.Base.Builder;
-using Tridion.ContentManager.AudienceManagement;
 using Tridion.ContentManager.Templating.Assembly;
 using Dynamic = DD4T.ContentModel;
 using Tcm = Tridion.ContentManager.AudienceManagement;

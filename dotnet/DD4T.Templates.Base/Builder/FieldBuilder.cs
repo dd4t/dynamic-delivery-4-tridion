@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Dynamic = DD4T.ContentModel;
 using TCM = Tridion.ContentManager.ContentManagement;
 using Tridion.ContentManager.ContentManagement.Fields;
 using DD4T.ContentModel.Exceptions;
 using DD4T.ContentModel;
-using Tridion.Logging;
 using Tridion.ContentManager.Templating;
 using DD4T.Templates.Base.Utils;
 

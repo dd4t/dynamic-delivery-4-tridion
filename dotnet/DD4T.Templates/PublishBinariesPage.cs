@@ -1,5 +1,4 @@
-﻿using Tridion.ContentManager;
-using Tridion.ContentManager.Templating;
+﻿using Tridion.ContentManager.Templating;
 using Tridion.ContentManager.Templating.Assembly;
 using Dynamic = DD4T.ContentModel;
 using DD4T.Templates.Base;

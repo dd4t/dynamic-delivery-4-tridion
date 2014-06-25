@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Dynamic = DD4T.ContentModel;
 using TCM = Tridion.ContentManager.ContentManagement;
 
