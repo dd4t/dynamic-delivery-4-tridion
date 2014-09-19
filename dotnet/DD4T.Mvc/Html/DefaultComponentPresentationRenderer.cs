@@ -5,6 +5,7 @@ using System.Web.Mvc.Html;
 using DD4T.ContentModel;
 using DD4T.Utils;
 using DD4T.ContentModel.Logging;
+using System.Collections.Generic;
 
 namespace DD4T.Mvc.Html
 {
@@ -27,6 +28,26 @@ namespace DD4T.Mvc.Html
             {
                 return ConfigurationHelper.UseUriAsAnchor;
             }
+        }
+
+        public MvcHtmlString ComponentPresentations(HtmlHelper htmlHelper, IEnumerable<IComponentPresentation> componentPresentations)
+        {
+            LoggerService.Information(">>ComponentPresentations", LoggingCategory.Performance);
+            StringBuilder sb = new StringBuilder();
+            foreach (IComponentPresentation cp in componentPresentations)
+            {
+                // Quirijn: if a component presentation was created by a non-DD4T template, its output was stored in RenderedContent
+                // In that case, we simply write it out
+                // Note that this type of component presentations cannot be excluded based on schema, because we do not know the schema
+                if (!string.IsNullOrEmpty(cp.RenderedContent))
+                    return new MvcHtmlString(cp.RenderedContent);
+                LoggerService.Debug("rendering cp {0} - {1}", LoggingCategory.Performance, cp.Component.Id, cp.ComponentTemplate.Id);
+                sb.Append(RenderComponentPresentation(cp, htmlHelper));
+                LoggerService.Debug("finished calling RenderComponentPresentation", LoggingCategory.Performance);
+
+            }
+            LoggerService.Information("<<ComponentPresentations", LoggingCategory.Performance);
+            return MvcHtmlString.Create(sb.ToString());
         }
 
         public MvcHtmlString ComponentPresentations(IPage tridionPage, HtmlHelper htmlHelper, string[] includeComponentTemplate, string includeSchema)

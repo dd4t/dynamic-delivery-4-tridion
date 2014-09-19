@@ -5,6 +5,7 @@ using DD4T.ContentModel.Logging;
 using System.Text.RegularExpressions;
 using DD4T.ContentModel.Contracts.Factories;
 using DD4T.Factories;
+using System.Collections.Generic;
 
 namespace DD4T.Mvc.Html
 {
@@ -67,6 +68,30 @@ namespace DD4T.Mvc.Html
         public static MvcHtmlString RenderComponentPresentationsBySchema(this HtmlHelper helper, string bySchema)
         {
             return RenderComponentPresentations(helper, null, bySchema, null);
+        }
+
+        public static MvcHtmlString RenderDynamicComponentPresentations(this HtmlHelper helper, IEnumerable<IComponentPresentation> componentPresentations)
+        {
+            return RenderDynamicComponentPresentations(helper, componentPresentations, null);
+        }
+
+        public static MvcHtmlString RenderDynamicComponentPresentations(this HtmlHelper helper, IEnumerable<IComponentPresentation> componentPresentations, IComponentPresentationRenderer renderer)
+        {
+            LoggerService.Information(">>RenderComponentPresentations", LoggingCategory.Performance);
+            IComponentPresentationRenderer cpr = renderer;
+            if (renderer == null)
+            {
+                LoggerService.Debug("about to create DefaultComponentPresentationRenderer", LoggingCategory.Performance);
+                renderer = DefaultComponentPresentationRenderer.Create();
+                LoggerService.Debug("finished creating DefaultComponentPresentationRenderer", LoggingCategory.Performance);
+            }
+
+            LoggerService.Debug("about to call renderer.ComponentPresentations", LoggingCategory.Performance);
+            MvcHtmlString output = renderer.ComponentPresentations(helper, componentPresentations);
+            LoggerService.Debug("finished calling renderer.ComponentPresentations", LoggingCategory.Performance);
+            LoggerService.Information("<<RenderComponentPresentations", LoggingCategory.Performance);
+
+            return output;
         }
 
         public static MvcHtmlString RenderComponentPresentations(this HtmlHelper helper, string[] byComponentTemplate, string bySchema, IComponentPresentationRenderer renderer)

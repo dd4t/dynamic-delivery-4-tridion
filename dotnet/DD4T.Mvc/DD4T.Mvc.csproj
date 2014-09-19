@@ -131,6 +131,7 @@
     <Compile Include="Providers\TridionSiteMapNode.cs" />
     <Compile Include="Providers\TridionSiteMapProvider.cs" />
     <Compile Include="ServiceLocator.cs" />
+    <Compile Include="Html\SmartTargetHelper.cs" />
     <Compile Include="SiteEdit\SiteEditService.cs" />
     <Compile Include="SiteEdit\SiteEditSettings.cs" />
   </ItemGroup>
