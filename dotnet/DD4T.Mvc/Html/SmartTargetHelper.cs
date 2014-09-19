@@ -33,52 +33,28 @@ namespace DD4T.Mvc.Html
             //foreach(var promotion in Promotions)
             //{
                 //Add Component Presentation to container
-                componentPresentations.Add(new ComponentPresentation
-                                                {
-                                                    ComponentTemplate = new ComponentTemplate
-                                                    {
-                                                        Id = "tcm:2011-3103-32",
-                                                        MetadataFields = new FieldSet 
-                                                                                    { 
-                                                                                        {
-                                                                                            "view", 
-                                                                                            new Field 
-                                                                                            {
-                                                                                                Values = new List<string> 
-                                                                                                {
-                                                                                                    view
-                                                                                                }
-                                                                                            } 
-                                                                                        } 
-                                                                                    }
-                                                    },
-                                                    Component = cf.GetComponent("tcm:2011-69-16", "tcm:2011-3103-32") as Component
-                                                }
-                                            );
-            
-            componentPresentations.Add(new ComponentPresentation
-                                                {
-                                                    ComponentTemplate = new ComponentTemplate
-                                                    {
-                                                        Id = "tcm:2011-3103-32",
-                                                        MetadataFields = new FieldSet 
-                                                                                    { 
-                                                                                        {
-                                                                                            "view", 
-                                                                                            new Field 
-                                                                                            {
-                                                                                                Values = new List<string> 
-                                                                                                {
-                                                                                                    "General"
-                                                                                                }
-                                                                                            } 
-                                                                                        } 
-                                                                                    }
-                                                    },
-                                                    Component = cf.GetComponent("tcm:2011-3080-16", "tcm:2011-3103-32") as Component
-                                                }
-                                            );
-
+                //componentPresentations.Add(new ComponentPresentation
+                                        //    {
+                                        //        ComponentTemplate = new ComponentTemplate
+                                        //        {
+                                        //            Id = "tcm:2011-3103-32",
+                                        //            MetadataFields = new FieldSet 
+                                        //                                        { 
+                                        //                                            {
+                                        //                                                "view", 
+                                        //                                                new Field 
+                                        //                                                {
+                                        //                                                    Values = new List<string> 
+                                        //                                                    {
+                                        //                                                        view
+                                        //                                                    }
+                                        //                                                } 
+                                        //                                            } 
+                                        //                                        }
+                                        //        },
+                                        //        Component = cf.GetComponent("tcm:2011-69-16", "tcm:2011-3103-32") as Component
+                                        //    }
+                                        //);
             //}
 
 
