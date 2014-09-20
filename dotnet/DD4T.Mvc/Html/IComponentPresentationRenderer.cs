@@ -7,6 +7,6 @@ namespace DD4T.Mvc.Html
     public interface IComponentPresentationRenderer
     {
         MvcHtmlString ComponentPresentations(IPage tridionPage, HtmlHelper htmlHelper, string[] includeComponentTemplate, string includeSchema);
-        MvcHtmlString ComponentPresentations(HtmlHelper htmlHelper, IEnumerable<IComponentPresentation> componentPresentations);
+        MvcHtmlString DynamicComponentPresentations(HtmlHelper htmlHelper, IEnumerable<IComponentPresentation> componentPresentations);
     }
 }

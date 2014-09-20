@@ -30,7 +30,7 @@ namespace DD4T.Mvc.Html
             }
         }
 
-        public MvcHtmlString ComponentPresentations(HtmlHelper htmlHelper, IEnumerable<IComponentPresentation> componentPresentations)
+        public MvcHtmlString DynamicComponentPresentations(HtmlHelper htmlHelper, IEnumerable<IComponentPresentation> componentPresentations)
         {
             LoggerService.Information(">>ComponentPresentations", LoggingCategory.Performance);
             StringBuilder sb = new StringBuilder();

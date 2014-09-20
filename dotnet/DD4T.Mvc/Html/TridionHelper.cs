@@ -87,7 +87,7 @@ namespace DD4T.Mvc.Html
             }
 
             LoggerService.Debug("about to call renderer.ComponentPresentations", LoggingCategory.Performance);
-            MvcHtmlString output = renderer.ComponentPresentations(helper, componentPresentations);
+            MvcHtmlString output = renderer.DynamicComponentPresentations(helper, componentPresentations);
             LoggerService.Debug("finished calling renderer.ComponentPresentations", LoggingCategory.Performance);
             LoggerService.Information("<<RenderComponentPresentations", LoggingCategory.Performance);
 
