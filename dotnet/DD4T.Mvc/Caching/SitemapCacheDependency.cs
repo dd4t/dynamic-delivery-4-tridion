@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Web.Caching;
 using System.Threading;
+<<<<<<< HEAD
 using DD4T.ContentModel.Contracts.Factories;
+=======
+using DD4T.ContentModel.Factories;
+using DD4T.Factories;
+>>>>>>> parent of 07454df... Fix for Issue #20: Namespace inconsistency in DD4T.ContentModel.Contracts assembly
 
 namespace DD4T.Mvc.Caching
 {

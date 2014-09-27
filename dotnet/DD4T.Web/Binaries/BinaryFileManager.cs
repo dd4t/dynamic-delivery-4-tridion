@@ -1,4 +1,11 @@
 ﻿using System;
+<<<<<<< HEAD
+=======
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using DD4T.ContentModel.Contracts.Caching;
+>>>>>>> parent of 07454df... Fix for Issue #20: Namespace inconsistency in DD4T.ContentModel.Contracts assembly
 using System.Web;
 using DD4T.ContentModel;
 using DD4T.Utils;
@@ -9,8 +16,7 @@ using System.Drawing.Drawing2D;
 using System.Text.RegularExpressions;
 using DD4T.Factories.Caching;
 using DD4T.ContentModel.Exceptions;
-using DD4T.ContentModel.Contracts.Caching;
-using DD4T.ContentModel.Contracts.Factories;
+using DD4T.ContentModel.Factories;
 using DD4T.Factories;
 
 namespace DD4T.Web.Binaries

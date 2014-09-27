@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using DD4T.ContentModel.Factories;
 using System.IO;
 
 namespace DD4T.ContentModel.Contracts.Providers

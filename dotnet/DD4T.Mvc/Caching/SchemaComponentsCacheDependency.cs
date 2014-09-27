@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Caching;
 using System.Threading;
-using DD4T.ContentModel.Contracts.Factories;
+using DD4T.ContentModel.Factories;
 using DD4T.Factories;
 
 namespace DD4T.Mvc.Caching

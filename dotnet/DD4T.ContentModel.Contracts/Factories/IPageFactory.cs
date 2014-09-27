@@ -2,7 +2,7 @@
 using DD4T.ContentModel.Contracts.Providers;
 using DD4T.ContentModel.Contracts.Caching;
 using DD4T.ContentModel.Contracts.Resolvers;
-namespace DD4T.ContentModel.Contracts.Factories
+namespace DD4T.ContentModel.Factories
 {
     public interface IPageFactory
     {

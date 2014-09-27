@@ -1,6 +1,6 @@
 ﻿using DD4T.ContentModel.Contracts.Providers;
 using DD4T.ContentModel.Contracts.Caching;
-namespace DD4T.ContentModel.Contracts.Factories
+namespace DD4T.ContentModel.Factories
 {
     public interface ILinkFactory
     {
