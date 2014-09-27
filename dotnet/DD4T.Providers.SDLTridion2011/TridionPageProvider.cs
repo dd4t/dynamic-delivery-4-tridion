@@ -1,18 +1,9 @@
 ﻿using System;
+using DD4T.Utils;
 using Tridion.ContentDelivery.DynamicContent;
 using Tridion.ContentDelivery.DynamicContent.Query;
 using Query = Tridion.ContentDelivery.DynamicContent.Query.Query;
 using Tridion.ContentDelivery.Meta;
-<<<<<<< HEAD
-using DD4T.Utils;
-=======
-using Tridion.ContentDelivery.Web.Linking;
-
-using DD4T.ContentModel;
-using DD4T.ContentModel.Exceptions;
-using DD4T.ContentModel.Factories;
-//using DD4T.Utils;
->>>>>>> parent of 07454df... Fix for Issue #20: Namespace inconsistency in DD4T.ContentModel.Contracts assembly
 using System.Collections.Generic;
 using DD4T.ContentModel.Contracts.Providers;
 

@@ -1,13 +1,7 @@
 ﻿using System;
-<<<<<<< HEAD
-=======
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DD4T.ContentModel.Contracts.Caching;
->>>>>>> parent of 07454df... Fix for Issue #20: Namespace inconsistency in DD4T.ContentModel.Contracts assembly
 using System.Web;
 using DD4T.ContentModel;
+using DD4T.ContentModel.Contracts.Caching;
 using DD4T.Utils;
 using System.IO;
 using System.Drawing;

@@ -1,15 +1,7 @@
-<<<<<<< HEAD
-﻿using DD4T.ContentModel.Contracts.Factories;
-=======
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DD4T.ContentModel.Factories;
->>>>>>> parent of 07454df... Fix for Issue #20: Namespace inconsistency in DD4T.ContentModel.Contracts assembly
-using DD4T.Factories;
-using System.Xml;
 using System.Web.Mvc;
+using System.Xml;
+using DD4T.ContentModel.Factories;
+using DD4T.Factories;
 
 namespace DD4T.Mvc.Html
 {

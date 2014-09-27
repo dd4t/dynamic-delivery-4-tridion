@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
-using System.Xml;
 using System.Diagnostics;
 using DD4T.ContentModel.Factories;
-using DD4T.ContentModel.Contracts;
 
 
 namespace DD4T.ContentModel
