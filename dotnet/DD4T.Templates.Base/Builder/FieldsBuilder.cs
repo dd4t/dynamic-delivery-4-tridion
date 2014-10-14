@@ -66,6 +66,25 @@ namespace DD4T.Templates.Base.Builder
                                        }
                                    }
                                    break;
+                               case FieldType.Keyword:
+                                   foreach (Keyword keyword in f.Keywords)
+                                   {
+                                       bool valueExists = false;
+                                       foreach (Keyword existingKeywords in existingField.Keywords)
+                                       {
+                                           if (keyword.Id.Equals(existingKeywords.Id))
+                                           {
+                                               // this value already exists
+                                               valueExists = true;
+                                               break;
+                                           }
+                                       }
+                                       if (!valueExists)
+                                       {
+                                           existingField.Keywords.Add(keyword);
+                                       }
+                                   }
+                                   break;
                                case FieldType.Date:
                                    foreach (DateTime dateTime in f.DateTimeValues)
                                    {

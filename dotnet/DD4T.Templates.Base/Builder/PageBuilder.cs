@@ -53,7 +53,7 @@ namespace DD4T.Templates.Base.Builder
             p.StructureGroup = manager.BuildOrganizationalItem((TCM.StructureGroup)tcmPage.OrganizationalItem);
             p.Publication = manager.BuildPublication(tcmPage.ContextRepository);
             p.OwningPublication = manager.BuildPublication(tcmPage.OwningRepository);
-            p.Categories = manager.BuildCategories(tcmPage);
+            p.Categories = manager.BuildCategories(tcmPage, linkLevels, resolveWidthAndHeight, publishEmptyFields);
 
             manager.AddXpathToFields(p.MetadataFields, "Metadata");
 

@@ -5,8 +5,18 @@ using Tridion.ContentManager.ContentManagement;
 namespace DD4T.Templates.Base.Builder
 {
    public class KeywordBuilder
-   {
-      public static Dynamic.Keyword BuildKeyword(Keyword keyword)
+   {       
+       public static Dynamic.Keyword BuildKeyword(Keyword keyword)
+       {
+           return BuildKeyword(keyword, 0, false, false, null);
+       }
+
+       public static Dynamic.Keyword BuildKeyword(Keyword keyword, int linkLevels, bool resolveWidthAndHeight, bool publishEmptyFields)
+       {
+           return BuildKeyword(keyword, linkLevels, resolveWidthAndHeight, publishEmptyFields, null);
+       }
+
+      public static Dynamic.Keyword BuildKeyword(Keyword keyword, int linkLevels, bool resolveWidthAndHeight, bool publishEmptyFields, BuildManager manager)
       {
          Dynamic.Keyword dk = new Dynamic.Keyword();
          dk.Id = keyword.Id;
@@ -15,6 +25,16 @@ namespace DD4T.Templates.Base.Builder
          dk.Description = keyword.Description;
          dk.Key = keyword.Key;
          dk.TaxonomyId = keyword.OrganizationalItem.Id;
+
+         if (keyword.MetadataSchema != null)
+         {
+             if (manager != null)
+             {
+                 var tcmFields = new Tridion.ContentManager.ContentManagement.Fields.ItemFields(keyword.Metadata, keyword.MetadataSchema);
+                 dk.MetadataFields = manager.BuildFields(tcmFields, linkLevels, resolveWidthAndHeight, publishEmptyFields);
+             }
+         }
+
          return dk;
       }
       private static string FindKeywordPath(Keyword keyword)

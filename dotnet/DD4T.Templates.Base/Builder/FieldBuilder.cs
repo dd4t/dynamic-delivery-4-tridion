@@ -128,7 +128,7 @@ namespace DD4T.Templates.Base.Builder
                     {
                         // todo: add binary to package, and add BinaryUrl property to the component
                         f.Values.Add(kw.Title);
-                        f.Keywords.Add(manager.BuildKeyword(kw));
+                        f.Keywords.Add(manager.BuildKeyword(kw, linkLevels - 1, resolveWidthAndHeight, publishEmptyFields));
                     }
                     
                     KeywordFieldDefinition fieldDef = (KeywordFieldDefinition)sField.Definition;
