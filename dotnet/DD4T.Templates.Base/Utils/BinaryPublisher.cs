@@ -83,7 +83,7 @@ namespace DD4T.Templates.Base.Utils
                     log.Debug("about to publish binary with uri " + link.Value);
                     string path = PublishMultimediaComponent(link.Value);
                     log.Debug("binary will be published to path " + path);
-                    img.SetAttribute("src", path);
+                    img.SetAttribute("href", path);
                 }
                 else
                 {
