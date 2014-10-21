@@ -5,5 +5,5 @@ using System.Text;
 
 namespace DD4T.Serialization
 {
-    public enum SerializationFormats { UNKNOWN, JSON, XML };
+    public enum SerializationFormat { UNKNOWN, JSON, XML };
 }

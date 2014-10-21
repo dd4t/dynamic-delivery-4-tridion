@@ -17,12 +17,12 @@ namespace DD4T.Factories
     {
 
         #region serialization
-        private Dictionary<SerializationFormats, ISerializerService> _serializerServices = new Dictionary<SerializationFormats,ISerializerService>();
+        private Dictionary<SerializationFormat, ISerializerService> _serializerServices = new Dictionary<SerializationFormat,ISerializerService>();
         private object lock1 = new object();
 
-        protected ISerializerService GetSerializationService(SerializationFormats format = SerializationFormats.UNKNOWN)
+        protected ISerializerService GetSerializationService(SerializationFormat format = SerializationFormat.UNKNOWN)
         {
-            if (format == SerializationFormats.UNKNOWN)
+            if (format == SerializationFormat.UNKNOWN)
             {
                 format = ConfigurationHelper.SerializationFormat;
             }
@@ -36,15 +36,15 @@ namespace DD4T.Factories
             return _serializerServices[format];
         }
 
-        private ISerializerService CreateSerializationService(SerializationFormats format)
+        private ISerializerService CreateSerializationService(SerializationFormat format)
         {
             ISerializerService service = null;
             switch(format)
             {
-                case SerializationFormats.JSON:
+                case SerializationFormat.JSON:
                     service = new JSONSerializerService();
                     break;
-                case SerializationFormats.XML:
+                case SerializationFormat.XML:
                     service = new XmlSerializerService();
                     break;
             }
@@ -55,13 +55,18 @@ namespace DD4T.Factories
             throw new Exception("Unsupported serialization format: " + format);
         }
 
-        protected SerializationFormats GetFormatFromContent(string content)
+        protected SerializationFormat GetSerizalizationFormat(string content)
         {
-            if (content.StartsWith("<"))
+            var format = ConfigurationHelper.SerializationFormat;
+            if (format==SerializationFormat.UNKNOWN)
             {
-                return SerializationFormats.XML;
+                if (content.StartsWith("<"))
+                {
+                    format = SerializationFormat.XML;
+                }
+                format = SerializationFormat.JSON;
             }
-            return SerializationFormats.JSON;
+            return format;
         }
 
         #endregion

@@ -59,7 +59,7 @@ namespace DD4T.Factories
         /// <returns></returns>
         public IComponent GetIComponentObject(string componentStringContent)
         {
-            return (IComponent)GetSerializationService(GetFormatFromContent(componentStringContent)).Deserialize<Component>(componentStringContent);
+            return (IComponent)GetSerializationService(GetSerizalizationFormat(componentStringContent)).Deserialize<Component>(componentStringContent);
         }
 
 

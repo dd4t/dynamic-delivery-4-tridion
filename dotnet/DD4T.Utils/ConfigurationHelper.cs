@@ -247,16 +247,11 @@ namespace DD4T.Utils
                 return SafeGetConfigSettingAsString(ConfigurationKeys.WelcomeFile, ConfigurationKeys.WelcomeFileAlt1);
             }
         }
-        public static SerializationFormats SerializationFormat
+        public static SerializationFormat SerializationFormat
         {
             get
             {
-                var format = (SerializationFormats) Enum.Parse(typeof(SerializationFormats), SafeGetConfigSettingAsString(ConfigurationKeys.SerializationFormat));
-                if (format==SerializationFormats.UNKNOWN)
-                {
-                    format = SerializationFormats.JSON;
-                }
-                return format;
+                return (SerializationFormat)Enum.Parse(typeof(SerializationFormat), SafeGetConfigSettingAsString(ConfigurationKeys.SerializationFormat));
             }
         }
         

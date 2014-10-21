@@ -273,7 +273,7 @@ namespace DD4T.Factories
         {
             LoggerService.Debug(">>GetIPageObject(string length {0})", LoggingCategory.Performance, Convert.ToString(pageStringContent.Length));
 
-            IPage page = (IPage)GetSerializationService(GetFormatFromContent(pageStringContent)).Deserialize<Page>(pageStringContent);
+            IPage page = (IPage)GetSerializationService(GetSerizalizationFormat(pageStringContent)).Deserialize<Page>(pageStringContent);
             // set order on page for each ComponentPresentation
             int orderOnPage = 0;
             foreach (IComponentPresentation cp in page.ComponentPresentations)
