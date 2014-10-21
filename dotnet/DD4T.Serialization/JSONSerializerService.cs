@@ -54,7 +54,11 @@ namespace DD4T.Serialization
 
         public bool IsAvailable()
         {
-            return Type.GetType("Newtonsoft.Json.JsonSerializer, Newtonsoft.Json") != null;
+            if (Type.GetType("Newtonsoft.Json.JsonSerializer")==null)
+            {
+                return Type.GetType("Newtonsoft.Json.JsonSerializer, Newtonsoft.Json") != null;
+            }
+            return true;
         }
     }
     public class FieldConverter : CustomCreationConverter<IField>

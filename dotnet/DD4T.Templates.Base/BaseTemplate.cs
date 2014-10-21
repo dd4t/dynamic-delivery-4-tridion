@@ -43,13 +43,13 @@ namespace DD4T.Templates.Base
         private ISerializerService FindBestService()
         {
             ISerializerService s;
-                    if (Manager.BuildProperties.SerializationFormat == SerializationFormats.JSON)
+                    if (Manager.BuildProperties.SerializationFormat == SerializationFormat.JSON)
                     {
                         s = new JSONSerializerService();
                         if (s.IsAvailable())
                             return s;
                     }
-                    if (Manager.BuildProperties.SerializationFormat == SerializationFormats.XML)
+                    if (Manager.BuildProperties.SerializationFormat == SerializationFormat.XML)
                     {
                         s = new XmlSerializerService();
                         if (s.IsAvailable())

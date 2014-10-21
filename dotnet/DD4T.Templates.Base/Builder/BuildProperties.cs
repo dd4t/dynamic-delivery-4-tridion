@@ -15,7 +15,7 @@ namespace DD4T.Templates.Base.Builder
         public static bool DefaultResolveWidthAndHeight = false;
         public static bool DefaultPublishEmptyFields = false;
         public static bool DefaultFollowLinksPerField = false;
-        public static SerializationFormats DefaultSerializationFormat = SerializationFormats.XML;
+        public static SerializationFormat DefaultSerializationFormat = SerializationFormat.XML;
         public static bool DefaultOmitContextPublications = false;
         public static bool DefaultOmitOwningPublications = false;
         public static bool DefaultOmitFolders = false;
@@ -27,7 +27,7 @@ namespace DD4T.Templates.Base.Builder
         public bool OmitContextPublications { get; set; }
         public bool OmitOwningPublications { get; set; }
         public bool OmitFolders { get; set; }
-        public SerializationFormats SerializationFormat { get; set; }
+        public SerializationFormat SerializationFormat { get; set; }
 
 
         public BuildProperties(Package package)
@@ -68,7 +68,7 @@ namespace DD4T.Templates.Base.Builder
             }
             if (HasPackageValue(package, "SerializationFormat"))
             {
-                SerializationFormat = (SerializationFormats)Enum.Parse(typeof(SerializationFormats), package.GetValue("SerializationFormat").ToUpper());
+                SerializationFormat = (SerializationFormat)Enum.Parse(typeof(SerializationFormat), package.GetValue("SerializationFormat").ToUpper());
             }
             else
             {

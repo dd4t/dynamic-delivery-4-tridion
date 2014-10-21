@@ -74,7 +74,11 @@ namespace DD4T.Serialization
 
         public bool IsAvailable()
         {
-            return Type.GetType("Microsoft.Xml.Serialization.GeneratedAssembly.ComponentSerializer, DD4T.ContentModel.XmlSerializers") != null;
+            if (Type.GetType("Microsoft.Xml.Serialization.GeneratedAssembly.ComponentSerializer")==null)
+            {
+                return Type.GetType("Microsoft.Xml.Serialization.GeneratedAssembly.ComponentSerializer, DD4T.ContentModel.XmlSerializers") != null;
+            }
+            return true;
         }
     }
     public class XmlTextWriterFormattedNoDeclaration : XmlTextWriter

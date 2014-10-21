@@ -148,7 +148,7 @@
       <Name>DD4T.ContentModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\DD4T.Serialization\DD4T.Serialization.csproj">
-      <Project>{849A21D3-5863-4C43-98D3-6B8B83B9300F}</Project>
+      <Project>{849a21d3-5863-4c43-98d3-6b8b83b9300f}</Project>
       <Name>DD4T.Serialization</Name>
     </ProjectReference>
   </ItemGroup>

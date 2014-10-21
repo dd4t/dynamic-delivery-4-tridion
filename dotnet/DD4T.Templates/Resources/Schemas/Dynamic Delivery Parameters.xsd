@@ -7,6 +7,7 @@
         <tcm:Label ElementName="ResolveWidthAndHeight" Metadata="false">Resolve width and height of images</tcm:Label>
         <tcm:Label ElementName="sg_PublishBinariesTargetStructureGroup" Metadata="false">StructureGroup to which binaries must be published</tcm:Label>
         <tcm:Label ElementName="PublishEmptyFields" Metadata="false">Publish empty fields of an item</tcm:Label>
+        <tcm:Label ElementName="SerializationFormat" Metadata="false">Serialization format</tcm:Label>
       </tcm:Labels>
     </xsd:appinfo>
   </xsd:annotation>
@@ -68,6 +69,20 @@
           <xsd:simpleType>
             <xsd:restriction base="xsd:normalizedString">
               <xsd:enumeration value="yes"></xsd:enumeration>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="SerializationFormat" minOccurs="0" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">select</tcm:listtype>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:enumeration value="JSON"></xsd:enumeration>
+              <xsd:enumeration value="XML"></xsd:enumeration>
             </xsd:restriction>
           </xsd:simpleType>
         </xsd:element>
