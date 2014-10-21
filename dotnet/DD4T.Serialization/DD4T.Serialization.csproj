@@ -54,7 +54,7 @@
   <ItemGroup>
     <Compile Include="JSONSerializerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SerializationFormats.cs" />
+    <Compile Include="SerializationFormat.cs" />
     <Compile Include="XmlSerializerService.cs" />
   </ItemGroup>
   <ItemGroup>

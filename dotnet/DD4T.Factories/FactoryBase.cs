@@ -64,7 +64,10 @@ namespace DD4T.Factories
                 {
                     format = SerializationFormat.XML;
                 }
-                format = SerializationFormat.JSON;
+                else
+                {
+                    format = SerializationFormat.JSON;
+                }
             }
             return format;
         }
