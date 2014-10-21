@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Dynamic = DD4T.ContentModel;
 using TCM = Tridion.ContentManager.CommunicationManagement;
 using Tridion.ContentManager.Templating;
+using DD4T.ContentModel.Exceptions;
 using DD4T.Templates.Base.Utils;
 
 namespace DD4T.Templates.Base.Builder
@@ -50,9 +52,14 @@ namespace DD4T.Templates.Base.Builder
                 Dynamic.ComponentPresentation dynCp = manager.BuildComponentPresentation(cp, engine, linkLevels - 1, resolveWidthAndHeight);
                 p.ComponentPresentations.Add(dynCp);
             }
+
+            if (!manager.BuildProperties.OmitContextPublications)
+                p.Publication = manager.BuildPublication(tcmPage.ContextRepository);
+
+            if (!manager.BuildProperties.OmitOwningPublications)
+                p.OwningPublication = manager.BuildPublication(tcmPage.OwningRepository);
+
             p.StructureGroup = manager.BuildOrganizationalItem((TCM.StructureGroup)tcmPage.OrganizationalItem);
-            p.Publication = manager.BuildPublication(tcmPage.ContextRepository);
-            p.OwningPublication = manager.BuildPublication(tcmPage.OwningRepository);
             p.Categories = manager.BuildCategories(tcmPage);
 
             manager.AddXpathToFields(p.MetadataFields, "Metadata");

@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Web
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.ContentModel.Contracts", "DD4T.ContentModel.Contracts\DD4T.ContentModel.Contracts.csproj", "{C21F66F0-01CE-4AF3-B76C-CD262B7EA1C0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.ContentModel", "DD4T.ContentModel\DD4T.ContentModel.csproj", "{83F5CFC2-14D5-4190-B51D-7AF7A69B67E9}"
@@ -20,11 +22,9 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DD4T.Templates.Installer", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Templates.Installer.CustomActions", "DD4T.Templates.Installer.CustomActions\DD4T.Templates.Installer.CustomActions.csproj", "{F0C03A14-CF4A-4E77-BBF7-F881BF70FB95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DD4T.Serialization", "DD4T.Serialization\DD4T.Serialization.csproj", "{849A21D3-5863-4C43-98D3-6B8B83B9300F}"
+EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -94,8 +94,22 @@ Global
 		{F0C03A14-CF4A-4E77-BBF7-F881BF70FB95}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F0C03A14-CF4A-4E77-BBF7-F881BF70FB95}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F0C03A14-CF4A-4E77-BBF7-F881BF70FB95}.Release|x86.ActiveCfg = Release|Any CPU
+		{849A21D3-5863-4C43-98D3-6B8B83B9300F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{849A21D3-5863-4C43-98D3-6B8B83B9300F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{849A21D3-5863-4C43-98D3-6B8B83B9300F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{849A21D3-5863-4C43-98D3-6B8B83B9300F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{849A21D3-5863-4C43-98D3-6B8B83B9300F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{849A21D3-5863-4C43-98D3-6B8B83B9300F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{849A21D3-5863-4C43-98D3-6B8B83B9300F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{849A21D3-5863-4C43-98D3-6B8B83B9300F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{849A21D3-5863-4C43-98D3-6B8B83B9300F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{849A21D3-5863-4C43-98D3-6B8B83B9300F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

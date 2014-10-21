@@ -36,15 +36,24 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>dynamicdelivery.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'JSON|AnyCPU'">
+    <OutputPath>bin\JSON\</OutputPath>
+    <DefineConstants>JSON</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DD4T.ContentModel.XmlSerializers, Version=1.22.0.18186, Culture=neutral, PublicKeyToken=4450e3c7f68bf872, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\DD4T.ContentModel.XmlSerializers.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -87,6 +96,7 @@
     <Compile Include="BasePageTemplate.cs" />
     <Compile Include="BaseTemplate.cs" />
     <Compile Include="Builder\BuildManager.cs" />
+    <Compile Include="Builder\BuildProperties.cs" />
     <Compile Include="Builder\CategoriesBuilder.cs" />
     <Compile Include="Builder\ComponentBuilder.cs" />
     <Compile Include="Builder\ComponentPresentationBuilder.cs" />
@@ -116,6 +126,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="dynamicdelivery.snk" />
+    <None Include="packages.config" />
     <None Include="Resources\CWA Parameters Auto.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -136,10 +147,18 @@
       <Project>{83F5CFC2-14D5-4190-B51D-7AF7A69B67E9}</Project>
       <Name>DD4T.ContentModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DD4T.Serialization\DD4T.Serialization.csproj">
+      <Project>{849A21D3-5863-4C43-98D3-6B8B83B9300F}</Project>
+      <Name>DD4T.Serialization</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Minimize.xslt" />
+    <Folder Include="Serializing\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Minimize.xslt">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

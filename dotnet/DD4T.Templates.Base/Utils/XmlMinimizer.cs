@@ -1,4 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
 using System.Xml;
 using System.Xml.Xsl;
 using System.Xml.XPath;
@@ -15,6 +19,10 @@ namespace DD4T.Templates.Base.Utils
             XPathDocument myXPathDoc = new XPathDocument(xmlReader);
 
             XslCompiledTransform xslTransformer = new XslCompiledTransform();
+
+
+
+
 
             //load the Xsl from the assembly
             Stream xslStream = IOUtils.LoadResourceAsStream("DD4T.Templates.Base.Resources.Minimize.xslt");

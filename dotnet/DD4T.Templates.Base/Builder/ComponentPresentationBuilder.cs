@@ -1,22 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using Dynamic = DD4T.ContentModel;
 using TCM = Tridion.ContentManager.CommunicationManagement;
 using Tridion.ContentManager.Templating;
 using System.Xml.Serialization;
 using System.IO;
 using DD4T.Templates.Base.Utils;
-using Microsoft.Xml.Serialization.GeneratedAssembly;
 
 namespace DD4T.Templates.Base.Builder
 {
     public class ComponentPresentationBuilder
     {
-        static XmlSerializer serializer = null;
 
         public static Dynamic.ComponentPresentation BuildComponentPresentation(TCM.ComponentPresentation tcmComponentPresentation, Engine engine, int linkLevels, bool resolveWidthAndHeight, BuildManager manager)
         {
+            TemplatingLogger logger = TemplatingLogger.GetLogger(typeof(ComponentPresentationBuilder));
             Dynamic.ComponentPresentation cp = new Dynamic.ComponentPresentation();
 
+            logger.Debug(string.Format(">BuildCP {0} ({1})", tcmComponentPresentation.ComponentTemplate.Title, tcmComponentPresentation.ComponentTemplate.IsRepositoryPublishable));
             if (tcmComponentPresentation.ComponentTemplate.IsRepositoryPublishable)
             {
                 // call render but ignore the output - render ensures componentlinking will be setup as normal.
@@ -39,30 +41,23 @@ namespace DD4T.Templates.Base.Builder
                 }
 
                 string renderedContent = engine.RenderComponentPresentation(tcmComponentPresentation.Component.Id, tcmComponentPresentation.ComponentTemplate.Id);
-                engine.PublishingContext.RenderContext.ContextVariables.Remove(BasePageTemplate.VariableNameCalledFromDynamicDelivery);
-
                 renderedContent = TridionUtils.StripTcdlTags(renderedContent);
 
                 cp.IsDynamic = false;
-                TextReader tr = new StringReader(renderedContent);
-                if (serializer == null)
-                {
-                    serializer = new ComponentSerializer();
-                    //serializer = new XmlSerializerFactory().CreateSerializer(typeof(Dynamic.Component));
-                }
                 try
                 {
-                    cp.Component = (Dynamic.Component)serializer.Deserialize(tr);
+                    cp.Component = (Dynamic.Component)manager.SerializerService.Deserialize<Dynamic.Component>(renderedContent);
                 }
                 catch (Exception e)
                 {
-                    TemplatingLogger.GetLogger(typeof(ComponentPresentationBuilder)).Error("exception while deserializing into CP: " + e.Message);                    
+                    TemplatingLogger.GetLogger(typeof(ComponentPresentationBuilder)).Error("exception while deserializing into CP: " + e.Message);
                     // the component presentation could not be deserialized, this probably not a Dynamic Delivery template
                     // just store the output as 'RenderedContent' on the CP
                     cp.RenderedContent = renderedContent;
                     // because the CT was not a DD4T CT, we will generate the DD4T XML code here
                     cp.Component = manager.BuildComponent(tcmComponentPresentation.Component);
                 }
+
             }
             cp.ComponentTemplate = manager.BuildComponentTemplate(tcmComponentPresentation.ComponentTemplate);
             return cp;
