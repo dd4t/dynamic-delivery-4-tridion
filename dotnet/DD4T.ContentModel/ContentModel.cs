@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 using System.Diagnostics;
 using DD4T.ContentModel.Factories;
+using Newtonsoft.Json;
 
 
 namespace DD4T.ContentModel
@@ -289,6 +290,8 @@ namespace DD4T.ContentModel
             get;
             set;
         }
+        [XmlIgnore]
+        [JsonIgnore]
         public string Value
         {
             get
