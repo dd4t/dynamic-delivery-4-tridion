@@ -421,6 +421,34 @@ namespace DD4T.ContentModel
             this.LinkedComponentValues = new List<Component>();
         }
         #endregion Constructors
+        #region Serialization Optimization Methods
+
+        public bool ShouldSerializeValues()
+        {
+            return (Values!=null && Values.Count>0);
+        }
+        public bool ShouldSerializeNumericValues()
+        {
+            return (NumericValues != null && NumericValues.Count > 0);
+        }
+        public bool ShouldSerializeDateTimeValues()
+        {
+            return (DateTimeValues != null && DateTimeValues.Count > 0);
+        }
+        public bool ShouldSerializeLinkedComponentValues()
+        {
+            return (LinkedComponentValues != null && LinkedComponentValues.Count > 0);
+        }
+        public bool ShouldSerializeEmbeddedValues()
+        {
+            return (EmbeddedValues != null && EmbeddedValues.Count > 0);
+        }
+        public bool ShouldSerializeKeywords()
+        {
+            return (Keywords != null && Keywords.Count > 0);
+        }
+
+        #endregion
     }
 
     public abstract class TridionItem : IItem
