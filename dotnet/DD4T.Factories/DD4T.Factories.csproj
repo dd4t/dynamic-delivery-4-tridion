@@ -133,6 +133,18 @@
       <Project>{C21F66F0-01CE-4AF3-B76C-CD262B7EA1C0}</Project>
       <Name>DD4T.ContentModel.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DD4T.ContentModel\DD4T.ContentModel.csproj">
+      <Project>{83f5cfc2-14d5-4190-b51d-7af7a69b67e9}</Project>
+      <Name>DD4T.ContentModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DD4T.Serialization\DD4T.Serialization.csproj">
+      <Project>{849a21d3-5863-4c43-98d3-6b8b83b9300f}</Project>
+      <Name>DD4T.Serialization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DD4T.Utils\DD4T.Utils.csproj">
+      <Project>{d2ce08be-7281-4697-adfe-e7a031cb59ec}</Project>
+      <Name>DD4T.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
