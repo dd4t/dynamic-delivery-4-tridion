@@ -2,7 +2,7 @@ Dynamic Delivery 4 Tridion (aka DD4T)
 =====================================
 DD4T is a light-weight framework which links the SDL Tridion CMS to your MVC web application architecture.
 
-It is available both for Java (Spring MVC) and .NET (ASP.NET MVC 3,4 and 5), and it supports Tridion 2009, 2011 and 2013.
+It is available both for Java (Spring MVC) and .NET (ASP.NET MVC 3, 4 and 5), and it supports Tridion 2009, 2011 and 2013.
 
 Get it
 ======
