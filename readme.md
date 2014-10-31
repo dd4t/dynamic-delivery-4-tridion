@@ -20,8 +20,6 @@ DD4T-MVC4 https://www.nuget.org/packages/DD4T-MVC4/
 DD4T-Tridion-2011sp1 https://www.nuget.org/packages/DD4T-Tridion-2011sp1/  
 DD4T-Tridion-2013 https://www.nuget.org/packages/DD4T-Tridion-2013/  
 
-No NuGet? Get the DLLs directly and reference them in your project.  
-
 Use it
 ======
 If you plan to create a .NET web site with DD4T, start with the .NET Quick Start https://code.google.com/p/dynamic-delivery-4-tridion/wiki/41_QuickstartDotNet.
