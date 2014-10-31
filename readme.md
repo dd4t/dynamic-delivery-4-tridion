@@ -13,7 +13,7 @@ https://code.google.com/p/dynamic-delivery-4-tridion/downloads/detail?name=DD4T-
 
 Visual Studio template (VS2012/2013, Tridion 2013 + MVC4)   https://code.google.com/p/dynamic-delivery-4-tridion/downloads/detail?name=DD4T.1.31-MVC4-Tridion2013-VS2012-VS2013.vsix
 
-*Official NuGet packages*
+*Official NuGet packages*  
 DD4T-Framework https://www.nuget.org/packages/DD4TFramework/  
 DD4T-MVC3 https://www.nuget.org/packages/DD4T-MVC3/  
 DD4T-MVC4 https://www.nuget.org/packages/DD4T-MVC4/  
