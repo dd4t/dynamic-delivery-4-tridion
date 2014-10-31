@@ -7,7 +7,7 @@ It is available both for Java (Spring MVC) and .NET (ASP.NET MVC 3 and ASP.NET M
 Get it
 ======
 
-*Downloads*
+*Downloads*  
 Template Installer (1.31)  
 https://code.google.com/p/dynamic-delivery-4-tridion/downloads/detail?name=DD4T-template-installer-1.31.zip&can=2&q=  
 
