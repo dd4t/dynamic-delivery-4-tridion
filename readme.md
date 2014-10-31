@@ -18,7 +18,8 @@ DD4T-Framework https://www.nuget.org/packages/DD4TFramework/
 DD4T-MVC3 https://www.nuget.org/packages/DD4T-MVC3/  
 DD4T-MVC4 https://www.nuget.org/packages/DD4T-MVC4/  
 DD4T-Tridion-2011sp1 https://www.nuget.org/packages/DD4T-Tridion-2011sp1/  
-DD4T-Tridion-2013 https://www.nuget.org/packages/DD4T-Tridion-2013/  
+DD4T-Tridion-2013 https://www.nuget.org/packages/DD4T-Tridion-2013/ 
+DD4T-Tridion-2013sp1 https://www.nuget.org/packages/DD4T-Tridion-2013sp1/
 
 Use it
 ======
