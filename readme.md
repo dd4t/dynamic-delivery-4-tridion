@@ -23,7 +23,7 @@ DD4T-Tridion-2013sp1 https://www.nuget.org/packages/DD4T-Tridion-2013sp1/
 
 Use it
 ======
-If you plan to create a .NET web site with DD4T, start with the .NET Quick Start https://code.google.com/p/dynamic-delivery-4-tridion/wiki/41_QuickstartDotNet.
+If you plan to create a .NET web site with DD4T, start with the .NET Quick Start https://code.google.com/p/dynamic-delivery-4-tridion/wiki/41_QuickstartDotNet or this blog post: http://blog.building-blocks.com/technical-tips/getting-started-with-dd4t-1-31-asp-net-mvc4-and-sdl-tridion-2013
 
 There is also a Java Quick Start available. https://code.google.com/p/dynamic-delivery-4-tridion/wiki/31_Quickstart
 
