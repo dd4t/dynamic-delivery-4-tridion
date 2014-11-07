@@ -29,6 +29,8 @@ There is also a Java Quick Start available. https://code.google.com/p/dynamic-de
 
 Fork it
 =======
-If you want to get involved by collaborating. We follow the forking workflow. <a href="https://github.com/dd4t/dynamic-delivery-4-tridion/fork">Fork the repository</a> and submit a pull request for it to be merged in.
+If you want to get involved by collaborating. We follow the forking workflow. 
+<a href="https://github.com/dd4t/dynamic-delivery-4-tridion/fork">Fork the repository</a> and submit a pull request for it to be merged in.
 
-For more information on the Forking Workflow, see <a href="https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow">Atlassian's excellent article</a>.
+For more information on the Forking Workflow, see 
+<a href="https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow">Atlassian's excellent article</a>.
