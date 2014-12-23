@@ -15,6 +15,7 @@
  */
 package org.dd4t.contentmodel.impl;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,8 +35,9 @@ import org.simpleframework.xml.ElementMap;
 
 
 public class GenericComponentImpl extends BaseComponent implements
-		GenericComponent, HasContent, HasMetadata, HasMultimedia {
+		GenericComponent, HasContent, HasMetadata, HasMultimedia, Serializable {
 
+	private static final long serialVersionUID = 6524240883792107394L;
 	@ElementMap(name = "metadata", keyType = String.class, valueType = Field.class, entry = "item", required = false)
 	private Map<String, Field> metadata;
 	@ElementMap(name = "fields", keyType = String.class, valueType = Field.class, entry = "item", required = false)

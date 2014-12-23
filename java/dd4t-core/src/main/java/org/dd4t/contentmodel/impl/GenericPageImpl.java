@@ -15,6 +15,7 @@
  */
 package org.dd4t.contentmodel.impl;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +36,9 @@ import org.simpleframework.xml.Root;
 
 
 @Root(name = "page")
-public class GenericPageImpl extends BasePage implements GenericPage, HasMetadata {
+public class GenericPageImpl extends BasePage implements GenericPage, HasMetadata, Serializable {
+
+	private static final long serialVersionUID = -4888166753098796796L;
 
 	@ElementMap(name = "metadata", keyType = String.class, valueType = Field.class, entry = "item", required = false)
 	private Map<String, Field> metadata;
