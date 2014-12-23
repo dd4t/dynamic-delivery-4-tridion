@@ -15,6 +15,8 @@
  */
 package org.dd4t.contentmodel.impl;
 
+import java.io.Serializable;
+
 import org.dd4t.contentmodel.ComponentPresentation;
 import org.dd4t.contentmodel.ComponentTemplate;
 import org.dd4t.contentmodel.GenericComponent;
@@ -27,7 +29,8 @@ import org.simpleframework.xml.Element;
  * @author bjornl
  * 
  */
-public class ComponentPresentationImpl implements ComponentPresentation {
+public class ComponentPresentationImpl implements ComponentPresentation, Serializable {
+	private static final long serialVersionUID = 8065995208403161518L;
 	@Element(name = "component", required = false)
 	private GenericComponent component;
 	@Element(name = "componentTemplate", required = false)

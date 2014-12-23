@@ -22,6 +22,7 @@ import org.simpleframework.xml.Element;
 public class OrganizationalItemImpl extends BaseItem implements
 		OrganizationalItem {
 
+	private static final long serialVersionUID = 8331589268695218999L;
 	@Element(name = "publicationId")
 	private String publicationId;
 

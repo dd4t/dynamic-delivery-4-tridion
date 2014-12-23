@@ -21,6 +21,7 @@ import org.simpleframework.xml.Element;
 
 public abstract class BasePage extends BasePublishedItem {
 
+	private static final long serialVersionUID = -6291418501535850012L;
 	@Element(name = "schema", required = false)
 	protected Schema schema;
 

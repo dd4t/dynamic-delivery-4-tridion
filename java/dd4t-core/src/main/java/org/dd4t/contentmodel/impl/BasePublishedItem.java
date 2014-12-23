@@ -30,6 +30,7 @@ import org.dd4t.contentmodel.impl.BaseRepositoryLocalItem;;
  */
 public abstract class BasePublishedItem extends BaseRepositoryLocalItem implements PublishedItem, Cachable, ObjectSizeProvider {
 
+	private static final long serialVersionUID = 2996230175958122285L;
 	private String source;
 	private ItemMeta nativeMetadata;
 	private int objectSize;

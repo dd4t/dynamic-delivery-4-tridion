@@ -19,6 +19,8 @@ import org.dd4t.contentmodel.Publication;
 
 public class PublicationImpl extends BaseItem implements Publication {
 
+	private static final long serialVersionUID = -4288636619154135599L;
+
 	public PublicationImpl(){
 		super();
 	}

@@ -24,6 +24,8 @@ import org.dd4t.contentmodel.FieldSet;
 
 public class EmbeddedField extends BaseField implements Field {
 
+	private static final long serialVersionUID = -4144685499099187584L;
+
 	public EmbeddedField(){
 		setFieldType(FieldType.Embedded);
 	}

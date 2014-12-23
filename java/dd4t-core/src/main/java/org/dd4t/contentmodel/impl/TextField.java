@@ -23,6 +23,7 @@ import org.simpleframework.xml.Attribute;
 
 
 public class TextField extends BaseField implements Field {
+	private static final long serialVersionUID = -4016701399160459282L;
 	@Attribute(required = false)
 	private String categoryId;
 	@Attribute(required = false)

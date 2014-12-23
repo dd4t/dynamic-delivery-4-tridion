@@ -15,6 +15,7 @@
  */
 package org.dd4t.contentmodel.impl;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import org.dd4t.contentmodel.Field;
@@ -24,8 +25,10 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementMap;
 
 
-public class FieldSetImpl implements FieldSet {
-    @ElementMap(name = "fields", keyType = String.class, valueType = Field.class, entry = "item", required = false)
+public class FieldSetImpl implements FieldSet, Serializable {
+	private static final long serialVersionUID = -7728755743007304678L;
+
+	@ElementMap(name = "fields", keyType = String.class, valueType = Field.class, entry = "item", required = false)
     private Map<String, Field> content;
     
     @Element(name = "schema", required = true)

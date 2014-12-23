@@ -15,6 +15,7 @@
  */
 package org.dd4t.contentmodel.impl;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,7 +28,8 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
 
-public abstract class BaseField implements Field {
+public abstract class BaseField implements Field, Serializable {
+	private static final long serialVersionUID = -4453264042325014679L;
 	@Element(name = "name")
 	private String name;
 	@ElementList(name = "textValues", required = false)

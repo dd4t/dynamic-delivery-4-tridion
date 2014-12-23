@@ -15,13 +15,16 @@
  */
 package org.dd4t.contentmodel.impl;
 
+import java.io.Serializable;
+
 import org.dd4t.contentmodel.Multimedia;
 import org.simpleframework.xml.Element;
 
 import com.tridion.data.BinaryData;
 
-public class MultimediaImpl implements Multimedia {
+public class MultimediaImpl implements Multimedia, Serializable {
 
+	private static final long serialVersionUID = 1804178250500823921L;
 	private BinaryData binaryData;
 	@Element(name = "height", required = false)
 	private int height;

@@ -23,6 +23,8 @@ import org.dd4t.contentmodel.Field;
 
 public class NumericField extends BaseField implements Field {
 
+	private static final long serialVersionUID = -8138417213590528773L;
+
 	public NumericField(){
 		setFieldType(FieldType.Number);
 	}

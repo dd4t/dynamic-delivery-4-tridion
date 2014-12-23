@@ -30,6 +30,8 @@ import org.simpleframework.xml.Element;
 public abstract class BaseRepositoryLocalItem extends BaseItem implements
 		RepositoryLocalItem {
 
+	private static final long serialVersionUID = 5662071841155997330L;
+
 	@Element(name = "publication", required = false)
 	private Publication publication;
 

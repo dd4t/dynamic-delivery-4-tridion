@@ -26,6 +26,8 @@ import org.simpleframework.xml.ElementMap;
 
 
 public class KeywordImpl extends BaseItem implements Keyword, HasMetadata {
+	private static final long serialVersionUID = 8762935962487695238L;
+
 	@Attribute(name = "key", required = false)
 	private String key;
 

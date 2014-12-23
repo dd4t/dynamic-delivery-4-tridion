@@ -27,6 +27,7 @@ import org.simpleframework.xml.ElementMap;
 
 public class ComponentTemplateImpl extends BaseRepositoryLocalItem implements ComponentTemplate {
 	
+	private static final long serialVersionUID = 9021348274530100412L;
 	@Element(name = "outputFormat", required = false)
 	private String outputFormat;
 	@ElementMap(name = "metadata", keyType = String.class, valueType = Field.class, entry = "item", required = false)

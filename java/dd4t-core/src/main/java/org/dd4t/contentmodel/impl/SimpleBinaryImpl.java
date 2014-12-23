@@ -24,6 +24,7 @@ import com.tridion.storage.BinaryMeta;
 
 public class SimpleBinaryImpl extends BasePublishedItem implements SimpleBinary {
 
+	private static final long serialVersionUID = 8989764444969980602L;
 	private BinaryData binaryData = null;
 	private BinaryMeta nativeBinaryMetaData = null;
 	private BinaryFactory factory;

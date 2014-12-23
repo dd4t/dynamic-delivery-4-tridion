@@ -29,6 +29,7 @@ import org.simpleframework.xml.ElementMap;
 public class PageTemplateImpl extends BaseRepositoryLocalItem implements
 		PageTemplate, HasMetadata {
 
+	private static final long serialVersionUID = 827151524534020212L;
 	@Element(name = "fileExtension")
 	private String fileExtension;
 	@ElementMap(name = "metadata", keyType = String.class, valueType = Field.class, entry = "item", required = false)
