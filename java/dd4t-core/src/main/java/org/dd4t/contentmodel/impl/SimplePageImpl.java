@@ -22,6 +22,8 @@ import org.dd4t.contentmodel.SimplePage;
 
 public class SimplePageImpl extends BasePage implements SimplePage {
 
+	private static final long serialVersionUID = 6797658005502610107L;
+
 	@Override
 	public Date getLastPublishedDate() {
 		// TODO Auto-generated method stub

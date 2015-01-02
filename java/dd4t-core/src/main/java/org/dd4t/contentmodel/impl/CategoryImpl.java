@@ -25,7 +25,7 @@ import org.simpleframework.xml.ElementList;
 
 public class CategoryImpl extends BaseItem implements Category {
 
-
+	private static final long serialVersionUID = -6425683149215945484L;
 	@ElementList(name = "keywords", required = false, type = KeywordImpl.class)
 	private List<KeywordImpl> keywords;
 	

@@ -15,6 +15,7 @@
  */
 package org.dd4t.contentmodel.impl;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import org.dd4t.contentmodel.Item;
@@ -27,8 +28,9 @@ import org.simpleframework.xml.Element;
  * @author Quirijn Slings
  * 
  */
-public abstract class BaseItem implements Item {
+public abstract class BaseItem implements Item, Serializable {
 
+	private static final long serialVersionUID = 8259063559927307354L;
 	@Element(name = "id")
 	private String id;
 	@Element(name = "title")

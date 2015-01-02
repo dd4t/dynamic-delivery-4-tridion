@@ -24,6 +24,8 @@ import org.dd4t.core.util.DateUtils;
 
 public class DateField extends BaseField implements Field {
 
+	private static final long serialVersionUID = 6929517321834738759L;
+
 	public DateField(){
 		setFieldType(FieldType.Date);
 	}

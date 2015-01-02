@@ -24,6 +24,8 @@ import org.dd4t.contentmodel.Field;
 
 public class ComponentLinkField extends BaseField implements Field {
 
+	private static final long serialVersionUID = 8921183912167079373L;
+
 	public ComponentLinkField() {
 		setFieldType(FieldType.ComponentLink);
 	}

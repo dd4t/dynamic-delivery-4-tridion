@@ -20,7 +20,8 @@ import org.simpleframework.xml.Element;
 
 
 public class SchemaImpl extends BaseRepositoryLocalItem implements Schema {
-    @Element(name = "rootElement", required = false)
+	private static final long serialVersionUID = 1113470472825303735L;
+	@Element(name = "rootElement", required = false)
     private String rootElement;
 
     public String getRootElement() {

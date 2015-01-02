@@ -15,6 +15,8 @@
  */
 package org.dd4t.core.caching;
 
+import java.io.Serializable;
+
 /**
  * Interface any object Cachable by the CacheAgent class must implement.
  * Its functions are used as such:
@@ -25,7 +27,7 @@ package org.dd4t.core.caching;
  * @author Rogier Oudshoorn, Capgemini
  *
  */
-public interface Cachable {
+public interface Cachable extends Serializable {
 	public void notifyCached(String key, String realm);
 	
 	public String getCacheRealm();

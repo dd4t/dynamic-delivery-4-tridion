@@ -22,6 +22,8 @@ import org.dd4t.contentmodel.SimpleComponent;
 
 public class SimpleComponentImpl extends BaseComponent implements SimpleComponent {
 
+	private static final long serialVersionUID = -3488271516919038033L;
+
 	@Override
 	public Date getLastPublishedDate() {
 		// TODO Auto-generated method stub

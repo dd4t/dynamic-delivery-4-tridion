@@ -36,6 +36,7 @@ import org.simpleframework.xml.ElementMap;
 public class GenericComponentImpl extends BaseComponent implements
 		GenericComponent, HasContent, HasMetadata, HasMultimedia {
 
+	private static final long serialVersionUID = 6589629775492497736L;
 	@ElementMap(name = "metadata", keyType = String.class, valueType = Field.class, entry = "item", required = false)
 	private Map<String, Field> metadata;
 	@ElementMap(name = "fields", keyType = String.class, valueType = Field.class, entry = "item", required = false)

@@ -19,6 +19,8 @@ import org.dd4t.contentmodel.Field;
 
 public class XhtmlField extends TextField implements Field {
 
+	private static final long serialVersionUID = -926939626186930607L;
+
 	public XhtmlField(){
 		setFieldType(FieldType.Xhtml);
 	}

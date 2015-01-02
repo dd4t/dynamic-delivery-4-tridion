@@ -6,6 +6,7 @@ import com.tridion.dcp.ComponentPresentation;
 
 public class DynamicComponentImpl extends GenericComponentImpl implements DynamicComponent
 {
+	private static final long serialVersionUID = 9021378235490500412L;
 	private ComponentPresentation nativeDCP;
 
 	public void setNativeDCP(ComponentPresentation nativeDCP){

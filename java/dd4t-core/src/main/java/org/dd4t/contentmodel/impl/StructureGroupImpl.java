@@ -21,6 +21,7 @@ import org.simpleframework.xml.Element;
 
 public class StructureGroupImpl extends BaseItem implements StructureGroup {
 
+	private static final long serialVersionUID = 1498020047755587604L;
 	@Element(name = "publicationId")
 	private String publicationId;
 
