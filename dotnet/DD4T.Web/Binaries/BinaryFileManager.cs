@@ -276,7 +276,6 @@ namespace DD4T.Web.Binaries
             if (re.IsMatch(path))
             {
                 dimensions = new Dimensions();
-                dimensions.NoStretch = true;
                 var match = re.Match(path);
                 var dim = match.Groups[2].ToString();
                 if (!String.IsNullOrEmpty(dim))
