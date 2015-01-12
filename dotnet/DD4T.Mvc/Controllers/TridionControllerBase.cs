@@ -59,18 +59,11 @@ namespace DD4T.Mvc.Controllers
 
         protected virtual ViewResult GetView(IComponentPresentation componentPresentation)
         {
-            string viewName = null;
-            if (componentPresentation.ComponentTemplate.MetadataFields == null || !componentPresentation.ComponentTemplate.MetadataFields.ContainsKey("view"))
-                viewName = componentPresentation.ComponentTemplate.Title.Replace(" ", "");
-            else
-                viewName = componentPresentation.ComponentTemplate.MetadataFields["view"].Value; 
+            if (ComponentPresentationRenderer == null)
+                throw new ConfigurationException("No ComponentPresentationRenderer configured");
 
-            if (string.IsNullOrEmpty(viewName))
-            {
-                throw new ConfigurationException("no view configured for component template " + componentPresentation.ComponentTemplate.Id);
-            }
+            string viewName = componentPresentationRenderer.GetComponentTemplateView(componentPresentation.ComponentTemplate);
             return View(viewName, componentPresentation);
-
         }
 
         [HandleError]

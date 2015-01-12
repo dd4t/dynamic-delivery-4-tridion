@@ -5,6 +5,7 @@ using System.Web.Mvc.Html;
 using DD4T.ContentModel;
 using DD4T.Utils;
 using DD4T.ContentModel.Logging;
+using DD4T.ContentModel.Exceptions;
 
 namespace DD4T.Mvc.Html
 {
@@ -58,7 +59,33 @@ namespace DD4T.Mvc.Html
             return MvcHtmlString.Create(sb.ToString());
         }
 
-        private static bool MustInclude(IComponentTemplate itemToCheck, string[] pattern)
+        /// <summary>
+        /// Resolve the viewName of the given ComponentTemplate.
+        /// 
+        /// This should be defined in the MetadataFields, if not the ComponentTemplate name will be used and stripped of spaces.
+        /// </summary>
+        /// <param name="componentTemplate">ComponentTemplate to use</param>
+        /// <returns>Resolved viewName</returns>
+        public string GetComponentTemplateView(IComponentTemplate componentTemplate)
+        {
+            string viewName = null;
+
+            // If MetadataFields are empty or view is not present, fallback to the name of the componentTemplate
+            if (componentTemplate.MetadataFields == null || !componentTemplate.MetadataFields.ContainsKey("view"))
+                viewName = componentTemplate.Title.Replace(" ", "");
+            else
+                viewName = componentTemplate.MetadataFields["view"].Value;
+
+            // If for any reason resolving the name fails or returns an empty value, throw an exception
+            if (string.IsNullOrEmpty(viewName))
+            {
+                throw new ConfigurationException("no viewName could be resolved for component template " + componentTemplate.Id);
+            }
+
+            return viewName;
+        }
+
+        private bool MustInclude(IComponentTemplate itemToCheck, string[] pattern)
         {
             if (pattern.Length == 0)
             {
@@ -71,16 +98,8 @@ namespace DD4T.Mvc.Html
             else
             {
                 // pattern does not start with tcm:, we will treat it as a (part of a) view
-                IField view;
-                if (itemToCheck.MetadataFields != null && itemToCheck.MetadataFields.TryGetValue("view", out view))
-                {
-                    return pattern.Any<string>(item => view.Value.ToLower().StartsWith(item.ToLower()));
-                }
-                else
-                {
-                    System.Diagnostics.Trace.TraceError("view for {0} not set", itemToCheck.Title);
-                    return false;
-                }
+                string viewName = GetComponentTemplateView(itemToCheck);
+                return pattern.Any<string>(item => viewName.ToLower().StartsWith(item.ToLower()));
             }
         }
 
