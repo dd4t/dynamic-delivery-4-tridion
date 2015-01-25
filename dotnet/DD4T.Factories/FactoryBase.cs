@@ -4,6 +4,9 @@ using DD4T.Factories.Caching;
 using DD4T.Utils;
 using DD4T.ContentModel.Contracts.Resolvers;
 using DD4T.Factories.Resolvers;
+using DD4T.ContentModel.Contracts.Serializing;
+using DD4T.Serialization;
+using System.Collections.Generic;
 
 namespace DD4T.Factories
 {
@@ -12,6 +15,64 @@ namespace DD4T.Factories
     /// </summary>
     public abstract class FactoryBase
     {
+
+        #region serialization
+        private Dictionary<SerializationFormat, ISerializerService> _serializerServices = new Dictionary<SerializationFormat,ISerializerService>();
+        private object lock1 = new object();
+
+        protected ISerializerService GetSerializationService(SerializationFormat format = SerializationFormat.UNKNOWN)
+        {
+            if (format == SerializationFormat.UNKNOWN)
+            {
+                format = ConfigurationHelper.SerializationFormat;
+            }
+            if (!_serializerServices.ContainsKey(format))
+            {
+                lock(lock1)
+                {
+                    _serializerServices.Add(format, CreateSerializationService(format));
+                }
+            }
+            return _serializerServices[format];
+        }
+
+        private ISerializerService CreateSerializationService(SerializationFormat format)
+        {
+            ISerializerService service = null;
+            switch(format)
+            {
+                case SerializationFormat.JSON:
+                    service = new JSONSerializerService();
+                    break;
+                case SerializationFormat.XML:
+                    service = new XmlSerializerService();
+                    break;
+            }
+            if (service.IsAvailable())
+            {
+                return service;
+            }
+            throw new Exception("Unsupported serialization format: " + format);
+        }
+
+        protected SerializationFormat GetSerizalizationFormat(string content)
+        {
+            var format = ConfigurationHelper.SerializationFormat;
+            if (format==SerializationFormat.UNKNOWN)
+            {
+                if (content.StartsWith("<"))
+                {
+                    format = SerializationFormat.XML;
+                }
+                else
+                {
+                    format = SerializationFormat.JSON;
+                }
+            }
+            return format;
+        }
+
+        #endregion
 
         #region publication resolving
         private int? _publicationId = null;

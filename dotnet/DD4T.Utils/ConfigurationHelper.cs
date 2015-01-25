@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Configuration;
 using DD4T.ContentModel.Contracts.Providers;
+using DD4T.Serialization;
 
 namespace DD4T.Utils
 {
@@ -37,6 +41,7 @@ namespace DD4T.Utils
         public const string BinaryUrlPattern = "DD4T.BinaryUrlPattern";
         public const string WelcomeFile = "DD4T.WelcomeFile";
         public const string WelcomeFileAlt1 = "DefaultPage";
+        public const string SerializationFormat = "DD4T.SerializationFormat";
 
     }
 
@@ -242,7 +247,24 @@ namespace DD4T.Utils
                 return SafeGetConfigSettingAsString(ConfigurationKeys.WelcomeFile, ConfigurationKeys.WelcomeFileAlt1);
             }
         }
-
+        private static string _serializationFormatString = null;
+        private static SerializationFormat _serializationFormat = SerializationFormat.UNKNOWN;
+        public static SerializationFormat SerializationFormat
+        {
+            get
+            {
+                if (_serializationFormatString == null)
+                {
+                    _serializationFormatString = SafeGetConfigSettingAsString(ConfigurationKeys.SerializationFormat);
+                    if (_serializationFormatString != "")
+                    {
+                        _serializationFormat = (SerializationFormat)Enum.Parse(typeof(SerializationFormat), _serializationFormatString);
+                    }
+                }
+                return _serializationFormat;
+            }
+        }
+        
     }
 
 }

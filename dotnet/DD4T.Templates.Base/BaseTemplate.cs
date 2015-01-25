@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
+using System.Xml;
+using System.Configuration;
 using Tridion.ContentManager.Templating.Assembly;
 using Tridion.ContentManager.Templating;
 using DD4T.Templates.Base.Builder;
-using System.Xml;
+using DD4T.ContentModel.Contracts.Serializing;
+using DD4T.Serialization;
 
 namespace DD4T.Templates.Base
 {
@@ -24,14 +28,63 @@ namespace DD4T.Templates.Base
             get;
             set;
         }
+        private ISerializerService _serializerService = null;
+        protected ISerializerService SerializerService
+        {
+            get
+            {
+                if (_serializerService == null)
+                {
+                    _serializerService = FindBestService();
+                }
+                return _serializerService;
+            }
+        }
+        private ISerializerService FindBestService()
+        {
+            ISerializerService s;
+                    if (Manager.BuildProperties.SerializationFormat == SerializationFormat.JSON)
+                    {
+                        s = new JSONSerializerService();
+                        if (s.IsAvailable())
+                            return s;
+                    }
+                    if (Manager.BuildProperties.SerializationFormat == SerializationFormat.XML)
+                    {
+                        s = new XmlSerializerService();
+                        if (s.IsAvailable())
+                            return s;
+                    }
+            // service for the configured serialization format is unavailable, pick one of the available services
+                    s = new JSONSerializerService();
+                    if (s.IsAvailable())
+                        return s;
+                    s = new XmlSerializerService();
+                    if (s.IsAvailable())
+                        return s;
+
+                    throw new Exception("Unsupported serialization format: " + Manager.BuildProperties.SerializationFormat);
+
+        }
+
         protected Package Package { get; set; }
         protected Engine Engine { get; set; }
-        private BuildManager _buildManager = new BuildManager();
+        private BuildManager _buildManager = null;
 
         public BuildManager Manager
         {
-            get { return _buildManager; }
-            set { _buildManager = value; }
+            get 
+            {
+                if (_buildManager == null)
+                {
+                    _buildManager = new BuildManager(Package);
+                    _buildManager.SerializerService = SerializerService;
+                }
+                return _buildManager; }
+            set 
+            { 
+                _buildManager = value; 
+            }
         }
 
         public abstract void Transform(Engine engine, Package package);
@@ -47,20 +100,9 @@ namespace DD4T.Templates.Base
             }
             return false;
         }
+
+        public static string DD4TContextVariableKey = "RenderedByDD4T";
     }
-    public class XmlTextWriterFormattedNoDeclaration : XmlTextWriter
-    {
-        public XmlTextWriterFormattedNoDeclaration(System.IO.TextWriter w)
-            : base(w)
-        {
-            Formatting = System.Xml.Formatting.Indented;
-        }
-        public XmlTextWriterFormattedNoDeclaration(System.IO.MemoryStream ms, Encoding enc)
-            : base(ms, enc)
-        {
-            Formatting = System.Xml.Formatting.Indented;
-        }
-        public override void WriteStartDocument() { } // suppress
-    }
+
 
 }

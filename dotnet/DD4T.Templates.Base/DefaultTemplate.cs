@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Tridion.ContentManager.CommunicationManagement;
 using Tridion.ContentManager.ContentManagement;
 using Tridion.ContentManager.Templating.Assembly;
 using Tridion.ContentManager.Templating;
+using DD4T.Templates.Base.Builder;
+using System.Xml;
 
 namespace DD4T.Templates.Base
 {

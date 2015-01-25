@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 using System.Diagnostics;
 using DD4T.ContentModel.Factories;
+using Newtonsoft.Json;
 
 
 namespace DD4T.ContentModel
@@ -289,6 +290,8 @@ namespace DD4T.ContentModel
             get;
             set;
         }
+        [XmlIgnore]
+        [JsonIgnore]
         public string Value
         {
             get
@@ -418,6 +421,34 @@ namespace DD4T.ContentModel
             this.LinkedComponentValues = new List<Component>();
         }
         #endregion Constructors
+        #region Serialization Optimization Methods
+
+        public bool ShouldSerializeValues()
+        {
+            return (Values!=null && Values.Count>0);
+        }
+        public bool ShouldSerializeNumericValues()
+        {
+            return (NumericValues != null && NumericValues.Count > 0);
+        }
+        public bool ShouldSerializeDateTimeValues()
+        {
+            return (DateTimeValues != null && DateTimeValues.Count > 0);
+        }
+        public bool ShouldSerializeLinkedComponentValues()
+        {
+            return (LinkedComponentValues != null && LinkedComponentValues.Count > 0);
+        }
+        public bool ShouldSerializeEmbeddedValues()
+        {
+            return (EmbeddedValues != null && EmbeddedValues.Count > 0);
+        }
+        public bool ShouldSerializeKeywords()
+        {
+            return (Keywords != null && Keywords.Count > 0);
+        }
+
+        #endregion
     }
 
     public abstract class TridionItem : IItem

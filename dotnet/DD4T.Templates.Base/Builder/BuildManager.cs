@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using TCM = Tridion.ContentManager.ContentManagement;
 using Dynamic = DD4T.ContentModel;
 using TComm = Tridion.ContentManager.CommunicationManagement;
 using Tridion.ContentManager.Templating;
+using DD4T.ContentModel.Contracts.Serializing;
 
 namespace DD4T.Templates.Base.Builder
 {
@@ -14,8 +18,15 @@ namespace DD4T.Templates.Base.Builder
     {
         public BuildManager()
         {
-
+            BuildProperties = new BuildProperties(null);
 		}
+        public BuildManager (Package package)
+        {
+            BuildProperties = new BuildProperties(package);
+        }
+
+        public BuildProperties BuildProperties { get; set; }
+        public ISerializerService SerializerService { get; set; }
 
         public virtual Dynamic.Page BuildPage(TComm.Page tcmPage, Engine engine)
         {
