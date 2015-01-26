@@ -11,7 +11,7 @@ namespace DD4T.Templates.Base.Builder
 {
     public class CategoriesBuilder
     {
-        public static List<Dynamic.Category> BuildCategories(TComm.Page page, BuildManager manager)
+        public static List<Dynamic.Category> BuildCategories(TComm.Page page, int linkLevels, bool resolveWidthAndHeight, bool publishEmptyFields, BuildManager manager)
         {
             // note that there might be multiple fields based on the same category, so we need to combine them
             // for that purpose we use a dictionary
@@ -27,7 +27,7 @@ namespace DD4T.Templates.Base.Builder
 
             // first, add categires from the metadata
             ItemFields tcmMetadataFields = new TCM.Fields.ItemFields(page.Metadata, page.MetadataSchema);
-            addFromItemFields(tcmMetadataFields, categories, manager);
+            addFromItemFields(tcmMetadataFields, categories, linkLevels, resolveWidthAndHeight, publishEmptyFields, manager);
 
             // finally, create a List from the Dictionary and return it
             List<Dynamic.Category> categoryList = new List<Dynamic.Category>();
@@ -38,7 +38,7 @@ namespace DD4T.Templates.Base.Builder
             return categoryList;
         }
 
-        public static List<Dynamic.Category> BuildCategories(TCM.Component component, BuildManager manager)
+        public static List<Dynamic.Category> BuildCategories(TCM.Component component, int linkLevels, bool resolveWidthAndHeight,bool publishEmptyFields, BuildManager manager)
         {
             // note that there might be multiple fields based on the same category, so we need to combine them
             // for that purpose we use a dictionary
@@ -52,7 +52,7 @@ namespace DD4T.Templates.Base.Builder
                 GeneralUtils.TimedLog("finished creating tcm ItemFields from Content");
                 GeneralUtils.TimedLog("start converting content ItemFields to dynamic fields");
 
-                addFromItemFields(tcmFields, categories, manager);
+                addFromItemFields(tcmFields, categories, linkLevels,  resolveWidthAndHeight, publishEmptyFields, manager);
                 GeneralUtils.TimedLog("finished converting content ItemFields to dynamic fields");
             }
 
@@ -63,7 +63,7 @@ namespace DD4T.Templates.Base.Builder
                 ItemFields tcmMetadataFields = new TCM.Fields.ItemFields(component.Metadata, component.MetadataSchema);
                 GeneralUtils.TimedLog("finished creating tcm ItemFields from Metadata");
                 GeneralUtils.TimedLog("start converting metadata ItemFields to dynamic fields");
-                addFromItemFields(tcmMetadataFields, categories, manager);
+                addFromItemFields(tcmMetadataFields, categories, linkLevels, resolveWidthAndHeight, publishEmptyFields, manager);
                 GeneralUtils.TimedLog("finished converting metadata ItemFields to dynamic fields");
             }
 
@@ -76,7 +76,7 @@ namespace DD4T.Templates.Base.Builder
             return categoryList;
         }
 
-        private static void addFromItemFields(ItemFields tcmFields, Dictionary<string, Dynamic.Category> categories, BuildManager manager)
+        private static void addFromItemFields(ItemFields tcmFields, Dictionary<string, Dynamic.Category> categories, int linkLevels, bool resolveWidthAndHeight,bool publishEmptyFields, BuildManager manager)
         {
             foreach (ItemField f in tcmFields)
             {
@@ -110,7 +110,7 @@ namespace DD4T.Templates.Base.Builder
                         }
                         if (!alreadyThere)
                         {
-                            dc.Keywords.Add(manager.BuildKeyword(keyword));
+                            dc.Keywords.Add(manager.BuildKeyword(keyword, linkLevels, resolveWidthAndHeight, publishEmptyFields));
                         }
                     }
                 }
@@ -156,7 +156,7 @@ namespace DD4T.Templates.Base.Builder
                                         }
                                         if (!alreadyThere)
                                         {
-                                            dc.Keywords.Add(manager.BuildKeyword(keyword));
+                                            dc.Keywords.Add(manager.BuildKeyword(keyword, linkLevels, resolveWidthAndHeight, publishEmptyFields));
                                         }
                                     }
                                 }

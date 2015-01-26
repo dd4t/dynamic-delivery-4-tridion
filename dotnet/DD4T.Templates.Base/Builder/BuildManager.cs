@@ -27,14 +27,14 @@ namespace DD4T.Templates.Base.Builder
             return PageBuilder.BuildPage(tcmPage, engine, this, linkLevels, resolveWidthAndHeight, publishEmptyFields);
         }
 
-        public virtual List<Dynamic.Category> BuildCategories(TComm.Page page)
+        public virtual List<Dynamic.Category> BuildCategories(TComm.Page page, int linkLevels, bool resolveWidthAndHeight, bool publishEmptyFields)
         {
-            return CategoriesBuilder.BuildCategories(page,this);
+            return CategoriesBuilder.BuildCategories(page, linkLevels, resolveWidthAndHeight, publishEmptyFields, this);
         }
 
-        public virtual List<Dynamic.Category> BuildCategories(TCM.Component component)
+        public virtual List<Dynamic.Category> BuildCategories(TCM.Component component, int linkLevels, bool resolveWidthAndHeight, bool publishEmptyFields)
         {
-            return CategoriesBuilder.BuildCategories(component, this);
+            return CategoriesBuilder.BuildCategories(component, linkLevels, resolveWidthAndHeight, publishEmptyFields, this);
         }
 
         public virtual Dynamic.Component BuildComponent(TCM.Component tcmComponent)
@@ -67,9 +67,9 @@ namespace DD4T.Templates.Base.Builder
             return FieldsBuilder.BuildFields(tcmItemFields, linkLevels, resolveWidthAndHeight,publishEmptyFields, this);
         }
 
-        public Dynamic.Keyword BuildKeyword(TCM.Keyword keyword)
+        public Dynamic.Keyword BuildKeyword(TCM.Keyword keyword, int linkLevels, bool resolveWidthAndHeight, bool publishEmptyFields)
         {
-            return KeywordBuilder.BuildKeyword(keyword);
+            return KeywordBuilder.BuildKeyword(keyword, linkLevels, resolveWidthAndHeight, publishEmptyFields, this);
         }
 
         public virtual Dynamic.OrganizationalItem BuildOrganizationalItem(TComm.StructureGroup tcmStructureGroup)

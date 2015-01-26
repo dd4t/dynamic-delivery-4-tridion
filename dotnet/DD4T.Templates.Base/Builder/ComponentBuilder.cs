@@ -108,7 +108,7 @@ namespace DD4T.Templates.Base.Builder
           c.OwningPublication = manager.BuildPublication(tcmComponent.OwningRepository);
           TCM.Folder folder = (TCM.Folder)tcmComponent.OrganizationalItem;
           c.Folder = manager.BuildOrganizationalItem(folder);
-          c.Categories = manager.BuildCategories(tcmComponent);
+          c.Categories = manager.BuildCategories(tcmComponent, linkLevels, resolveWidthAndHeight, publishEmptyFields);
 
           manager.AddXpathToFields(c.Fields, "tcm:Content/custom:" + tcmComponent.Schema.RootElementName); // TODO: check if the first part of the XPath is really the root element name, or simply always 'Content'
           manager.AddXpathToFields(c.MetadataFields, "tcm:Metadata/custom:Metadata");
