@@ -13,8 +13,6 @@ namespace DD4T.Mvc.Controllers
 {
     public abstract class TridionControllerBase : Controller, IPageController, IComponentController
     {
-        public IComponentPresentationRenderer componentPresentationRenderer { get; set; }
-
         public virtual IPageFactory PageFactory { get; set; }
         public virtual IComponentFactory ComponentFactory { get; set; }
         public IComponentPresentationRenderer ComponentPresentationRenderer { get; set; }
@@ -62,7 +60,7 @@ namespace DD4T.Mvc.Controllers
             if (ComponentPresentationRenderer == null)
                 throw new ConfigurationException("No ComponentPresentationRenderer configured");
 
-            string viewName = componentPresentationRenderer.GetComponentTemplateView(componentPresentation.ComponentTemplate);
+            string viewName = ComponentPresentationRenderer.GetComponentTemplateView(componentPresentation.ComponentTemplate);
             return View(viewName, componentPresentation);
         }
 

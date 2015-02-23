@@ -37,6 +37,7 @@ namespace DD4T.Utils
         public const string BinaryUrlPattern = "DD4T.BinaryUrlPattern";
         public const string WelcomeFile = "DD4T.WelcomeFile";
         public const string WelcomeFileAlt1 = "DefaultPage";
+        public const string ResourcePath = "DD4T.ResourcePath";
 
     }
 
@@ -242,6 +243,14 @@ namespace DD4T.Utils
                 return SafeGetConfigSettingAsString(ConfigurationKeys.WelcomeFile, ConfigurationKeys.WelcomeFileAlt1);
             }
         }
+        public static string ResourcePath
+        {
+            get
+            {
+                return SafeGetConfigSettingAsString("", ConfigurationKeys.ResourcePath);
+            }
+        }
+
 
     }
 
