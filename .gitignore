@@ -183,3 +183,4 @@ FakesAssemblies/
 
 # DD4T Specific
 dependencies/Tridion*
+!dependencies/Tridion jarfiles
