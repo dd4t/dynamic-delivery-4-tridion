@@ -439,10 +439,23 @@ namespace DD4T.Factories
         private void resolveLinks(Field richTextField, TcmUri pageUri)
         {
             // Find any <a> nodes with xlink:href="tcm attribute
+            bool isMultiValue = richTextField.Values.Count > 1;
             string nodeText = richTextField.Value;
             XmlDocument tempDocument = new XmlDocument();
+
+            if (isMultiValue)
+            {
+                //if the field allows multiple values
+                //wrap each value in a temp node 
+                //to be placed into a temp xml doc to run agains XPath
+                List<string> values = new List<string>();
+                string tempNode = "<tempNode>{0}</tempNode>";
+                //add all of the values to the temp xml doc as tempNode
+                richTextField.Values.ForEach(rtf => values.Add(string.Format(tempNode, rtf)));
+                nodeText = string.Join(string.Empty, values);
+            }
+
             tempDocument.LoadXml("<tempRoot>" + nodeText + "</tempRoot>");
-           
 
             XmlNamespaceManager nsManager = new XmlNamespaceManager(tempDocument.NameTable);
             nsManager.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
@@ -473,8 +486,24 @@ namespace DD4T.Factories
 
             if (linkNodes.Count > 0)
             {
+                //old unresolved values are cleared
                 richTextField.Values.Clear();
-                richTextField.Values.Add(tempDocument.DocumentElement.InnerXml);
+
+                //replace the values on the RTF field with the new resolved values
+                if (isMultiValue)
+                {
+                    //When multiple values exists loop the temp nodes that were added
+                    foreach (XmlNode child in tempDocument.DocumentElement.ChildNodes)
+                    {
+                        richTextField.Values.Add(child.InnerXml);
+                    }
+                }
+                else
+                {
+                    //when only one value exists no temp nodes are created, 
+                    //just grab the xml from the root node
+                    richTextField.Values.Add(tempDocument.DocumentElement.InnerXml);
+                }
             }
         }
 
