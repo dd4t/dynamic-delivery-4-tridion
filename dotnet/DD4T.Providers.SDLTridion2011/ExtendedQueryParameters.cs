@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using DD4T.Providers.SDLTridion2011;
 using Tridion.ContentDelivery.DynamicContent.Query;
@@ -68,7 +69,7 @@ namespace DD4T.ContentModel.Factories
             //PublicationCriteria publicationAndLastPublishedDateCriteria = new PublicationCriteria(PublicationId);
             PublicationCriteria publicationAndLastPublishedDateCriteria = new PublicationCriteria(PublicationId);
             //format DateTime // 00:00:00.000
-            ItemLastPublishedDateCriteria dateLastPublished = new ItemLastPublishedDateCriteria(lastPublishedDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), Criteria.GreaterThanOrEqual);
+            ItemLastPublishedDateCriteria dateLastPublished = new ItemLastPublishedDateCriteria(lastPublishedDate.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture), Criteria.GreaterThanOrEqual);
             //publicationAndLastPublishedDateCriteria.AddCriteria(dateLastPublished);
 
             Criteria basedOnSchemaAndInPublication;
@@ -108,7 +109,7 @@ namespace DD4T.ContentModel.Factories
                     {
                         case "DateTime":
                             DateTime tempDate = (DateTime)queryItem.MetaValue;
-                            metaCriteria = new CustomMetaValueCriteria(metaField, tempDate.ToString("yyyy-MM-dd HH:mm:ss.fff"), "yyyy-MM-dd HH:mm:ss.SSS", metaOperator);
+                            metaCriteria = new CustomMetaValueCriteria(metaField, tempDate.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture), "yyyy-MM-dd HH:mm:ss.SSS", metaOperator);
                             break;
                         case "Float":
                             metaCriteria = new CustomMetaValueCriteria(metaField, (float)queryItem.MetaValue, metaOperator);
