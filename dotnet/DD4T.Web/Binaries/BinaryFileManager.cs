@@ -270,17 +270,23 @@ namespace DD4T.Web.Binaries
             }
             return ImageFormat.Png; // use png as default
         }
-        private string StripDimensions(string path, out Dimensions dimensions)
+       private string StripDimensions(string path, out Dimensions dimensions)
         {
-            Regex re = new Regex(@"_([hw])(\d+)\.");
+            Regex re = new Regex(@"_(w(\d+))?(_h(\d+))?\.");
             if (re.IsMatch(path))
             {
-                string d = re.Match(path).Groups[1].ToString();
-                string v = re.Match(path).Groups[2].ToString();
-                if (d == "h")
-                    dimensions = new Dimensions() { Height = Convert.ToInt32(v) };
-                else
-                    dimensions = new Dimensions() { Width = Convert.ToInt32(v) };
+                dimensions = new Dimensions();
+                var match = re.Match(path);
+                var dim = match.Groups[2].ToString();
+                if (!String.IsNullOrEmpty(dim))
+                {
+                    dimensions.Width = Convert.ToInt32(dim);
+                }
+                dim = match.Groups[4].ToString();
+                if (!String.IsNullOrEmpty(dim))
+                {
+                    dimensions.Height = Convert.ToInt32(dim);
+                }
                 return re.Replace(path, ".");
             }
             dimensions = null;
